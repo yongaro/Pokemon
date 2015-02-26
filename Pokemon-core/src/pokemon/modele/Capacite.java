@@ -1,0 +1,79 @@
+package pokemon.modele;
+
+import java.util.*;
+
+public abstract class Capacite implements Qmax,Infos {
+	protected int ID;
+	protected String nom;
+	protected String description;
+	//puissance de la capacite marche aussi bien dans l'offensif que dans la restauration des pv
+	protected int power;
+	//designe l'attribut utilise par la capacite ATT pour cap physique ATTSP pour le reste
+	protected int type;
+	//conditions requises pour apprendre l'attaque
+	protected int[] auth;
+	//precision
+	protected int pre;
+	//Chances de Coups critiques
+	protected int CC;
+	//feu eau etc ...
+	protected Type element;
+	//nombre d'utilisations de la capacite directement apres apprentissage
+	protected int maxPP;
+	
+	public  Capacite(){
+		 description="TODO";
+	}
+	public Capacite(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp){
+		power=pw; this.type=type; this.pre=pre; this.CC=cc;this.nom=nom; description=d; element=el; maxPP=pp;
+	}
+	protected void atkdamage(Pkm user,Pkm cible,Climat climat){
+		double STAB=1;double weakness=1.0; Random random=new Random(); double climatmod;
+		//recherche de l'affinite de l'utilisateur avec l'element de l'attaque
+		if(user.type.contains(this.element)){STAB=1.5;}
+		//Calcul des degats
+		double damage;
+		//recherche de la resistance de l'adversaire a�l'attaque
+		for(Type t:cible.type){weakness*=t.isweak(element);} 
+		//test de chance pour le critique
+		double ccmult=1.0;
+		if(random.nextInt(100)<=this.CC){ccmult=1.5; System.out.println("Coup critique");}
+		//formule de calcul des degats
+		double mod=(double)STAB*(double)weakness*(double)ccmult;
+		double A=(2*user.stats[0][0]+10)/250.0;
+		double B=(user.stats[type][0]/(double)cible.stats[type+1][0]);
+		damage=A*B*((double)power+2.0)*mod;
+		climatmod=climat.mod(this.element);
+		damage=(int)((double)damage*climatmod);
+		if(weakness==0){System.out.println("Aucun effet");}
+		else{
+		if(weakness>=2){System.out.println("C'est super efficace");}
+		if(weakness<1 && weakness>0){System.out.println("Ce n'est pas tres efficace");}
+		System.out.println("-"+(int)damage+" PV");
+		cible.stats[2][0]-=(int)damage;
+		}
+	}
+	public abstract void script(Pkm user,Pkm cible,Combat context);
+	public void teach(Pkm cible){
+		//Verification des conditions requises
+		//Verification de la liste des capacites
+		//Si 4 capacites connues demande du numero de la technique a effacer ou annulation
+	}
+	public boolean equals(Capacite c){return this.description==c.description;}
+	
+	//Impl�mentation des interfaces
+	public int qmax(){return maxPP;}
+	public int getID(){return ID;}
+	public String getNom(){return nom;}
+	public String getDesc(){return description;}
+	public String getInfos(){ return power+" "+pre+" "+type+" "+element;}
+	
+	public String toString(){
+		if(type==3){
+		return (nom+": "+"pw:"+power+" pre:"+pre+" "+element+" ATT");
+		}
+		else{
+			return (nom+": "+"pw:"+power+" pre:"+pre+" "+element+" ATTSP");
+		}
+	}
+}
