@@ -11,7 +11,7 @@ public abstract class Capacite implements Qmax,Infos {
 	//designe l'attribut utilise par la capacite ATT pour cap physique ATTSP pour le reste
 	protected int type;
 	//conditions requises pour apprendre l'attaque
-	protected int[] auth;
+	//protected int[] auth; //tableaux de 400 int en moyenne pour chaque attaque ... MEME PAS EN REVE
 	//precision
 	protected int pre;
 	//Chances de Coups critiques
