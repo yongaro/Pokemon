@@ -51,29 +51,7 @@ public enum bddCapacite {
 		return cap;
 	}
 	
-	public static void fromXML(){
-		Capacite[] testcap=new Capacite[16]; int i=0; Element temp;
-		XmlReader reader = new XmlReader();
-		try {
-			System.out.println("ICI");
-			Element root = reader.parse(Gdx.files.internal("Capacite.xml"));
-			System.out.println("ICI "+root);
-			Array<Element> elements= root.getChildrenByName("Atk");
-			System.out.println("ICI");
-			for(Element e:elements){
-				System.out.println("ICI");
-				temp=e.getChild(0);System.out.println(temp);
-				testcap[i]=new Atk(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
-								   Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet"))
-								  );
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		for(Capacite c:testcap){
-			System.out.println(c);
-		}
-	}
+	
 	
 	
 }

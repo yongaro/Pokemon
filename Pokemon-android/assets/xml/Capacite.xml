@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <Capacite>
 	<Atk>
 		<Tonnerre 
 			ID="24"
 			nom="Tonnerre"
 			description="Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser."
-			power="100" type="5" pre="100" CC="" element="Electrique" maxPP="35" effet="Paralyse" >
+			power="100" type="5" pre="100" CC="0" element="Electrique" maxPP="35" effet="Paralyse" >
 		</Tonnerre>
 	</Atk>
 	<AtkCS>
