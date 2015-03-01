@@ -32,6 +32,7 @@ public class PokematosMenuListener implements   InputProcessor{
 		if(Gdx.input.isKeyJustPressed(Keys.DPAD_DOWN)){
 			if(state==1)
 			tab++;
+			Gdx.graphics.setContinuousRendering(true);
 	}
 		if(Gdx.input.isKeyJustPressed(Keys.DPAD_UP)){
 			if(state==1)

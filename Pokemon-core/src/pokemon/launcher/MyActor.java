@@ -31,20 +31,24 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 ;
 			
 	    }
+	    
+	    public void act(float delta){
+	    	switch(move){
+	    	case left:
+	    		posx-=10;
+	    		break;
+	    	case right:
+	    		posx+=10;
+	    		break;
+	    	}
+	    	System.out.println("Act");
+	    }
 
 	    @Override
 	    public void draw (Batch batch, float parentAlpha) {
 	      b.begin();
 	    	Color color = getColor();
-	    	switch(move){
-	    	case left:
-	    		posx-=70*Gdx.graphics.getDeltaTime();
-	    		break;
-	    	case right:
-	    		posx+=70*Gdx.graphics.getDeltaTime();
-	    		break;
-
-	    	}
+	    	
 	    			    	
 	    	
 		   b.setColor(color.r, color.g, color.b, color.a * parentAlpha);
