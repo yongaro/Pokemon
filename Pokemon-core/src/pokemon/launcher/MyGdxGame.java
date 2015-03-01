@@ -44,6 +44,7 @@ public class MyGdxGame extends Game {
 	public void create () {
 		MyGdxGame.initStatic();
 		MenuListener menu=new MenuListener(this);
+		System.out.print(Gdx.files.internal("Sprites/0.png").exists());
 		System.out.println("Level pk1 :"+MyGdxGame.Ptest[0].get(0));
 	}
 

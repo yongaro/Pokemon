@@ -136,6 +136,8 @@ public class menuPokemon  implements Screen {
 			f.setColor(1, 1, 1, 1);
 
 			f.draw(stage.getBatch(),"Inventaire",160+13, height-5);
+			f.draw(stage.getBatch(),"PokeMatos",324+13, height-5);
+
 			f.setScale(1.5f);
 			f.draw(stage.getBatch(),"Team",105*0.7f, 315);
 			//stage.getBatch().draw(sp, 50, 50,500,500);

@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class menuInventaire implements Screen{
 
 	MyGdxGame myGdxGame;
-	Screen previous;
+	//Screen previous;
 	MenuListener menuListener;
 	//InventaireMenuListener listener;
 	private Texture texture = new Texture(Gdx.files.internal("Dresseur.png"));
@@ -34,9 +34,9 @@ public class menuInventaire implements Screen{
     int offset;
     String[] poches = {"Objets","Baies","Objets Combat","Objets Soin","Balls","Poche CT/CS"};
     Vector<String> objets ;
-    public menuInventaire( MyGdxGame myGdxGame, Screen previous, MenuListener menuListener)
+    public menuInventaire( MyGdxGame myGdxGame,  MenuListener menuListener)
     {
-    	this.previous=previous;
+    	//this.previous=previous;
     	this.myGdxGame=myGdxGame;
     	//stage = new Stage(viewport);
     	this.menuListener=menuListener;
@@ -114,7 +114,7 @@ public class menuInventaire implements Screen{
 		f.setColor(1, 1, 1, 1);
 		f.setScale(1.2f);
 		f.draw(stage.getBatch(),"Pokemons",18, height-5);
-		
+		f.draw(stage.getBatch(),"PokeMatos",324+13, height-5);
 		f.setColor(0.58f, 0.59f, 0.57f, 1);
 		f.draw(stage.getBatch(),"Inventaire",160+13, height-5);
 		f.setScale(1.5f);
