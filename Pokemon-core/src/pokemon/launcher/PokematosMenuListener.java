@@ -31,21 +31,34 @@ public class PokematosMenuListener implements   InputProcessor{
 	public boolean keyTyped(char arg0) {
 		if(Gdx.input.isKeyJustPressed(Keys.DPAD_DOWN)){
 			if(state==1)
-			tab++;
-			Gdx.graphics.setContinuousRendering(true);
+			{tab++;
+			}
+			if(state==2){
+				menu.acteur.move=Move.down;
+				//System.out.print("set");
+				}
 	}
 		if(Gdx.input.isKeyJustPressed(Keys.DPAD_UP)){
 			if(state==1)
 			tab--;
+			if(state==2){
+				menu.acteur.move=Move.up;
+				//System.out.print("set");
+				}
+		}
+		if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
+			if(tab==1)
+			 state++;
+			Gdx.graphics.setContinuousRendering(true);
 		}
 		if(Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)){
-				if(state==1){
+				if(state==2){
 				menu.acteur.move=Move.right;
 				//System.out.print("set");
 				}
 		}
 		if(Gdx.input.isKeyPressed(Keys.DPAD_LEFT)){
-					if(state==1){
+					if(state==2){
 					menu.acteur.move=Move.left;
 					//System.out.print("set");
 					}

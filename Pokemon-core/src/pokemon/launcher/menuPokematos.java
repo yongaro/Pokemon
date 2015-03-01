@@ -118,7 +118,7 @@ public class menuPokematos implements Screen{
 		acteur= new MyActor();
 		acteur.setVisible(false);
 		
-		t=new Texture(Gdx.files.internal("map_2012.jpg"));
+		t=new Texture(Gdx.files.internal("testminimap.png"));
 	
 	}
 	
@@ -181,7 +181,6 @@ public class menuPokematos implements Screen{
 			stage.addActor(acteur);
 		}
 		
-
 	}
 		
 	
