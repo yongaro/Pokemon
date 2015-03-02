@@ -11,14 +11,15 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class PokematosMenuListener implements   InputProcessor{
 	menuPokematos menu;
 	MyGdxGame myGdxGame;
 	MenuListener menuListener;
-	int state;
+	int state; //2-Pokemon slider 1 debloque /3-Pokemon validé slider 2 debloque
 	Sound s;
-	int pkselector=1;
+	int pkselector=1,optselector=1;
 	int page=0;
 	Vector<String> nom=new Vector<String>();
 	
@@ -38,15 +39,21 @@ public class PokematosMenuListener implements   InputProcessor{
 		if(menu==myGdxGame.getScreen()){
 			switch(arg0){
 			case Keys.ENTER:
-				if(state==2)
-					{s = Gdx.audio.newSound(Gdx.files.internal("Sound/"+(page+pkselector)+".ogg"));
-				
+				if(state==3 && optselector==1){
+					s = Gdx.audio.newSound(Gdx.files.internal("Sound/"+(page+pkselector)+".ogg"));
 					s.play();
-					}
-			
+				}
+				if(state==3 && optselector==2){
+					menu.stage.addActor(new MyActor());
+					
+				}
+				if(state==2)
+				{
+					state=3;
+				}
+
 				if(state==1)
 					state=2;
-				
 				break;
 			case Keys.DOWN:
 				if(state==2){
@@ -55,7 +62,12 @@ public class PokematosMenuListener implements   InputProcessor{
 					else
 						if(pkselector==6 && page+7<nom.size()){
 							page+=6;pkselector=1;}
-				}
+					}
+					if(state==3){
+						if(optselector==1)
+							optselector++;
+					}
+				
 				break;
 			case Keys.UP:
 				if(state==2){
@@ -63,12 +75,22 @@ public class PokematosMenuListener implements   InputProcessor{
 						page-=6;pkselector=6;}
 					else
 						if(pkselector>1)
-						pkselector--;
+							pkselector--;
+				}	
+				if(state==3){
+					if(optselector==2)
+						optselector--;
 					break;
-					
+
 				}
+			case Keys.BACKSPACE:
+				if(state==3 && optselector==2){
+					for(Actor a:menu.stage.getActors())
+						a.remove();
+						;}
+					
 			}
-			menu.update(state,pkselector,page);
+			menu.update(state,pkselector,page,optselector);
 			return true;
 		}
 		return false;

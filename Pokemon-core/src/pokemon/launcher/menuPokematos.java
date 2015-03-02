@@ -19,10 +19,10 @@ public class menuPokematos implements Screen{
 
 	int width=640;//Gdx.graphics.getWidth();
 	int height=360;//Gdx.graphics.getHeight();
-	private Stage stage = new Stage(new FitViewport(width,height));
+	public Stage stage = new Stage(new FitViewport(width,height));
 	MyGdxGame mygdxgame;
 	int state;
-	int pkselector;
+	int pkselector,optselector;
 	int page;
 	int offset;
 	ShapeRenderer shapeRenderer;
@@ -35,7 +35,7 @@ public class menuPokematos implements Screen{
 		
 		super();
 		shapeRenderer=new ShapeRenderer();
-		pkselector=1;
+		pkselector=optselector=1;
 		page=0;
 		this.mygdxgame = myGdxGame;
 		this.state = 1;
@@ -93,9 +93,10 @@ public class menuPokematos implements Screen{
 		shapeRenderer.rect(45,280, 185, 41);
 
 		/*Drawing right bottom menu*/
-		shapeRenderer.rect(240,10, 175, 110);
 		shapeRenderer.setColor(1, 1, 1, 1);
-		shapeRenderer.rect(415,10, 240, 110);
+		shapeRenderer.rect(240,10, 175, 110);
+		//shapeRenderer.setColor(1, 1, 1, 1);
+		//shapeRenderer.rect(415,10, 240, 110);
 		/*object banner*/
 		//shapeRenderer.rect(240,125, 150,60); 
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
@@ -109,11 +110,13 @@ public class menuPokematos implements Screen{
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
 		shapeRenderer.rect(240,237, 385, 84);
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		shapeRenderer.triangle(240+207-10, 237, 240+207+10, 237, 240+207, 227); //top triangle
-		shapeRenderer.triangle(240+207-10, 205, 240+207+10, 205, 240+207, 215); //bottom triangle
+		shapeRenderer.triangle(407+10, 237, 427+10, 237, 417+10, 227); //top triangle
+		shapeRenderer.triangle(407+10, 205, 427+10, 205,  417+10, 215); //bottom triangle
 		/*Drawing pokemon selectors*/
 		shapeRenderer.setColor(1, 0, 0, 1);
 		shapeRenderer.rect(45,280-(45*this.pkselector), 5, 45);
+		shapeRenderer.setColor(0, 0, 1, 1);
+		shapeRenderer.rect(240,120-(55f*this.optselector), 5, 55);
 		/*shapeRenderer.setColor(0, 0, 1, 1);
 		shapeRenderer.rect(210,120-(27.5f*this.atkselector), 5, 27);*/
 		shapeRenderer.end();
@@ -146,6 +149,10 @@ public class menuPokematos implements Screen{
 			f.draw(stage.getBatch(),nom.get(i),65,268-offset);
 			offset+=46;
 		}
+		f.setScale(1.2f);
+		f.draw(stage.getBatch(),"Cri",260,110);
+		f.draw(stage.getBatch(),"Location",260,55);
+		//offset+=27.5;
 		f.setColor(1, 1, 1, 1);
 
 		f.setScale(1.2f);
@@ -158,12 +165,12 @@ public class menuPokematos implements Screen{
 		stage.getBatch().draw(spritepokemon,247,(410-25)*0.6f,(int)(spritepokemon.getWidth())*0.95f,(int)(spritepokemon.getHeight()*0.95f));
 
 		stage.getBatch().end();
-		/*if(acteur.isVisible()){
+		
 		stage.draw();
 		stage.act(delta);
-		}*/
+		}
 		
-	}
+
 
 
 	public void resize(int w, int h) {
@@ -252,10 +259,11 @@ public class menuPokematos implements Screen{
 		
 	
 
-	public void update(int state, int pkselector,int page) {
+	public void update(int state, int pkselector,int page, int optselector) {
 		this.state=state;
 		this.pkselector=pkselector;
 		this.page=page;
+		this.optselector=optselector;
 		System.out.println(state+" "+pkselector+" "+page);
 		spritepokemon=new Texture(Gdx.files.internal("Sprites/"+(pkselector+page)+".png"));
 		Gdx.graphics.requestRendering();

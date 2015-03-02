@@ -18,21 +18,21 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 	    public float posy;
 	    public Move move=Move.wait;
 	    public MyActor () {
-	        t = new Texture(Gdx.files.internal("crosshair.png"));
-	        this.setBounds(200,40,370,370);
+	        t = new Texture(Gdx.files.internal("testminimap.png"));
+	        this.setBounds(340-t.getWidth()/2,165-t.getHeight()/2,370,370);
 	       /* RepeatAction action = new RepeatAction();
 	        action.setCount(RepeatAction.FOREVER);
 	        action.setAction(Actions.fadeOut(2f));*/
-	        this.addAction(Actions.repeat(RepeatAction.FOREVER,Actions.sequence(Actions.fadeOut(1f),Actions.fadeIn(1f))));
-			posx=this.getX();
-			posy=this.getY();
+	      //  this.addAction(Actions.repeat(RepeatAction.FOREVER,Actions.sequence(Actions.fadeOut(1f),Actions.fadeIn(1f))));
+			//posx=this.getX();
+			//posy=this.getY();
 			//this.addAction(action);
 			//this.addAction(Actions.sequence(Actions.alpha(0),Actions.fadeIn(2f)));
 ;
 			
 	    }
 	    
-	   public void act(float delta){
+	   /*public void act(float delta){
 		   super.act(delta);
 	    	switch(move){
 	    	case left:
@@ -54,11 +54,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 	    		
 	    	}
 	    	System.out.println(posx+";"+posy);
-	    }
+	    }*/
 
 	    @Override
 	    public void draw (Batch batch, float parentAlpha) {
-	      b.begin();
+	    /*  b.begin();
 	    	Color color = getColor();
 	    	
 	    			    	
@@ -67,7 +67,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 		   
 	       b.draw(t,posx,posy,30,30);
 	       b.setColor(color);
-	       b.end();
+	       b.end();*/
 	        //System.out.println("Called");
+	    	batch.draw(t,this.getX(),this.getY(),t.getWidth(),t.getHeight());
 	    }
 	}
