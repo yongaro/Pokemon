@@ -16,7 +16,7 @@ public class PokemonMenuListenner implements InputProcessor{
 
 	menuPokemon menu;
 	MyGdxGame myGdxGame;
-	Screen nextScreen=null;
+	//Screen nextScreen=null;
 	MenuListener menuListener;
 	Joueur joueur= MyGdxGame.Jtest;
 	int state;
@@ -117,15 +117,16 @@ public class PokemonMenuListenner implements InputProcessor{
 				break;
 			case RIGHT:
 			
-				if(state==1){				
-						menuListener.switchtoInventory();
+				if(state==1){		
+						menuListener.switchto(menuInventaire.class);
+						//menuListener.switchtoInventory();
 				}
 				break;
 			case START:
 				if(state==2)
 				{
 					System.out.print("OK");
-					menuListener.switchtoInventory();
+					menuListener.switchto(menuInventaire.class);
 					menuListener.setState(1);
 				}
 				break;

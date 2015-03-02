@@ -136,6 +136,8 @@ public class menuPokemon  implements Screen {
 			f.setColor(1, 1, 1, 1);
 
 			f.draw(stage.getBatch(),"Inventaire",160+13, height-5);
+			f.draw(stage.getBatch(),"PokeMatos",324+13, height-5);
+
 			f.setScale(1.5f);
 			f.draw(stage.getBatch(),"Team",105*0.7f, 315);
 			//stage.getBatch().draw(sp, 50, 50,500,500);
@@ -223,17 +225,10 @@ public class menuPokemon  implements Screen {
 	@Override
 	public void resize(int width, int height) {     //https://github.com/libgdx/libgdx/wiki/Scene2d
 		stage.getViewport().update(width, height, true);
-		System.out.println(Gdx.graphics.getHeight());
-		System.out.println("stage:"+stage.getCamera());
-		System.out.println("INTRO RESIZE IS CALLED");
-		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
 		Gdx.graphics.requestRendering();
 	}
 
-	public String[] textCut(String str)
-	{
-		return str.split("\n");
-	}
 
 	@Override
 	public void show() {

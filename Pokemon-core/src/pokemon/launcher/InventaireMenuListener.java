@@ -9,7 +9,7 @@ import com.badlogic.gdx.Input.Keys;
 
 public class InventaireMenuListener implements InputProcessor{
 
-	MyGdxGame myGdxGame;
+	MyGdxGame mygdxgame;
 	Screen previous;
 	menuInventaire inventaire; //this is wat i'm listening
 	int state=1;
@@ -23,7 +23,7 @@ public class InventaireMenuListener implements InputProcessor{
     
 	public InventaireMenuListener(MyGdxGame myGdxGame, Screen previous, menuInventaire menu, MenuListener menuListener) {
 		
-		this.myGdxGame = myGdxGame;
+		this.mygdxgame = myGdxGame;
 		this.previous = previous;
 		this.inventaire=menu;
 		for(int i=0; i<45;i++)
@@ -41,9 +41,10 @@ public class InventaireMenuListener implements InputProcessor{
 
 	@Override
 	public boolean keyTyped(char arg0) {
+		if(mygdxgame.getScreen()==inventaire){
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT)){
 			if(state==1)
-				myGdxGame.setScreen(previous);
+				menuListener.switchto(menuPokemon.class);
 			if(state==2 && objselector[1]==1)
 				objselector[1]--;
 		}
@@ -97,6 +98,8 @@ public class InventaireMenuListener implements InputProcessor{
 				System.out.println(objets.get(objselector[0]+displayedAtk+7*objselector[1]));
 
 				}
+			if(state==1)
+				menuListener.switchto(menuPokematos.class);
 		}
 		if(Gdx.input.isKeyJustPressed(Keys.UP)){
 			if(state==1){
@@ -128,7 +131,10 @@ public class InventaireMenuListener implements InputProcessor{
 		}
 
 		inventaire.update(state, pktselector, objselector[0], objselector[1],actionselector, displayedAtk);
-		return false;
+		return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
