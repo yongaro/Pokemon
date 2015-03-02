@@ -13,15 +13,17 @@
 			nom="Jet de Sable"
 			description="Lance du sable au visage de l'ennemi pour baisser sa precision."
 			power="0" type="5" pre="100" CC="0" element="Sol" maxPP="35" effet="Normal"
-			Tstats="08" ChangeProc="100" fof="adv" >
+			Tstats="08" ChangeProc="100" fof="0" >
 		</JetDeSable>
 	</AtkCS>
+	<AtkRep>
+	</AtkRep>
 	<Heal>
 		<Repos
 			ID="44"
 			nom="Repos"
 			description="Le lanceur dort pendant deux tours. Il regagne tous ses PVs et n'a plus de problèmes de statut."
-			power="0" type="5" pre="100" CC="0" element="Psy" maxPP="10" effet="Normal"
+			power="100" type="5" pre="100" CC="0" element="Psy" maxPP="10" effet="Normal"
 			code="3" >
 		</Repos>
 	</Heal>
