@@ -97,17 +97,17 @@ public class menuPokematos implements Screen{
 		shapeRenderer.setColor(1, 1, 1, 1);
 		shapeRenderer.rect(415,10, 240, 110);
 		/*object banner*/
-		shapeRenderer.rect(240,125, 150,60); 
+		//shapeRenderer.rect(240,125, 150,60); 
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
 		/*capacity definition banner*/
-		shapeRenderer.rect(400,125, 265, 60);
+		//shapeRenderer.rect(400,125, 265, 60);
 		/*capacity banner*/
-		shapeRenderer.rect(240,185, 415, 20);
+		shapeRenderer.rect(240,125, 385, 80);
 		shapeRenderer.setColor(1, 1, 1, 1);
-		shapeRenderer.rect(240,205, 415, 32);
+		shapeRenderer.rect(240,205, 385, 32);
 		/*top banner*/
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		shapeRenderer.rect(240,237, 415, 84);
+		shapeRenderer.rect(240,237, 385, 84);
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
 		shapeRenderer.triangle(240+207-10, 237, 240+207+10, 237, 240+207, 227); //top triangle
 		shapeRenderer.triangle(240+207-10, 205, 240+207+10, 205, 240+207, 215); //bottom triangle
@@ -132,7 +132,6 @@ public class menuPokematos implements Screen{
 		f.drawMultiLine(stage.getBatch(),"C\nA\nR\nT\nE", 5, 140);
 		f.setColor(1, 1, 1, 1);
 		f.draw(stage.getBatch(),"Pokemons",18, height-5);
-		
 
 		f.draw(stage.getBatch(),"Inventaire",160+13, height-5);
 		f.setScale(1.5f);
@@ -151,7 +150,10 @@ public class menuPokematos implements Screen{
 
 		f.setScale(1.2f);
 		f.draw(stage.getBatch(),nom.get(pkselector-1),340, 315);
-		
+		f.setScale(0.9f);
+
+		f.drawWrapped(stage.getBatch(), " Ses ailes peuvent le faire voler à plus de 1400 m d'altitude. Ce Pokemon crache du feu a des temperatures tres élevees. ",245, 200, 380);
+
 		
 		stage.getBatch().draw(spritepokemon,247,(410-25)*0.6f,(int)(spritepokemon.getWidth())*0.95f,(int)(spritepokemon.getHeight()*0.95f));
 
