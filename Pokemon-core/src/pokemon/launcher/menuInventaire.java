@@ -167,6 +167,8 @@ public class menuInventaire implements Screen{
 	public void resize(int arg0, int arg1) {
     	stage.getViewport().update(arg0, arg1, true);
         stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+		Gdx.graphics.requestRendering();
+
 		
 	}
 	 public void update(int state,int pktselector, int objectselector0,int objectselector1,int actionselector,int displayedAtk)
@@ -188,7 +190,7 @@ public class menuInventaire implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		//Gdx.input.setInputProcessor(listener);
+		Gdx.graphics.setContinuousRendering(false);
 	}
 
 }

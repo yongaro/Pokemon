@@ -53,7 +53,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 	    		break;
 	    		
 	    	}
-	    	//System.out.println(move.name());
+	    	System.out.println(posx+";"+posy);
 	    }
 
 	    @Override

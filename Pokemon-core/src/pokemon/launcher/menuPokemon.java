@@ -225,17 +225,10 @@ public class menuPokemon  implements Screen {
 	@Override
 	public void resize(int width, int height) {     //https://github.com/libgdx/libgdx/wiki/Scene2d
 		stage.getViewport().update(width, height, true);
-		System.out.println(Gdx.graphics.getHeight());
-		System.out.println("stage:"+stage.getCamera());
-		System.out.println("INTRO RESIZE IS CALLED");
-		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
 		Gdx.graphics.requestRendering();
 	}
 
-	public String[] textCut(String str)
-	{
-		return str.split("\n");
-	}
 
 	@Override
 	public void show() {

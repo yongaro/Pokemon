@@ -1,9 +1,15 @@
 package pokemon.launcher;
 
+import java.util.Vector;
+
+
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class PokematosMenuListener implements   InputProcessor{
@@ -11,7 +17,10 @@ public class PokematosMenuListener implements   InputProcessor{
 	MyGdxGame myGdxGame;
 	MenuListener menuListener;
 	int state;
-	int tab=0;
+	Sound s;
+	int pkselector=1;
+	int page=0;
+	Vector<String> nom=new Vector<String>();
 	
 	PokematosMenuListener(menuPokematos menu,MyGdxGame myGdxGame, MenuListener menuListener)
 	{
@@ -19,19 +28,58 @@ public class PokematosMenuListener implements   InputProcessor{
 		state=1;
 		this.myGdxGame=myGdxGame;
 		this.menuListener=menuListener;
+		for(int i=0;i<20;i++)
+			nom.add("Pokemon "+i);
 	}
 
 	@Override
 	public boolean keyDown(int arg0) {
 
+		if(menu==myGdxGame.getScreen()){
+			switch(arg0){
+			case Keys.ENTER:
+				if(state==2)
+					{s = Gdx.audio.newSound(Gdx.files.internal("Sound/"+(page+pkselector)+".ogg"));
+				
+					s.play();
+					}
+			
+				if(state==1)
+					state=2;
+				
+				break;
+			case Keys.DOWN:
+				if(state==2){
+					if(pkselector<6 && page+pkselector<nom.size())
+						pkselector++;
+					else
+						if(pkselector==6 && page+7<nom.size()){
+							page+=6;pkselector=1;}
+				}
+				break;
+			case Keys.UP:
+				if(state==2){
+					if(pkselector==1 && page>0){
+						page-=6;pkselector=6;}
+					else
+						if(pkselector>1)
+						pkselector--;
+					break;
+					
+				}
+			}
+			menu.update(state,pkselector,page);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean keyTyped(char arg0) {
+		return false;
 
-		if(menu==myGdxGame.getScreen()){
-			if(Gdx.input.isKeyJustPressed(Keys.DPAD_DOWN)){
+	/*	if(menu==myGdxGame.getScreen()){
+			/*if(Gdx.input.isKeyJustPressed(Keys.DPAD_DOWN)){
 				if(state==1)
 				{tab++;
 				}
@@ -69,12 +117,12 @@ public class PokematosMenuListener implements   InputProcessor{
 			menu.update(state,tab);
 			return true;
 		}
-		return false;
+		return false;*/
 	}
 
 	@Override
 	public boolean keyUp(int arg0) {
-		if(myGdxGame.getScreen()==menu)
+	/*	if(myGdxGame.getScreen()==menu)
 		{
 			//menu.acteur.move=Move.wait;
 			switch(arg0)
@@ -105,7 +153,7 @@ public class PokematosMenuListener implements   InputProcessor{
 			break;
 			}
 			return true;
-		}
+		}*/
 		return false;
 	}
 
