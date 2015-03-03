@@ -2,6 +2,8 @@ package pokemon.launcher;
 
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+@Tps(nbhours=3)
 public class menuInventaire implements Screen{
 
 	MyGdxGame myGdxGame;

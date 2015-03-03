@@ -1,5 +1,7 @@
 package pokemon.launcher;
 
+import pokemon.annotations.Tps;
+
 import pokemon.modele.Joueur;
 import pokemon.modele.Pkm;
 import pokemon.modele.Stockage;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+@Tps(nbhours=2)
 public class PokemonMenuListenner implements InputProcessor{
 
 	menuPokemon menu;

@@ -2,11 +2,13 @@ package pokemon.launcher;
 
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
-
+@Tps(nbhours=3)
 public class InventaireMenuListener implements InputProcessor{
 
 	MyGdxGame mygdxgame;
@@ -35,19 +37,33 @@ public class InventaireMenuListener implements InputProcessor{
 	}
 
 	public boolean keyDown(int arg0) {
-		// TODO Auto-generated method stub
+		if(mygdxgame.getScreen()==inventaire){
+			System.out.println("INVENTORY INPUT DELECTED");
+		if(Gdx.input.isKeyPressed(Keys.LEFT)){
+			if(state==1){
+				
+				System.out.println("Switch a partir de l'inventaire");
+				menuListener.switchto(menuPokemon.class);}
+			if(state==2 && objselector[1]==1)
+				objselector[1]--;
+		}
+		return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean keyTyped(char arg0) {
 		if(mygdxgame.getScreen()==inventaire){
-		if(Gdx.input.isKeyJustPressed(Keys.LEFT)){
-			if(state==1)
-				menuListener.switchto(menuPokemon.class);
+			System.out.println("INVENTORY INPUT DELECTED");
+		/*if(Gdx.input.isKeyPressed(Keys.LEFT)){
+			if(state==1){
+				
+				System.out.println("Switch a partir de l'inventaire");
+				menuListener.switchto(menuPokemon.class);}
 			if(state==2 && objselector[1]==1)
 				objselector[1]--;
-		}
+		}*/
 		if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
 			if(state==2 && this.menuListener.state==1){
 				System.out.println("Je donne"+objets.get(objselector[0]+displayedAtk+7*objselector[1]));
@@ -98,8 +114,9 @@ public class InventaireMenuListener implements InputProcessor{
 				System.out.println(objets.get(objselector[0]+displayedAtk+7*objselector[1]));
 
 				}
-			if(state==1)
-				menuListener.switchto(menuPokematos.class);
+			if(state==1){
+				System.out.println("Switch a partir de l'inventaire");
+				menuListener.switchto(menuPokematos.class);}
 		}
 		if(Gdx.input.isKeyJustPressed(Keys.UP)){
 			if(state==1){

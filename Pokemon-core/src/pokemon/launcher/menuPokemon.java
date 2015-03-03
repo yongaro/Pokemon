@@ -3,6 +3,7 @@ package pokemon.launcher;
 import java.util.Random;
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
 import pokemon.launcher.PokemonMenuListenner;
 import pokemon.modele.Capacite;
 import pokemon.modele.CapacitePassive;
@@ -37,7 +38,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-
+@Tps(nbhours=5)
 public class menuPokemon  implements Screen {
 
 	MyGdxGame myGdxGame;
