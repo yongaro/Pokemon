@@ -13,13 +13,16 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 
  public class MyActor extends Actor {
 	    public Texture t;
+	    public Texture s=new Texture(Gdx.files.internal("crosshair.png"));
 	    SpriteBatch b=new SpriteBatch();
 	    public float posx;
 	    public float posy;
 	    public Move move=Move.wait;
 	    public MyActor () {
+	    	
 	        t = new Texture(Gdx.files.internal("testminimap.png"));
 	        this.setBounds(340-t.getWidth()/2,165-t.getHeight()/2,370,370);
+	        
 	       /* RepeatAction action = new RepeatAction();
 	        action.setCount(RepeatAction.FOREVER);
 	        action.setAction(Actions.fadeOut(2f));*/
@@ -70,5 +73,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 	       b.end();*/
 	        //System.out.println("Called");
 	    	batch.draw(t,this.getX(),this.getY(),t.getWidth(),t.getHeight());
+	    	batch.draw(s,this.getX()+Minimap.BourgPalette.getX(),this.getY()+Minimap.BourgPalette.getY(),30,30);
 	    }
 	}

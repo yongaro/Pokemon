@@ -2,8 +2,6 @@ package pokemon.launcher;
 
 import java.util.Vector;
 
-
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Audio;
@@ -17,7 +15,7 @@ public class PokematosMenuListener implements   InputProcessor{
 	menuPokematos menu;
 	MyGdxGame myGdxGame;
 	MenuListener menuListener;
-	int state; //2-Pokemon slider 1 debloque /3-Pokemon validé slider 2 debloque
+	int state; //2-Pokemon slider 1 debloque /3-Pokemon validï¿½ slider 2 debloque /4-Affichage location
 	Sound s;
 	int pkselector=1,optselector=1;
 	int page=0;
@@ -44,6 +42,7 @@ public class PokematosMenuListener implements   InputProcessor{
 					s.play();
 				}
 				if(state==3 && optselector==2){
+					state=4;
 					menu.stage.addActor(new MyActor());
 					
 				}
@@ -51,7 +50,6 @@ public class PokematosMenuListener implements   InputProcessor{
 				{
 					state=3;
 				}
-
 				if(state==1)
 					state=2;
 				break;
@@ -84,10 +82,14 @@ public class PokematosMenuListener implements   InputProcessor{
 
 				}
 			case Keys.BACKSPACE:
-				if(state==3 && optselector==2){
+				if(state==3)
+					state--;
+				if(state==4){
 					for(Actor a:menu.stage.getActors())
 						a.remove();
+					state--;
 						;}
+				
 					
 			}
 			menu.update(state,pkselector,page,optselector);
