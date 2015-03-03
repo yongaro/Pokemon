@@ -14,6 +14,7 @@ public class MenuListener extends InputMultiplexer{
 	public int state=0; //1- objet dans pokemon
 	menuInventaire menuinventaire;
 	menuPokematos  menupokematos;
+	menuPokematosMap  menupokematosmap;
 	
 	MenuListener(MyGdxGame mygdxgame)
 	{
@@ -21,10 +22,12 @@ public class MenuListener extends InputMultiplexer{
 		menupokemon=new menuPokemon(mygdxgame);
 		menuinventaire=new menuInventaire(mygdxgame,this);
 		menupokematos=new menuPokematos(mygdxgame);
+		menupokematosmap=new menuPokematosMap(mygdxgame);
 		mygdxgame.setScreen(menupokemon);
 		this.addProcessor(new PokemonMenuListenner(menupokemon,mygdxgame,this));
 		this.addProcessor(new InventaireMenuListener(mygdxgame, menupokemon, menuinventaire,this));
 		this.addProcessor(new PokematosMenuListener(menupokematos,mygdxgame,this));
+		this.addProcessor(new PokematosMapMenuListener(menupokematosmap,mygdxgame,this));
 		Gdx.input.setInputProcessor(this);
 	}
 
@@ -53,6 +56,7 @@ public class MenuListener extends InputMultiplexer{
 				    o=ct.newInstance(mygdxgame,this);
 				    f.set(this,o);*/
 					mygdxgame.setScreen((Screen)f.get(this));
+					break;
 				}
 			}
 

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -27,8 +28,7 @@ public class menuPokematos implements Screen{
 	int offset;
 	ShapeRenderer shapeRenderer;
 	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
-	Texture spritepokemon;
-	MyActor acteur;
+	Texture spritepokemon,map;
 	Vector<String> nom=new Vector<String>();
 
 	public menuPokematos(MyGdxGame myGdxGame) {
@@ -163,7 +163,8 @@ public class menuPokematos implements Screen{
 
 		
 		stage.getBatch().draw(spritepokemon,247,(410-25)*0.6f,(int)(spritepokemon.getWidth())*0.95f,(int)(spritepokemon.getHeight()*0.95f));
-
+		if(state==4)
+		stage.getBatch().draw(map,340-map.getWidth()/2,165-map.getHeight()/2,map.getWidth(),map.getHeight());
 		stage.getBatch().end();
 		
 		stage.draw();
@@ -189,76 +190,16 @@ public class menuPokematos implements Screen{
 
 
 	public void show() {
-		//acteur= new MyActor();
-		//acteur.setVisible(false);
 		
 		spritepokemon=new Texture(Gdx.files.internal("Sprites/"+pkselector+".png"));
 	
 	}
-	
-	public void drawPokedex()
-	{
-		shapeRenderer.begin(ShapeType.Filled);
 		
-		shapeRenderer.setColor(0.85f, 0.85f, 0.85f, 1);
-		shapeRenderer.rect(0, 165, 30, 165);
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		shapeRenderer.rect(0,0, 30, 165);
+	public void drawMap(){
+		map = new Texture(Gdx.files.internal("testminimap.png"));
+		stage.addActor(new MyActor(340-map.getWidth()/2,165-map.getHeight()/2));	
+	}
 		
-		/*Drawing left menu*/
-		shapeRenderer.setColor(1, 1, 1, 1);
-		shapeRenderer.rect(45,10, 185, 270);
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		shapeRenderer.rect(45,280, 185, 41);
-
-		/*Drawing right bottom menu*/
-		shapeRenderer.rect(240,10, 175, 110);
-		shapeRenderer.setColor(1, 1, 1, 1);
-		shapeRenderer.rect(415,10, 240, 110);
-		/*object banner*/
-		shapeRenderer.rect(240,125, 150,60); 
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		/*capacity definition banner*/
-		shapeRenderer.rect(400,125, 265, 60);
-		/*capacity banner*/
-		shapeRenderer.rect(240,185, 415, 20);
-		shapeRenderer.setColor(1, 1, 1, 1);
-		shapeRenderer.rect(240,205, 415, 32);
-		/*top banner*/
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		shapeRenderer.rect(240,237, 415, 84);
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		shapeRenderer.triangle(240+207-10, 237, 240+207+10, 237, 240+207, 227); //top triangle
-		shapeRenderer.triangle(240+207-10, 205, 240+207+10, 205, 240+207, 215); //bottom triangle
-		/*Drawing pokemon selectors*/
-		shapeRenderer.setColor(1, 0, 0, 1);
-		shapeRenderer.rect(45,280-(45*this.pkselector), 5, 45);
-		/*shapeRenderer.setColor(0, 0, 1, 1);
-		shapeRenderer.rect(210,120-(27.5f*this.atkselector), 5, 27);*/
-		shapeRenderer.end();
-		}
-	
-	/*public void drawMap(){
-		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-		shapeRenderer.rect(0, 165, 30, 165);
-		shapeRenderer.setColor(0.85f, 0.85f, 0.85f, 1);
-		shapeRenderer.rect(0,0, 30, 165);
-		shapeRenderer.end();
-
-		stage.getBatch().begin();
-		stage.getBatch().draw(t,150,30,216*1.5f,168*1.5f);
-	
-		stage.getBatch().end();
-		if(!acteur.isVisible()){
-			acteur.setVisible(true);
-			stage.addActor(acteur);
-		}
-		
-	}*/
-		
-	
-
 	public void update(int state, int pkselector,int page, int optselector) {
 		this.state=state;
 		this.pkselector=pkselector;

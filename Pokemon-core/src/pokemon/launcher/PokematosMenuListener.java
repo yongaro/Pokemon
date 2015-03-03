@@ -43,7 +43,7 @@ public class PokematosMenuListener implements   InputProcessor{
 				}
 				if(state==3 && optselector==2){
 					state=4;
-					menu.stage.addActor(new MyActor());
+					menu.drawMap();
 					
 				}
 				if(state==2)
@@ -65,6 +65,8 @@ public class PokematosMenuListener implements   InputProcessor{
 						if(optselector==1)
 							optselector++;
 					}
+					if(state==1)
+						menuListener.switchto(menuPokematosMap.class);
 				
 				break;
 			case Keys.UP:
@@ -89,7 +91,13 @@ public class PokematosMenuListener implements   InputProcessor{
 						a.remove();
 					state--;
 						;}
-				
+			case Keys.DPAD_LEFT:
+				if(state==1){
+					System.out.println("SWITCHING");
+					menuListener.switchto(menuInventaire.class);
+					
+				}
+				break;
 					
 			}
 			menu.update(state,pkselector,page,optselector);

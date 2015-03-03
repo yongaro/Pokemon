@@ -21,6 +21,7 @@ public class MyGdxGame extends Game {
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
 
+    public static Minimap m=new Minimap();
     public static Joueur Jtest=new Joueur();
     public static Pkm[] Ptest=new Pkm[6];
     public static void initStatic(){
