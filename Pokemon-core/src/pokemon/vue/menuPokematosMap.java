@@ -1,11 +1,16 @@
 package pokemon.vue;
+import javax.microedition.khronos.opengles.GL;
+
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Minimap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -14,6 +19,8 @@ public class menuPokematosMap implements Screen{
 	int height=360;//Gdx.graphics.getHeight();
 	public Stage stage = new Stage(new FitViewport(width,height));
 	MyGdxGame mygdxgame;
+	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
+	ShapeRenderer shapeRenderer=new ShapeRenderer();
 	Texture map;
 	MyActor a;
 	Minimap minimap=MyGdxGame.m;
@@ -46,7 +53,49 @@ public menuPokematosMap(MyGdxGame myGdxGame) {
 
 	@Override
 	public void render(float arg0) {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        shapeRenderer.setProjectionMatrix(stage.getViewport().getCamera().combined);
+		
+		shapeRenderer.begin(ShapeType.Filled);
+		/*Drawing top tabs*/
+		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
+
+		shapeRenderer.rect(0, height-30, 154, 30);	       
+	
+		shapeRenderer.rect(162,height-30, 154, 30);
+		shapeRenderer.setColor(0.85f, 0.85f, 0.85f, 1);
+		shapeRenderer.rect(324, height-30, 154, 30);
+
+		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
+
+		shapeRenderer.rect(486, height-30, 154, 30);
+		/*Drawing backGround*/
+		shapeRenderer.setColor(0.85f, 0.85f, 0.85f, 1);
+		shapeRenderer.rect(30,0,width, height-30);
+		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
+		shapeRenderer.rect(0, 165, 30, 165);
+		shapeRenderer.setColor(0.85f, 0.85f, 0.85f, 1);
+		shapeRenderer.rect(0,0, 30, 165);
+		
+		shapeRenderer.end();
 		stage.getBatch().begin();
+		f.setScale(1.2f);
+	
+		f.setColor(1, 1, 1, 1);
+		f.drawMultiLine(stage.getBatch(),"P\nO\nK\nE\nD\nE\nX", 5, 327);
+		f.setColor(0.58f, 0.59f, 0.57f, 1);	
+
+		f.drawMultiLine(stage.getBatch(),"C\nA\nR\nT\nE", 5, 140);
+		f.setColor(1, 1, 1, 1);
+		f.draw(stage.getBatch(),"Pokemons",18, height-5);
+
+		f.draw(stage.getBatch(),"Inventaire",160+13, height-5);
+		f.setScale(1.5f);
+		//f.draw(stage.getBatch(),"Pokedex",75, 315);			
+		//f.draw(stage.getBatch(),"Pokedex",80, 315);
+		
+		f.setColor(0.58f, 0.59f, 0.57f, 1);	
 		stage.getBatch().draw(map,340-map.getWidth()/2,165-map.getHeight()/2,map.getWidth(),map.getHeight());
 		stage.getBatch().end();
 		stage.act(arg0);
@@ -55,8 +104,9 @@ public menuPokematosMap(MyGdxGame myGdxGame) {
 
 	@Override
 	public void resize(int arg0, int arg1) {
-		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width,height);
-
+    	stage.getViewport().update(arg0, arg1, true);
+        stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+		Gdx.graphics.requestRendering();
 		
 	}
 
