@@ -1,8 +1,12 @@
-package pokemon.launcher;
+package pokemon.controle;
 
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
+import pokemon.launcher.MyGdxGame;
+import pokemon.vue.menuInventaire;
+import pokemon.vue.menuPokematos;
+import pokemon.vue.menuPokemon;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;

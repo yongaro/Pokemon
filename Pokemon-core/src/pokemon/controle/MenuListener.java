@@ -1,8 +1,14 @@
-package pokemon.launcher;
+package pokemon.controle;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+
+import pokemon.launcher.MyGdxGame;
+import pokemon.vue.menuInventaire;
+import pokemon.vue.menuPokematos;
+import pokemon.vue.menuPokematosMap;
+import pokemon.vue.menuPokemon;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -16,7 +22,7 @@ public class MenuListener extends InputMultiplexer{
 	menuPokematos  menupokematos;
 	menuPokematosMap  menupokematosmap;
 	
-	MenuListener(MyGdxGame mygdxgame)
+	public MenuListener(MyGdxGame mygdxgame)
 	{
 		this.mygdxgame=mygdxgame;
 		menupokemon=new menuPokemon(mygdxgame);

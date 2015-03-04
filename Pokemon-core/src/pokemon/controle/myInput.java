@@ -1,4 +1,4 @@
-package pokemon.launcher;
+package pokemon.controle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

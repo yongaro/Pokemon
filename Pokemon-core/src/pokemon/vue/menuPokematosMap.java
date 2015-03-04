@@ -1,4 +1,5 @@
-package pokemon.launcher;
+package pokemon.vue;
+import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Minimap;
 
 import com.badlogic.gdx.Gdx;

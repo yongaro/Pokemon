@@ -1,6 +1,8 @@
-package pokemon.launcher;
+package pokemon.controle;
 
+import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Minimap;
+import pokemon.vue.menuPokematosMap;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;

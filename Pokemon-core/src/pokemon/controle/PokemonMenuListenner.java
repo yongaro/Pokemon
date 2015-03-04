@@ -1,10 +1,12 @@
-package pokemon.launcher;
+package pokemon.controle;
 
 import pokemon.annotations.Tps;
-
+import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Joueur;
 import pokemon.modele.Pkm;
 import pokemon.modele.Stockage;
+import pokemon.vue.menuInventaire;
+import pokemon.vue.menuPokemon;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

@@ -1,10 +1,11 @@
-package pokemon.launcher;
+package pokemon.vue;
 
 import java.util.Random;
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
-import pokemon.launcher.PokemonMenuListenner;
+import pokemon.controle.PokemonMenuListenner;
+import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
 import pokemon.modele.CapacitePassive;
 import pokemon.modele.Joueur;

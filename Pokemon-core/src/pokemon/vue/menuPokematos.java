@@ -1,6 +1,8 @@
-package pokemon.launcher;
+package pokemon.vue;
 
 import java.util.Vector;
+
+import pokemon.launcher.MyGdxGame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -159,7 +161,7 @@ public class menuPokematos implements Screen{
 		f.draw(stage.getBatch(),nom.get(pkselector-1),340, 315);
 		f.setScale(0.9f);
 
-		f.drawWrapped(stage.getBatch(), "Ses ailes peuvent le faire voler à plus de 1400 m d'altitude. Ce Pokemon crache du feu a des temperatures tres élevees. ",245, 200, 380);
+		f.drawWrapped(stage.getBatch(), "Ses ailes peuvent le faire voler ï¿½ plus de 1400 m d'altitude. Ce Pokemon crache du feu a des temperatures tres ï¿½levees. ",245, 200, 380);
 
 		
 		stage.getBatch().draw(spritepokemon,247,(410-25)*0.6f,(int)(spritepokemon.getWidth())*0.95f,(int)(spritepokemon.getHeight()*0.95f));
