@@ -1,21 +1,12 @@
 package pokemon.modele;
-import java.io.IOException;
-import java.lang.reflect.*;
+
 import java.util.Random;
 
-public class Atk extends Capacite {
-	protected Statut effet;
-	
-	public Atk(){
-		super(); this.effet=Statut.Normal;
-	}
-	public Atk(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
-		super(pw,pre,cc,nom,d,el,type,pp); this.effet=effet;
-	}
-	
+public class AtkSoin extends Atk {
+
 	public void script(Pkm user,Pkm cible,Combat context){
-		System.out.println(user.nom+" utilise "+nom);
-		 Random random=new Random();
+		System.out.println(user.nom+" utilise "+nom); 
+		Random random=new Random();
 		//test de precision
 		int touche=0;
 		if(random.nextInt(100)<=this.pre){touche=1;}
@@ -26,9 +17,20 @@ public class Atk extends Capacite {
 			System.out.println(user.nom+" rate son attaque...");
 		}
 		if(touche==1 && esquive==0 && power>0){
-			if(power>0){this.atkdamage(user,cible,context.climat);}
+			int soin=0;
+			if(power>0){soin=(int)(this.atkdamage(user,cible,context.climat)/2);}
 			if(random.nextInt(100)<=10 && this.effet!=Statut.Normal){cible.statut=effet; System.out.println(cible.nom+" est "+effet);}
-		
+			
+			//Test de capacite Passive Suintement
+			if(cible.capP==CapacitePassive.Suintement){
+				System.out.println("Suitement de "+cible.nom+" fait perdre des PV a "+user.nom);
+				user.stats[2][0]-=soin;
+			}
+			else{
+				System.out.println("L'attaque soigne "+user.nom);
+				user.stats[2][0]+=soin;
+			}
+			
 			//Traitement capacite passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){
 				try{
@@ -38,5 +40,5 @@ public class Atk extends Capacite {
 			}
 		}
 	}
-
+	
 }

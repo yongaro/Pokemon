@@ -22,11 +22,11 @@ public class AtkRepet extends Atk {
 			//Nombre de coups portes par l'attaque
 			int  nbcoups=random.nextInt();
 			for(int i=0;i<=nbcoups;i++){
-				this.atkdamage(user,cible,context.climat);
+				System.out.println("Touche "+i+" fois"+this.atkdamage(user,cible,context.climat));
 			}
 			System.out.println("Touche "+nbcoups+" fois");
 			
-			//Traitement capacité passive
+			//Traitement capacitï¿½ passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){
 				try{
 					CapacitePassive.class.getMethod(cible.capP.name(),Pkm.class,Pkm.class).invoke(null,user,cible);

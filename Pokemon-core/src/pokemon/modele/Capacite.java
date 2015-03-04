@@ -27,7 +27,7 @@ public abstract class Capacite implements Qmax,Infos {
 	public Capacite(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp){
 		power=pw; this.type=type; this.pre=pre; this.CC=cc;this.nom=nom; description=d; element=el; maxPP=pp;
 	}
-	protected void atkdamage(Pkm user,Pkm cible,Climat climat){
+	protected int atkdamage(Pkm user,Pkm cible,Climat climat){
 		double STAB=1;double weakness=1.0; Random random=new Random(); double climatmod;
 		//recherche de l'affinite de l'utilisateur avec l'element de l'attaque
 		if(user.type.contains(this.element)){STAB=1.5;}
@@ -45,12 +45,13 @@ public abstract class Capacite implements Qmax,Infos {
 		damage=A*B*((double)power+2.0)*mod;
 		climatmod=climat.mod(this.element);
 		damage=(int)((double)damage*climatmod);
-		if(weakness==0){System.out.println("Aucun effet");}
+		if(weakness==0){System.out.println("Aucun effet"); return 0;}
 		else{
 		if(weakness>=2){System.out.println("C'est super efficace");}
 		if(weakness<1 && weakness>0){System.out.println("Ce n'est pas tres efficace");}
 		System.out.println("-"+(int)damage+" PV");
 		cible.stats[2][0]-=(int)damage;
+		return (int)damage;
 		}
 	}
 	public abstract void script(Pkm user,Pkm cible,Combat context);
