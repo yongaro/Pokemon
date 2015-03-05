@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="tileset_pkm" tilewidth="16" tileheight="16">
+  <image source="tileset.png" trans="000000" width="128" height="7504"/>
+ </tileset>
+ <layer name="Terrain" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJyl1kuO5DYQRVGJ0mZsj/wb2N7/vpwGqoDAyUt1uXtApJQiGcGI9+E6juN+jTV+z4/n82Os8XzxfjLv2sxbY8zv94i1y2ON+ddYc49453hexJwxzrHuim/mUd/PsfY6ugaL+NfxXhPnLfa42MM9Pcvn+81+9tPaXeP77KFYmDlZl2sT19xm3VbsMXtir51fWLkYFav6XhisHhXurY/1/GqfJsbnr3ifPPC85/Fesx1Hdxi1T1UnOVw5GKNwK6fX8V6b+ma9C8fr6DpOHu70wfrZ18n7xX+zp3JfzM6ezDzs+65vV8R6wqS6+pRvaaIc3WFs1qN0rvaZeKv+lH6UbniGebab55lbeZUxZn1nT0rDdtpY+Yh19di8xYWaWzVSN4pv4kkOiN/CilxUs8Wdc0tv7as64jc9zlzVvZlL+WXxVS7t9Kv8YP5fPlZ6534zf7nv+SaX1Iddbco/7UP52U+v8fNr/PEav73Gnx/v9d8vrDVXtaD8uLSyNH2etbzZ8/36ketXxu/RP/OZceXSkw/OfpfeeH+xZt9zDmPWnWkxZ+fxu/qKNbkk/n7kHDsOqvHie23eS2/lkzX6/P2ec1TOavx5vNeu9Gb28Yo9nnRs9vlHzmHN1O+Jo+k9Tz6rV9TzPMvnfv/3HOWLaqjYERPVD+ft7inF8f9+/3qNv784/ol4swfeGXaepz7UnW4x13tieZN3F2tQd6udppRf1p2o7he7u175amlg3WEKq2qs+CnPXfFeXjd7oM6Vr5tbeYD71jlnDws/5VnWfeZknnO+GKy6zN58y0vFlbH1gIoxz1F8KqzOPdW+umupZ6Wfu36Vd6vN+p3Y/pYOV13st73S7+SNvXFvtezp3ObrmrqX6L+F0x3WSx+u472Oc621nMP+25MV42KoweZWfZHTszbivTRSXBbHxIf8tgelzTVfnbuYo9bNc+98xNjiRJ0oz5w1Kw7Y85mra5y/0wv7udPxi30mTqy//lq4MOfKp3hQsdbx3svCjR4iFsTxjCtnrb1cLTwUX2euu/hiYZ7TuDd7m7vrqld+sw6l56WlVUOxbs7uv/NFz2SeYmHn3XVuee68yl/drz7oJXMPcV08rnOWDj7VQ88pP3W+nFdrSp+tU3m0tde37Ls91Ltm3k99fNL0Xd2tXXFdv3GtOqC2Wjf5PvPWw0sDi6PzXZ+8j/d6y6FZL/utFqqtYl8OVn5q5U5nrZ/7uU4NnOvrPqPW1Lt6al7lRaW11qX4P3Ms/sqV4nFx/mlN+Urxc5fb7r3qah6lceJlckNe7jRJT5s9K/7cjJl7Yap6Ypz5f/FQbfQ/cbI7uzUojjz5bmmI95kzvqtxFbvyf9q3NNnc1UH7Lm/UuHqeedZdZXeHEmPFBfmo9qmxxrfeu/133ndunvWc0sryxfKeOcTk1CE5W/UvDlZt9fTSrfKtmlPeaj3kuHhTx8ofrcUOZ9ao9OpkjRhRQxbrZi5q3M1/O86KpcLLebz3TB2UE+aj3tmnXW8+5/8Le70qqA==
+  </data>
+ </layer>
+ <layer name="Collide" width="50" height="50">
+  <properties>
+   <property name="collide" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1DdLBEEYh/E5zsQZwQiGOzDcVWqlVmplbgyNoTE0psJUmApTYfoApkI9C5Ur/X4+ByussJwuLDdb/B/4MbAivC8zaoxSSillp9WIMWtYxwY2I7Yn+rtRZhzDOCacebc4t7GDXey59ojbGfNXd1Fj7vGARzxhkhmnMI0ZZ959zgMc4gjHSPO9A0mkLO6Q7Zm5X/CKNN4wy4xzmMeCs8cJ5ynOcI4LZPjeiS50W9wh2ztzf+DTOTNYZMYlLGPF2eOS8wrXuMEtvvjeg170WdzB6039lMjxe+6fheE+vN6U38JwH15vym9huI9c7+q/heE+gnhXYbiPIN6V+z6iMWMKUIgiFKMkFvDQHgXxrtz3UcrMZShHBSpRlYc9gv5/Vc3MNahFHerRkIc9vN6V3zvqxwAG0cjMTWhGC+JI5GEPr/ze0RCGMYJWZm5DOzqQRMrSHkH87SullFJKKaWUUkoppZTtvgH8P1BE
+  </data>
+ </layer>
+</map>

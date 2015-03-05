@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<PNJ id="1">
+	<dialogue>
+		<text>Bonjour !</text>
+		<status npc="1" value="1"/>
+	</dialogue>
+	<dialogue>
+		<text>Ca va ?</text>
+	</dialogue>
+</PNJ>
