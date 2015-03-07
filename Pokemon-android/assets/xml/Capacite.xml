@@ -10,7 +10,7 @@
 			ID="11"
 			nom="Blizzard"
 			description="Déclenche une tempête de neige pouvant geler l'ennemi."
-			power="110" type="5" pre="70" CC="0" element="Glace" maxPP="8" effet="Gele">
+			power="110" type="5" pre="70" CC="0" element="Glace" maxPP="8" effet="Gel">
 		</Blizzard>
 		<Eclair
 			ID="13"
@@ -28,7 +28,7 @@
 			ID="19"
 			nom="Poing-Glace"
 			description="Un coup de poing glacé vient frapper l'ennemi. Peut le geler."
-			power="75" type="5" pre="100" CC="0" element="Glace" maxPP="24" effet="Gele">
+			power="75" type="5" pre="100" CC="0" element="Glace" maxPP="24" effet="Gel">
 		</PoingGlace>
 		<PoingEclair	
 			ID="23"

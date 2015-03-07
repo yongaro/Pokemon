@@ -1,7 +1,7 @@
 package pokemon.modele;
 
 public enum Statut {
-	Amoureux,Brule,Confus,Empoisonne,Endormi,Gele,KO,Normal,Paralyse,Peur;
+	Amoureux,Brule,Confus,Empoisonne,Endormi,Gel,KO,Normal,Paralyse,Peur;
 	
 	void StatEffect(Pkm cible){
 	    if(this==Statut.Brule){
@@ -10,7 +10,7 @@ public enum Statut {
 	    if(this==Statut.Endormi){
 		System.out.println(cible.nom+" dort");
 	    }
-	    if(this==Statut.Gele){
+	    if(this==Statut.Gel){
 		System.out.println(cible.nom+" est gele");
 	    }
 	    if(this==Statut.Paralyse){
