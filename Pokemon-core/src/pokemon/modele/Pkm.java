@@ -9,13 +9,14 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	//0-niveau | 1-XP | 2-PV | 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base)
 	protected int[][] stats;
 	protected Statut statut;
+	protected Statut supTemp;
 	protected int[] IV;
 	protected Nature personnalite;
 	protected Vector <Type> type;
 	protected Stockage<Capacite> cap;
 	//PP[0][1] contient les PP max de l'attaque 1 PP[0][0] contient les PP courants
 	protected CapacitePassive capP;
-	
+	protected Objet objTenu;
 	protected static final Capacite[] bases={bddCapacite.Charge.cap};
 	
 	
@@ -206,6 +207,11 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public void Heal(int pv){
 		stats[2][0]+=pv;
 		if(stats[2][0]>stats[2][1]){stats[2][0]=stats[2][1];}
+	}
+	
+	public void infliger(int dmg){
+		if(dmg>this.stats[2][1]){ this.stats[2][0]=0; this.statut=Statut.KO; this.supTemp=Statut.Normal; }
+		else{ stats[2][0]-=dmg; }
 	}
 	
 	public void reset(){

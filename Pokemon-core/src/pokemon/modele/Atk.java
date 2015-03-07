@@ -27,7 +27,7 @@ public class Atk extends Capacite {
 		}
 		if(touche==1 && esquive==0 && power>0){
 			if(power>0){this.atkdamage(user,cible,context.climat);}
-			if(random.nextInt(100)<=10 && this.effet!=Statut.Normal){cible.statut=effet; System.out.println(cible.nom+" est "+effet);}
+			if(random.nextInt(100)<=10 && this.effet!=Statut.Normal){effet.applique(cible);}
 		
 			//Traitement capacite passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){

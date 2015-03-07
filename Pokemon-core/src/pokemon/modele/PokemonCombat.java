@@ -37,5 +37,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	}
 	
 	public void setPokemon(Pkm p){ pkm=p; }
+	
+	
 
 }

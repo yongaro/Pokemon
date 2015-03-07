@@ -46,6 +46,13 @@ public class Combat {
 				p.action(p.adv[0],this);
 			}
 			//Application des dégats sur la durée
+			for(PokemonCombat p:pkmListe){
+				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){ 
+					p.pkm.statut.StatEffect(p.pkm,1);
+					p.pkm.supTemp.StatEffect(p.pkm,1);
+					if(p.pkm.stats[2][0]<=0){pokeswap(p);}
+				}
+			}
 		}
 		
 		return this.gagnant(j,pk);
@@ -53,7 +60,7 @@ public class Combat {
 	
 	
 	public void action(PokemonCombat user,PokemonCombat cible){
-		int isdone=0;  int act=0; int i=0;
+		int isdone=0;  int act=0; int i=0; int ch1=0; int ch2=0;
 		while(isdone==0){
 			System.out.println("Que doit faire "+user.pkm.nom+" ? "+user.pkm.stats[2][0]+"/"+user.pkm.stats[2][1]+" "+user.pkm.statut);
 			System.out.println("1-Attaque   2-Pkm");
@@ -67,17 +74,27 @@ public class Combat {
 				}
 				//while((act=sc.nextInt())<user.cap.max){System.out.println(act); }
 				act=sc.nextInt();
-				user.pkm.cap.at(act).script(user.pkm,cible.pkm,this);
-				if(user.pkm.stats[2][0]<=0 && !cible.isIA){
-					System.out.println(user.pkm.nom+" est K.O");
-					user.pkm.stats[2][0]=0; user.pkm.statut=Statut.KO;
-					pokeswap(user);
+				//Application des statuts pouvant empecher l'action
+				ch1=user.pkm.statut.StatEffect(user.pkm,1);
+				ch2=user.pkm.supTemp.StatEffect(user.pkm,1);
+				if(ch1==1 && ch2==1){
+					user.pkm.cap.at(act).script(user.pkm,cible.pkm,this);
 				}
-				if(cible.pkm.stats[2][0]<=0 && !cible.isIA){
-					System.out.println(cible.pkm.nom+" est K.O");
-					cible.pkm.stats[2][0]=0; cible.pkm.statut=Statut.KO;
-					pokeswap(cible);
-				} 
+				//Conséquences de l'action
+				if(user.pkm.stats[2][0]<=0){ pokeswap(user); }
+				if(cible.pkm.stats[2][0]<=0){ pokeswap(cible); }
+				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2)){
+					if(user.pkm.objTenu instanceof Medicament){
+						Medicament m=(Medicament)user.pkm.objTenu;
+						if(m.baie){ m.script(user.pkm); user.pkm.objTenu=null; }
+					}
+				}
+				if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2)){
+					if(cible.pkm.objTenu instanceof Medicament){
+						Medicament m=(Medicament)user.pkm.objTenu;
+						if(m.baie){ m.script(cible.pkm); cible.pkm.objTenu=null; }
+					}
+				}
 				isdone=1;
 				break;
 			case 2:
@@ -101,21 +118,30 @@ public class Combat {
 	
 	public void pokeswap(PokemonCombat user){
 		int i=0; int act=0; int done=0;
-		
-		while(done==0){
-			System.out.println("Qui voulez vous envoyer ?");
-			for(Pkm p: user.prop.team){
-				System.out.println(i+" "+p.nom+" LV."+p.stats[0][1]+" "+p.stats[2][0]+"/"+p.stats[2][1]+" "+p.statut);
-				i++;
+		if(!user.isIA){
+			while(done==0){
+				System.out.println("Qui voulez vous envoyer ?");
+				for(Pkm p: user.prop.team){
+					System.out.println(i+" "+p.nom+" LV."+p.stats[0][1]+" "+p.stats[2][0]+"/"+p.stats[2][1]+" "+p.statut);
+					i++;
+				}
+				act=sc.nextInt();
+				if(user.prop.team[act].statut!=Statut.KO){
+					System.out.println(user.prop.team[act].nom+" remplace "+user.pkm.nom);
+					user.pkm=user.prop.team[act];
+					done=1;
+				}
+				else{
+					System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
+				}
 			}
-			act=sc.nextInt();
-			if(user.prop.team[act].statut!=Statut.KO){
-				System.out.println(user.prop.team[act].nom+" remplace "+user.pkm.nom);
-				user.pkm=user.prop.team[act];
-				done=1;
-			}
-			else{
-				System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
+		}
+		else{
+			for(Pkm p:user.prop.team){
+				if(p.statut!=Statut.KO){
+					user.pkm=p;
+					System.out.println(user.prop+" envoie "+p+" au combat");
+				}
 			}
 		}
 		

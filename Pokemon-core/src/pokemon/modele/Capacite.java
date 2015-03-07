@@ -50,7 +50,8 @@ public abstract class Capacite implements Qmax,Infos {
 		if(weakness>=2){System.out.println("C'est super efficace");}
 		if(weakness<1 && weakness>0){System.out.println("Ce n'est pas tres efficace");}
 		System.out.println("-"+(int)damage+" PV");
-		cible.stats[2][0]-=(int)damage;
+		cible.infliger((int)damage);
+		//cible.stats[2][0]-=(int)damage;
 		return (int)damage;
 		}
 	}
