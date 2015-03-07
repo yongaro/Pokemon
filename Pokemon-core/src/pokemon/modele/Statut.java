@@ -1,23 +1,23 @@
 package pokemon.modele;
 
 public enum Statut {
-	Normal,Brule,Endormi,Gele,Paralyse,Empoisonne,Confus,KO;
+	Amoureux,Brule,Confus,Empoisonne,Endormi,Gele,KO,Normal,Paralyse,Peur;
 	
 	void StatEffect(Pkm cible){
 	    if(this==Statut.Brule){
-		System.out.println("La brulure inflige des dégats");
+		System.out.println("La brulure inflige des degats");
 	    }
 	    if(this==Statut.Endormi){
 		System.out.println(cible.nom+" dort");
 	    }
 	    if(this==Statut.Gele){
-		System.out.println(cible.nom+" est gelé");
+		System.out.println(cible.nom+" est gele");
 	    }
 	    if(this==Statut.Paralyse){
-		System.out.println(cible.nom+" est paralysé");
+		System.out.println(cible.nom+" est paralyse");
 	    }
 	    if(this==Statut.Empoisonne){
-		System.out.println("Le poison inflige des dégats");
+		System.out.println("Le poison inflige des degats");
 	    }
 	    if(this==Statut.Confus){
 		System.out.println(cible.nom+" est Confus");

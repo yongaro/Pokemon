@@ -10,8 +10,9 @@ public class CT extends Objet {
 		capRef=cap;
 	}
 	
-	public void script(Pkm cible){
+	public int script(Pkm cible){
 		capRef.teach(cible);
+		return 0;
 	}
 	
 }

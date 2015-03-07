@@ -10,7 +10,7 @@
 			ID="11"
 			nom="Blizzard"
 			description="Déclenche une tempête de neige pouvant geler l'ennemi."
-			power="110" type="5" pre="70" CC="0" element="Glace" maxPP="8" effet="Gel">
+			power="110" type="5" pre="70" CC="0" element="Glace" maxPP="8" effet="Gele">
 		</Blizzard>
 		<Eclair
 			ID="13"
@@ -22,13 +22,13 @@
 			ID="17"
 			nom="Poing de Feu"
 			description="Le lanceur frappe l'adversaire avec un poing enflammé. Peut aussi le brûler"
-			power="75" type="5" pre="100" CC="0" element="Feu" maxPP="24" effet="Brûle">
+			power="75" type="5" pre="100" CC="0" element="Feu" maxPP="24" effet="Brule">
 		</PoingDeFeu>
 		<PoingGlace	
 			ID="19"
 			nom="Poing-Glace"
 			description="Un coup de poing glacé vient frapper l'ennemi. Peut le geler."
-			power="75" type="5" pre="100" CC="0" element="Glace" maxPP="24" effet="Gel">
+			power="75" type="5" pre="100" CC="0" element="Glace" maxPP="24" effet="Gele">
 		</PoingGlace>
 		<PoingEclair	
 			ID="23"
@@ -40,13 +40,13 @@
 			ID="29"
 			nom="Griffe"
 			description="Lacère l'ennemi avec des griffes acérées pour lui infliger des dégâts."
-			power="40" type="5" pre="100" CC="0" element="Normal" maxPP="56" effet="Aucun">
+			power="40" type="5" pre="100" CC="0" element="Normal" maxPP="56" effet="Normal">
 		</Griffe>
 		<Charge	
 			ID="31"
 			nom="Charge"
 			description="Le lanceur charge l'ennemi et le percute de tout son corps."
-			power="50" type="5" pre="100" CC="0" element="Normal" maxPP="56" effet="Aucun">
+			power="50" type="5" pre="100" CC="0" element="Normal" maxPP="56" effet="Normal">
 		</Charge>
 		
 		<Tonnerre 
@@ -65,13 +65,13 @@
 			ID="43"
 			nom="Séisme"
 			description="Le lanceur provoque un tremblement de terre touchant tous les Pokémon autour de lui."
-			power="100" type="5" pre="100" CC="0" element="Sol" maxPP="16" effet="Aucun" >
+			power="100" type="5" pre="100" CC="0" element="Sol" maxPP="16" effet="Normal" >
 		</Seisme>
 		<JetPierres 
 			ID="47"
 			nom="Jet-Pierres"
 			description="Le lanceur lâche une pierre sur l'ennemi."
-			power="50" type="5" pre="90" CC="0" element="Roche" maxPP="24" effet="Aucun" >
+			power="50" type="5" pre="90" CC="0" element="Roche" maxPP="24" effet="Normal" >
 		</JetPierres>
 		
 	</Atk>
@@ -88,7 +88,7 @@
 			ID="37"
 			nom="Surf"
 			description="Une énorme vague s'abat sur le champ de bataille. Permet aussi de voyager sur l'eau. "
-			power="90" type="5" pre="100" CC="0" element="Eau" maxPP="24" effet="Aucun">
+			power="90" type="5" pre="100" CC="0" element="Eau" maxPP="24" effet="Normal">
 		</Surf>
 	<AtkRep>
 	</AtkRep>

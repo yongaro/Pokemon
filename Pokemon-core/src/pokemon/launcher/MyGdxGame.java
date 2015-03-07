@@ -48,7 +48,8 @@ public class MyGdxGame extends Game {
 		MenuListener menu=new MenuListener(this);
 		System.out.print(Gdx.files.internal("Sprites/0.png").exists());
 		System.out.println("Level pk1 :"+MyGdxGame.Ptest[0].get(0));
-		TestMap test = new TestMap();
+		//TestMap test = new TestMap();
+		this.setScreen(new TestRender());
 	}
 
 }

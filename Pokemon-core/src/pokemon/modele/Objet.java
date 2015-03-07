@@ -14,8 +14,9 @@ public class Objet implements Qmax,Infos {
 	
 	
 	
-	public void script(Pkm cible){
+	public int script(Pkm cible){
 		
+		return 0;
 	}
 	
 	public int qmax(){ return qmax; }

@@ -64,7 +64,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	//constructeur pour creer les pokemon de base du pokedex
-	public Pkm(String nom,int[] stats,Type[] type){//,Hashtable <Integer,Capacite> levelinglist){
+	public Pkm(String nom,int[] stats,Type[] type){
 		//copie des stats
 		this.ID=cpt++;
 		this.statut=Statut.Normal;
@@ -201,6 +201,11 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 			}
 		}
 		}
+	}
+	
+	public void Heal(int pv){
+		stats[2][0]+=pv;
+		if(stats[2][0]>stats[2][1]){stats[2][0]=stats[2][1];}
 	}
 	
 	public void reset(){

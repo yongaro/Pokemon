@@ -10,6 +10,10 @@ public class Pokeball extends Objet {
 		this.proc=proc;
 	}
 	
-	public void script(Pkm cible){}
+	public int script(Pkm cible){
+		
+		
+		return 0;
+	}
 
 }

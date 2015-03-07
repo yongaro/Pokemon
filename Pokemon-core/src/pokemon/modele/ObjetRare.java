@@ -11,6 +11,6 @@ public class ObjetRare extends Objet {
 		this.cible=cible;
 	}
 	
-	public void script(Pkm cible){}
-	public void script(Joueur J){}
+	public int script(Pkm cible){ return 0;}
+	public int script(Joueur J){ return 0; }
 }
