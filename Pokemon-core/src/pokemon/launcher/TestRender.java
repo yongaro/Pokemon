@@ -1,5 +1,6 @@
 package pokemon.launcher;
 
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -8,14 +9,29 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 
 public class TestRender implements Screen,InputProcessor{
 	TiledMap map = new TmxMapLoader().load("sans-titre.tmx");
+	TextureAtlas atlaswest=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
+	TextureAtlas atlaseast=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
+	TextureAtlas atlassouth=new TextureAtlas(Gdx.files.internal("player/w_south.pack"));
+	TextureAtlas atlasnorth=new TextureAtlas(Gdx.files.internal("player/w_north.pack"));
+	Animation rightwalk=new Animation(1f/5f,atlaswest.getRegions());
+	Animation leftwalk=new Animation(1f/5f,atlaseast.getRegions());
+	Animation southwalk=new Animation(1f/5f,atlassouth.getRegions());
+	Animation northwalk=new Animation(1f/5f,atlasnorth.getRegions());
+
+	Animation a=rightwalk;
+
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera cam;
 	Texture t=new Texture(Gdx.files.internal("sprite.png"));
@@ -24,6 +40,8 @@ public class TestRender implements Screen,InputProcessor{
 	float posy=17;
 	Vector2 speed;
 	Vector2 nextPos=new Vector2(posx,posy);
+	float animationtime;
+	boolean move=false;
 	
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -47,13 +65,32 @@ public class TestRender implements Screen,InputProcessor{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		cam.position.set(80,80,0);
 		cam.update();
-		update();
+		update(delta);
 		renderer.setView(cam);
 		renderer.render();
 		renderer.getBatch().begin();
-		renderer.getBatch().draw(t, posx, posy,16,16);
+		if(speed.x!=0 || speed.y!=0){
+				animationtime+=delta;
+				move=true;
+		}
+		else{
+			System.out.println(a.getKeyFrameIndex(animationtime));
+			if(a.getKeyFrameIndex(animationtime)<2 && move) //on va jusqua la derniere frame
+				animationtime+=delta;
+			else{
+				move=false;
+				animationtime=0;
+			}
+				
+		}
+		
+		//renderer.getBatch().draw(atlassouth.getRegions().get(1),0,0);
+		//renderer.getBatch().draw(atlassouth.getRegions().get(2),20,0);
+		//else
+		//animationtime=0;
+		renderer.getBatch().draw(a.getKeyFrame(animationtime,true), posx, posy);
 		renderer.getBatch().end();
-
+		
 
 
 	}
@@ -79,30 +116,46 @@ public class TestRender implements Screen,InputProcessor{
 		cam=new OrthographicCamera();
 		Gdx.input.setInputProcessor(this);
 		speed=new Vector2(0,0);
+		for(TextureRegion r:atlaseast.getRegions())
+		{
+			r.flip(true, false);
+		}
 	}
 	
-	public void update()
+	public void update(float delta)
 	{
-		nextPos.x=posx;
-		nextPos.y=posy;
-		nextPos.x+=Gdx.graphics.getDeltaTime()*speed.x;
-		nextPos.y+=Gdx.graphics.getDeltaTime()*speed.y;
-		System.out.println("Nextpos: "+nextPos);
-		/*Verif si non debordement de map*/
-		if(nextPos.x>160-t.getWidth() || nextPos.x<0 ||
-				layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
-				layerCollision.getCell((int)((nextPos.x+t.getWidth())/16f),(int)(nextPos.y/16f))!=null ||
-				layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null ||
-				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null
+		/*si le sprite bouge*/
+		if(speed.x!=0 || speed.y!=0){
+			nextPos.x=posx;
+			nextPos.y=posy;
+			nextPos.x+=Gdx.graphics.getDeltaTime()*speed.x;
+			nextPos.y+=Gdx.graphics.getDeltaTime()*speed.y;
+			System.out.println("Nextpos: "+nextPos);
+			/*Verif si non debordement de map*/
 
-				) 
+			if(nextPos.x>160-t.getWidth() || nextPos.x<0 	) 
 			{speed.x=0;return;}
-		if( nextPos.y>160-t.getHeight() || nextPos.y<0)
+			if( nextPos.y>160-t.getHeight() || nextPos.y<0)
 			{speed.y=0;return;}
-		
-		System.out.println("Speed: "+speed);
-		posx=nextPos.x;
-		//posy=nextPos.y;
+			/*verif si collision avec decors*/
+			if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
+					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)(nextPos.y/16f))!=null ||
+					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null ||
+					layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null)
+			{
+				if(speed.x!=0)
+					speed.x=0;
+				if(speed.y!=0)
+					speed.y=0;
+				return;
+			}
+			System.out.println("Speed: "+speed);
+			//speed.x+=10*delta;
+			posx=nextPos.x;
+			posy=nextPos.y;
+		}
+
+
 	}
 
 	@Override
@@ -113,17 +166,20 @@ public class TestRender implements Screen,InputProcessor{
 				
 				System.out.println((posx+t.getWidth())/16f);
 			}
-			speed.x=100;
-			//speed.y=0;
+			speed.x=60;
+			a=this.rightwalk;
+			speed.y=0;
 		}
 		if(Gdx.input.isKeyPressed(Keys.LEFT))
 			if((layerCollision.getCell((int)(posx/16f),(int) (posy/16f)))==null){
 				{//posx-=Gdx.graphics.getDeltaTime()*100;
 				System.out.print("moving");
-				
+
 				}
-				speed.x=-100;
-				//speed.y=0;
+				speed.x=-60;
+				a=this.leftwalk;
+
+				speed.y=0;
 			}
 		if(Gdx.input.isKeyPressed(Keys.DOWN)){
 			//if((layerCollision.getCell((int)((posx+t.getWidth()/2f)/16f),(int) (posy/16f)))==null){
@@ -131,16 +187,17 @@ public class TestRender implements Screen,InputProcessor{
 				//{posy-=Gdx.graphics.getDeltaTime()*100;
 				//System.out.print("moving");
 				//}
-				speed.y=-100;
-				//speed.x=0;
+				speed.y=-60;
+				a=this.southwalk;
+				speed.x=0;
 			}
 		if(Gdx.input.isKeyPressed(Keys.UP))
 		{
 			//if((layerCollision.getCell((int)((posx+t.getWidth()/2f)/16f),(int) ((posy+t.getHeight())/16f)))==null){
 			//posy+=Gdx.graphics.getDeltaTime()*100;
-			speed.y=100;
-			//speed.x=0;
-
+			speed.y=60;
+			speed.x=0;
+			a=this.northwalk;
 		//}
 		}
 		return false;
