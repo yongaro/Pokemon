@@ -8,9 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 
 //import pokemon.launcher.MyGdxGame;
 
-/* La classe Joueur regroupe toute les informations concernant le joueur, son équipe
- * de Pokémon ainsi que son état (argent, badges...). 
- * Contient aussi la base de données afin de stocker les pokémons */
+/* La classe Joueur regroupe toute les informations concernant le joueur, son ï¿½quipe
+ * de Pokemon ainsi que son etat (argent, badges...). 
+ * Contient aussi la base de donnees afin de stocker les pokemons */
 
 public class Joueur {
 	//Attributs du dresseur
@@ -29,6 +29,7 @@ public class Joueur {
 	protected Vector2 pos;
 	protected Direction orientation;
 	protected Map currentMap;
+	protected Vector2 speed;
 	
 	public Joueur(){
 		ID=0; nom="TODO"; argent=2000; badges=new int[8];
@@ -37,6 +38,7 @@ public class Joueur {
 		inventaire=new Vector<Stockage<Objet>>();
 		
 		pos = new Vector2(0f, 0f);
+		speed=new Vector2(0,0);
 		orientation = Direction.South;
 		currentMap = null;
 	}
@@ -56,8 +58,10 @@ public class Joueur {
 		return pos;
 	}
 	public void setPos(Vector2 pos) {
-		this.pos = pos;
+		this.pos.x=pos.x;
+		this.pos.y=pos.y;
 	}
+
 	public Map getCurrentMap() {
 		return currentMap;
 	}
@@ -148,4 +152,43 @@ public class Joueur {
 		}
 		return null;
 	}
+	
+	public Vector2 getSpeed() {
+		return speed;
+	}
+	public void setSpeedX(float sx)
+	{
+		speed.x=sx;
+	}
+	public void setSpeedY(float sy)
+	{
+		speed.y=sy;
+	}
+	
+	public void setOrientation(Direction orientation) {
+		this.orientation = orientation;
+		switch(this.orientation){
+		case South:
+			speed.y=-60;
+			speed.x=0;
+			break;
+		case North:
+			speed.y=60;
+			speed.x=0;
+			break;
+		case East:
+			speed.y=0;
+			speed.x=60;
+			break;
+		case West:
+			speed.y=0;
+			speed.x=-60;
+			break;
+		case Standing:
+			speed.y=0;
+			speed.x=0;
+		}
+	}
+	public boolean isMoving(){
+		return !speed.isZero();}
 }

@@ -1,11 +1,15 @@
 package pokemon.launcher;
 
 
+import pokemon.modele.Direction;
+import pokemon.modele.Joueur;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,6 +22,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class TestRender implements Screen,InputProcessor{
 	TiledMap map = new TmxMapLoader().load("sans-titre.tmx");
@@ -29,11 +35,14 @@ public class TestRender implements Screen,InputProcessor{
 	Animation leftwalk=new Animation(1f/5f,atlaseast.getRegions());
 	Animation southwalk=new Animation(1f/5f,atlassouth.getRegions());
 	Animation northwalk=new Animation(1f/5f,atlasnorth.getRegions());
-
+	Joueur j=MyGdxGame.Jtest;
 	Animation a=rightwalk;
-
+	
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera cam;
+	int width=640;
+	int height=360;
+    private Stage stage;
 	Texture t=new Texture(Gdx.files.internal("sprite.png"));
 	TiledMapTileLayer layerCollision;
 	float posx=0;
@@ -69,12 +78,11 @@ public class TestRender implements Screen,InputProcessor{
 		renderer.setView(cam);
 		renderer.render();
 		renderer.getBatch().begin();
-		if(speed.x!=0 || speed.y!=0){
+		if(j.isMoving()){
 				animationtime+=delta;
 				move=true;
 		}
 		else{
-			System.out.println(a.getKeyFrameIndex(animationtime));
 			if(a.getKeyFrameIndex(animationtime)<2 && move) //on va jusqua la derniere frame
 				animationtime+=delta;
 			else{
@@ -88,19 +96,19 @@ public class TestRender implements Screen,InputProcessor{
 		//renderer.getBatch().draw(atlassouth.getRegions().get(2),20,0);
 		//else
 		//animationtime=0;
-		renderer.getBatch().draw(a.getKeyFrame(animationtime,true), posx, posy);
+		renderer.getBatch().draw(a.getKeyFrame(animationtime,true), j.getPos().x, j.getPos().y);
 		renderer.getBatch().end();
 		
 
 
 	}
-	public boolean noCollision(){
-		return (layerCollision.getCell((int) ((posx+t.getWidth())/16f),1))==null;}
+
 	@Override
 	public void resize(int arg0, int arg1) {
-		cam.viewportWidth=arg0/3.5f;
-		cam.viewportHeight=arg1/3.5f;
-
+		//cam.viewportWidth=arg0/3.5f;
+		//cam.viewportHeight=arg1/3.5f;
+		stage.getViewport().update(arg0, arg1, true);
+		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
 	}
 
 	@Override
@@ -120,39 +128,44 @@ public class TestRender implements Screen,InputProcessor{
 		{
 			r.flip(true, false);
 		}
+
+	   stage = new Stage(new FitViewport(width,height,cam));
+	   cam.zoom-=0.5;
 	}
 	
 	public void update(float delta)
 	{
 		/*si le sprite bouge*/
-		if(speed.x!=0 || speed.y!=0){
-			nextPos.x=posx;
-			nextPos.y=posy;
-			nextPos.x+=Gdx.graphics.getDeltaTime()*speed.x;
-			nextPos.y+=Gdx.graphics.getDeltaTime()*speed.y;
+		if(j.isMoving()){
+			nextPos.x=j.getPos().x;
+			nextPos.y=j.getPos().y;
+			nextPos.x+=Gdx.graphics.getDeltaTime()*j.getSpeed().x;
+			nextPos.y+=Gdx.graphics.getDeltaTime()*j.getSpeed().y;
 			System.out.println("Nextpos: "+nextPos);
 			/*Verif si non debordement de map*/
 
-			if(nextPos.x>160-t.getWidth() || nextPos.x<0 	) 
-			{speed.x=0;return;}
+			if(nextPos.x>160-t.getWidth() || nextPos.x<0 ) 
+			{j.setSpeedX(0);System.out.println("REACH BORDER");return;}
 			if( nextPos.y>160-t.getHeight() || nextPos.y<0)
-			{speed.y=0;return;}
+			{j.setSpeedY(0);System.out.println("REACH BORDER");return;}
 			/*verif si collision avec decors*/
 			if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
 					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)(nextPos.y/16f))!=null ||
 					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null ||
 					layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null)
 			{
-				if(speed.x!=0)
-					speed.x=0;
-				if(speed.y!=0)
-					speed.y=0;
+				if(j.getSpeed().x!=0)
+					j.setSpeedX(0);
+				if(j.getSpeed().y!=0)
+					j.setSpeedY(0);
+				System.out.println("Collision DETECTE");
+				System.out.println("Speed:" +j.getSpeed());
 				return;
 			}
-			System.out.println("Speed: "+speed);
+			System.out.println("GOING TO NEXT POS");
 			//speed.x+=10*delta;
-			posx=nextPos.x;
-			posy=nextPos.y;
+			j.setPos(nextPos);//);=nextPos.x;
+			//posy=nextPos.y;
 		}
 
 
@@ -162,46 +175,35 @@ public class TestRender implements Screen,InputProcessor{
 	public boolean keyDown(int keycode) {
 		if(Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
-			if((layerCollision.getCell((int) ((posx+t.getWidth())/16f),(int) (posy/16f)))==null){
-				
-				System.out.println((posx+t.getWidth())/16f);
-			}
-			speed.x=60;
+		
+			j.setOrientation(Direction.East);
 			a=this.rightwalk;
-			speed.y=0;
-		}
-		if(Gdx.input.isKeyPressed(Keys.LEFT))
-			if((layerCollision.getCell((int)(posx/16f),(int) (posy/16f)))==null){
-				{//posx-=Gdx.graphics.getDeltaTime()*100;
-				System.out.print("moving");
 
-				}
-				speed.x=-60;
+		}
+		if(Gdx.input.isKeyPressed(Keys.LEFT)){
+		
+				j.setOrientation(Direction.West);
 				a=this.leftwalk;
 
-				speed.y=0;
+
 			}
 		if(Gdx.input.isKeyPressed(Keys.DOWN)){
-			//if((layerCollision.getCell((int)((posx+t.getWidth()/2f)/16f),(int) (posy/16f)))==null){
+		
+			j.setOrientation(Direction.South);
+			a=this.southwalk;
 
-				//{posy-=Gdx.graphics.getDeltaTime()*100;
-				//System.out.print("moving");
-				//}
-				speed.y=-60;
-				a=this.southwalk;
-				speed.x=0;
-			}
+		}
 		if(Gdx.input.isKeyPressed(Keys.UP))
 		{
-			//if((layerCollision.getCell((int)((posx+t.getWidth()/2f)/16f),(int) ((posy+t.getHeight())/16f)))==null){
-			//posy+=Gdx.graphics.getDeltaTime()*100;
-			speed.y=60;
-			speed.x=0;
+
+			j.setOrientation(Direction.North);
+
 			a=this.northwalk;
-		//}
+
 		}
 		return false;
 	}
+
 
 	@Override
 	public boolean keyTyped(char arg0) {
@@ -215,11 +217,9 @@ public class TestRender implements Screen,InputProcessor{
 		{
 		case Keys.RIGHT:
 		case Keys.LEFT:
-			speed.x=0;
-			break;
 		case Keys.DPAD_UP:
 		case Keys.DPAD_DOWN:
-			speed.y=0;
+			j.setOrientation(Direction.Standing);
 			break;
 		}
 		return false;
