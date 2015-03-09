@@ -1,5 +1,7 @@
 package pokemon.modele;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Vector;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -30,7 +32,8 @@ public class Joueur {
 	protected Direction orientation;
 	protected Map currentMap;
 	protected Vector2 speed;
-	
+	Queue<Direction> file=new LinkedList<Direction>();
+
 	public Joueur(){
 		ID=0; nom="TODO"; argent=2000; badges=new int[8];
 		team=new Pkm[6]; teamsize=0;

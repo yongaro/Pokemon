@@ -1,6 +1,11 @@
 package pokemon.launcher;
 
 
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Vector;
+
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 
@@ -37,12 +42,11 @@ public class TestRender implements Screen,InputProcessor{
 	Animation northwalk=new Animation(1f/5f,atlasnorth.getRegions());
 	Joueur j=MyGdxGame.Jtest;
 	Animation a=rightwalk;
-	
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera cam;
 	int width=640;
 	int height=360;
-    private Stage stage;
+   // private Stage stage;
 	Texture t=new Texture(Gdx.files.internal("sprite.png"));
 	TiledMapTileLayer layerCollision;
 	float posx=0;
@@ -51,6 +55,7 @@ public class TestRender implements Screen,InputProcessor{
 	Vector2 nextPos=new Vector2(posx,posy);
 	float animationtime;
 	boolean move=false;
+	Vector<Direction> input=new Vector<Direction>();
 	
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -105,10 +110,10 @@ public class TestRender implements Screen,InputProcessor{
 
 	@Override
 	public void resize(int arg0, int arg1) {
-		//cam.viewportWidth=arg0/3.5f;
-		//cam.viewportHeight=arg1/3.5f;
-		stage.getViewport().update(arg0, arg1, true);
-		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
+		cam.viewportWidth=arg0/2f;
+		cam.viewportHeight=arg1/2f;
+		//stage.getViewport().update(arg0, arg1, true);
+		//stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
 	}
 
 	@Override
@@ -129,7 +134,7 @@ public class TestRender implements Screen,InputProcessor{
 			r.flip(true, false);
 		}
 
-	   stage = new Stage(new FitViewport(width,height,cam));
+//	   stage = new Stage(new FitViewport(width,height,cam));
 	   //cam.zoom-=0.5;
 	}
 	
@@ -141,7 +146,7 @@ public class TestRender implements Screen,InputProcessor{
 			nextPos.y=j.getPos().y;
 			nextPos.x+=Gdx.graphics.getDeltaTime()*j.getSpeed().x;
 			nextPos.y+=Gdx.graphics.getDeltaTime()*j.getSpeed().y;
-			System.out.println("Nextpos: "+nextPos);
+			//System.out.println("Nextpos: "+nextPos);
 			/*Verif si non debordement de map*/
 
 			if(nextPos.x>800-t.getWidth() || nextPos.x<0 ) 
@@ -162,7 +167,7 @@ public class TestRender implements Screen,InputProcessor{
 				System.out.println("Speed:" +j.getSpeed());
 				return;
 			}
-			System.out.println("GOING TO NEXT POS");
+			//System.out.println("GOING TO NEXT POS");
 			//speed.x+=10*delta;
 			j.setPos(nextPos);//);=nextPos.x;
 			//posy=nextPos.y;
@@ -175,31 +180,41 @@ public class TestRender implements Screen,InputProcessor{
 	public boolean keyDown(int keycode) {
 		if(Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
-		
-			j.setOrientation(Direction.East);
-			a=this.rightwalk;
+			if(input.size()<2 && !input.contains(Direction.East))
+				{input.add(0, Direction.East);
+			j.setOrientation(input.firstElement());
+			a=this.rightwalk;}
 
 		}
-		if(Gdx.input.isKeyPressed(Keys.LEFT)){
-		
-				j.setOrientation(Direction.West);
-				a=this.leftwalk;
-
-
+		if(Gdx.input.isKeyPressed(Keys.LEFT) ){
+			
+			if(input.size()<2 && !input.contains(Direction.West))
+				{input.add(0, Direction.West);
+				j.setOrientation(input.firstElement());
+				a=this.leftwalk;}
 			}
 		if(Gdx.input.isKeyPressed(Keys.DOWN)){
 		
-			j.setOrientation(Direction.South);
-			a=this.southwalk;
+			if(input.size()<2 && !input.contains(Direction.South))
+				{input.add(0, Direction.South);
+			j.setOrientation(input.firstElement());
+			a=this.southwalk;}
 
 		}
 		if(Gdx.input.isKeyPressed(Keys.UP))
 		{
+			if(input.size()<2){
+				input.add(0, Direction.North);
+			j.setOrientation(input.firstElement());
 
-			j.setOrientation(Direction.North);
+			a=this.northwalk;}
 
-			a=this.northwalk;
+		}
+		System.out.println("NEW");
 
+		for(Direction c:input)
+		{
+			System.out.println(c.name());
 		}
 		return false;
 	}
@@ -216,12 +231,41 @@ public class TestRender implements Screen,InputProcessor{
 		switch(arg0)
 		{
 		case Keys.RIGHT:
-		case Keys.LEFT:
-		case Keys.DPAD_UP:
-		case Keys.DPAD_DOWN:
-			j.setOrientation(Direction.Standing);
+			input.remove(Direction.East);
 			break;
+		case Keys.LEFT:
+			input.remove(Direction.West);
+			break;
+		case Keys.DPAD_UP:
+			input.remove(Direction.North);
+			break;
+		case Keys.DPAD_DOWN:
+			input.remove(Direction.South);
+			break;
+
 		}
+		if(input.size()!=0){
+			j.setOrientation(input.firstElement());
+			switch(input.firstElement()){
+			case North:
+				a=this.northwalk;
+				break;
+
+			case South:
+				a=this.southwalk;
+				break;
+
+			case East:
+				a=this.rightwalk;
+				break;
+
+			case West:
+				a=this.leftwalk;
+				break;
+			}
+		}
+		else 
+			j.setOrientation(Direction.Standing);
 		return false;
 	}
 
