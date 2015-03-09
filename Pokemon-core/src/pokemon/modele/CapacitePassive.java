@@ -28,10 +28,10 @@ public enum CapacitePassive {
 	//11-le pokemon est en jeu.( 0 + 1 + 8 )
 	//12-action de l'adversaire
 	//13-Le pokemon quitte le combat
-	
+	XmlReader reader = new XmlReader();
 	
 	CapacitePassive(){
-		XmlReader reader = new XmlReader(); Element temp;
+		Element temp;
 		try{
 			Element root = reader.parse(Gdx.files.internal("xml/CapacitePassive.xml"));
 			temp=root.getChildByName(this.name());
@@ -53,7 +53,7 @@ public enum CapacitePassive {
 	//prototype manquant la verification d'echauffement
 	public static void Statik(Pkm user,Pkm cible){ 
 		user.statut=Statut.Paralyse;
-		System.out.println("Le Statik de "+user.nom+" paralyse "+cible.nom);
+		System.out.println("Le Statik de "+cible.nom+" paralyse "+user.nom);
 	}
 	
 	public static void AirLock(Combat c){ 

@@ -3,16 +3,18 @@ package pokemon.modele;
 import java.util.Random;
 
 public enum Statut {
-	Attraction,Brule,Confus,Empoisonne,Endormi,Gel,KO,Maudit,Normal,Paralyse,Peur;
+	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur;
 	
 	//useless ?
 	public void applique(Pkm cible){
-		if(this==Brule || this==Empoisonne || this==Endormi || this==Gel || this==Paralyse){
+		if(this==Brule || this==Empoisonne || this==Endormi || this==Gele || this==Paralyse){
 			if(cible.statut==Normal){
 				cible.statut=this;
+				System.out.println(cible.nom+" ");
 				if(cible.objTenu instanceof Medicament){
 					Medicament m=(Medicament)cible.objTenu;
 					if(m.baie && (m.flagSoin==2 || m.flagSoin==4)){
+						System.out.println(cible.nom+" utilise sa baie");
 						m.script(cible);
 						cible.objTenu=null;
 					}
@@ -26,6 +28,7 @@ public enum Statut {
 				if(cible.objTenu instanceof Medicament){
 					Medicament m=(Medicament)cible.objTenu;
 					if(m.baie && (m.flagSoin==2 || m.flagSoin==4)){
+						System.out.println(cible.nom+" utilise sa baie");
 						m.script(cible);
 						cible.objTenu=null;
 					}
@@ -51,7 +54,7 @@ public enum Statut {
 	    	System.out.println(cible.nom+" dort");
 	    	return 0;
 	    }
-	    if(this==Statut.Gel && flag==0){
+	    if(this==Statut.Gele && flag==0){
 	    	Random rand=new Random();
 	    	if(rand.nextInt()<=10){
 	    		System.out.println(cible.nom+" n'est plus gele");

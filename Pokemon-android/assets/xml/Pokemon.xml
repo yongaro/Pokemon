@@ -1,0 +1,136 @@
+<Pokemon>
+	<Bulbizarre
+		ID="1" nom="Bulbizarre"
+		description="Il a une étrange graine plantée sur son dos. Elle grandit avec lui depuis sa naissance."
+		PV="45" ATT="49" DEF="49" ATTSP="65" DEFSP="65" VIT="45" type1="Plante" type2="Poison">
+		<CapacitePassive>
+			<Engrais nom="Engrais"></Engrais>
+			<Chlorophyle nom="Chlorophyle"></Chlorophyle>
+		</CapacitePassive>
+	</Bulbizarre>
+	<Herbizarre
+		ID="2" nom="Herbizarre"
+		description="Il y a un bulbe sur son dos. On dit que s’il absorbe assez de nutriments, ce bulbe se transforme en une jolie fleur."
+		PV="60" ATT="62" DEF="63" ATTSP="80" DEFSP="80" VIT="60" type1="Plante" type2="Poison">
+		<CapacitePassive>
+			<Engrais nom="Engrais"></Engrais>
+			<Chlorophyle nom="Chlorophyle"></Chlorophyle>
+		</CapacitePassive>
+	</Herbizarre>
+	<Florizarre
+		ID="3" nom="Florizarre"
+		description="Ses pétales lui servent à capter la lumière du soleil. Il peut ainsi en canaliser l’énergie."
+		PV="80" ATT="82" DEF="83" ATTSP="100" DEFSP="100" VIT="80" type1="Plante" type2="Poison">
+		<CapacitePassive>
+			<Engrais nom="Engrais"></Engrais>
+			<Chlorophyle nom="Chlorophyle"></Chlorophyle>
+		</CapacitePassive>
+	</Florizarre>
+	<Salameche
+		ID="4" nom="Salameche"
+		description="Une petite flamme brûle au bout de sa queue. Si cette flamme s’éteint, la vie de ce Pokémon s’éteint elle aussi."
+		PV="39" ATT="52" DEF="43" ATTSP="60" DEFSP="50" VIT="65" type1="Feu" type2="">
+		<CapacitePassive>
+			<Brasier nom="Brasier"></Brasier>
+		</CapacitePassive>
+	</Salameche>
+	<Reptincel
+		ID="5" nom="Reptincel"
+		description="Il se sert de sa queue pour faire tomber ses adversaires. Une fois qu’ils sont au sol, il les lacère de ses griffes acérées."
+		PV="58" ATT="64" DEF="58" ATTSP="80" DEFSP="65" VIT="80" type1="Feu" type2="">
+		<CapacitePassive>
+			<Brasier nom="Brasier"></Brasier>
+		</CapacitePassive>
+	</Reptincel>
+	<Dracaufeu
+		ID="6" nom="Dracaufeu"
+		description="Ses ailes peuvent le faire voler à plus de 1?400 m d’altitude. Ce Pokémon crache du feu à des températures très élevées."
+		PV="78" ATT="84" DEF="78" ATTSP="109" DEFSP="85" VIT="100" type1="Feu" type2="Vol">
+		<CapacitePassive>
+			<Brasier nom="Brasier"></Brasier>
+		</CapacitePassive>
+	</Dracaufeu>
+	<Carapuce
+		ID="7" nom="Carapuce"
+		description="Caché sous l’eau, il crache un jet d’eau sur sa proie et se cache à l’intérieur de sa carapace."
+		PV="44" ATT="48" DEF="65" ATTSP="50" DEFSP="64" VIT="43" type1="Eau" type2="">
+		<CapacitePassive>
+			<Torrent nom="Torrent"></Torrent>
+			<Cuvette nom="Cuvette"></Cuvette>
+		</CapacitePassive>
+	</Carapuce>
+	<Carabaffe
+		ID="8" nom="Carabaffe"
+		description="On prétend qu’il vit 10 000 ans. Attaqué, il cache sa tête dans sa carapace, mais son corps trop gros ne peut y tenir en entier."
+		PV="59" ATT="63" DEF="80" ATTSP="65" DEFSP="80" VIT="58" type1="Eau" type2="">
+		<CapacitePassive>
+			<Torrent nom="Torrent"></Torrent>
+			<Cuvette nom="Cuvette"></Cuvette>
+		</CapacitePassive>
+	</Carabaffe>
+	<Tortank
+		ID="9" nom="Tortank"
+		description="Les trombes d’eau projetées par les canons de sa carapace peuvent percer le métal le plus résistant."
+		PV="79" ATT="83" DEF="100" ATTSP="85" DEFSP="105" VIT="78" type1="Eau" type2="">
+		<CapacitePassive>
+			<Torrent nom="Torrent"></Torrent>
+			<Cuvette nom="Cuvette"></Cuvette>
+		</CapacitePassive>
+	</Tortank>
+	<Roucool
+		ID="16" nom="Roucool"
+		description="Ce Pokémon docile préfère éviter le combat. Toutefois, il se montre très féroce quand on l’agresse."
+		PV="40" ATT="45" DEF="40" ATTSP="35" DEFSP="35" VIT="56" type1="Normal" type2="Vol">
+		<CapacitePassive>
+			<Cran nom="Cran"></Cran>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Roucool>
+	<Roucoups
+		ID="17" nom="Roucoups"
+		description="Grâce à ses griffes très puissantes, il est capable de transporter des Noeunoeuf vers un nid éloigné de plus de 100 km."
+		PV="63" ATT="60" DEF="55" ATTSP="50" DEFSP="50" VIT="71" type1="Normal" type2="Vol">
+		<CapacitePassive>
+			<Cran nom="Cran"></Cran>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Roucoups>
+	<Roucarnage
+		ID="18" nom="Roucarnage"
+		description="Roucarnage déploie ses ailes majestueuses pour effrayer ses ennemis. Il peut voler à Mach 2."
+		PV="83" ATT="80" DEF="75" ATTSP="70" DEFSP="70" VIT="101" type1="Normal" type2="Vol">
+		<CapacitePassive>
+			<Cran nom="Cran"></Cran>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Roucarnage>
+	<Rattata
+		ID="19" nom="Rattata"
+		description="Les dents de Rattata sont longues et tranchantes. Comme elles poussent sans arrêt, il doit ronger tout ce qu’il trouve pour pouvoir les tailler."
+		PV="30" ATT="56" DEF="35" ATTSP="25" DEFSP="35" VIT="72" type1="Normal" type2="">
+		<CapacitePassive>
+			<Fuite nom="Fuite"></Fuite>
+			<Cran nom="Cran"></Cran>
+			<Agitation nom="Agitation"></Agitation>
+		</CapacitePassive>
+	</Rattata>
+	<Rattatac
+		ID="20" nom="Rattatac"
+		description="Il grignote sans cesse pour apaiser la poussée de ses crocs. Il peut transpercer un mur de parpaings."
+		PV="55" ATT="81" DEF="60" ATTSP="50" DEFSP="70" VIT="97" type1="Normal" type2="">
+		<CapacitePassive>
+			<Fuite nom="Fuite"></Fuite>
+			<Cran nom="Cran"></Cran>
+			<Agitation nom="Agitation"></Agitation>
+		</CapacitePassive>
+	</Rattatac>
+	<Pikachu
+		ID="25" nom="Pikachu"
+		description="Pikachu a de petites poches pleines d’électricité sur ses joues. S’il se sent menacé, il laisse s’échapper des décharges électriques."
+		PV="35" ATT="55" DEF="40" ATTSP="50" DEFSP="50" VIT="90" type1="Electrique" type2="">
+		<CapacitePassive>
+			<Statik nom="Statik"></Statik>
+			<Paratonnerre nom="Paratonnerre"></Paratonnerre>
+		</CapacitePassive>
+	</Pikachu>
+</Pokemon>

@@ -24,5 +24,5 @@ public class Objet implements Qmax,Infos {
 	public String getNom(){return nom;}
 	public String getDesc(){return description;}
 	public String getInfos(){return "";}
-
+	public String toString(){return nom+"\n"+description;}
 }

@@ -1,104 +1,118 @@
 <Capacite>
-	<Atk>
 		<Balayage
-			ID="7"
+			ID="7" class="Atk"
 			nom="Balayage"
 			description="Un puissant coup de pied bas qui fauche l'ennemi."
-			power="50" type="5" pre="100" CC="0" element="Combat" maxPP="32" effet="Peur">
+			power="50" type="3" pre="100" CC="7" element="Combat" maxPP="32" effet="Peur">
 		</Balayage>
 		<Blizzard
-			ID="11"
+			ID="11" class="Atk"
 			nom="Blizzard"
 			description="Déclenche une tempête de neige pouvant geler l'ennemi."
-			power="110" type="5" pre="70" CC="0" element="Glace" maxPP="8" effet="Gel">
+			power="110" type="5" pre="70" CC="7" element="Glace" maxPP="8" effet="Gele">
 		</Blizzard>
-		<Eclair
-			ID="13"
-			nom="Eclair"
-			description="Une décharge électrique tombe sur l'ennemi. Peut aussi le paralyser "
-			power="40" type="5" pre="100" CC="0" element="Electrique" maxPP="48" effet="Paralyse">
-		</Eclair>
-		<PoingDeFeu
-			ID="17"
-			nom="Poing de Feu"
-			description="Le lanceur frappe l'adversaire avec un poing enflammé. Peut aussi le brûler"
-			power="75" type="5" pre="100" CC="0" element="Feu" maxPP="24" effet="Brule">
-		</PoingDeFeu>
-		<PoingGlace	
-			ID="19"
-			nom="Poing-Glace"
-			description="Un coup de poing glacé vient frapper l'ennemi. Peut le geler."
-			power="75" type="5" pre="100" CC="0" element="Glace" maxPP="24" effet="Gel">
-		</PoingGlace>
-		<PoingEclair	
-			ID="23"
-			nom="Poing-Eclair"
-			description="Un coup de poing électrique vient frapper l'ennemi. Peut le paralyser."
-			power="75" type="5" pre="100" CC="0" element="Electrique" maxPP="24" effet="Paralyse">
-		</PoingEclair>
-		<Griffe	
-			ID="29"
-			nom="Griffe"
-			description="Lacère l'ennemi avec des griffes acérées pour lui infliger des dégâts."
-			power="40" type="5" pre="100" CC="0" element="Normal" maxPP="56" effet="Normal">
-		</Griffe>
 		<Charge	
-			ID="31"
+			ID="31" class="Atk"
 			nom="Charge"
 			description="Le lanceur charge l'ennemi et le percute de tout son corps."
-			power="50" type="5" pre="100" CC="0" element="Normal" maxPP="56" effet="Normal">
+			power="50" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
 		</Charge>
-		
-		<Tonnerre 
-			ID="2"
-			nom="Tonnerre"
-			description="Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser."
-			power="100" type="5" pre="100" CC="0" element="Electrique" maxPP="35" effet="Paralyse" >
-		</Tonnerre>
-		<RafalePsy 
-			ID="41"
-			nom="Rafale Psu"
-			description="Un étrange rayon frappe l'ennemi. Peut aussi le rendre confus."
-			power="65" type="5" pre="100" CC="0" element="Psy" maxPP="32" effet="Confus" >
-		</RafalePsy>
-		<Seisme 
-			ID="43"
-			nom="Séisme"
-			description="Le lanceur provoque un tremblement de terre touchant tous les Pokémon autour de lui."
-			power="100" type="5" pre="100" CC="0" element="Sol" maxPP="16" effet="Normal" >
-		</Seisme>
-		<JetPierres 
-			ID="47"
-			nom="Jet-Pierres"
-			description="Le lanceur lâche une pierre sur l'ennemi."
-			power="50" type="5" pre="90" CC="0" element="Roche" maxPP="24" effet="Normal" >
-		</JetPierres>
-		
-	</Atk>
-	<AtkCS>
+		<CrochetVenin
+			ID="999" class="Atk"
+			nom="Crochet Venin"
+			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisées. Peut aussi apeurer l'ennemi. "
+			power="50" type="3" pre="100" CC="7" element="Poison" maxPP="15" effet="Empoisonne">
+		</CrochetVenin>
+		<CrocDeMort
+			ID="999" class="Atk"
+			nom="Croc de Mort"
+			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisées. Peut aussi apeurer l'ennemi. "
+			power="80" type="3" pre="90" CC="7" element="Normal" maxPP="15" effet="Peur">
+		</CrocDeMort>
+		<CruAile	
+			ID="999" class="Atk"
+			nom="Cru-Aile"
+			description="L'ennemi est frappé par de larges ailes déployées pour infliger des dégâts. "
+			power="60" type="3" pre="100" CC="7" element="Vol" maxPP="35" effet="Normal">
+		</CruAile>
+		<Eclair
+			ID="13" class="Atk"
+			nom="Eclair"
+			description="Une décharge électrique tombe sur l'ennemi. Peut aussi le paralyser "
+			power="40" type="5" pre="100" CC="7" element="Electrique" maxPP="48" effet="Paralyse">
+		</Eclair>
+		<Griffe	
+			ID="29" class="Atk"
+			nom="Griffe"
+			description="Lacère l'ennemi avec des griffes acérées pour lui infliger des dégâts."
+			power="40" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
+		</Griffe>
 		<JetDeSable
-			ID="3"
+			ID="3" class="AtkCS"
 			nom="Jet de Sable"
 			description="Lance du sable au visage de l'ennemi pour baisser sa precision."
 			power="0" type="5" pre="100" CC="0" element="Sol" maxPP="35" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0" >
 		</JetDeSable>
-	</AtkCS>
-	<Surf	
-			ID="37"
-			nom="Surf"
-			description="Une énorme vague s'abat sur le champ de bataille. Permet aussi de voyager sur l'eau. "
-			power="90" type="5" pre="100" CC="0" element="Eau" maxPP="24" effet="Normal">
-		</Surf>
-	<AtkRep>
-	</AtkRep>
-	<Heal>
+		<JetPierres 
+			ID="47" class="Atk"
+			nom="Jet-Pierres"
+			description="Le lanceur lâche une pierre sur l'ennemi."
+			power="50" type="5" pre="90" CC="7" element="Roche" maxPP="24" effet="Normal" >
+		</JetPierres>
+		<MegaSangsue 
+			ID="999" class="AtkSoin"
+			nom="Mega-Sangsue"
+			description="Une attaque qui convertit la moitié des dégâts infligés en PV. "
+			power="40" type="5" pre="100" CC="7" element="Plante" maxPP="15" effet="Normal" >
+		</MegaSangsue>
+		<PoingDeFeu
+			ID="17" class="Atk"
+			nom="Poing de Feu"
+			description="Le lanceur frappe l'adversaire avec un poing enflammé. Peut aussi le brûler"
+			power="75" type="3" pre="100" CC="7" element="Feu" maxPP="24" effet="Brule">
+		</PoingDeFeu>
+		<PoingEclair	
+			ID="23" class="Atk"
+			nom="Poing-Eclair"
+			description="Un coup de poing électrique vient frapper l'ennemi. Peut le paralyser."
+			power="75" type="3" pre="100" CC="7" element="Electrique" maxPP="24" effet="Paralyse">
+		</PoingEclair>
+		<PoingGlace	
+			ID="19" class="Atk"
+			nom="Poing-Glace"
+			description="Un coup de poing glacé vient frapper l'ennemi. Peut le geler."
+			power="75" type="3" pre="100" CC="7" element="Glace" maxPP="24" effet="Gele">
+		</PoingGlace>
+		<RafalePsy 
+			ID="41" class="Atk"
+			nom="Rafale Psu"
+			description="Un étrange rayon frappe l'ennemi. Peut aussi le rendre confus."
+			power="65" type="5" pre="100" CC="7" element="Psy" maxPP="32" effet="Confus" >
+		</RafalePsy>
 		<Repos
-			ID="5"
+			ID="5" class="Heal"
 			nom="Repos"
 			description="Le lanceur dort pendant deux tours. Il regagne tous ses PVs et n'a plus de problèmes de statut."
-			power="100" type="5" pre="100" CC="0" element="Psy" maxPP="10" effet="Normal"
+			power="100" type="5" pre="100" CC="0" element="Psy" maxPP="10" effet="Endormi"
 			code="3" >
 		</Repos>
-	</Heal>
+		<Seisme 
+			ID="43" class="Atk"
+			nom="Séisme"
+			description="Le lanceur provoque un tremblement de terre touchant tous les Pokémon autour de lui."
+			power="100" type="5" pre="100" CC="7" element="Sol" maxPP="16" effet="Normal" >
+		</Seisme>
+		<Surf	
+			ID="37" class="Atk"
+			nom="Surf"
+			description="Une énorme vague s'abat sur le champ de bataille. Permet aussi de voyager sur l'eau. "
+			power="90" type="5" pre="100" CC="7" element="Eau" maxPP="24" effet="Normal">
+		</Surf>
+		<Tonnerre 
+			ID="2" class="Atk"
+			nom="Tonnerre"
+			description="Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser."
+			power="100" type="5" pre="100" CC="7" element="Electrique" maxPP="35" effet="Paralyse" >
+		</Tonnerre>
 </Capacite>

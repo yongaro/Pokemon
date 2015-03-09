@@ -6,6 +6,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	private static int cpt=1;
 	protected int ID;
 	protected String nom;
+	protected String description;
 	//0-niveau | 1-XP | 2-PV | 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base)
 	protected int[][] stats;
 	protected Statut statut;
@@ -17,7 +18,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	//PP[0][1] contient les PP max de l'attaque 1 PP[0][0] contient les PP courants
 	protected CapacitePassive capP;
 	protected Objet objTenu;
-	protected static final Capacite[] bases={bddCapacite.Charge.cap};
+	//protected static final Capacite[] bases={bddCapacite.Charge.cap};
 	
 	
 	public Pkm(Pkm base,int level){
@@ -31,6 +32,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		this.stats[9][0]=5;this.stats[9][1]=5;
 		this.stats[0][0]=level; this.stats[0][1]=level;
 		this.statut=Statut.Normal;
+		this.supTemp=Statut.Normal;
 		this.personnalite=Nature.getRandom(this);
 		this.capP=CapacitePassive.Statik;
 		this.type=new Vector <Type>();
@@ -65,11 +67,13 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	//constructeur pour creer les pokemon de base du pokedex
-	public Pkm(String nom,int[] stats,Type[] type){
+	public Pkm(String nom,String desc,int[] stats,Type t1,Type t2){
 		//copie des stats
 		this.ID=cpt++;
 		this.statut=Statut.Normal;
+		this.supTemp=Statut.Normal;
 		this.nom=nom;
+		this.description=desc;
 		int i=0;
 		this.stats=new int[10][2];
 		this.stats[0][0]=0; this.stats[1][0]=0;
@@ -79,7 +83,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		this.stats[9][0]=5;this.stats[9][1]=5;
 		//copie du/des type(s)
 		this.type=new Vector <Type>();
-		for(Type t: type){this.type.addElement(t);}
+		if(t1!=null){this.type.addElement(t1);} if(t2!=null){this.type.addElement(t2);}
 		i=0;
 		//copie des capacites
 		this.cap=new Stockage<Capacite>(); cap.max=4;
@@ -210,7 +214,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	public void infliger(int dmg){
-		if(dmg>this.stats[2][1]){ this.stats[2][0]=0; this.statut=Statut.KO; this.supTemp=Statut.Normal; }
+		if(dmg>=this.stats[2][0]){ this.stats[2][0]=0; this.statut=Statut.KO; this.supTemp=Statut.Normal; }
 		else{ stats[2][0]-=dmg; }
 	}
 	
@@ -224,7 +228,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public int qmax(){return 1;}
 	public int getID(){return ID;}
 	public String getNom(){return nom;}
-	public String getDesc(){return "";}
+	public String getDesc(){return description;}
 	public String getInfos(){return "";}
 	
 	public Stockage<Capacite> getCap(){
@@ -235,6 +239,11 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		cap.add(Cap);
 	}
 	
+	public void give(Objet o){
+		if(this.objTenu==null){
+			this.objTenu=o;
+		}
+	}
 	
 	public int compare(Pkm p1,Pkm p2){
 		if(p1.stats[7][0]<p2.stats[7][0]){return -1;}
@@ -253,6 +262,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		return (ID+" "+nom+" LV."+stats[0][0]+
 				"\n XP:"+stats[1][0]+"/"+stats[1][1]+
 				"\n PV:"+stats[2][0]+"/"+stats[2][1]+" "+statut+
+				"\n"+objTenu+
 				"\n ATT:"+stats[3][1]+" DEF:"+stats[4][1]+
 				"\n ASP:"+stats[5][1]+" DSP:"+stats[6][1]+
 				"\n VIT:"+stats[7][1]+" "+personnalite);

@@ -4,6 +4,14 @@ import java.util.Random;
 
 public class AtkSoin extends Atk {
 
+	public AtkSoin(){
+		super(); this.effet=Statut.Normal;
+	}
+	public AtkSoin(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
+		super(pw,pre,cc,nom,d,el,type,pp,effet);
+	}
+	
+	
 	public void script(Pkm user,Pkm cible,Combat context){
 		System.out.println(user.nom+" utilise "+nom); 
 		Random random=new Random();
@@ -24,11 +32,12 @@ public class AtkSoin extends Atk {
 			//Test de capacite Passive Suintement
 			if(cible.capP==CapacitePassive.Suintement){
 				System.out.println("Suitement de "+cible.nom+" fait perdre des PV a "+user.nom);
-				user.stats[2][0]-=soin;
+				//user.stats[2][0]-=soin;
+				user.infliger(soin);
 			}
 			else{
 				System.out.println("L'attaque soigne "+user.nom);
-				user.stats[2][0]+=soin;
+				user.Heal(soin);
 			}
 			
 			//Traitement capacite passive

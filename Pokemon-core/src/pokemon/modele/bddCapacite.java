@@ -3,6 +3,7 @@ package pokemon.modele;
 import java.io.IOException;
 
 import pokemon.annotations.Cpx;
+import pokemon.annotations.Tps;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -10,47 +11,53 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.*;
 
-
+@Tps(nbhours=5)
 public enum bddCapacite {
+	Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,Eclair,Griffe,JetPierres,MegaSangsue,
+	PoingDeFeu,PoingEclair,PoingGlace,RafalePsy,Repos,Seisme,Surf,Tonnerre,JetDeSable;
+
 	
-	//Type Plante
-	
-	//Type Sol
-	JetdeSable(0,100,0,"Jet de Sable","Lance du sable au visage de l'ennemi pour baisser sa precision.",Type.Sol,5,35,Statut.Normal,"08",100,0),
-	//Type Electrique
-	Tonnerre(90,100,10,"Tonnerre","Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser.",Type.Electrique,5,10,Statut.Paralyse),
-	//Type Normal
-	Boularmure(0,100,0,"Boul'armure","",Type.Normal,5,40,Statut.Normal,"04",100,1),
-	Charge(35,95,10,"Charge","",Type.Normal,3,35,Statut.Normal),
-	//Type Psy
-	ChocMental(50,100,10,"Choc Mental","",Type.Psy,5,25,Statut.Confus),
-	Plenitude(0,100,0,"Plenitude","",Type.Psy,5,20,Statut.Normal,"056",100,1),
-	Psyko(90,100,10,"Choc Mental","",Type.Psy,5,10,Statut.Normal,"06",10,0),
-	PsychoBoost(140,90,10,"Psycho Boost","",Type.Psy,5,5,Statut.Normal,"05",75,1),
-	RafalePsy(65,100,10,"Choc Mental","",Type.Psy,5,20,Statut.Confus),
-	Repos(100,100,0,"Repos","",Type.Psy,5,10,'3'),
-	Telekinesie(0,80,0,"Telekinesie","",Type.Psy,5,35,Statut.Normal,"08",100,0),
-	Yoga(0,100,0,"Yoga","",Type.Psy,5,40,Statut.Normal,"03",100,1)
-	//Type Tenebre
-	;
-	
-	bddCapacite(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,String code,int proc,int fof){
-			cap=new AtkChangeStats(pw,pre,cc,nom,d,el,type,pp,effet,code,proc,fof);
-		
-	}
-	bddCapacite(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
-		cap=new Atk(pw,pre,cc,nom,d,el,type,pp,effet);
-	}
-	bddCapacite(int pw,int pre,int cc, String nom,String d,Type el,int type,int pp,char code){
-		cap=new Heal(pw,pre,cc,nom,d,el,type,pp,code);
-	}
+	protected  XmlReader reader = new XmlReader();
 	protected Capacite cap;
 	
-	public Capacite get(){
-		return cap;
+	
+	
+	 bddCapacite(){
+		 try {
+			Element root,e;
+			root = reader.parse(Gdx.files.internal("xml/Capacite.xml"));
+			e=root.getChildByName(this.name());
+			
+			//La capacite courante est une Atk
+			if(e.get("class").compareTo("Atk")==0){ 
+				this.cap=new Atk(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")));
+			}
+			//La capacite courante est une AtkChangeStats		
+			if(e.get("class").compareTo("AtkCS")==0){
+				this.cap=new AtkChangeStats(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.get("Tstats"),
+						e.getInt("ChangeProc"),e.getInt("fof"));
+			}
+			//La capacite courante est une AtkRepet
+			if(e.get("class").compareTo("AtkRep")==0){
+				this.cap=new AtkRepet(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")));
+				System.out.println(cap);
+			}
+			//La capacite courante est un Heal
+			if(e.get("class").compareTo("Heal")==0){
+				this.cap=new Heal(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),e.getInt("code"),Statut.valueOf(e.get("effet")));
+			}
+			if(e.get("class").compareTo("AtkSoin")==0){
+				this.cap=new AtkSoin(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")));
+			}
+			cap.ID=e.getInt("ID");
+		}
+		catch (IOException e1) { e1.printStackTrace(); }
 	}
-	
-	
-	
+	public Capacite get(){ return cap; }
 	
 }

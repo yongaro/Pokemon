@@ -1,9 +1,14 @@
 package pokemon.modele;
 
+import pokemon.annotations.*;
+
+@Tps(nbhours=5)
 public class Medicament extends Objet {
 	protected int effet; // proportion de pv rendus //0 - 0% 1- 15% 2- 25 % 3- 33 % 4- 100 %
 	protected int flagSoin; // 1 pv | 2 statut | 3 K.O | 4 pv+statut
 	protected boolean baie;
+	
+	public static Medicament baieTest= new Medicament(1,"baieTest","Une baie qui soigne 33% des PV et les problemes de Statut",255,3,4,true);
 	
 	public Medicament(){ super(); }
 
@@ -21,7 +26,7 @@ public class Medicament extends Objet {
 			case 3:
 				return cible.statut==Statut.KO;
 			case 4:
-				return (cible.stats[2][0]<cible.stats[2][1]) && (cible.statut!=Statut.Normal && cible.statut!=Statut.KO);
+				return (cible.stats[2][0]<cible.stats[2][1]) || (cible.statut!=Statut.Normal && cible.statut!=Statut.KO);
 			default:
 				return false;
 		}

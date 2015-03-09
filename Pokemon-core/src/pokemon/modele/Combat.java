@@ -5,11 +5,13 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
+import pokemon.annotations.Tps;
 
+@Tps(nbhours=12)
 public class Combat {
 	protected Terrain terrain;
 	protected Climat climat;
-	protected Scanner sc = new Scanner(System.in); //HAAAAAN CA PUE HAAAAAN CAY DEGUEULASS
+	protected Scanner sc = new Scanner(System.in); //BERK
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
 	
@@ -17,30 +19,30 @@ public class Combat {
 		terrain=Terrain.Plaine; climat=Climat.Normal;
 	}
 	
-	public int gagnant(Joueur j1, Pkm pk){
-		int nbko=0;
-		
-		if(pk.stats[2][0]<=0){ return 1; }
+	public int gagnant(Joueur j1,Joueur j2){
+		int nbko1=0; int nbko2=0;
 		
 		for(int i=0;i<j1.teamsize;i++){
-			if(j1.team[i].stats[2][0]<=0){ nbko++; }
+			if(j1.team[i].stats[2][0]<=0){ nbko1++; }
 		}
-		if(nbko==j1.teamsize){
-			return 2;
+		
+		for(int i=0;i<j2.teamsize;i++){
+			if(j2.team[i].stats[2][0]<=0){ nbko2++; }
 		}
+		if(nbko2==j2.teamsize){ return 1; }
+		if(nbko1==j1.teamsize){ return 2; }
 		return 0;
 	}
 	
 	
-	public int combatsolo(Joueur j,Pkm pk){
+	public int combatsolo(Joueur j1,Joueur j2){
 		PokemonCombat[] pkmListe=new PokemonCombat[2];
 		
-		pkmListe[0]=new PokemonCombat(j.team[0],false);
-		pkmListe[1]=new PokemonCombat(pk,false);
-		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].prop=j;
-		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].prop=j;
-		
-		while(this.gagnant(j,pk)==0){
+		pkmListe[0]=new PokemonCombat(j1.team[0],false);
+		pkmListe[1]=new PokemonCombat(j2.team[0],false);
+		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].prop=j1;
+		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].prop=j2;
+		while(this.gagnant(j1,j2)==0){
 			Arrays.sort(pkmListe);
 			for(PokemonCombat p: pkmListe){
 				p.action(p.adv[0],this);
@@ -55,7 +57,7 @@ public class Combat {
 			}
 		}
 		
-		return this.gagnant(j,pk);
+		return this.gagnant(j1,j2);
 	}
 	
 	
@@ -84,14 +86,16 @@ public class Combat {
 				if(user.pkm.stats[2][0]<=0){ pokeswap(user); }
 				if(cible.pkm.stats[2][0]<=0){ pokeswap(cible); }
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2)){
-					if(user.pkm.objTenu instanceof Medicament){
+					if(user.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)user.pkm.objTenu;
+						System.out.println(user.pkm.nom+" utilise sa baie");
 						if(m.baie){ m.script(user.pkm); user.pkm.objTenu=null; }
 					}
 				}
 				if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2)){
-					if(cible.pkm.objTenu instanceof Medicament){
-						Medicament m=(Medicament)user.pkm.objTenu;
+					if(cible.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
+						Medicament m=(Medicament)cible.pkm.objTenu;
+						System.out.println(cible.pkm.nom+" utilise sa baie");
 						if(m.baie){ m.script(cible.pkm); cible.pkm.objTenu=null; }
 					}
 				}

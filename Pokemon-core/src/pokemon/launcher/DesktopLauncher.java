@@ -1,10 +1,6 @@
 package pokemon.launcher;
 
-import pokemon.modele.Atk;
-import pokemon.modele.Capacite;
-import pokemon.modele.CapacitePassive;
-import pokemon.modele.Statut;
-import pokemon.modele.Type;
+import pokemon.modele.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -20,14 +16,5 @@ public class DesktopLauncher {
 		new LwjglApplication(new MyGdxGame(), config);
 		config.width=900;
 		config.height=600;
-		TestCombat.fromXML();
-		System.out.println(CapacitePassive.Absenteisme.getDesc());
 	}
-	
-	
-
-	
-	
-	
-	
 }
