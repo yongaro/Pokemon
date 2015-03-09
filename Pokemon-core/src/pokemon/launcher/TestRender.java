@@ -26,7 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class TestRender implements Screen,InputProcessor{
-	TiledMap map = new TmxMapLoader().load("sans-titre.tmx");
+	TiledMap map = new TmxMapLoader().load("maps/bigmap.tmx");
 	TextureAtlas atlaswest=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
 	TextureAtlas atlaseast=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
 	TextureAtlas atlassouth=new TextureAtlas(Gdx.files.internal("player/w_south.pack"));
@@ -72,7 +72,7 @@ public class TestRender implements Screen,InputProcessor{
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		cam.position.set(80,80,0);
+		cam.position.set(j.getPos().x,j.getPos().y,0);
 		cam.update();
 		update(delta);
 		renderer.setView(cam);
@@ -130,7 +130,7 @@ public class TestRender implements Screen,InputProcessor{
 		}
 
 	   stage = new Stage(new FitViewport(width,height,cam));
-	   cam.zoom-=0.5;
+	   //cam.zoom-=0.5;
 	}
 	
 	public void update(float delta)
@@ -144,9 +144,9 @@ public class TestRender implements Screen,InputProcessor{
 			System.out.println("Nextpos: "+nextPos);
 			/*Verif si non debordement de map*/
 
-			if(nextPos.x>160-t.getWidth() || nextPos.x<0 ) 
+			if(nextPos.x>800-t.getWidth() || nextPos.x<0 ) 
 			{j.setSpeedX(0);System.out.println("REACH BORDER");return;}
-			if( nextPos.y>160-t.getHeight() || nextPos.y<0)
+			if( nextPos.y>800-t.getHeight() || nextPos.y<0)
 			{j.setSpeedY(0);System.out.println("REACH BORDER");return;}
 			/*verif si collision avec decors*/
 			if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||

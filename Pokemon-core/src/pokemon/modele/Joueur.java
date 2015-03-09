@@ -37,7 +37,7 @@ public class Joueur {
 		boites=new Vector<Stockage<Pkm>>();
 		inventaire=new Vector<Stockage<Objet>>();
 		
-		pos = new Vector2(0f, 0f);
+		pos = new Vector2(400f, 400f);
 		speed=new Vector2(0,0);
 		orientation = Direction.South;
 		currentMap = null;
