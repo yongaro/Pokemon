@@ -1,28 +1,21 @@
 package pokemon.modele;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
 
 /*La classe NPC permet de stocker toutes les informatiosn relatives au comportement d'un PNJ, 
- * c'est à dire les lignes de texte que le personnage doit communiquer au joueur*/
+ * c'est a� dire les lignes de texte que le personnage doit communiquer au joueur*/
 
 public class NPC {
-	//status détermine quelle ligne de dialogue le PNJ doit réciter
-	private int id;
-	private int status;
-	private Direction orientation;
-	private Vector<Dialog> dialogs;
+	//status determine quelle ligne de dialogue le PNJ doit reciter
+	protected int id;
+	protected int status;
+	protected Direction orientation;
+	protected Vector<Dialog> dialogs;
 	
 	//Constructeurs
 	public NPC() {
@@ -65,47 +58,28 @@ public class NPC {
 		this.orientation = orientation;
 	}
 	
-	//Fonctions priv�es
+	//Fonctions privees
 	private void lireXML(String path) {
-		//On met en place le parseur
-		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		XmlReader reader = new XmlReader();
+		Element temp = null;
 		try {
+			//On recupere la racine, et l'id du NPC
+			Element root = reader.parse(Gdx.files.internal(path));
+			id = root.getInt("id");
 			
-			final DocumentBuilder builder = factory.newDocumentBuilder();
-			final Document document = builder.parse(new File(path));
-			
-			//On r�cup�re la racine et l'id du PNJ
-			final Element root = document.getDocumentElement();
-			setId(Integer.parseInt(root.getAttribute("id")));
-			
-			//On r�cup�re les enfants de la racine, pour les mettre dans le Vector.
-			final NodeList children = root.getChildNodes();
-			final int nbChildren = children.getLength();
-			for(int i = 0;i<nbChildren;i++) {
-				if(children.item(i).getNodeType() == Node.ELEMENT_NODE) {
-					Element dialog = (Element) children.item(i);
-					
-					//On r�cup�re le texte du dialogue
-					String text = dialog.getElementsByTagName("text").item(0).getTextContent();
-					
-					//On r�cup�re les informations du changement de status
-					Element statusChange = (Element) dialog.getElementsByTagName("status").item(0);
-					//On v�rifie si le dialogue qu'on a contient un changement de status
-					if(statusChange == null) {
-						dialogs.add(new Dialog(text, 0, 0));
-					}
-					else {
-						int newStatus = Integer.parseInt(statusChange.getAttribute("value"));
-						int changingNPC = Integer.parseInt(statusChange.getAttribute("npc"));
-						dialogs.add(new Dialog(text, changingNPC, newStatus));
-					}
+			//On parcourt chaque dialogues
+			for(int i = 0;i<root.getChildCount();i++) {
+				temp = root.getChild(i);
+				
+				Element text = temp.getChildByName("text");
+				Element status = temp.getChildByName("status");
+				int newStatus = 0, target = 0;
+				if(status != null) {
+					newStatus = status.getInt("value");
+					target = status.getInt("npc");
 				}
+				dialogs.addElement(new Dialog(text.getText(), target, newStatus));
 			}
-			
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
