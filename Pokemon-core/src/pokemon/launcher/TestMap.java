@@ -19,7 +19,7 @@ public class TestMap {
 		
 		Map map = new Map("maps/test.tmx");
 		NPCList npcList = new NPCList();
-		NPC npc = new NPC("assets/npcs/test.xml");
+		NPC npc = new NPC("npcs/test.xml");
 		npcList.addNPC(npc);
 		map.addNPC(22, 33, npc);
 		Joueur joueur = new Joueur();
