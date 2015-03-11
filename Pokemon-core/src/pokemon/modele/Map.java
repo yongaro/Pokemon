@@ -2,6 +2,8 @@ package pokemon.modele;
 
 import java.util.Vector;
 
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
  * objets prÃ©sent sur la map */
 
 public class Map {
-	//Propriétés de la Map
+	//Proprietes de la Map
 	private TiledMap tiledMap;
 	private Music music;
 	
@@ -19,11 +21,15 @@ public class Map {
 	private Vector<NPC> npcs;
 	private Vector<Vector2> npcsPosition;
 	
+	//Attributs des changements de Map
+	private Vector<MapChange> mapChanges;
+	
 	//Constructeurs
 	public Map() {
 		tiledMap = new TmxMapLoader().load("map.tmx");
 		npcs = new Vector<NPC>();
 		npcsPosition = new Vector<Vector2>();
+		mapChanges = new Vector<MapChange>();
 		
 		setMusique(new Music(tiledMap));
 	}	
@@ -32,20 +38,71 @@ public class Map {
 		tiledMap = loader.load(path);
 		npcs = new Vector<NPC>();
 		npcsPosition = new Vector<Vector2>();
+		mapChanges = new Vector<MapChange>();
 		
+		getTransitions();
 		setMusique(new Music(tiledMap));
 	}
-
-	//Fonctionnalités principales
+	public Map(String path, NPCList npcList) {
+		TmxMapLoader loader = new TmxMapLoader();
+		tiledMap = loader.load(path);
+		npcs = new Vector<NPC>();
+		npcsPosition = new Vector<Vector2>();
+		mapChanges = new Vector<MapChange>();
+		
+		getTransitions();
+		getNPCs(npcList);
+		setMusique(new Music(tiledMap));
+	}
+	
+	//Fonction privees
+	private void getNPCs(NPCList npcList) {
+		for(MapObject o : tiledMap.getLayers().get("NPCs").getObjects()) {
+			float x = Float.parseFloat(o.getProperties().get("x").toString())/16;
+			float y = Float.parseFloat(o.getProperties().get("y").toString())/16;
+			if(o.getProperties().containsKey("dialogs")) {
+				NPC npc = new NPC(o.getProperties().get("dialogs").toString());
+				addNPC((int) x, (int) y , npc);
+				npcList.addNPC(npc);
+			}
+			else {
+				NPC npc = new NPC();
+				addNPC((int) x, (int) y , npc);
+				npcList.addNPC(npc);
+			}
+		}
+	}
+	private void getTransitions() {
+		MapLayer objectLayer = tiledMap.getLayers().get("Regions");
+		if(objectLayer != null)
+		{
+			for(MapObject o : objectLayer.getObjects()) {
+				String destMap = o.getProperties().get("map", String.class);
+				String orientationStr = o.getProperties().get("orientation", String.class);
+				Direction orientation = Direction.toDirection(orientationStr);
+				Vector2 pos = new Vector2();
+				Vector2 targetPos = new Vector2();
+				
+				pos.x = o.getProperties().get("x", Float.class);
+				pos.y = o.getProperties().get("y", Float.class);
+				targetPos.x = Float.parseFloat(o.getProperties().get("dest_x", String.class));
+				targetPos.y = Float.parseFloat(o.getProperties().get("dest_y", String.class));
+				
+				mapChanges.add(new MapChange(destMap, orientation, pos, targetPos));
+			}
+		}
+	}
+	
+	//Fonctionnalites principales
 	//Ajoute un NPC sur la map
 	public void addNPC(int x, int y, NPC npc) {
 		npcsPosition.add(new Vector2((int) x, (int) y));
 		npcs.add(npc);
 	}
-	//Vérifie si un NPC est présent sur la position donnée.
+	//Vï¿½rifie si un NPC est prï¿½sent sur la position donnï¿½e.
 	public boolean isNPCPresent(int x, int y) {
 		Vector2 targetPosition = new Vector2((float) x, (float) y);
-		//On vérifie si un NPC se trouve à la position cible
+		//On vï¿½rifie si un NPC se trouve ï¿½ la position cible
 		for(int i = 0;i<npcsPosition.size();i++) {
 			if(targetPosition.x == npcsPosition.get(i).x && targetPosition.y == npcsPosition.get(i).y) {			
 				return true;
@@ -53,11 +110,11 @@ public class Map {
 		}
 		return false;
 	}
-	/* Intéragit avec le NPC de la position donnée
-	 * Renvoie null si aucun NPC n'est présent sur place.*/
-	public String interact(int x, int y, NPCList npcList) {
+	/* Intï¿½ragit avec le NPC de la position donnï¿½e
+	 * Renvoie null si aucun NPC n'est prï¿½sent sur place.*/
+	public String interact(float x, float y, NPCList npcList) {
 		Vector2 targetPosition = new Vector2((float) x, (float) y);
-		//On vérifie si un NPC se trouve à la position cible
+		//On vï¿½rifie si un NPC se trouve ï¿½ la position cible
 		for(int i = 0;i<npcsPosition.size();i++) {
 			if(targetPosition.x == npcsPosition.get(i).x && targetPosition.y == npcsPosition.get(i).y) {			
 				return npcs.get(i).executeDialog(npcList);

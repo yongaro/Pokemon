@@ -1,11 +1,9 @@
 package pokemon.modele;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Vector;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 
 //import pokemon.launcher.MyGdxGame;
@@ -32,7 +30,6 @@ public class Joueur {
 	protected Direction orientation;
 	protected Map currentMap;
 	protected Vector2 speed;
-	Queue<Direction> file=new LinkedList<Direction>();
 
 	public Joueur(){
 		ID=0; nom="TODO"; argent=2000; badges=new int[8];
@@ -54,6 +51,11 @@ public class Joueur {
 		pos = new Vector2(0f, 0f);
 		orientation = Direction.South;
 		currentMap = null;
+	}
+	
+	//Fonction privees
+	private void changeMap() {
+		
 	}
 	
 	//Accesseurs
@@ -103,7 +105,7 @@ public class Joueur {
 		team[ind]=cible;
 	}
 	
-	public boolean move(Direction dir) {
+	/*public boolean move(Direction dir) {
 		Cell targetPosition = null;
 		orientation = dir;
 		if(currentMap == null) {
@@ -138,20 +140,60 @@ public class Joueur {
 			}
 		}
 		return false;
+	}*/
+	
+	public boolean move(Direction dir) {
+		Vector2 nextPos = new Vector2(getPos());
+		TiledMapTileLayer layerCollision = (TiledMapTileLayer) getCurrentMap().getTiledMap().getLayers().get("Collide");
+		int spriteWidth = 14;
+		int spriteHeight = 19;
+		
+		nextPos.x+=Gdx.graphics.getDeltaTime()*getSpeed().x;
+		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
+		//System.out.println("Nextpos: "+nextPos);
+		/*Verif si non debordement de map*/
+
+		if(nextPos.x>800-spriteWidth || nextPos.x<0 ) 
+		{setSpeedX(0);System.out.println("REACH BORDER");return false;}
+		if( nextPos.y>800-spriteHeight || nextPos.y<0)
+		{setSpeedY(0);System.out.println("REACH BORDER");return false;}
+		/*verif si collision avec decors*/
+		if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)(nextPos.y/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null)
+		{
+			if(getSpeed().x!=0)
+				setSpeedX(0);
+			if(getSpeed().y!=0)
+				setSpeedY(0);
+			System.out.println("Collision DETECTE");
+			System.out.println("Speed:" +getSpeed());
+			return false;
+		}
+		//System.out.println("GOING TO NEXT POS");
+		//speed.x+=10*delta;
+		setPos(nextPos);//);=nextPos.x;
+		//posy=nextPos.y;
+		
+		changeMap();
+		
+		return true;
 	}
 	
 	public String interact(NPCList npcList) {
+		Vector2 cellPos = new Vector2(Math.round(pos.x/16f), Math.round(pos.y/16f));
 		if(orientation == Direction.North) {
-			return currentMap.interact((int) pos.x, (int) pos.y + 1, npcList);
+			return currentMap.interact((int) cellPos.x, (int) cellPos.y + 1, npcList);
 		}
 		else if(orientation == Direction.South) {
-			return currentMap.interact((int) pos.x, (int) pos.y - 1, npcList);
+			return currentMap.interact((int) cellPos.x, (int) cellPos.y - 1, npcList);
 		}
 		else if(orientation == Direction.East) {
-			return currentMap.interact((int) pos.x + 1, (int) pos.y, npcList);
+			return currentMap.interact((int) cellPos.x + 1, (int) cellPos.y, npcList);
 		}
 		else if(orientation == Direction.West) {
-			return currentMap.interact((int) pos.x - 1, (int) pos.y, npcList);
+			return currentMap.interact((int) cellPos.x - 1, (int) cellPos.y, npcList);
 		}
 		return null;
 	}
