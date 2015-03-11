@@ -2,6 +2,10 @@ package pokemon.modele;
 
 import java.util.*;
 
+import pokemon.annotations.Tps;
+
+
+@Tps(nbhours=4)
 public abstract class Capacite implements Qmax,Infos {
 	protected int ID;
 	protected String nom;
@@ -45,6 +49,12 @@ public abstract class Capacite implements Qmax,Infos {
 		damage=A*B*((double)power+2.0)*mod;
 		climatmod=climat.mod(this.element);
 		damage=(int)((double)damage*climatmod);
+		//Traitement de l'objet du pokemon (buff passifs des objets)
+		if(user.objTenu!=null){
+			if(user.objTenu.buffedType!=null){
+				if(user.objTenu.buffedType==this.element){damage+=(int)(damage/2);}
+			}
+		}
 		if(weakness==0){System.out.println("Aucun effet"); return 0;}
 		else{
 		if(weakness>=2){System.out.println("C'est super efficace");}
@@ -63,7 +73,7 @@ public abstract class Capacite implements Qmax,Infos {
 	}
 	public boolean equals(Capacite c){return this.description==c.description;}
 	
-	//Impl�mentation des interfaces
+	//Implementation des interfaces
 	public int qmax(){return maxPP;}
 	public int getID(){return ID;}
 	public String getNom(){return nom;}

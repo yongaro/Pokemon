@@ -3,7 +3,6 @@ package pokemon.modele;
 import java.util.*;
 
 public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
-	private static int cpt=1;
 	protected int ID;
 	protected String nom;
 	protected String description;
@@ -15,9 +14,9 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected Nature personnalite;
 	protected Vector <Type> type;
 	protected Stockage<Capacite> cap;
-	//PP[0][1] contient les PP max de l'attaque 1 PP[0][0] contient les PP courants
 	protected CapacitePassive capP;
 	protected Objet objTenu;
+	protected Event[] events;
 	//protected static final Capacite[] bases={bddCapacite.Charge.cap};
 	
 	
@@ -69,7 +68,6 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	//constructeur pour creer les pokemon de base du pokedex
 	public Pkm(String nom,String desc,int[] stats,Type t1,Type t2){
 		//copie des stats
-		this.ID=cpt++;
 		this.statut=Statut.Normal;
 		this.supTemp=Statut.Normal;
 		this.nom=nom;
@@ -206,6 +204,13 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 			}
 		}
 		}
+	}
+	
+	public void XPreward(Pkm cible,int div){
+		float ratio=cible.stats[0][0]/this.stats[0][0]; int xp=(int)(this.stats[1][1]/20);
+		
+		
+		
 	}
 	
 	public void Heal(int pv){

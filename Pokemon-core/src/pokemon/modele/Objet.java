@@ -5,12 +5,12 @@ public class Objet implements Qmax,Infos {
 	protected String nom;
 	protected String description;
 	protected int qmax;
+	protected Type buffedType;
 	
 	public Objet(){ ID=0; nom="TODO"; description="TODO"; qmax=1; }
 	
-	public Objet(int id,String nm, String desc, int nbmax){
-		ID=id; nom=nm; description=desc; qmax=nbmax;
-	}
+	public Objet(int id,String nm, String desc, int nbmax){ ID=id; nom=nm; description=desc; qmax=nbmax; buffedType=null; }
+	public Objet(int id,String nm, String desc, int nbmax,Type bT){this(id,nm,desc,nbmax); buffedType=bT;}
 	
 	
 	
