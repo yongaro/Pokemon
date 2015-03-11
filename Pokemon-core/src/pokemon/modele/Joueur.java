@@ -26,6 +26,8 @@ public class Joueur {
 	protected Vector<Stockage<Pkm>> boites;
 	
 	//Attributs concernant la position du joueur
+	protected int spriteWidth = 14;
+	protected int spriteHeight = 19;
 	protected Vector2 pos;
 	protected Direction orientation;
 	protected Map currentMap;
@@ -55,7 +57,18 @@ public class Joueur {
 	
 	//Fonction privees
 	private void changeMap() {
-		
+		Vector<MapChange> mapChanges = currentMap.getMapChanges();
+		for(MapChange mc : mapChanges) {
+			//On check si le joueur est entierment dans la zone de changement
+			if((mc.getPos().x <= pos.x && pos.x <= (mc.getPos().x + mc.getDim().x) - spriteWidth) 
+					&& (mc.getPos().y <= pos.y && pos.y <= (mc.getPos().y + mc.getDim().y) - spriteHeight)) {
+				
+				currentMap = new Map(mc.getDestMap());
+				pos.x = mc.getTargetPos().x;
+				pos.y = mc.getTargetPos().y;
+				orientation = mc.getOrientation();
+			}
+		}
 	}
 	
 	//Accesseurs
@@ -105,51 +118,18 @@ public class Joueur {
 		team[ind]=cible;
 	}
 	
-	/*public boolean move(Direction dir) {
-		Cell targetPosition = null;
-		orientation = dir;
-		if(currentMap == null) {
-			return false;
-		}
-		if(dir == Direction.North) {
-			targetPosition = ( (TiledMapTileLayer) currentMap.getTiledMap().getLayers().get("Collide") ).getCell( (int) pos.x, (int) pos.y + 1);
-			if(targetPosition == null && !currentMap.isNPCPresent( (int) pos.x, (int) pos.y + 1)) {
-				pos.y++;
-				return true;
-			}
-		}
-		if(dir == Direction.South) {
-			targetPosition = ( (TiledMapTileLayer) currentMap.getTiledMap().getLayers().get("Collide") ).getCell( (int) pos.x, (int) pos.y - 1);
-			if(targetPosition == null && !currentMap.isNPCPresent( (int) pos.x, (int) pos.y - 1)) {
-				pos.y--;
-				return true;
-			}
-		}
-		if(dir == Direction.West) {
-			targetPosition = ( (TiledMapTileLayer) currentMap.getTiledMap().getLayers().get("Collide") ).getCell( (int) pos.x - 1, (int) pos.y);
-			if(targetPosition == null && !currentMap.isNPCPresent( (int) pos.x - 1, (int) pos.y)) {
-				pos.x--;
-				return true;
-			}
-		}
-		if(dir == Direction.East) {
-			targetPosition = ( (TiledMapTileLayer) currentMap.getTiledMap().getLayers().get("Collide") ).getCell( (int) pos.x + 1, (int) pos.y );
-			if(targetPosition == null && !currentMap.isNPCPresent( (int) pos.x + 1, (int) pos.y)) {
-				pos.x++;
-				return true;
-			}
-		}
-		return false;
-	}*/
-	
 	public boolean move(Direction dir) {
 		Vector2 nextPos = new Vector2(getPos());
 		TiledMapTileLayer layerCollision = (TiledMapTileLayer) getCurrentMap().getTiledMap().getLayers().get("Collide");
-		int spriteWidth = 14;
-		int spriteHeight = 19;
+		setOrientation(dir);
 		
-		nextPos.x+=Gdx.graphics.getDeltaTime()*getSpeed().x;
-		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
+		//Avec TestMap2.java :
+		nextPos.y++;
+		
+		//Sinon :
+//		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
+//		nextPos.x+=Gdx.graphics.getDeltaTime()*getSpeed().x;
+		
 		//System.out.println("Nextpos: "+nextPos);
 		/*Verif si non debordement de map*/
 
@@ -167,8 +147,8 @@ public class Joueur {
 				setSpeedX(0);
 			if(getSpeed().y!=0)
 				setSpeedY(0);
-			System.out.println("Collision DETECTE");
-			System.out.println("Speed:" +getSpeed());
+			System.out.println("Collision DETECTE A " + nextPos);
+			//System.out.println("Speed:" +getSpeed());
 			return false;
 		}
 		//System.out.println("GOING TO NEXT POS");

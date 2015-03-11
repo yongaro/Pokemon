@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
@@ -81,14 +82,18 @@ public class Map {
 				String orientationStr = o.getProperties().get("orientation", String.class);
 				Direction orientation = Direction.toDirection(orientationStr);
 				Vector2 pos = new Vector2();
+				Vector2 dim = new Vector2();
 				Vector2 targetPos = new Vector2();
-				
-				pos.x = o.getProperties().get("x", Float.class);
-				pos.y = o.getProperties().get("y", Float.class);
 				targetPos.x = Float.parseFloat(o.getProperties().get("dest_x", String.class));
 				targetPos.y = Float.parseFloat(o.getProperties().get("dest_y", String.class));
+
+				RectangleMapObject r = (RectangleMapObject) o;
+				pos.x = r.getRectangle().x;
+				pos.y = r.getRectangle().y;
+				dim.x = r.getRectangle().width;
+				dim.y = r.getRectangle().height;
 				
-				mapChanges.add(new MapChange(destMap, orientation, pos, targetPos));
+				mapChanges.add(new MapChange(destMap, orientation, pos, dim, targetPos));
 			}
 		}
 	}
@@ -135,5 +140,11 @@ public class Map {
 	}
 	public void setTiledMap(TiledMap tiledMap) {
 		this.tiledMap = tiledMap;
+	}
+	public Vector<MapChange> getMapChanges() {
+		return mapChanges;
+	}
+	public void setMapChanges(Vector<MapChange> mapChanges) {
+		this.mapChanges = mapChanges;
 	}
 }

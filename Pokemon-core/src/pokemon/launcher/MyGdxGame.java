@@ -37,10 +37,10 @@ public class MyGdxGame extends Game {
 	public void create () {
 		MyGdxGame.initStatic();
 		MenuListener menu=new MenuListener(this);
-		//TestMap test = new TestMap();
 		this.setScreen(new TestRender());
-		Combat test=new Combat();
-		System.out.println(test.combatsolo(MyGdxGame.Jtest,MyGdxGame.Jtest2));
+		TestMap2 test = new TestMap2();
+//		Combat test=new Combat();
+//		System.out.println(test.combatsolo(MyGdxGame.Jtest,MyGdxGame.Jtest2));
 	}
 	
 	 public static void initStatic(){
