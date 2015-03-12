@@ -102,6 +102,8 @@ public class TestRender implements Screen,InputProcessor{
 		//else
 		//animationtime=0;
 		renderer.getBatch().draw(a.getKeyFrame(animationtime,true), j.getPos().x, j.getPos().y);
+		//renderer.renderTileLayer((TiledMapTileLayer) map.getLayers().get(2));
+
 		renderer.getBatch().end();
 		
 
@@ -124,11 +126,11 @@ public class TestRender implements Screen,InputProcessor{
 
 	@Override
 	public void show() {
-		renderer=new OrthogonalTiledMapRenderer(map);
-		layerCollision =  (TiledMapTileLayer) map.getLayers().get(1);
+		renderer=new OrthogonalTiledMapRenderer(j.getCurrentMap().getTiledMap());
+		//layerCollision =  (TiledMapTileLayer) map.getLayers().get(1);
 		cam=new OrthographicCamera();
 		Gdx.input.setInputProcessor(this);
-		speed=new Vector2(0,0);
+		//speed=new Vector2(0,0);
 		for(TextureRegion r:atlaseast.getRegions())
 		{
 			r.flip(true, false);
@@ -142,19 +144,19 @@ public class TestRender implements Screen,InputProcessor{
 	{
 		/*si le sprite bouge*/
 		if(j.isMoving()){
-			nextPos.x=j.getPos().x;
+			/*nextPos.x=j.getPos().x;
 			nextPos.y=j.getPos().y;
 			nextPos.x+=Gdx.graphics.getDeltaTime()*j.getSpeed().x;
 			nextPos.y+=Gdx.graphics.getDeltaTime()*j.getSpeed().y;
 			//System.out.println("Nextpos: "+nextPos);
 			/*Verif si non debordement de map*/
 
-			if(nextPos.x>800-t.getWidth() || nextPos.x<0 ) 
+			/*if(nextPos.x>800-t.getWidth() || nextPos.x<0 ) 
 			{j.setSpeedX(0);System.out.println("REACH BORDER");return;}
 			if( nextPos.y>800-t.getHeight() || nextPos.y<0)
 			{j.setSpeedY(0);System.out.println("REACH BORDER");return;}
 			/*verif si collision avec decors*/
-			if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
+			/*if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
 					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)(nextPos.y/16f))!=null ||
 					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null ||
 					layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null)
@@ -166,11 +168,15 @@ public class TestRender implements Screen,InputProcessor{
 				System.out.println("Collision DETECTE");
 				System.out.println("Speed:" +j.getSpeed());
 				return;
-			}
+			}*/
 			//System.out.println("GOING TO NEXT POS");
 			//speed.x+=10*delta;
-			j.setPos(nextPos);//);=nextPos.x;
+			//j.setPos(nextPos);//);=nextPos.x;
 			//posy=nextPos.y;
+			if(j.move()){
+				map=j.getCurrentMap().getTiledMap();
+				renderer.setMap(map);
+			}
 		}
 
 

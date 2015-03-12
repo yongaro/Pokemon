@@ -56,7 +56,7 @@ public class Joueur {
 	}
 	
 	//Fonction privees
-	private void changeMap() {
+	private boolean changeMap() {
 		Vector<MapChange> mapChanges = currentMap.getMapChanges();
 		for(MapChange mc : mapChanges) {
 			//On check si le joueur est entierment dans la zone de changement
@@ -67,8 +67,11 @@ public class Joueur {
 				pos.x = mc.getTargetPos().x;
 				pos.y = mc.getTargetPos().y;
 				orientation = mc.getOrientation();
+				
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	//Accesseurs
@@ -118,17 +121,17 @@ public class Joueur {
 		team[ind]=cible;
 	}
 	
-	public boolean move(Direction dir) {
+	public boolean move() {
 		Vector2 nextPos = new Vector2(getPos());
-		TiledMapTileLayer layerCollision = (TiledMapTileLayer) getCurrentMap().getTiledMap().getLayers().get("Collide");
-		setOrientation(dir);
+		TiledMapTileLayer layerCollision = (TiledMapTileLayer) getCurrentMap().getTiledMap().getLayers().get(1);
+		
 		
 		//Avec TestMap2.java :
-		nextPos.y++;
+		//nextPos.y++;
 		
 		//Sinon :
-//		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
-//		nextPos.x+=Gdx.graphics.getDeltaTime()*getSpeed().x;
+		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
+		nextPos.x+=Gdx.graphics.getDeltaTime()*getSpeed().x;
 		
 		//System.out.println("Nextpos: "+nextPos);
 		/*Verif si non debordement de map*/
@@ -156,9 +159,8 @@ public class Joueur {
 		setPos(nextPos);//);=nextPos.x;
 		//posy=nextPos.y;
 		
-		changeMap();
-		
-		return true;
+		//On retourne vrai si le joueur a change de Map
+		return changeMap();
 	}
 	
 	public String interact(NPCList npcList) {

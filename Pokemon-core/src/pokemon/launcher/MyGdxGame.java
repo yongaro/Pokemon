@@ -36,9 +36,11 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 		MyGdxGame.initStatic();
+		Jtest.setCurrentMap(new Map("maps/bigmap.tmx"));
 		MenuListener menu=new MenuListener(this);
+		
+		//TestMap2 test = new TestMap2();
 		this.setScreen(new TestRender());
-		TestMap2 test = new TestMap2();
 //		Combat test=new Combat();
 //		System.out.println(test.combatsolo(MyGdxGame.Jtest,MyGdxGame.Jtest2));
 	}
