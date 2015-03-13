@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 /*La classe NPC permet de stocker toutes les informatiosn relatives au comportement d'un PNJ, 
- * c'est a  dire les lignes de texte que le personnage doit communiquer au joueur*/
+ * c'est aï¿½ dire les lignes de texte que le personnage doit communiquer au joueur*/
 
 public class NPC {
 	//status determine quelle ligne de dialogue le PNJ doit reciter

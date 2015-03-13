@@ -121,7 +121,32 @@ public class Joueur {
 		team[ind]=cible;
 	}
 	
-	public boolean move() {
+	//Methodes de mouvement
+	public void move(Direction orientation) {
+		this.orientation = orientation;
+		switch(this.orientation){
+		case South:
+			speed.y=-60;
+			speed.x=0;
+			break;
+		case North:
+			speed.y=60;
+			speed.x=0;
+			break;
+		case East:
+			speed.y=0;
+			speed.x=60;
+			break;
+		case West:
+			speed.y=0;
+			speed.x=-60;
+			break;
+		case Standing:
+			speed.y=0;
+			speed.x=0;
+		}
+	}
+	public boolean updatePosition() {
 		Vector2 nextPos = new Vector2(getPos());
 		TiledMapTileLayer layerCollision = (TiledMapTileLayer) getCurrentMap().getTiledMap().getLayers().get(1);
 		
@@ -192,30 +217,6 @@ public class Joueur {
 		speed.y=sy;
 	}
 	
-	public void setOrientation(Direction orientation) {
-		this.orientation = orientation;
-		switch(this.orientation){
-		case South:
-			speed.y=-60;
-			speed.x=0;
-			break;
-		case North:
-			speed.y=60;
-			speed.x=0;
-			break;
-		case East:
-			speed.y=0;
-			speed.x=60;
-			break;
-		case West:
-			speed.y=0;
-			speed.x=-60;
-			break;
-		case Standing:
-			speed.y=0;
-			speed.x=0;
-		}
-	}
 	public boolean isMoving(){
 		return !speed.isZero();}
 }

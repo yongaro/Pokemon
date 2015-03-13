@@ -143,40 +143,10 @@ public class TestRender implements Screen,InputProcessor{
 	public void update(float delta)
 	{
 		/*si le sprite bouge*/
-		if(j.isMoving()){
-			/*nextPos.x=j.getPos().x;
-			nextPos.y=j.getPos().y;
-			nextPos.x+=Gdx.graphics.getDeltaTime()*j.getSpeed().x;
-			nextPos.y+=Gdx.graphics.getDeltaTime()*j.getSpeed().y;
-			//System.out.println("Nextpos: "+nextPos);
-			/*Verif si non debordement de map*/
 
-			/*if(nextPos.x>800-t.getWidth() || nextPos.x<0 ) 
-			{j.setSpeedX(0);System.out.println("REACH BORDER");return;}
-			if( nextPos.y>800-t.getHeight() || nextPos.y<0)
-			{j.setSpeedY(0);System.out.println("REACH BORDER");return;}
-			/*verif si collision avec decors*/
-			/*if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
-					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)(nextPos.y/16f))!=null ||
-					layerCollision.getCell((int)((nextPos.x+t.getWidth()-5)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null ||
-					layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+t.getHeight()-5)/16f))!=null)
-			{
-				if(j.getSpeed().x!=0)
-					j.setSpeedX(0);
-				if(j.getSpeed().y!=0)
-					j.setSpeedY(0);
-				System.out.println("Collision DETECTE");
-				System.out.println("Speed:" +j.getSpeed());
-				return;
-			}*/
-			//System.out.println("GOING TO NEXT POS");
-			//speed.x+=10*delta;
-			//j.setPos(nextPos);//);=nextPos.x;
-			//posy=nextPos.y;
-			if(j.move()){
-				map=j.getCurrentMap().getTiledMap();
-				renderer.setMap(map);
-			}
+		if(j.updatePosition()){
+			map=j.getCurrentMap().getTiledMap();
+			renderer.setMap(map);
 		}
 
 
@@ -188,7 +158,7 @@ public class TestRender implements Screen,InputProcessor{
 		{
 			if(input.size()<2 && !input.contains(Direction.East))
 				{input.add(0, Direction.East);
-			j.setOrientation(input.firstElement());
+			j.move(input.firstElement());
 			a=this.rightwalk;}
 
 		}
@@ -196,14 +166,14 @@ public class TestRender implements Screen,InputProcessor{
 			
 			if(input.size()<2 && !input.contains(Direction.West))
 				{input.add(0, Direction.West);
-				j.setOrientation(input.firstElement());
+				j.move(input.firstElement());
 				a=this.leftwalk;}
 			}
 		if(Gdx.input.isKeyPressed(Keys.DOWN)){
 		
 			if(input.size()<2 && !input.contains(Direction.South))
 				{input.add(0, Direction.South);
-			j.setOrientation(input.firstElement());
+			j.move(input.firstElement());
 			a=this.southwalk;}
 
 		}
@@ -211,7 +181,7 @@ public class TestRender implements Screen,InputProcessor{
 		{
 			if(input.size()<2){
 				input.add(0, Direction.North);
-			j.setOrientation(input.firstElement());
+			j.move(input.firstElement());
 
 			a=this.northwalk;}
 
@@ -251,7 +221,7 @@ public class TestRender implements Screen,InputProcessor{
 
 		}
 		if(input.size()!=0){
-			j.setOrientation(input.firstElement());
+			j.move(input.firstElement());
 			switch(input.firstElement()){
 			case North:
 				a=this.northwalk;
@@ -271,7 +241,7 @@ public class TestRender implements Screen,InputProcessor{
 			}
 		}
 		else 
-			j.setOrientation(Direction.Standing);
+			j.move(Direction.Standing);
 		return false;
 	}
 
