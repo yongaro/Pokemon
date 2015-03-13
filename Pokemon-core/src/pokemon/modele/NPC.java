@@ -17,21 +17,36 @@ public class NPC {
 	protected int status;
 	protected Direction orientation;
 	protected Vector<Dialog> dialogs;
+	protected Vector2 pos;
 	
 	//Constructeurs
 	public NPC() {
 		setStatus(0);
 		setId(0);
 		dialogs = new Vector<Dialog>();
+		pos = new Vector2(0, 0);
 	}
 	public NPC(String path) {
 		setStatus(0);
 		dialogs = new Vector<Dialog>();
+		pos = new Vector2(0, 0);
 		lireXML(path);
 	}
-	public NPC(String path, int status) {
+	public NPC(Vector2 pos) {
+		setStatus(0);
+		dialogs = new Vector<Dialog>();
+		this.pos = new Vector2(pos);
+	}
+	public NPC(String path, Vector2 pos) {
+		setStatus(0);
+		dialogs = new Vector<Dialog>();
+		this.pos = new Vector2(pos);
+		lireXML(path);
+	}
+	public NPC(String path, Vector2 pos, int status) {
 		setStatus(status);
 		dialogs = new Vector<Dialog>();
+		this.pos = new Vector2(pos);
 		lireXML(path);
 	}
 
@@ -58,7 +73,12 @@ public class NPC {
 	public void setOrientation(Direction orientation) {
 		this.orientation = orientation;
 	}
-	
+	public Vector2 getPos() {
+		return pos;
+	}
+	public void setPos(Vector2 pos) {
+		this.pos = pos;
+	}
 	//Fonctions privees
 	private void lireXML(String path) {
 		XmlReader reader = new XmlReader();

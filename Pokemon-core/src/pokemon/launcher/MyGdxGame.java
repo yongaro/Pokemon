@@ -1,18 +1,11 @@
 package pokemon.launcher;
 
-import java.util.Arrays;
-
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.utils.Array;
-
 import pokemon.annotations.Tps;
 import pokemon.controle.MenuListener;
 import pokemon.modele.*;
@@ -25,6 +18,7 @@ public class MyGdxGame extends Game {
 	TiledMap tiledMap;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
+    NPCList npcList = new NPCList();
 
     public static Minimap m=new Minimap();
     public static Joueur Jtest=new Joueur();
@@ -36,7 +30,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 		MyGdxGame.initStatic();
-		Jtest.setCurrentMap(new Map("maps/bigmap.tmx"));
+		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
 		MenuListener menu=new MenuListener(this);
 		
 		//TestMap2 test = new TestMap2();

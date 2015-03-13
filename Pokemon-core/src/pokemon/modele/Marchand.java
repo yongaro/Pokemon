@@ -2,6 +2,8 @@ package pokemon.modele;
 
 import java.util.Vector;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Marchand extends NPC {
 	private Vector<Vente> ventes;
 	
@@ -14,8 +16,16 @@ public class Marchand extends NPC {
 		super(path);
 		ventes = new Vector<Vente>();
 	}
-	public Marchand(String path, int status) {
-		super(path, status);
+	public Marchand(Vector2 pos) {
+		super(pos);
+		ventes = new Vector<Vente>();
+	}
+	public Marchand(String path, Vector2 pos) {
+		super(path, pos);
+		ventes = new Vector<Vente>();
+	}
+	public Marchand(String path, Vector2 pos, int status) {
+		super(path, pos, status);
 		ventes = new Vector<Vente>();
 	}
 	

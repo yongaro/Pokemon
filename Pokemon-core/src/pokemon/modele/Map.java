@@ -6,7 +6,9 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 /* La classe Map permet de regrouper toutes les informations
@@ -20,7 +22,6 @@ public class Map {
 	
 	//Attributs des NPC
 	private Vector<NPC> npcs;
-	private Vector<Vector2> npcsPosition;
 	
 	//Attributs des changements de Map
 	private Vector<MapChange> mapChanges;
@@ -29,7 +30,6 @@ public class Map {
 	public Map() {
 		tiledMap = new TmxMapLoader().load("map.tmx");
 		npcs = new Vector<NPC>();
-		npcsPosition = new Vector<Vector2>();
 		mapChanges = new Vector<MapChange>();
 		
 		setMusique(new Music(tiledMap));
@@ -38,7 +38,6 @@ public class Map {
 		TmxMapLoader loader = new TmxMapLoader();
 		tiledMap = loader.load(path);
 		npcs = new Vector<NPC>();
-		npcsPosition = new Vector<Vector2>();
 		mapChanges = new Vector<MapChange>();
 		
 		getTransitions();
@@ -48,7 +47,6 @@ public class Map {
 		TmxMapLoader loader = new TmxMapLoader();
 		tiledMap = loader.load(path);
 		npcs = new Vector<NPC>();
-		npcsPosition = new Vector<Vector2>();
 		mapChanges = new Vector<MapChange>();
 		
 		getTransitions();
@@ -59,18 +57,18 @@ public class Map {
 	//Fonction privees
 	private void getNPCs(NPCList npcList) {
 		for(MapObject o : tiledMap.getLayers().get("NPCs").getObjects()) {
-			float x = Float.parseFloat(o.getProperties().get("x").toString())/16;
-			float y = Float.parseFloat(o.getProperties().get("y").toString())/16;
+			float x = Float.parseFloat(o.getProperties().get("x").toString());
+			float y = Float.parseFloat(o.getProperties().get("y").toString());
 			if(o.getProperties().containsKey("dialogs")) {
-				NPC npc = new NPC(o.getProperties().get("dialogs").toString());
-				addNPC((int) x, (int) y , npc);
+				NPC npc = new NPC(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
 				npcList.addNPC(npc);
 			}
 			else {
-				NPC npc = new NPC();
-				addNPC((int) x, (int) y , npc);
+				NPC npc = new NPC(new Vector2(x, y));
 				npcList.addNPC(npc);
 			}
+			Rectangle hitbox = new Rectangle(x, y, 16, 16);
+			System.out.println(hitbox);
 		}
 	}
 	private void getTransitions() {
@@ -100,31 +98,38 @@ public class Map {
 	
 	//Fonctionnalites principales
 	//Ajoute un NPC sur la map
-	public void addNPC(int x, int y, NPC npc) {
-		npcsPosition.add(new Vector2((int) x, (int) y));
+	public void addNPC(NPC npc) {
 		npcs.add(npc);
 	}
-	//V�rifie si un NPC est pr�sent sur la position donn�e.
-	public boolean isNPCPresent(int x, int y) {
-		Vector2 targetPosition = new Vector2((float) x, (float) y);
-		//On v�rifie si un NPC se trouve � la position cible
-		for(int i = 0;i<npcsPosition.size();i++) {
-			if(targetPosition.x == npcsPosition.get(i).x && targetPosition.y == npcsPosition.get(i).y) {			
+	public boolean collide(Vector2 nextPos, int spriteWidth, int spriteHeight) {
+		TiledMapTileLayer layerCollision = (TiledMapTileLayer) tiledMap.getLayers().get(1);
+		if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)(nextPos.y/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null) {
+			return true;
+		}
+		Rectangle playerHitbox = new Rectangle(nextPos.x, nextPos.y, spriteWidth, spriteHeight);
+		for(NPC npc : npcs) {
+			Vector2 npcPos = npc.getPos();
+			Rectangle npcHitbox = new Rectangle(npcPos.x, npcPos.y, 16, 16);
+			if(playerHitbox.overlaps(npcHitbox)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	/* Int�ragit avec le NPC de la position donn�e
-	 * Renvoie null si aucun NPC n'est pr�sent sur place.*/
+	/* Interagit avec le NPC de la position donnee
+	 * Renvoie null si aucun NPC n'est present sur place.*/
 	public String interact(float x, float y, NPCList npcList) {
-		Vector2 targetPosition = new Vector2((float) x, (float) y);
-		//On v�rifie si un NPC se trouve � la position cible
+		/*Vector2 targetPosition = new Vector2((float) x, (float) y);
+		//On verifie si un NPC se trouve a la position cible
+		//TODO
 		for(int i = 0;i<npcsPosition.size();i++) {
 			if(targetPosition.x == npcsPosition.get(i).x && targetPosition.y == npcsPosition.get(i).y) {			
 				return npcs.get(i).executeDialog(npcList);
 			}
-		}
+		}*/
 		return null;
 	}
 	

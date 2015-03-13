@@ -1,5 +1,7 @@
 package pokemon.modele;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Infirmiere extends NPC {
 	public Infirmiere() {
 		super();
@@ -7,8 +9,14 @@ public class Infirmiere extends NPC {
 	public Infirmiere(String path) {
 		super(path);
 	}
-	public Infirmiere(String path, int status) {
-		super(path, status);
+	public Infirmiere(Vector2 pos) {
+		super(pos);
+	}
+	public Infirmiere(String path, Vector2 pos) {
+		super(path, pos);
+	}
+	public Infirmiere(String path, Vector2 pos, int status) {
+		super(path, pos, status);
 	}
 	
 	//Fonctionnalites principales

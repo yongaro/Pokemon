@@ -2,6 +2,8 @@ package pokemon.modele;
 
 import java.util.Vector;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Dresseur extends NPC {
 	private Vector<Pkm> team;
 	
@@ -13,8 +15,16 @@ public class Dresseur extends NPC {
 		super(path);
 		team = new Vector<Pkm>();
 	}
-	public Dresseur(String path, int status) {
-		super(path, status);
+	public Dresseur(Vector2 pos) {
+		super(pos);
+		team = new Vector<Pkm>();
+	}
+	public Dresseur(String path, Vector2 pos) {
+		super(path, pos);
+		team = new Vector<Pkm>();
+	}
+	public Dresseur(String path, Vector2 pos, int status) {
+		super(path, pos, status);
 		team = new Vector<Pkm>();
 	}
 	

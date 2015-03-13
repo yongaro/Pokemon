@@ -186,6 +186,9 @@ public class TestRender implements Screen,InputProcessor{
 			a=this.northwalk;}
 
 		}
+		if(Gdx.input.isKeyPressed(Keys.A)) {
+			System.out.println(j.getPos());
+		}
 		System.out.println("NEW");
 
 		for(Direction c:input)

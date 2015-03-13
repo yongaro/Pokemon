@@ -3,7 +3,6 @@ package pokemon.modele;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 
 //import pokemon.launcher.MyGdxGame;
@@ -148,13 +147,7 @@ public class Joueur {
 	}
 	public boolean updatePosition() {
 		Vector2 nextPos = new Vector2(getPos());
-		TiledMapTileLayer layerCollision = (TiledMapTileLayer) getCurrentMap().getTiledMap().getLayers().get(1);
-		
-		
-		//Avec TestMap2.java :
-		//nextPos.y++;
-		
-		//Sinon :
+
 		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
 		nextPos.x+=Gdx.graphics.getDeltaTime()*getSpeed().x;
 		
@@ -166,10 +159,7 @@ public class Joueur {
 		if( nextPos.y>800-spriteHeight || nextPos.y<0)
 		{setSpeedY(0);System.out.println("REACH BORDER");return false;}
 		/*verif si collision avec decors*/
-		if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
-				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)(nextPos.y/16f))!=null ||
-				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null ||
-				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null)
+		if(currentMap.collide(nextPos, spriteWidth, spriteHeight))
 		{
 			if(getSpeed().x!=0)
 				setSpeedX(0);
