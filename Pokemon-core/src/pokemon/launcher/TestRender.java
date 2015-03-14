@@ -187,9 +187,11 @@ public class TestRender implements Screen,InputProcessor{
 
 		}
 		if(Gdx.input.isKeyPressed(Keys.A)) {
-			System.out.println(j.getPos());
+			String text = j.interact(MyGdxGame.npcList);
+			if(text != null) {
+				System.out.println(text);
+			}
 		}
-		System.out.println("NEW");
 
 		for(Direction c:input)
 		{

@@ -18,8 +18,8 @@ public class MyGdxGame extends Game {
 	TiledMap tiledMap;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
-    NPCList npcList = new NPCList();
-
+    
+    public static NPCList npcList = new NPCList();
     public static Minimap m=new Minimap();
     public static Joueur Jtest=new Joueur();
     public static Joueur Jtest2=new Joueur();

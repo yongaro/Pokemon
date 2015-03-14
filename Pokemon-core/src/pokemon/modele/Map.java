@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 
 /* La classe Map permet de regrouper toutes les informations
  * concernant une map, notemment sa TiledMap, ainsi que tout les
- * objets présent sur la map */
+ * objets present sur la map */
 
 public class Map {
 	//Proprietes de la Map
@@ -120,15 +120,13 @@ public class Map {
 	}
 	/* Interagit avec le NPC de la position donnee
 	 * Renvoie null si aucun NPC n'est present sur place.*/
-	public String interact(float x, float y, NPCList npcList) {
-		/*Vector2 targetPosition = new Vector2((float) x, (float) y);
-		//On verifie si un NPC se trouve a la position cible
-		//TODO
-		for(int i = 0;i<npcsPosition.size();i++) {
-			if(targetPosition.x == npcsPosition.get(i).x && targetPosition.y == npcsPosition.get(i).y) {			
-				return npcs.get(i).executeDialog(npcList);
+	public String interact(Joueur j, Vector2 target, NPCList npcList) {
+		for(NPC npc : npcs) {
+			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
+			if(npcHitbox.contains(target)) {
+				return npc.executeDialog(j, npcList);
 			}
-		}*/
+		}
 		return null;
 	}
 	

@@ -51,7 +51,7 @@ public class NPC {
 	}
 
 	//Accesseurs
-	public String executeDialog(NPCList npcList) {
+	public String executeDialog(Joueur j, NPCList npcList) {
 		return dialogs.get(status).execute(npcList);
 	}
 	

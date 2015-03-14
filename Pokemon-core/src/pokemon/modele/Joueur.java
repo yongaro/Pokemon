@@ -28,6 +28,7 @@ public class Joueur {
 	protected int spriteWidth = 14;
 	protected int spriteHeight = 19;
 	protected Vector2 pos;
+	protected Direction moveDirection;
 	protected Direction orientation;
 	protected Map currentMap;
 	protected Vector2 speed;
@@ -40,6 +41,7 @@ public class Joueur {
 		
 		pos = new Vector2(400f, 400f);
 		speed=new Vector2(0,0);
+		moveDirection = Direction.South;
 		orientation = Direction.South;
 		currentMap = null;
 	}
@@ -50,6 +52,7 @@ public class Joueur {
 		inventaire=new Vector<Stockage<Objet>>();
 		
 		pos = new Vector2(0f, 0f);
+		moveDirection = Direction.South;
 		orientation = Direction.South;
 		currentMap = null;
 	}
@@ -65,7 +68,7 @@ public class Joueur {
 				currentMap = new Map(mc.getDestMap());
 				pos.x = mc.getTargetPos().x;
 				pos.y = mc.getTargetPos().y;
-				orientation = mc.getOrientation();
+				moveDirection = mc.getOrientation();
 				
 				return true;
 			}
@@ -122,21 +125,25 @@ public class Joueur {
 	
 	//Methodes de mouvement
 	public void move(Direction orientation) {
-		this.orientation = orientation;
-		switch(this.orientation){
+		this.moveDirection = orientation;
+		switch(this.moveDirection){
 		case South:
+			this.orientation = orientation;
 			speed.y=-60;
 			speed.x=0;
 			break;
 		case North:
+			this.orientation = orientation;
 			speed.y=60;
 			speed.x=0;
 			break;
 		case East:
+			this.orientation = orientation;
 			speed.y=0;
 			speed.x=60;
 			break;
 		case West:
+			this.orientation = orientation;
 			speed.y=0;
 			speed.x=-60;
 			break;
@@ -179,20 +186,32 @@ public class Joueur {
 	}
 	
 	public String interact(NPCList npcList) {
-		Vector2 cellPos = new Vector2(Math.round(pos.x/16f), Math.round(pos.y/16f));
-		if(orientation == Direction.North) {
-			return currentMap.interact((int) cellPos.x, (int) cellPos.y + 1, npcList);
+		Vector2 target = new Vector2();
+		Vector2 center = new Vector2();
+		center.x = pos.x + (spriteWidth/2);
+		center.y = pos.y + (spriteWidth/2); //Car spriteHeight - 5 = spriteWidth
+		int range = 16;
+		switch(this.orientation) {
+		case East:
+			target.x = center.x + range;
+			target.y = center.y;
+			break;
+		case North:
+			target.x = center.x;
+			target.y = center.y + range;
+			break;
+		case South:
+			target.x = center.x;
+			target.y = center.y - range;
+			break;
+		case West:
+			target.x = center.x - range;
+			target.y = center.y;
+			break;
+		default:
+			break;	
 		}
-		else if(orientation == Direction.South) {
-			return currentMap.interact((int) cellPos.x, (int) cellPos.y - 1, npcList);
-		}
-		else if(orientation == Direction.East) {
-			return currentMap.interact((int) cellPos.x + 1, (int) cellPos.y, npcList);
-		}
-		else if(orientation == Direction.West) {
-			return currentMap.interact((int) cellPos.x - 1, (int) cellPos.y, npcList);
-		}
-		return null;
+		return currentMap.interact(this, target, npcList);
 	}
 	
 	public Vector2 getSpeed() {
