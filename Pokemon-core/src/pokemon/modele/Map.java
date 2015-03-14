@@ -61,14 +61,14 @@ public class Map {
 			float y = Float.parseFloat(o.getProperties().get("y").toString());
 			if(o.getProperties().containsKey("dialogs")) {
 				NPC npc = new NPC(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
+				npcs.addElement(npc);
 				npcList.addNPC(npc);
 			}
 			else {
 				NPC npc = new NPC(new Vector2(x, y));
+				npcs.addElement(npc);
 				npcList.addNPC(npc);
 			}
-			Rectangle hitbox = new Rectangle(x, y, 16, 16);
-			System.out.println(hitbox);
 		}
 	}
 	private void getTransitions() {
@@ -97,10 +97,6 @@ public class Map {
 	}
 	
 	//Fonctionnalites principales
-	//Ajoute un NPC sur la map
-	public void addNPC(NPC npc) {
-		npcs.add(npc);
-	}
 	public boolean collide(Vector2 nextPos, int spriteWidth, int spriteHeight) {
 		TiledMapTileLayer layerCollision = (TiledMapTileLayer) tiledMap.getLayers().get(1);
 		if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
@@ -109,10 +105,10 @@ public class Map {
 				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null) {
 			return true;
 		}
-		Rectangle playerHitbox = new Rectangle(nextPos.x, nextPos.y, spriteWidth, spriteHeight);
+		Rectangle playerHitbox = new Rectangle(nextPos.x, nextPos.y, spriteWidth, spriteHeight-5);
 		for(NPC npc : npcs) {
 			Vector2 npcPos = npc.getPos();
-			Rectangle npcHitbox = new Rectangle(npcPos.x, npcPos.y, 16, 16);
+			Rectangle npcHitbox = new Rectangle(npcPos.x, npcPos.y+16, 16, 16);
 			if(playerHitbox.overlaps(npcHitbox)) {
 				return true;
 			}
