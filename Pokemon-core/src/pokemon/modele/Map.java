@@ -56,18 +56,21 @@ public class Map {
 	
 	//Fonction privees
 	private void getNPCs(NPCList npcList) {
-		for(MapObject o : tiledMap.getLayers().get("NPCs").getObjects()) {
-			float x = Float.parseFloat(o.getProperties().get("x").toString());
-			float y = Float.parseFloat(o.getProperties().get("y").toString());
-			if(o.getProperties().containsKey("dialogs")) {
-				NPC npc = new NPC(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
-				npcs.addElement(npc);
-				npcList.addNPC(npc);
-			}
-			else {
-				NPC npc = new NPC(new Vector2(x, y));
-				npcs.addElement(npc);
-				npcList.addNPC(npc);
+		MapLayer objectLayer = tiledMap.getLayers().get("NPCs");
+		if(objectLayer != null) {			
+			for(MapObject o : objectLayer.getObjects()) {
+				float x = Float.parseFloat(o.getProperties().get("x").toString());
+				float y = Float.parseFloat(o.getProperties().get("y").toString());
+				if(o.getProperties().containsKey("dialogs")) {
+					NPC npc = new NPC(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
+					npcs.addElement(npc);
+					npcList.addNPC(npc);
+				}
+				else {
+					NPC npc = new NPC(new Vector2(x, y));
+					npcs.addElement(npc);
+					npcList.addNPC(npc);
+				}
 			}
 		}
 	}
