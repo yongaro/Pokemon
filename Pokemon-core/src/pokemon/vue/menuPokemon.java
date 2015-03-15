@@ -175,16 +175,13 @@ public class menuPokemon  implements Screen {
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
 				   
 			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getCap().at(atkselector-1).getNom(),400,115);
-			f.draw(stage.getBatch(),"90",(210+405)-f.getBounds("90").width,115);
+			f.draw(stage.getBatch(),""+joueur.getTeam()[pkselector].getCap().at(atkselector-1).getPower(),(210+405)-f.getBounds(""+joueur.getTeam()[pkselector].getCap().at(atkselector-1).getPower()).width,115);
 			offset=0;	   
 			f.setScale(0.7f);	       
 
 
 			f.drawWrapped(stage.getBatch(),joueur.getTeam()[pkselector].getCap().at(atkselector-1).getDesc(),395,95,230);
-			offset+=17;
-
-			offset=0;
-			//f.draw(stage.getBatch(),attaque.get(1),250,95-offset);
+			//f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getCap().elementAt(atkselector-1).,395,20);
 
 
 			f.setScale(0.9f);
@@ -199,6 +196,7 @@ public class menuPokemon  implements Screen {
 			f.setColor(1,1,1,1);
 			for(UniteStockage<Capacite> cap:joueur.getTeam()[pkselector].getCap())//affichage des attaques
 			{
+				//f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
 				f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
 				f.draw(stage.getBatch(),cap.getQte()+"/"+cap.getQteMax(),385-f.getBounds(cap.getQte()+" / "+cap.getQteMax()).width,113-offset);
 				offset+=27.5;

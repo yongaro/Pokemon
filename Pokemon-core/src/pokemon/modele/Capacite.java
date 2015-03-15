@@ -80,6 +80,9 @@ public abstract class Capacite implements Qmax,Infos {
 	public String getDesc(){return description;}
 	public String getInfos(){ return power+" "+pre+" "+type+" "+element;}
 	
+	public int getPower() {
+		return power;
+	}
 	public String toString(){
 		if(type==3){
 		return (nom+": "+"pw:"+power+" pre:"+pre+" "+element+" ATT");
