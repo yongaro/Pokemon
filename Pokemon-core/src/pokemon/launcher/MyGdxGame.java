@@ -34,7 +34,7 @@ public class MyGdxGame extends Game {
 		MenuListener menu=new MenuListener(this);
 		
 		//TestMap2 test = new TestMap2();
-		this.setScreen(new TestRender());
+		//this.setScreen(new TestRender());
 //		Combat test=new Combat();
 //		System.out.println(test.combatsolo(MyGdxGame.Jtest,MyGdxGame.Jtest2));
 	}

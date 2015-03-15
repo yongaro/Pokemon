@@ -55,7 +55,7 @@ public class menuPokemon  implements Screen {
 	Random r=new Random();
 	ShapeRenderer shapeRenderer=new ShapeRenderer();
 	int state=1;
-	public int pkselector=1;
+	public int pkselector=0;
 	int atkselector=1;
 	int offset=0;
 	int posx=0;
@@ -122,7 +122,9 @@ public class menuPokemon  implements Screen {
 		shapeRenderer.triangle(210+207-10, 205, 210+207+10, 205, 210+207, 215); //bottom triangle
 		/*Drawing pokemon selectors*/
 		shapeRenderer.setColor(1, 0, 0, 1);
-		shapeRenderer.rect(15,280-(45*this.pkselector), 5, 45);
+		offset=45;
+		offset+=offset*pkselector;
+		shapeRenderer.rect(15,280-offset, 5, 45);
 		shapeRenderer.setColor(0, 0, 1, 1);
 		shapeRenderer.rect(210,120-(27.5f*this.atkselector), 5, 27);
 
@@ -144,16 +146,16 @@ public class menuPokemon  implements Screen {
 			f.draw(stage.getBatch(),"Team",105*0.7f, 315);
 			//stage.getBatch().draw(sp, 50, 50,500,500);
 			f.setScale(1.2f);
-			f.draw(stage.getBatch(),joueur.getTeam()[pkselector-1].getNom(),310, 315);
-			f.draw(stage.getBatch(),"Lvl "+joueur.getTeam()[pkselector-1].get(0),(210+405)-f.getBounds("Lvl "+joueur.getTeam()[pkselector-1].get(0)).width, 315);
+			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getNom(),310, 315);
+			f.draw(stage.getBatch(),"Lvl "+joueur.getTeam()[pkselector].get(0),(210+405)-f.getBounds("Lvl "+joueur.getTeam()[pkselector].get(0)).width, 315);
 			f.setScale(1.0f);
-			f.draw(stage.getBatch(),"Pv "+joueur.getTeam()[pkselector-1].get(2)+"/"+joueur.getTeam()[pkselector-1].getmax(2),310, 285);
-			int xprate=0;//(joueur.getTeam()[pkselector-1].get(1)*100)/joueur.getTeam()[pkselector-1].getmax(1);
-			f.draw(stage.getBatch(),"XP "+joueur.getTeam()[pkselector-1].getmax(0)+"%",(210+405)-f.getBounds("XP "+joueur.getTeam()[pkselector-1].getmax(0)+"%").width, 285);
+			f.draw(stage.getBatch(),"Pv "+joueur.getTeam()[pkselector].get(2)+"/"+joueur.getTeam()[pkselector].getmax(2),310, 285);
+			int xprate=0;//(joueur.getTeam()[pkselector].get(1)*100)/joueur.getTeam()[pkselector].getmax(1);
+			f.draw(stage.getBatch(),"XP "+joueur.getTeam()[pkselector].getmax(0)+"%",(210+405)-f.getBounds("XP "+joueur.getTeam()[pkselector].getmax(0)+"%").width, 285);
 			f.setScale(0.8f);
 			f.draw(stage.getBatch(),"Empoisonne",310, 257);
 			String types="";
-			for(Type t:joueur.getTeam()[pkselector-1].getType())
+			for(Type t:joueur.getTeam()[pkselector].getType())
 			{
 				if(t!=null)
 				types+=" "+t.name();
@@ -161,24 +163,24 @@ public class menuPokemon  implements Screen {
 			f.draw(stage.getBatch(),types,(210+405)-f.getBounds(types).width, 257);
 			f.setScale(0.6f);
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
-			f.draw(stage.getBatch(),"Att: "+joueur.getTeam()[pkselector-1].get(3)+" / AttSpe: "+joueur.getTeam()[pkselector-1].get(5),220,235);
-			f.draw(stage.getBatch(),"Def: "+joueur.getTeam()[pkselector-1].get(4)+" / DefSpe: "+joueur.getTeam()[pkselector-1].get(6),220,220);
-			f.draw(stage.getBatch(),"Vitesse: "+joueur.getTeam()[pkselector-1].get(7),(210+405)-f.getBounds("Vitesse: "+joueur.getTeam()[pkselector-1].get(7)).width,235);
-			f.draw(stage.getBatch(),joueur.getTeam()[pkselector-1].getNat().name(),(210+405)-f.getBounds(joueur.getTeam()[pkselector-1].getNat().name()).width,220);
+			f.draw(stage.getBatch(),"Att: "+joueur.getTeam()[pkselector].get(3)+" / AttSpe: "+joueur.getTeam()[pkselector].get(5),220,235);
+			f.draw(stage.getBatch(),"Def: "+joueur.getTeam()[pkselector].get(4)+" / DefSpe: "+joueur.getTeam()[pkselector].get(6),220,220);
+			f.draw(stage.getBatch(),"Vitesse: "+joueur.getTeam()[pkselector].get(7),(210+405)-f.getBounds("Vitesse: "+joueur.getTeam()[pkselector].get(7)).width,235);
+			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getNat().name(),(210+405)-f.getBounds(joueur.getTeam()[pkselector].getNat().name()).width,220);
 			f.setColor(1, 1, 1, 1);
-			f.draw(stage.getBatch(),joueur.getTeam()[pkselector-1].getCapP().getNom(),(210+((415/2)-(f.getBounds(joueur.getTeam()[pkselector-1].getCapP().getNom()).width)/2)),202);
+			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getCapP().getNom(),(210+((415/2)-(f.getBounds(joueur.getTeam()[pkselector].getCapP().getNom()).width)/2)),202);
 			f.setScale(0.8f);
 
-			f.drawWrapped(stage.getBatch(),joueur.getTeam()[pkselector-1].getCapP().getDesc(),365,185,260);
+			f.drawWrapped(stage.getBatch(),joueur.getTeam()[pkselector].getCapP().getDesc(),365,185,260);
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
 				   
-			f.draw(stage.getBatch(),joueur.getTeam()[pkselector-1].getCap().at(atkselector-1).getNom(),400,115);
+			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getCap().at(atkselector-1).getNom(),400,115);
 			f.draw(stage.getBatch(),"90",(210+405)-f.getBounds("90").width,115);
 			offset=0;	   
 			f.setScale(0.7f);	       
 
 
-			f.drawWrapped(stage.getBatch(),joueur.getTeam()[pkselector-1].getCap().at(atkselector-1).getDesc(),395,95,230);
+			f.drawWrapped(stage.getBatch(),joueur.getTeam()[pkselector].getCap().at(atkselector-1).getDesc(),395,95,230);
 			offset+=17;
 
 			offset=0;
@@ -195,12 +197,13 @@ public class menuPokemon  implements Screen {
 			f.setScale(0.7f);
 			offset=0;
 			f.setColor(1,1,1,1);
-			for(UniteStockage<Capacite> cap:joueur.getTeam()[pkselector-1].getCap())//affichage des attaques
+			for(UniteStockage<Capacite> cap:joueur.getTeam()[pkselector].getCap())//affichage des attaques
 			{
-				f.draw(stage.getBatch(),cap.get().getNom(),230,113-offset);
+				f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
+				f.draw(stage.getBatch(),cap.getQte()+"/"+cap.getQteMax(),385-f.getBounds(cap.getQte()+" / "+cap.getQteMax()).width,113-offset);
 				offset+=27.5;
 			}
-			/*for(int i=0;i<joueur.getTeam()[pkselector-1].getCap().size();i++){ //liste des attaques du pokemon survolé
+			/*for(int i=0;i<joueur.getTeam()[pkselector].getCap().size();i++){ //liste des attaques du pokemon survolé
 				f.draw(stage.getBatch(),attaque.get(i),230,113-offset);
 				offset+=27.5;
 			}*/
@@ -219,7 +222,7 @@ public class menuPokemon  implements Screen {
 		this.pkselector=pkselector;
 		this.atkselector=atkselector;
 		if(joueur.teamSize()>0)
-			texture = new Texture(Gdx.files.internal("Sprites/"+joueur.getTeam()[pkselector-1].getID()+".png")); /*pick random pkm*/
+			texture = new Texture(Gdx.files.internal("Sprites/"+joueur.getTeam()[pkselector].getID()+".png")); /*pick random pkm*/
 		else
 			texture = new Texture(Gdx.files.internal("Sprites/0.png"));
 	}

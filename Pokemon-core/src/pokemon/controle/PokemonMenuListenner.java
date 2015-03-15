@@ -33,7 +33,7 @@ public class PokemonMenuListenner implements InputProcessor{
 	{
 		this.menu=menu;
 		state=1;
-		pkselector=1;
+		pkselector=0;
 		atkselector=1;
 		this.myGdxGame=myGdxGame;
 		this.menuListener=menuListener;
@@ -52,7 +52,7 @@ public class PokemonMenuListenner implements InputProcessor{
 			
 			case DOWN:
 				if(state==1 || state==3){
-					if(pkselector<joueur.teamSize()){
+					if(pkselector+1<joueur.teamSize()){
 						this.pkselector++;
 						menu.update(state,pkselector,atkselector);
 					}
@@ -67,7 +67,7 @@ public class PokemonMenuListenner implements InputProcessor{
 			
 			case UP:
 				if(state==1 || state==3){
-					if(pkselector!=1){
+					if(pkselector!=0){
 						this.pkselector--;
 						menu.update(state,pkselector,atkselector);
 					}
@@ -94,16 +94,16 @@ public class PokemonMenuListenner implements InputProcessor{
 				{
 				case 1:
 					state=3;
-					change=pkselector-1;
+					change=pkselector;
 					System.out.println("State to 3");
 					break;
 				case 2:
 					state=4;
 					change=atkselector-1;
 					break;
-				case 3://switch tes pokemons
-					Pkm swap=joueur.getTeam()[pkselector-1];
-					joueur.getTeam()[pkselector-1]= joueur.getTeam()[change];
+				case 3://switch des pokemons
+					Pkm swap=joueur.getTeam()[pkselector];
+					joueur.getTeam()[pkselector]= joueur.getTeam()[change];
 					joueur.getTeam()[change]=swap;
 					//team.swap(team.elementAt(change), team.elementAt(pkselector-1));
 					

@@ -22,4 +22,9 @@ public class UniteStockage<A extends Qmax & Infos> /*implements Comparable*/ {
 	public A get(){
 		return cible;
 	}
+	public String getInfos(){return cible.getInfos();}
+	 public String getDesc(){return cible.getDesc();}
+	 public String getNom(){return cible.getNom();}
+	 public int getQte(){ return quantite;}
+	 public int getQteMax(){ return quantitemax;}
 }
