@@ -62,7 +62,7 @@ public class menuPokemon  implements Screen {
 	//String[] str; //bufferisation de la definition de l'attaque
 	public Vector<String> nom=new Vector<String>();
 	public Vector<String> attaque=new Vector<String>();
-
+	int[] healthbars;
 
 	public menuPokemon(MyGdxGame myGdxGame) {
 		this.myGdxGame=myGdxGame;
@@ -70,7 +70,7 @@ public class menuPokemon  implements Screen {
 		//listener=new PokemonMenuListenner(this,myGdxGame);
 		nom.add("Dracaufeu");nom.add("Pikaderp");nom.add("Bulbiboule");nom.add("Sorboul");nom.add("Saladerp");nom.add("Taupiqueur");
 		attaque.add("Hydro-canon");attaque.add("Fatal Foudre");attaque.add("Griffe");attaque.add("Smashing");
-
+		healthbars=new int[6];
 	}
 
 
@@ -78,6 +78,8 @@ public class menuPokemon  implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+	    Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		stage.act();
 		stage.draw();
 		// stage.getBatch().begin();
@@ -117,9 +119,18 @@ public class menuPokemon  implements Screen {
 		/*top banner*/
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
 		shapeRenderer.rect(210,237, 415, 84);
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
+		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 0.3f);
 		shapeRenderer.triangle(210+207-10, 237, 210+207+10, 237, 210+207, 227); //top triangle
 		shapeRenderer.triangle(210+207-10, 205, 210+207+10, 205, 210+207, 215); //bottom triangle
+	
+		/*Drawing Healthbars*/
+		shapeRenderer.setColor(1f, 0.9f, 0.9f, 1f);
+		offset=0;
+		for(int i=0;i<joueur.teamSize();i++) //liste des pokemons
+		{
+		shapeRenderer.rect(15, 235-offset, healthbars[i], 45);
+		offset+=45;
+		}
 		/*Drawing pokemon selectors*/
 		shapeRenderer.setColor(1, 0, 0, 1);
 		offset=45;
@@ -127,7 +138,6 @@ public class menuPokemon  implements Screen {
 		shapeRenderer.rect(15,280-offset, 5, 45);
 		shapeRenderer.setColor(0, 0, 1, 1);
 		shapeRenderer.rect(210,120-(27.5f*this.atkselector), 5, 27);
-
 		shapeRenderer.end();
 		
 		stage.getBatch().begin();
@@ -189,7 +199,9 @@ public class menuPokemon  implements Screen {
 			for(int i=0;i<joueur.teamSize();i++) //liste des pokemons
 			{
 				f.draw(stage.getBatch(),joueur.getTeam()[i].getNom(),35,268-offset);
-				offset+=46;
+				if(healthbars[i]<(joueur.getTeam()[i].get(2)*185)/joueur.getTeam()[i].getmax(2))
+					healthbars[i]+=delta*80f;
+				offset+=45;
 			}
 			f.setScale(0.7f);
 			offset=0;
@@ -210,7 +222,7 @@ public class menuPokemon  implements Screen {
 		stage.getBatch().end();
 
 		// System.out.println(pkselector);
-		Gdx.graphics.setContinuousRendering(false); //coupe la boucle de render inutile dans les menus
+		//Gdx.graphics.setContinuousRendering(false); //coupe la boucle de render inutile dans les menus
 	}
 
 
