@@ -2,6 +2,9 @@ package pokemon.modele;
 
 import java.util.*;
 
+import pokemon.annotations.Tps;
+
+@Tps(nbhours=8)
 public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected int ID;
 	protected String nom;
@@ -14,6 +17,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected int[] EV;
 	//Récompenses données a l'adversaire
 	protected int XPReward;
+	protected int prevXpPal;
 	protected Nature personnalite;
 	protected Vector <Type> type;
 	protected Stockage<Capacite> cap;
@@ -85,29 +89,12 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		//copie des capacites
 		this.cap=new Stockage<Capacite>(); cap.max=4;
 		i=0;
-		
-		//Copie des evolutions
-
-		
-		//copie de la liste de capacitÃ©s a apprendre
-		//this.levelinglist=new Hashtable<Integer,Capacite>();
-		
-		//for(Integer key:levelinglist.keySet()){
-			//this.levelinglist.put(key,levelinglist.get(key));	
-		//}
-		
-	
-		//copie des conditions d'evolution
-		//this.evolution=new int[2];
-		//this.evolution[0]=evolution[0];
-		//this.evolution[1]=evolution[1];	
-		
 	}
 	
 	public void AjustementStats(){
 		Pkm base=Pokedex.values()[ID].get();
 		//XP
-		this.stats[1][0]=(int)Math.pow(this.stats[0][0],3);
+		prevXpPal=this.stats[1][0]=(int)Math.pow(this.stats[0][0],3);
 		this.stats[1][1]=(int)Math.pow(this.stats[0][0]+1,3);
 		//PV
 		this.stats[2][0]=this.stats[2][1]=(int)(((2*base.stats[2][1])+(EV[0]/4)+IV[0])*(double)(stats[0][0]/100.0)+(stats[0][0]+10));
@@ -115,12 +102,40 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 			this.stats[i][0]=this.stats[i][1]=(int)((2*base.stats[i][1]+IV[i-2])*(double)(stats[0][0]/100.0)+5);
 		}
 		this.personnalite.Applique(this);
+		stats[0][1]=(int)((stats[1][0]-prevXpPal)/(stats[1][1]-prevXpPal));
 	}
 	
-	public void levelup(){
-		if(this.stats[0][0]<100){
-			this.stats[0][0]++;
+	public Event eventAt(int level){
+		for(int i=0;i<events.length;i++){
+			if(events[i].niveau==level){
+				return events[i];
+			}
+		}
+		return null;
+	}
+	
+	public void evolution(Pkm cible){
+		this.ID=cible.ID;
+		this.AjustementStats();
+		System.out.println("Felicitations ! Votre "+nom+" a evolue en "+cible.nom);
+		this.nom=cible.nom;
+	}
+	
+	public void addXP(int xp){
+		Event temp;
+		
+		this.stats[1][0]+=xp;
+		if(stats[1][0]>= stats[1][1] && stats[0][0]<100){
+			stats[0][0]++;
+			temp=eventAt(stats[0][0]);
+			if(temp!=null){
+				if(temp.evolution!=null){ this.evolution(temp.evolution); }
+				if(temp.cap!=null){ temp.cap.teach(this); }
+			}
 			this.AjustementStats();
+		}
+		else{
+			stats[0][1]=(int)((stats[1][0]-prevXpPal)/(stats[1][1]-prevXpPal));
 		}
 	}
 	
@@ -225,12 +240,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		}
 	}
 	
-	public void XPreward(Pkm cible,int div){
-		float ratio=cible.stats[0][0]/this.stats[0][0]; int xp=(int)(this.stats[1][1]/20);
-		
-		
-		
-	}
+
 	
 	public void Heal(int pv){
 		stats[2][0]+=pv;

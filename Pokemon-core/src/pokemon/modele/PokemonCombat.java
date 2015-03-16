@@ -6,14 +6,18 @@ import java.util.Stack;
 public class PokemonCombat implements Comparable<PokemonCombat> {
 	protected Pkm pkm;
 	protected boolean isIA;
-	protected int equipe;
+	//protected int equipe;
+	protected PokemonCombat[] equipe;
 	protected Joueur prop;
+	protected Stack<Pkm> XpStack;
 	protected PokemonCombat[] adv;
 	protected PokemonCombat[] voisins;
 
-	public PokemonCombat(Pkm p,boolean isIA){
+	public PokemonCombat(Pkm p,boolean isIA,Joueur j){
 		pkm=p;
 		this.isIA=isIA;
+		prop=j;
+		this.XpStack=new Stack<Pkm>();
 		this.adv=new PokemonCombat[5];
 		this.voisins=new PokemonCombat[2];
 	}

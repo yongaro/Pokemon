@@ -12,8 +12,8 @@ import pokemon.annotations.Tps;
 public class Combat {
 	protected Terrain terrain;
 	protected Climat climat;
-	protected Vector<Stack<Pkm>> XPStackTeam1;
-	protected Vector<Stack<Pkm>> XPStackTeam2;
+	protected PokemonCombat[] equipe1;
+	protected PokemonCombat[] equipe2;
 	protected Scanner sc = new Scanner(System.in); //BERK
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
@@ -39,14 +39,20 @@ public class Combat {
 	
 	
 	public int combatsolo(Joueur j1,Joueur j2){
+		equipe1=new PokemonCombat[j1.teamsize];
+		equipe1=new PokemonCombat[j2.teamsize];
 		PokemonCombat[] pkmListe=new PokemonCombat[2];
-		XPStackTeam1 = new Vector<Stack<Pkm>>(j1.teamsize,0);
-		XPStackTeam2 = new Vector<Stack<Pkm>>(j2.teamsize,0);
 		
-		pkmListe[0]=new PokemonCombat(j1.team[0],false);
-		pkmListe[1]=new PokemonCombat(j2.team[0],false);
-		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].prop=j1;
-		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].prop=j2;
+		for(int i=0;i<j1.teamsize;i++){
+			equipe1[i]=new PokemonCombat(j1.team[i],false,j1); equipe1[i].equipe=equipe1;
+		}
+		for(int i=0;i<j2.teamsize;i++){
+			equipe2[i]=new PokemonCombat(j2.team[i],false,j2); equipe2[i].equipe=equipe2;
+		}
+		pkmListe[0]=equipe1[0];
+		pkmListe[1]=equipe2[0];
+		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
+		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
 		while(this.gagnant(j1,j2)==0){
 			Arrays.sort(pkmListe);
 			for(PokemonCombat p: pkmListe){
@@ -61,7 +67,6 @@ public class Combat {
 				}
 			}
 		}
-		
 		return this.gagnant(j1,j2);
 	}
 	
@@ -130,14 +135,14 @@ public class Combat {
 		if(!user.isIA){
 			while(done==0){
 				System.out.println("Qui voulez vous envoyer ?");
-				for(Pkm p: user.prop.team){
-					System.out.println(i+" "+p.nom+" LV."+p.stats[0][1]+" "+p.stats[2][0]+"/"+p.stats[2][1]+" "+p.statut);
+				for(PokemonCombat p: user.equipe){
+					System.out.println(i+" "+p.pkm.nom+" LV."+p.pkm.stats[0][1]+" "+p.pkm.stats[2][0]+"/"+p.pkm.stats[2][1]+" "+p.pkm.statut);
 					i++;
 				}
 				act=sc.nextInt();
-				if(user.prop.team[act].statut!=Statut.KO){
-					System.out.println(user.prop.team[act].nom+" remplace "+user.pkm.nom);
-					user.pkm=user.prop.team[act];
+				if(user.equipe[act].pkm.statut!=Statut.KO){
+					System.out.println(user.equipe[act].pkm.nom+" remplace "+user.pkm.nom);
+					user=user.equipe[act];
 					done=1;
 					
 				}
@@ -147,10 +152,10 @@ public class Combat {
 			}
 		}
 		else{
-			for(Pkm p:user.prop.team){
-				if(p.statut!=Statut.KO){
-					user.pkm=p;
-					System.out.println(user.prop+" envoie "+p+" au combat");
+			for(PokemonCombat p:user.equipe){
+				if(p.pkm.statut!=Statut.KO){
+					user=p;
+					System.out.println(user.prop+" envoie "+p.pkm.nom+" au combat");
 				}
 			}
 		}
