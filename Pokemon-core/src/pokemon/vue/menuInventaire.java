@@ -6,6 +6,7 @@ import pokemon.annotations.Tps;
 import pokemon.controle.InventaireMenuListener;
 import pokemon.controle.MenuListener;
 import pokemon.launcher.MyGdxGame;
+import pokemon.modele.Joueur;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -23,9 +24,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class menuInventaire implements Screen{
 
 	MyGdxGame myGdxGame;
-	//Screen previous;
 	MenuListener menuListener;
-	//InventaireMenuListener listener;
+	Joueur joueur= MyGdxGame.Jtest;
 	private Texture texture = new Texture(Gdx.files.internal("Dresseur.png"));
 	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
 	ShapeRenderer shapeRenderer=new ShapeRenderer();
@@ -38,7 +38,7 @@ public class menuInventaire implements Screen{
     int[] objselector={0,0};
     int displayedAtk=0;
     int offset;
-    String[] poches = {"Objets","Baies","Objets Combat","Objets Soin","Balls","Poche CT/CS"};
+    String[] poches = {"Medicaments","Objets rares","CT/CM","Pokeballs","Objets","Poche CT/CS"};
     Vector<String> objets ;
     public menuInventaire( MyGdxGame myGdxGame,  MenuListener menuListener)
     {

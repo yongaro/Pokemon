@@ -92,6 +92,10 @@ public class Joueur {
 		this.currentMap = currentMap;
 	}
 	public Pkm[] getTeam(){ return team; }
+	
+	public Stockage<Objet> getPocket(int i) {
+		return inventaire.get(i);
+	}
 	public int teamSize(){ return teamsize;}
 	
 	//Ajoute le pokemon cible a l'equipe du dresseur
