@@ -11,6 +11,9 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected Statut statut;
 	protected Statut supTemp;
 	protected int[] IV;
+	protected int[] EV;
+	//Récompenses données a l'adversaire
+	protected int XPReward;
 	protected Nature personnalite;
 	protected Vector <Type> type;
 	protected Stockage<Capacite> cap;
@@ -46,18 +49,14 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		Random rand=new Random();
 		int IV=(int)rand.nextInt(32);
 		this.IV=new int[6];
+		this.EV=new int[6];
 		this.IV[0]=IV;
-		//niveau
-		this.stats[0][0]=level;
-		//XP
-		this.stats[1][0]=(int)Math.pow(level-1,3);
-		this.stats[1][1]=(int)Math.pow(level,3);
-		//PV
-		this.stats[2][0]=this.stats[2][1]=(int)((2*base.stats[3][1]+IV)*(double)(level/100.0)+(level+10));
-		//autres stats
 		for(i=3;i<8;i++){
 			IV=(int)rand.nextInt(32);
-			this.stats[i][0]=this.stats[i][1]=(int)((2*base.stats[i][1]+IV)*(double)(level/100.0)+5);}
+		}
+		//niveau
+		this.stats[0][0]=level;
+		this.AjustementStats();
 		/*Fast - 0.8(Current Level)^3
 		Medium Fast - (Current Level)^3
 		Medium Slow - 1.2(Current Level)^3 - 15(Current Level)^2 + 100(Current Level) - 140
@@ -103,6 +102,26 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		//this.evolution[0]=evolution[0];
 		//this.evolution[1]=evolution[1];	
 		
+	}
+	
+	public void AjustementStats(){
+		Pkm base=Pokedex.values()[ID].get();
+		//XP
+		this.stats[1][0]=(int)Math.pow(this.stats[0][0],3);
+		this.stats[1][1]=(int)Math.pow(this.stats[0][0]+1,3);
+		//PV
+		this.stats[2][0]=this.stats[2][1]=(int)(((2*base.stats[2][1])+(EV[0]/4)+IV[0])*(double)(stats[0][0]/100.0)+(stats[0][0]+10));
+		for(int i=3;i<8;i++){
+			this.stats[i][0]=this.stats[i][1]=(int)((2*base.stats[i][1]+IV[i-2])*(double)(stats[0][0]/100.0)+5);
+		}
+		this.personnalite.Applique(this);
+	}
+	
+	public void levelup(){
+		if(this.stats[0][0]<100){
+			this.stats[0][0]++;
+			this.AjustementStats();
+		}
 	}
 	
 	public int get(int indice){
