@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Vector;
 
 import pokemon.annotations.Tps;
 
@@ -11,6 +12,8 @@ import pokemon.annotations.Tps;
 public class Combat {
 	protected Terrain terrain;
 	protected Climat climat;
+	protected Vector<Stack<Pkm>> XPStackTeam1;
+	protected Vector<Stack<Pkm>> XPStackTeam2;
 	protected Scanner sc = new Scanner(System.in); //BERK
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
@@ -37,6 +40,8 @@ public class Combat {
 	
 	public int combatsolo(Joueur j1,Joueur j2){
 		PokemonCombat[] pkmListe=new PokemonCombat[2];
+		XPStackTeam1 = new Vector<Stack<Pkm>>(j1.teamsize,0);
+		XPStackTeam2 = new Vector<Stack<Pkm>>(j2.teamsize,0);
 		
 		pkmListe[0]=new PokemonCombat(j1.team[0],false);
 		pkmListe[1]=new PokemonCombat(j2.team[0],false);
@@ -134,6 +139,7 @@ public class Combat {
 					System.out.println(user.prop.team[act].nom+" remplace "+user.pkm.nom);
 					user.pkm=user.prop.team[act];
 					done=1;
+					
 				}
 				else{
 					System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");

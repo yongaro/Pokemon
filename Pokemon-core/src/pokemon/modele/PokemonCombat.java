@@ -8,7 +8,6 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	protected boolean isIA;
 	protected int equipe;
 	protected Joueur prop;
-	protected Stack<Pkm> XPstack;
 	protected PokemonCombat[] adv;
 	protected PokemonCombat[] voisins;
 
@@ -17,7 +16,6 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		this.isIA=isIA;
 		this.adv=new PokemonCombat[5];
 		this.voisins=new PokemonCombat[2];
-		XPstack= new Stack<Pkm>();
 	}
 	
 	public int compareTo(PokemonCombat p) {
@@ -40,15 +38,4 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	}
 	
 	public void setPokemon(Pkm p){ pkm=p; }
-	
-	public void XPreward(){
-		int div=XPstack.size(); Pkm temp;
-		
-		while(!XPstack.isEmpty()){
-			temp=XPstack.pop();
-			temp.XPreward(this.pkm,div);
-		}
-	}
-	
-
 }
