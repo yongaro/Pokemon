@@ -145,14 +145,14 @@ public class menuInventaire implements Screen{
         	offset=0;
         	f.setScale(0.7f);
         	f.setColor(1,1,1,1);
-        	for(int i=displayedAtk;i<Math.min(this.displayedAtk+7,objets.size());i++){
+        	for(int i=displayedAtk;i<Math.min(this.displayedAtk+7,joueur.getPoche(pktselector-1).size());i++){
         		
-        		f.draw(stage.getBatch(),objets.get(i),220,227-offset);
+        		f.draw(stage.getBatch(),joueur.getPoche(pktselector-1).at(i).getNom(),220,227-offset);
         		offset+=20;
    
         	}
         	offset=0;
-        	for(int i=displayedAtk+7;i<Math.min(this.displayedAtk+14,objets.size());i++){
+        	for(int i=displayedAtk+7;i<Math.min(this.displayedAtk+14,joueur.getPoche(pktselector-1).size());i++){
         		
         		f.draw(stage.getBatch(),objets.get(i),370,227-offset);
         		offset+=20;
@@ -196,7 +196,7 @@ public class menuInventaire implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		Gdx.graphics.setContinuousRendering(false);
+		//Gdx.graphics.setContinuousRendering(false);
 	}
 
 }

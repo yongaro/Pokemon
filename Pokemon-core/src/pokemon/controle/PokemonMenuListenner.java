@@ -81,7 +81,12 @@ public class PokemonMenuListenner implements InputProcessor{
 				break;
 			case A:
 				if(state==1)
-					this.state++;
+					if(menuListener.state==2)
+						{joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).script(joueur.getTeam()[pkselector]);
+						System.out.println("Je donne"+joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).getNom());
+						}
+					else
+						this.state++;
 				break;
 			case B:
 				if(state==2){

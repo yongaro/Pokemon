@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import pokemon.annotations.Tps;
 import pokemon.launcher.MyGdxGame;
+import pokemon.modele.Joueur;
 import pokemon.vue.menuInventaire;
 import pokemon.vue.menuPokematos;
 import pokemon.vue.menuPokemon;
@@ -26,6 +27,8 @@ public class InventaireMenuListener implements InputProcessor{
 	int[] objselector={0,0};
     public static Vector<String> objets = new Vector<String>();
     MenuListener menuListener;
+	Joueur joueur= MyGdxGame.Jtest;
+
     
 	public InventaireMenuListener(MyGdxGame myGdxGame, Screen previous, menuInventaire menu, MenuListener menuListener) {
 		
@@ -72,6 +75,12 @@ public class InventaireMenuListener implements InputProcessor{
 			if(state==2 && this.menuListener.state==1){
 				System.out.println("Je donne"+objets.get(objselector[0]+displayedAtk+7*objselector[1]));
 			}
+			if(state==3){
+				menuListener.slotInventaire[0]=pktselector-1;
+				menuListener.slotInventaire[1]=objselector[0]+displayedAtk+7*objselector[1];
+				menuListener.state=2;
+				menuListener.switchto(menuPokemon.class);
+			}
 			if(state<3)
 				state++;
 		}
@@ -84,12 +93,12 @@ public class InventaireMenuListener implements InputProcessor{
 			if(state==2)
 			{
 				if(objselector[0]<6 && objselector[1]==0){
-					if(objselector[0]+displayedAtk+1<objets.size()){
+					if(objselector[0]+displayedAtk+1<joueur.getPoche(pktselector-1).size()){
 						//System.out.println(objselector+displayedAtk);
 						this.objselector[0]++;}
 				}
 				else{
-					if(objselector[0]==6 && displayedAtk+14<objets.size()){ //NOUVELLE LISTE
+					if(objselector[0]==6 && displayedAtk+14<joueur.getPoche(pktselector-1).size()){ //NOUVELLE LISTE
 						displayedAtk+=14;
 						System.out.print("Bouh");
 						objselector[0]=0;
@@ -98,13 +107,13 @@ public class InventaireMenuListener implements InputProcessor{
 						
 				}
 				if(objselector[0]<6 && objselector[1]==1){
-					if(objselector[0]+1+displayedAtk+7*objselector[1]<objets.size()){
+					if(objselector[0]+1+displayedAtk+7*objselector[1]<joueur.getPoche(pktselector-1).size()){
 						this.objselector[0]++;
 						
 
 					}
 				}
-				System.out.println(objets.get(objselector[0]+displayedAtk+7*objselector[1]));
+				/*System.out.println(objets.get(objselector[0]+displayedAtk+7*objselector[1]));*/
 			}
 			if(state==3){
 				if(actionselector<2)
@@ -112,7 +121,7 @@ public class InventaireMenuListener implements InputProcessor{
 			}
 		}
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)){
-			if(state==2 && objselector[1]==0 && objselector[0]+7+displayedAtk<objets.size())
+			if(state==2 && objselector[1]==0 && objselector[0]+7+displayedAtk<joueur.getPoche(pktselector-1).size())
 				{
 				objselector[1]++;
 				System.out.println(objets.get(objselector[0]+displayedAtk+7*objselector[1]));
