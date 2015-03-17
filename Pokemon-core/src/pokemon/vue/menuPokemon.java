@@ -199,7 +199,7 @@ public class menuPokemon  implements Screen {
 			for(int i=0;i<joueur.teamSize();i++) //liste des pokemons
 			{
 				f.draw(stage.getBatch(),joueur.getTeam()[i].getNom(),35,268-offset);
-				if(healthbars[i]<(joueur.getTeam()[i].get(2)*165)/joueur.getTeam()[i].getmax(2))
+				if(healthbars[i]<(joueur.getTeam()[i].get(2)*140)/joueur.getTeam()[i].getmax(2))
 					healthbars[i]+=delta*100f;
 				offset+=45;
 			}
