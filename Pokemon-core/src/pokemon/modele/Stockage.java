@@ -9,7 +9,7 @@ public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<
 	protected int max;
 	
 	public Stockage(){contenu=new Vector<UniteStockage<A>>();}
-	public Stockage(int max){contenu=new Vector<UniteStockage<A>>(max,0); this.max=max;}
+	public Stockage(int max){contenu=new Vector<UniteStockage<A>>(); this.max=max;}
 	public Stockage(Vector<UniteStockage<A>> cpy,int capmax){
 		contenu=new Vector<UniteStockage<A>>();
 		for(UniteStockage<A> a:cpy){
@@ -30,7 +30,7 @@ public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<
 	}
 	
 	public int indiceOf(A a){
-		int i=0; 
+		int i=0;
 		for(i=0;i<max;i++){
 			if(this.contenu.elementAt(i).cible.equals(a)){
 				return i;

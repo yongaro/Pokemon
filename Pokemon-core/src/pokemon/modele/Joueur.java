@@ -38,7 +38,7 @@ public class Joueur {
 		team=new Pkm[6]; teamsize=0;
 		boites=new Vector<Stockage<Pkm>>();
 		inventaire=new Vector<Stockage<Objet>>();
-		for(int i=0;i<5;i++){ inventaire.add(new Stockage<Objet>());}
+		for(int i=0;i<5;i++){ inventaire.add(i,new Stockage<Objet>(30));}
 		
 		pos = new Vector2(400f, 400f);
 		speed=new Vector2(0,0);
@@ -51,6 +51,7 @@ public class Joueur {
 		team=new Pkm[6]; teamsize=0;
 		boites=new Vector<Stockage<Pkm>>();
 		inventaire=new Vector<Stockage<Objet>>();
+		for(int i=0;i<5;i++){ inventaire.add(new Stockage<Objet>(30));}
 		
 		pos = new Vector2(0f, 0f);
 		moveDirection = Direction.South;
@@ -109,14 +110,16 @@ public class Joueur {
 	
 	//Ajoute un objet dans la poche choisie
 	public void add(int poche,Objet obj,int qte){
-		int indice=inventaire.elementAt(poche).indiceOf(obj);
-		if(indice==-1){
-			inventaire.elementAt(poche).add(new UniteStockage<Objet>(obj,qte));
-		}
-		else{
+		if(inventaire.elementAt(poche).contains(obj)){
+			int indice=inventaire.elementAt(poche).indiceOf(obj);
 			inventaire.elementAt(poche).contenu.elementAt(indice).ajoutQte(qte);
 		}
+		else{
+			inventaire.elementAt(poche).add(new UniteStockage<Objet>(obj,qte));
+		}
 	}
+	
+	public Stockage<Objet> getPoche(int poche){ return inventaire.elementAt(poche); }
 	
 	//enleve le pokemon cible a l'equipe du dresseur
 	public void remove(Pkm cible){
