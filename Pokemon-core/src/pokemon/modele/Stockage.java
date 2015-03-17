@@ -9,6 +9,7 @@ public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<
 	protected int max;
 	
 	public Stockage(){contenu=new Vector<UniteStockage<A>>();}
+	public Stockage(int max){contenu=new Vector<UniteStockage<A>>(max,0); this.max=max;}
 	public Stockage(Vector<UniteStockage<A>> cpy,int capmax){
 		contenu=new Vector<UniteStockage<A>>();
 		for(UniteStockage<A> a:cpy){
@@ -36,6 +37,10 @@ public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<
 			}
 		}
 		return -1;
+	}
+	
+	public boolean contains(A a){
+		return contenu.contains(a);
 	}
 	
 	public void swap(A a1,A a2){

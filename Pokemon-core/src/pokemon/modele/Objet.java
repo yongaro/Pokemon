@@ -7,6 +7,11 @@ public class Objet implements Qmax,Infos {
 	protected int qmax;
 	protected Type buffedType;
 	
+	public static Objet graineMiracle= new Objet(10,"Graine Miracle","Augmente la puissance des attaques Plante de 50%",99,Type.Plante);
+	public static Objet aimant= new Objet(10,"Aimant","Augmente la puissance des attaques Electrique de 50%",99,Type.Electrique);
+	
+	
+	
 	public Objet(){ ID=0; nom="TODO"; description="TODO"; qmax=1; }
 	
 	public Objet(int id,String nm, String desc, int nbmax){ ID=id; nom=nm; description=desc; qmax=nbmax; buffedType=null; }

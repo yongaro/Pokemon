@@ -8,7 +8,8 @@ public class Medicament extends Objet {
 	protected int flagSoin; // 1 pv | 2 statut | 3 K.O | 4 pv+statut
 	protected boolean baie;
 	
-	public static Medicament baieTest= new Medicament(1,"baieTest","Une baie qui soigne 33% des PV et les problemes de Statut",255,3,4,true);
+	public static Medicament baieTest= new Medicament(1,"BaieTest","Une baie qui soigne 33% des PV et les problemes de Statut",255,3,4,true);
+	public static Medicament rappel= new Medicament(2,"Rappel","Un medicament qui reanime un pokemon K.O",3,4,3,false);
 	
 	public Medicament(){ super(); }
 

@@ -19,9 +19,15 @@ public class UniteStockage<A extends Qmax & Infos> /*implements Comparable*/ {
 		System.out.println("TODO");
 	}
 	
-	public A get(){
-		return cible;
+	public int ajoutQte(int qte){
+		if(qte+quantite<quantitemax){
+			quantite+=qte;
+			return 0;
+		}
+		return -1;
 	}
+	
+	public A get(){ return cible;}
 	public String getInfos(){return cible.getInfos();}
 	 public String getDesc(){return cible.getDesc();}
 	 public String getNom(){return cible.getNom();}
