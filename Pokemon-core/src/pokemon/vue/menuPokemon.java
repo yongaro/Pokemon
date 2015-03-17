@@ -124,11 +124,11 @@ public class menuPokemon  implements Screen {
 		shapeRenderer.triangle(210+207-10, 205, 210+207+10, 205, 210+207, 215); //bottom triangle
 	
 		/*Drawing Healthbars*/
-		shapeRenderer.setColor(1f, 0.9f, 0.9f, 1f);
+		shapeRenderer.setColor(1f, 0.85f, 0.85f, 1f);
 		offset=0;
 		for(int i=0;i<joueur.teamSize();i++) //liste des pokemons
 		{
-		shapeRenderer.rect(15, 235-offset, healthbars[i], 45);
+		shapeRenderer.rect(35, 235-offset, healthbars[i], 5);
 		offset+=45;
 		}
 		/*Drawing pokemon selectors*/
@@ -199,8 +199,8 @@ public class menuPokemon  implements Screen {
 			for(int i=0;i<joueur.teamSize();i++) //liste des pokemons
 			{
 				f.draw(stage.getBatch(),joueur.getTeam()[i].getNom(),35,268-offset);
-				if(healthbars[i]<(joueur.getTeam()[i].get(2)*185)/joueur.getTeam()[i].getmax(2))
-					healthbars[i]+=delta*80f;
+				if(healthbars[i]<(joueur.getTeam()[i].get(2)*165)/joueur.getTeam()[i].getmax(2))
+					healthbars[i]+=delta*100f;
 				offset+=45;
 			}
 			f.setScale(0.7f);
