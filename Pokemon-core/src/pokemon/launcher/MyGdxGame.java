@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+
 import pokemon.annotations.Tps;
 import pokemon.controle.MenuListener;
 import pokemon.modele.*;
@@ -36,9 +37,8 @@ public class MyGdxGame extends Game {
 		//TestMap2 test = new TestMap2();
 		//this.setScreen(new TestRender());
 //		Combat test=new Combat();
-//		System.out.println(test.combatsolo(MyGdxGame.Jtest,MyGdxGame.Jtest2));
 	}
-	
+	//@Tps(nbhours=2)
 	 public static void initStatic(){
 	    	Ptest[0]=new Pkm(Pokedex.Reptincel.get(),25); Ptest2[0]=new Pkm(Pokedex.Reptincel.get(),25);
 	    	Ptest[1]=new Pkm(Pokedex.Herbizarre.get(),25); Ptest2[1]=new Pkm(Pokedex.Herbizarre.get(),25);
@@ -91,5 +91,23 @@ public class MyGdxGame extends Game {
 	    	}
 	    	Pkm[] temp=Jtest2.getTeam();
 	    	temp[0]=Ptest2[2]; temp[2]=Ptest2[0];
+	    	
+	    	
+	    	
+	    	//ajout d'objets dans l'inventaire
+	    	Jtest.add(0,Medicament.baieTest,6);  Jtest2.add(0,Medicament.baieTest,6);
+	    	Jtest.add(0,Medicament.rappel,3);  Jtest2.add(0,Medicament.rappel,3);
+	    	Jtest.add(1,ObjetRare.Bicyclette,1);  Jtest2.add(1,ObjetRare.Bicyclette,1);
+	    	Jtest.add(1,ObjetRare.Machette,1);  Jtest2.add(1,ObjetRare.Machette,1);
+	    	Jtest.add(1,ObjetRare.Lampe,1);  Jtest2.add(1,ObjetRare.Lampe,1);
+	    	Jtest.add(2,CT.surf,1);  Jtest2.add(2,CT.surf,1);
+	    	Jtest.add(2,CT.tonnerre,1);  Jtest2.add(2,CT.tonnerre,1);
+	    	Jtest.add(3,Pokeball.pokeball,25);  Jtest2.add(3,Pokeball.pokeball,25);
+	    	Jtest.add(3,Pokeball.superball,10);  Jtest2.add(3,Pokeball.superball,10);
+	    	Jtest.add(3,Pokeball.hyperball,5);  Jtest2.add(3,Pokeball.hyperball,5);
+	    	Jtest.add(3,Pokeball.masterball,1);  Jtest2.add(3,Pokeball.masterball,1);
+	    	Jtest.add(4,Objet.graineMiracle,1);  Jtest2.add(4,Objet.graineMiracle,1);
+	    	Jtest.add(4,Objet.aimant,1);  Jtest2.add(4,Objet.aimant,1);
+	    	
 	    }
 }
