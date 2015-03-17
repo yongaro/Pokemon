@@ -24,6 +24,7 @@ public class NPC {
 		setStatus(0);
 		setId(0);
 		dialogs = new Vector<Dialog>();
+		dialogs.add(new Dialog());
 		pos = new Vector2(0, 0);
 	}
 	public NPC(String path) {
