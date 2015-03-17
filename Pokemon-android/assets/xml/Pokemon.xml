@@ -7,6 +7,23 @@
 			<Engrais nom="Engrais"></Engrais>
 			<Chlorophyle nom="Chlorophyle"></Chlorophyle>
 		</CapacitePassive>
+		<Events>
+			<E niveau="1" Capacite="Charge" Evolution=""></E>
+			<E niveau="3" Capacite="Rugissement" Evolution=""></E>
+			<E niveau="7" Capacite="Vampigraine" Evolution=""></E>
+			<E niveau="9" Capacite="FouetLianes" Evolution=""></E>
+			<E niveau="12" Capacite="PoudreDodo" Evolution=""></E>
+			<E niveau="13" Capacite="PoudreToxic" Evolution=""></E>
+			<E niveau="14" Capacite="ParaSpore" Evolution=""></E>
+			<E niveau="15" Capacite="Belier" Evolution=""></E>
+			<E niveau="19" Capacite="TrancheHerbe" Evolution=""></E>
+			<E niveau="21" Capacite="DouxParfum" Evolution=""></E>
+			<E niveau="25" Capacite="Croissance" Evolution=""></E>
+			<E niveau="27" Capacite="Damocles" Evolution=""></E>
+			<E niveau="31" Capacite="SouciGraine" Evolution=""></E>
+			<E niveau="33" Capacite="Synthese" Evolution=""></E>
+			<E niveau="37" Capacite="CanonGraine" Evolution=""></E>
+		</Events>
 	</Bulbizarre>
 	<Herbizarre
 		ID="2" nom="Herbizarre"
