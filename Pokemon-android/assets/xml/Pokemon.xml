@@ -94,6 +94,56 @@
 			<Cuvette nom="Cuvette"></Cuvette>
 		</CapacitePassive>
 	</Tortank>
+	<Chenipan
+		ID="10" nom="Chenipan"
+		description="Ses antennes rouges libèrent une puanteur qui repousse l’ennemi. Il grandit par mues régulières."
+		PV="45" ATT="30" DEF="35" ATTSP="20" DEFSP="20" VIT="45" type1="Insecte" type2="">
+		<CapacitePassive>
+			<EcranPoudre nom="EcranPoudre"></EcranPoudre>
+			<Fuite nom="Fuite"></Fuite>
+		</CapacitePassive>
+	</Chenipan>
+	<Chrysacier
+		ID="11" nom="Chrysacier"
+		description="Son corps frêle est protégé par sa carapace d’acier. Il encaisse les coups durs en attendant d’évoluer."
+		PV="50" ATT="20" DEF="55" ATTSP="25" DEFSP="25" VIT="30" type1="Insecte" type2="">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+		</CapacitePassive>
+	</Chrysacier>
+	<Papilusion
+		ID="12" nom="Papilusion"
+		description="Il raffole du nectar des fleurs. Il est capable de repérer la plus petite quantité de pollen."
+		PV="60" ATT="45" DEF="50" ATTSP="90" DEFSP="80" VIT="70" type1="Insecte" type2="Vol">
+		<CapacitePassive>
+			<OeilCompose nom="OeilCompose"></OeilCompose>
+		</CapacitePassive>
+	</Papilusion>
+	<Aspicot
+		ID="13" nom="Aspicot"
+		description="Son aiguillon empoisonné est très dangereux. Son corps est coloré afin de repousser ses ennemis."
+		PV="40" ATT="35" DEF="30" ATTSP="20" DEFSP="20" VIT="50" type1="Insecte" type2="Poison">
+		<CapacitePassive>
+			<EcranPoudre nom="EcranPoudre"></EcranPoudre>
+			<Fuite nom="Fuite"></Fuite>
+		</CapacitePassive>
+	</Aspicot>
+	<Coconfort
+		ID="14" nom="Coconfort"
+		description="Il se cache sous les feuilles et les branches pour fuir les prédateurs en attendant d’évoluer."
+		PV="45" ATT="25" DEF="50" ATTSP="25" DEFSP="25" VIT="35" type1="Insecte" type2="Poison">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+		</CapacitePassive>
+	</Coconfort>
+	<Dardargnan
+		ID="15" nom="Dardargnan"
+		description="Il se sert de ses trois aiguillons empoisonnés pour attaquer sans relâche ses adversaires."
+		PV="65" ATT="90" DEF="40" ATTSP="45" DEFSP="80" VIT="75" type1="Insecte" type2="Poison">
+		<CapacitePassive>
+			<Essaim nom="Essaim"></Essaim>
+		</CapacitePassive>
+	</Dardargnan>
 	<Roucool
 		ID="16" nom="Roucool"
 		description="Ce Pokémon docile préfère éviter le combat. Toutefois, il se montre très féroce quand on l’agresse."
@@ -141,6 +191,40 @@
 			<Agitation nom="Agitation"></Agitation>
 		</CapacitePassive>
 	</Rattatac>
+	<Piafabec
+		ID="21" nom="Piafabec"
+		description="Très protecteur de son territoire, il chasse les insectes dans les hautes herbes. Ses petites ailes lui permettent de voler très vite."
+		PV="40" ATT="60" DEF="30" ATTSP="31" DEFSP="31" VIT="70" type1="Normal" type2="Vol">
+		<CapacitePassive>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Piafabec>
+	<Rapasdepic
+		ID="22" nom="Rapasdepic"
+		description="Ses ailes géantes lui permettent de voler sur de longues distances sans qu’il ait besoin de se reposer."
+		PV="65" ATT="90" DEF="65" ATTSP="61" DEFSP="61" VIT="100" type1="Normal" type2="Vol">
+		<CapacitePassive>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Rapasdepic>
+	<Abo
+		ID="23" nom="Abo"
+		description="Il se faufile dans l’herbe sans un bruit et frappe dans le dos quand sa proie s’y attend le moins."
+		PV="35" ATT="60" DEF="44" ATTSP="40" DEFSP="54" VIT="55" type1="Poison" type2="">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+			<Intimidation nom="Intimidation"></Intimidation>
+		</CapacitePassive>
+	</Abo>
+	<Arbok
+		ID="24" nom="Arbok"
+		description="Il utilise la marque sur son ventre pour intimider l’ennemi. Il étouffe l’ennemi pétrifié par la peur."
+		PV="60" ATT="85" DEF="69" ATTSP="65" DEFSP="79" VIT="80" type1="Poison" type2="">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+			<Intimidation nom="Intimidation"></Intimidation>
+		</CapacitePassive>
+	</Arbok>
 	<Pikachu
 		ID="25" nom="Pikachu"
 		description="Pikachu a de petites poches pleines d’électricité sur ses joues. S’il se sent menacé, il laisse s’échapper des décharges électriques."

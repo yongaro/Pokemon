@@ -69,8 +69,9 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	//constructeur pour creer les pokemon de base du pokedex
-	public Pkm(String nom,String desc,int[] stats,Type t1,Type t2){
+	public Pkm(int ID,String nom,String desc,int[] stats,Type t1,Type t2){
 		//copie des stats
+		this.ID=ID;
 		this.statut=Statut.Normal;
 		this.supTemp=Statut.Normal;
 		this.nom=nom;
@@ -92,7 +93,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	public void AjustementStats(){
-		Pkm base=Pokedex.values()[ID].get();
+		Pkm base=Pokedex.values()[ID-1].get();
 		//XP
 		prevXpPal=this.stats[1][0]=(int)Math.pow(this.stats[0][0],3);
 		this.stats[1][1]=(int)Math.pow(this.stats[0][0]+1,3);
