@@ -15,7 +15,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected Statut supTemp;
 	protected int[] IV;
 	protected int[] EV;
-	//Récompenses données a l'adversaire
+	//Rï¿½compenses donnï¿½es a l'adversaire
 	protected int XPReward;
 	protected int prevXpPal;
 	protected Nature personnalite;
@@ -270,6 +270,10 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		return cap;
 	}
 	
+	public Statut getStatut() {
+		return statut;
+	}
+
 	public void add(Capacite Cap){
 		cap.add(Cap);
 	}

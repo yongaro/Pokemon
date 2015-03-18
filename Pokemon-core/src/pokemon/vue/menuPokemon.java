@@ -124,7 +124,7 @@ public class menuPokemon  implements Screen {
 		shapeRenderer.triangle(210+207-10, 205, 210+207+10, 205, 210+207, 215); //bottom triangle
 	
 		/*Drawing Healthbars*/
-		shapeRenderer.setColor(1f, 0.85f, 0.85f, 1f);
+		shapeRenderer.setColor(0.5f, 0.8f, 0.5f, 1f);
 		offset=0;
 		for(int i=0;i<joueur.teamSize();i++) //liste des pokemons
 		{
@@ -163,7 +163,7 @@ public class menuPokemon  implements Screen {
 			int xprate=0;//(joueur.getTeam()[pkselector].get(1)*100)/joueur.getTeam()[pkselector].getmax(1);
 			f.draw(stage.getBatch(),"XP "+joueur.getTeam()[pkselector].getmax(0)+"%",(210+405)-f.getBounds("XP "+joueur.getTeam()[pkselector].getmax(0)+"%").width, 285);
 			f.setScale(0.8f);
-			f.draw(stage.getBatch(),"Empoisonne",310, 257);
+			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getStatut().name(),310, 257);
 			String types="";
 			for(Type t:joueur.getTeam()[pkselector].getType())
 			{

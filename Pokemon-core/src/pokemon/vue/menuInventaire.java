@@ -38,7 +38,7 @@ public class menuInventaire implements Screen{
     int[] objselector={0,0};
     int displayedAtk=0;
     int offset;
-    String[] poches = {"Medicaments","Objets rares","CT/CM","Pokeballs","Objets","Poche CT/CS"};
+    String[] poches = {"Medicaments","Objets rares","CT/CM","Pokeballs","Objets"};
     Vector<String> objets ;
     public menuInventaire( MyGdxGame myGdxGame,  MenuListener menuListener)
     {
@@ -121,7 +121,7 @@ public class menuInventaire implements Screen{
 		f.setScale(1.2f);
 		f.draw(stage.getBatch(),"Pokemons",18, height-5);
 		f.draw(stage.getBatch(),"PokeMatos",324+13, height-5);
-		f.setColor(0.58f, 0.59f, 0.57f, 1);
+		f.setColor(0.58f, 0.59f, 0.57f, 1); 
 		f.draw(stage.getBatch(),"Inventaire",160+13, height-5);
 		f.setScale(1.5f);
 		f.setColor(1, 1, 1, 1);
@@ -148,6 +148,7 @@ public class menuInventaire implements Screen{
         	for(int i=displayedAtk;i<Math.min(this.displayedAtk+7,joueur.getPoche(pktselector-1).size());i++){
         		
         		f.draw(stage.getBatch(),joueur.getPoche(pktselector-1).at(i).getNom(),220,227-offset);
+        		f.draw(stage.getBatch(),"x"+joueur.getPoche(pktselector-1).elementAt(i).getQte(),300,227-offset);
         		offset+=20;
    
         	}

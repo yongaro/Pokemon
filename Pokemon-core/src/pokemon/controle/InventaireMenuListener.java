@@ -86,7 +86,7 @@ public class InventaireMenuListener implements InputProcessor{
 		}
 		if(Gdx.input.isKeyJustPressed(Keys.DOWN)){
 			if(state==1 ){
-				if(pktselector<6){
+				if(pktselector<5){
 					this.pktselector++;
 				}
 			}
