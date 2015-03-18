@@ -2,21 +2,27 @@ package pokemon.modele;
 
 import java.util.*;
 
+import pokemon.annotations.Tps;
+
+@Tps(nbhours=8)
 public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
-	private static int cpt=1;
 	protected int ID;
 	protected String nom;
+	protected String description;
 	//0-niveau | 1-XP | 2-PV | 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base)
 	protected int[][] stats;
 	protected Statut statut;
+	protected Statut supTemp;
 	protected int[] IV;
+	protected int[] EV;
+	//R�compenses donn�es a l'adversaire
+	protected int XPReward;
+	protected int prevXpPal;
 	protected Nature personnalite;
 	protected Vector <Type> type;
 	protected Stockage<Capacite> cap;
-	//PP[0][1] contient les PP max de l'attaque 1 PP[0][0] contient les PP courants
 	protected CapacitePassive capP;
-	
-	protected static final Capacite[] bases={bddCapacite.Charge.cap};
+	protected Objet objTenu;
 	
 	
 	public Pkm(Pkm base,int level){
@@ -30,32 +36,25 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		this.stats[9][0]=5;this.stats[9][1]=5;
 		this.stats[0][0]=level; this.stats[0][1]=level;
 		this.statut=Statut.Normal;
+		this.supTemp=Statut.Normal;
 		this.personnalite=Nature.getRandom(this);
-		this.capP=CapacitePassive.Statik;
 		this.type=new Vector <Type>();
 		for(Type t: base.type){ this.type.addElement(t);}
 		this.cap=new Stockage<Capacite>(); cap.max=4;
 		i=0;
-		//this.levelinglist=new Hashtable<Integer,Capacite>();
-		//for(Integer key: base.levelinglist.keySet()){
-			//this.levelinglist.put(key,base.levelinglist.get(key));	
-		//}
 		//Gestion de l'aleatoire et de la mise a niveau
 		Random rand=new Random();
+		this.capP=Pokedex.values()[ID-1].randCapP(rand);
 		int IV=(int)rand.nextInt(32);
 		this.IV=new int[6];
+		this.EV=new int[6];
 		this.IV[0]=IV;
-		//niveau
-		this.stats[0][0]=level;
-		//XP
-		this.stats[1][0]=(int)Math.pow(level-1,3);
-		this.stats[1][1]=(int)Math.pow(level,3);
-		//PV
-		this.stats[2][0]=this.stats[2][1]=(int)((2*base.stats[3][1]+IV)*(double)(level/100.0)+(level+10));
-		//autres stats
 		for(i=3;i<8;i++){
 			IV=(int)rand.nextInt(32);
-			this.stats[i][0]=this.stats[i][1]=(int)((2*base.stats[i][1]+IV)*(double)(level/100.0)+5);}
+		}
+		//niveau
+		this.stats[0][0]=level;
+		this.AjustementStats();
 		/*Fast - 0.8(Current Level)^3
 		Medium Fast - (Current Level)^3
 		Medium Slow - 1.2(Current Level)^3 - 15(Current Level)^2 + 100(Current Level) - 140
@@ -64,11 +63,13 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	//constructeur pour creer les pokemon de base du pokedex
-	public Pkm(String nom,int[] stats,Type[] type){//,Hashtable <Integer,Capacite> levelinglist){
+	public Pkm(int ID,String nom,String desc,int[] stats,Type t1,Type t2){
 		//copie des stats
-		this.ID=cpt++;
+		this.ID=ID;
 		this.statut=Statut.Normal;
+		this.supTemp=Statut.Normal;
 		this.nom=nom;
+		this.description=desc;
 		int i=0;
 		this.stats=new int[10][2];
 		this.stats[0][0]=0; this.stats[1][0]=0;
@@ -78,28 +79,62 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		this.stats[9][0]=5;this.stats[9][1]=5;
 		//copie du/des type(s)
 		this.type=new Vector <Type>();
-		for(Type t: type){this.type.addElement(t);}
+		if(t1!=null){this.type.addElement(t1);} if(t2!=null){this.type.addElement(t2);}
 		i=0;
 		//copie des capacites
 		this.cap=new Stockage<Capacite>(); cap.max=4;
 		i=0;
-		
-		//Copie des evolutions
-
-		
-		//copie de la liste de capacités a apprendre
-		//this.levelinglist=new Hashtable<Integer,Capacite>();
-		
-		//for(Integer key:levelinglist.keySet()){
-			//this.levelinglist.put(key,levelinglist.get(key));	
-		//}
-		
+	}
 	
-		//copie des conditions d'evolution
-		//this.evolution=new int[2];
-		//this.evolution[0]=evolution[0];
-		//this.evolution[1]=evolution[1];	
+	public void AjustementStats(){
+		Pkm base=Pokedex.values()[ID-1].get();
+		//XP
+		prevXpPal=this.stats[1][0]=(int)Math.pow(this.stats[0][0],3);
+		this.stats[1][1]=(int)Math.pow(this.stats[0][0]+1,3);
+		//PV
+		this.stats[2][0]=this.stats[2][1]=(int)(((2*base.stats[2][1])+(EV[0]/4)+IV[0])*(double)(stats[0][0]/100.0)+(stats[0][0]+10));
+		for(int i=3;i<8;i++){
+			this.stats[i][0]=this.stats[i][1]=(int)((2*base.stats[i][1]+IV[i-2])*(double)(stats[0][0]/100.0)+5);
+		}
+		this.personnalite.Applique(this);
+		stats[0][1]=(int)((stats[1][0]-prevXpPal)/(stats[1][1]-prevXpPal));
+	}
+	
+	
+	public Event eventAt(int level){
+		Pokedex base=Pokedex.values()[ID-1];
 		
+		for(int i=0;i<base.events.length;i++){
+			if(base.events[i].niveau==level){
+				return base.events[i];
+			}
+		}
+		return null;
+	}
+	
+	public void evolution(Pkm cible){
+		this.ID=cible.ID;
+		this.AjustementStats();
+		System.out.println("Felicitations ! Votre "+nom+" a evolue en "+cible.nom);
+		this.nom=cible.nom;
+	}
+	
+	public void addXP(int xp){
+		Event temp;
+		
+		this.stats[1][0]+=xp;
+		if(stats[1][0]>= stats[1][1] && stats[0][0]<100){
+			stats[0][0]++;
+			temp=eventAt(stats[0][0]);
+			if(temp!=null){
+				if(temp.evolution!=null){ this.evolution(temp.evolution); }
+				if(temp.cap!=null){ temp.cap.teach(this); }
+			}
+			this.AjustementStats();
+		}
+		else{
+			stats[0][1]=(int)((stats[1][0]-prevXpPal)/(stats[1][1]-prevXpPal));
+		}
 	}
 	
 	public int get(int indice){
@@ -203,6 +238,18 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		}
 	}
 	
+
+	
+	public void Heal(int pv){
+		stats[2][0]+=pv;
+		if(stats[2][0]>stats[2][1]){stats[2][0]=stats[2][1];}
+	}
+	
+	public void infliger(int dmg){
+		if(dmg>=this.stats[2][0]){ this.stats[2][0]=0; this.statut=Statut.KO; this.supTemp=Statut.Normal; }
+		else{ stats[2][0]-=dmg; }
+	}
+	
 	public void reset(){
 		int i=0;
 		for(i=2;i<10;i++){
@@ -213,7 +260,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public int qmax(){return 1;}
 	public int getID(){return ID;}
 	public String getNom(){return nom;}
-	public String getDesc(){return "";}
+	public String getDesc(){return description;}
 	public String getInfos(){return "";}
 	
 	public Stockage<Capacite> getCap(){
@@ -223,11 +270,16 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public Statut getStatut() {
 		return statut;
 	}
-	
+
 	public void add(Capacite Cap){
 		cap.add(Cap);
 	}
 	
+	public void give(Objet o){
+		if(this.objTenu==null){
+			this.objTenu=o;
+		}
+	}
 	
 	public int compare(Pkm p1,Pkm p2){
 		if(p1.stats[7][0]<p2.stats[7][0]){return -1;}
@@ -241,16 +293,15 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		
 		return 0;
 	}
-	
 	public String toString(){
 		
 		return (ID+" "+nom+" LV."+stats[0][0]+
 				"\n XP:"+stats[1][0]+"/"+stats[1][1]+
 				"\n PV:"+stats[2][0]+"/"+stats[2][1]+" "+statut+
+				"\n"+objTenu+
 				"\n ATT:"+stats[3][1]+" DEF:"+stats[4][1]+
 				"\n ASP:"+stats[5][1]+" DSP:"+stats[6][1]+
 				"\n VIT:"+stats[7][1]+" "+personnalite);
-		
 	}
 	
 	
