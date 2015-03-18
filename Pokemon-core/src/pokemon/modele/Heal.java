@@ -22,7 +22,7 @@ public class Heal extends Capacite{
 		int soin=(int)((double)(cible.stats[2][1]*power)/100.0);
 	
 		if(soin+cible.stats[2][0]>=cible.stats[2][1]){cible.stats[2][0]=cible.stats[2][1];}
-		else{cible.Heal(soin);}
+		else{cible.heal(soin);}
 		
 		if(code==1){
 		    System.out.println(cible.nom+"n'est plus "+cible.statut);

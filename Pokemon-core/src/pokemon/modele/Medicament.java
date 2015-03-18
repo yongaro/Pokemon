@@ -38,30 +38,30 @@ public class Medicament extends Objet {
 			int soin=0;
 			switch(effet){
 				case 1: 
-					cible.Heal(soin=(int)(15*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=(int)(15*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
 					break;
 				case 2:
-					cible.Heal(soin=(int)(25*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=(int)(25*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
 					break;
 				case 3:
-					cible.Heal(soin=(int)(33*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=(int)(33*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
 					break;
 				case 4:
-					cible.Heal(soin=cible.stats[2][1]); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=cible.stats[2][1]); System.out.println(cible.nom+" regagne "+soin+" PV");
 					break;
-				default: System.out.println("Medicament utilisé avec effet invalide:"+effet);
+				default: System.out.println("Medicament utilise avec effet invalide:"+effet);
 			}
 			switch(flagSoin){
 				case 2:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigné de son affliction");
+					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
 					break;
 				case 3:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigné de son affliction");
+					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
 					break;
 				case 4:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigné de son affliction");
+					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
 					break;
-				default: System.out.println("Medicament utilisé avec flagSoin invalide:"+flagSoin);
+				default: System.out.println("Medicament utilise avec flagSoin invalide:"+flagSoin);
 			}
 			return 0;
 		}
