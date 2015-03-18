@@ -23,8 +23,6 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected Stockage<Capacite> cap;
 	protected CapacitePassive capP;
 	protected Objet objTenu;
-	protected Event[] events;
-	//protected static final Capacite[] bases={bddCapacite.Charge.cap};
 	
 	
 	public Pkm(Pkm base,int level){
@@ -40,17 +38,13 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		this.statut=Statut.Normal;
 		this.supTemp=Statut.Normal;
 		this.personnalite=Nature.getRandom(this);
-		this.capP=CapacitePassive.Statik;
 		this.type=new Vector <Type>();
 		for(Type t: base.type){ this.type.addElement(t);}
 		this.cap=new Stockage<Capacite>(); cap.max=4;
 		i=0;
-		//this.levelinglist=new Hashtable<Integer,Capacite>();
-		//for(Integer key: base.levelinglist.keySet()){
-			//this.levelinglist.put(key,base.levelinglist.get(key));	
-		//}
 		//Gestion de l'aleatoire et de la mise a niveau
 		Random rand=new Random();
+		this.capP=Pokedex.values()[ID-1].randCapP(rand);
 		int IV=(int)rand.nextInt(32);
 		this.IV=new int[6];
 		this.EV=new int[6];
@@ -106,10 +100,13 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		stats[0][1]=(int)((stats[1][0]-prevXpPal)/(stats[1][1]-prevXpPal));
 	}
 	
+	
 	public Event eventAt(int level){
-		for(int i=0;i<events.length;i++){
-			if(events[i].niveau==level){
-				return events[i];
+		Pokedex base=Pokedex.values()[ID-1];
+		
+		for(int i=0;i<base.events.length;i++){
+			if(base.events[i].niveau==level){
+				return base.events[i];
 			}
 		}
 		return null;
@@ -305,7 +302,6 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 				"\n ATT:"+stats[3][1]+" DEF:"+stats[4][1]+
 				"\n ASP:"+stats[5][1]+" DSP:"+stats[6][1]+
 				"\n VIT:"+stats[7][1]+" "+personnalite);
-		
 	}
 	
 	
