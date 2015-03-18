@@ -37,7 +37,7 @@ public class AtkSoin extends Atk {
 			}
 			else{
 				System.out.println("L'attaque soigne "+user.nom);
-				user.Heal(soin);
+				user.heal(soin);
 			}
 			
 			//Traitement capacite passive

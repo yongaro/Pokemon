@@ -240,7 +240,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	
 
 	
-	public void Heal(int pv){
+	public void heal(int pv){
 		stats[2][0]+=pv;
 		if(stats[2][0]>stats[2][1]){stats[2][0]=stats[2][1];}
 	}
