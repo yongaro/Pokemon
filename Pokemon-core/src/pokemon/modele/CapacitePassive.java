@@ -20,14 +20,15 @@ public enum CapacitePassive {
 	protected String description;
 	//Conditions d'activation de la capacite
 	protected int flag;
-	//0-Le pkm arrive en combat |
+	//0-Le pkm arrive en combat
 	//1-Le pkm est touche par une attaque physique | 2- touche par attaque speciale | 3- attaque quelconque
 	//4-le statut du pokemon change | 5-Les statistiques changent
 	//6-Activation en debut de tour | 7-Activation en fin de tour | 8-debut ET fin de tour
-	//9 Le pokemon attaque | 10-la meteo change
+	//9 Le pokemon attaque(la capacitePassive est un bonus) | 10-la meteo change
 	//11-le pokemon est en jeu.( 0 + 1 + 8 )
 	//12-action de l'adversaire
 	//13-Le pokemon quitte le combat
+	protected Type buffedType;
 	XmlReader reader = new XmlReader();
 	
 	CapacitePassive(){

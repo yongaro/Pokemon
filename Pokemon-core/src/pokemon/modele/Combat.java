@@ -7,6 +7,7 @@ import java.util.Stack;
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
+import pokemon.launcher.MyGdxGame;
 
 @Tps(nbhours=12)
 public class Combat {
@@ -39,8 +40,9 @@ public class Combat {
 	
 	
 	public int combatsolo(Joueur j1,Joueur j2){
-		equipe1=new PokemonCombat[j1.teamsize];
-		equipe1=new PokemonCombat[j2.teamsize];
+		System.out.println(j1.teamsize+" "+j2.teamsize);
+		equipe1=new PokemonCombat[j1.teamsize]; System.out.println(j1.team[0]);
+		equipe2=new PokemonCombat[j2.teamsize];
 		PokemonCombat[] pkmListe=new PokemonCombat[2];
 		
 		for(int i=0;i<j1.teamsize;i++){
@@ -55,8 +57,8 @@ public class Combat {
 		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
 		while(this.gagnant(j1,j2)==0){
 			Arrays.sort(pkmListe);
-			for(PokemonCombat p: pkmListe){
-				p.action(p.adv[0],this);
+			for(int i=0;i<pkmListe.length;i++){
+				pkmListe[i].action(pkmListe[i].adv[0],this);
 			}
 			//Application des dégats sur la durée
 			for(PokemonCombat p:pkmListe){
@@ -93,8 +95,8 @@ public class Combat {
 					user.pkm.cap.at(act).script(user.pkm,cible.pkm,this);
 				}
 				//Conséquences de l'action
-				if(user.pkm.stats[2][0]<=0){ pokeswap(user); }
-				if(cible.pkm.stats[2][0]<=0){ pokeswap(cible); }
+				if(user.pkm.stats[2][0]<=0){ user=pokeswap(user); }
+				if(cible.pkm.stats[2][0]<=0){ cible=pokeswap(cible); }
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2)){
 					if(user.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)user.pkm.objTenu;
@@ -130,7 +132,7 @@ public class Combat {
 		//sc.close();
 	}
 	
-	public void pokeswap(PokemonCombat user){
+	public PokemonCombat pokeswap(PokemonCombat user){
 		int i=0; int act=0; int done=0;
 		if(!user.isIA){
 			while(done==0){
@@ -142,9 +144,7 @@ public class Combat {
 				act=sc.nextInt();
 				if(user.equipe[act].pkm.statut!=Statut.KO){
 					System.out.println(user.equipe[act].pkm.nom+" remplace "+user.pkm.nom);
-					user=user.equipe[act];
-					done=1;
-					
+					return user.equipe[act];
 				}
 				else{
 					System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
@@ -154,12 +154,12 @@ public class Combat {
 		else{
 			for(PokemonCombat p:user.equipe){
 				if(p.pkm.statut!=Statut.KO){
-					user=p;
 					System.out.println(user.prop+" envoie "+p.pkm.nom+" au combat");
+					return p;
 				}
 			}
 		}
-		
+		return null;
 	}
 	
 	

@@ -5,12 +5,11 @@
 		PV="45" ATT="49" DEF="49" ATTSP="65" DEFSP="65" VIT="45" type1="Plante" type2="Poison">
 		<CapacitePassive>
 			<Engrais nom="Engrais"></Engrais>
-			<Chlorophyle nom="Chlorophyle"></Chlorophyle>
+			<Chlorophylle nom="Chlorophylle"></Chlorophylle>
 		</CapacitePassive>
 		<Events>
 			<E niveau="1" Capacite="Charge" Evolution=""></E>
 			<E niveau="3" Capacite="Rugissement" Evolution=""></E>
-			<E niveau="7" Capacite="Vampigraine" Evolution=""></E>
 			<E niveau="9" Capacite="FouetLianes" Evolution=""></E>
 			<E niveau="12" Capacite="PoudreDodo" Evolution=""></E>
 			<E niveau="13" Capacite="PoudreToxic" Evolution=""></E>
@@ -20,7 +19,6 @@
 			<E niveau="21" Capacite="DouxParfum" Evolution=""></E>
 			<E niveau="25" Capacite="Croissance" Evolution=""></E>
 			<E niveau="27" Capacite="Damocles" Evolution=""></E>
-			<E niveau="31" Capacite="SouciGraine" Evolution=""></E>
 			<E niveau="33" Capacite="Synthese" Evolution=""></E>
 			<E niveau="37" Capacite="CanonGraine" Evolution=""></E>
 		</Events>
@@ -31,7 +29,7 @@
 		PV="60" ATT="62" DEF="63" ATTSP="80" DEFSP="80" VIT="60" type1="Plante" type2="Poison">
 		<CapacitePassive>
 			<Engrais nom="Engrais"></Engrais>
-			<Chlorophyle nom="Chlorophyle"></Chlorophyle>
+			<Chlorophylle nom="Chlorophylle"></Chlorophylle>
 		</CapacitePassive>
 	</Herbizarre>
 	<Florizarre
@@ -40,7 +38,7 @@
 		PV="80" ATT="82" DEF="83" ATTSP="100" DEFSP="100" VIT="80" type1="Plante" type2="Poison">
 		<CapacitePassive>
 			<Engrais nom="Engrais"></Engrais>
-			<Chlorophyle nom="Chlorophyle"></Chlorophyle>
+			<Chlorophylle nom="Chlorophylle"></Chlorophylle>
 		</CapacitePassive>
 	</Florizarre>
 	<Salameche
