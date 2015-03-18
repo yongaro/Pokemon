@@ -22,7 +22,7 @@ public class Joueur {
 	//Attributs de l'équipe de Pokémon
 	protected Pkm[] team;
 	protected int teamsize;
-	protected Vector<Stockage<Pkm>> boites;
+	protected Vector<Vector<Pkm>> boites;
 	
 	//Attributs concernant la position du joueur
 	protected int spriteWidth = 14;
@@ -36,7 +36,7 @@ public class Joueur {
 	public Joueur(){
 		ID=0; nom="TODO"; argent=2000; badges=new int[8];
 		team=new Pkm[6]; teamsize=0;
-		boites=new Vector<Stockage<Pkm>>();
+		boites=new Vector<Vector<Pkm>>();
 		inventaire=new Vector<Stockage<Objet>>();
 		for(int i=0;i<5;i++){ inventaire.add(i,new Stockage<Objet>(30));}
 		
@@ -49,7 +49,7 @@ public class Joueur {
 	public Joueur(int id,String nom){
 		ID=id; this.nom=nom; argent=2000; badges=new int[8];
 		team=new Pkm[6]; teamsize=0;
-		boites=new Vector<Stockage<Pkm>>();
+		boites=new Vector<Vector<Pkm>>();
 		inventaire=new Vector<Stockage<Objet>>();
 		for(int i=0;i<5;i++){ inventaire.add(new Stockage<Objet>(30));}
 		

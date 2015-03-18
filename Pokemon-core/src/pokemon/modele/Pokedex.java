@@ -13,6 +13,7 @@ public enum Pokedex {
 	Rattata,Rattatac,Piafabec,Rapasdepic,Abo,Arbok,Pikachu;
 	
 	protected Pkm pkm;
+	protected String description;
 	protected Event[] events;
 	protected CapacitePassive[] capP;
 	XmlReader reader = new XmlReader();
@@ -24,12 +25,12 @@ public enum Pokedex {
 			Element root = reader.parse(Gdx.files.internal("xml/Pokemon.xml"));
 			pk=root.getChildByName(this.name());
 			if(pk.get("type2").compareTo("")==0){
-				pkm=new Pkm(pk.getInt("ID"),pk.get("nom"),pk.get("description"),
+				pkm=new Pkm(pk.getInt("ID"),pk.get("nom"),
 						new int[]{pk.getInt("PV"),pk.getInt("ATT"),pk.getInt("DEF"),pk.getInt("ATTSP"),pk.getInt("DEFSP"),pk.getInt("VIT")},
 						Type.valueOf(pk.get("type1")),null);
 			}
 			else{
-				pkm=new Pkm(pk.getInt("ID"),pk.get("nom"),pk.get("description"),
+				pkm=new Pkm(pk.getInt("ID"),pk.get("nom"),
 						new int[]{pk.getInt("PV"),pk.getInt("ATT"),pk.getInt("DEF"),pk.getInt("ATTSP"),pk.getInt("DEFSP"),pk.getInt("VIT")},
 						Type.valueOf(pk.get("type1")),Type.valueOf(pk.get("type2")));
 			}
@@ -39,6 +40,7 @@ public enum Pokedex {
 			for(int i=0;i<subtemp.getChildCount();i++){
 				capP[i]=CapacitePassive.valueOf(subtemp.getChild(i).get("nom"));
 			}
+			description=pk.get("description");
 		}
 		catch(IOException e){
 			e.printStackTrace();

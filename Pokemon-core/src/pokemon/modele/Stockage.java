@@ -84,6 +84,14 @@ public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<
 		}
 	}
 	
+	public void utiliser(int index,Pkm user,Pkm cible,Combat context){
+		contenu.elementAt(index).utiliser(user,cible,context);
+		if(contenu.elementAt(index).cible instanceof Objet && contenu.elementAt(index).quantite==0){
+			contenu.remove(contenu.elementAt(index));
+		}
+	}
+	
+	
 	public void remove(A a){
 		if(contenu.size()>0){
 			contenu.remove(a);

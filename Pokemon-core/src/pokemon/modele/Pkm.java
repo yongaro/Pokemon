@@ -8,7 +8,6 @@ import pokemon.annotations.Tps;
 public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected int ID;
 	protected String nom;
-	protected String description;
 	//0-niveau | 1-XP | 2-PV | 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base)
 	protected int[][] stats;
 	protected Statut statut;
@@ -63,13 +62,12 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	//constructeur pour creer les pokemon de base du pokedex
-	public Pkm(int ID,String nom,String desc,int[] stats,Type t1,Type t2){
+	public Pkm(int ID,String nom,int[] stats,Type t1,Type t2){
 		//copie des stats
 		this.ID=ID;
 		this.statut=Statut.Normal;
 		this.supTemp=Statut.Normal;
 		this.nom=nom;
-		this.description=desc;
 		int i=0;
 		this.stats=new int[10][2];
 		this.stats[0][0]=0; this.stats[1][0]=0;
@@ -260,7 +258,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public int qmax(){return 1;}
 	public int getID(){return ID;}
 	public String getNom(){return nom;}
-	public String getDesc(){return description;}
+	public String getDesc(){return "";}
 	public String getInfos(){return "";}
 	
 	public Stockage<Capacite> getCap(){
