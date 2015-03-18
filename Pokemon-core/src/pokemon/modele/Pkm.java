@@ -266,11 +266,9 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public Stockage<Capacite> getCap(){
 		return cap;
 	}
-	
 	public Statut getStatut() {
 		return statut;
 	}
-
 	public void add(Capacite Cap){
 		cap.add(Cap);
 	}
