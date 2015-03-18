@@ -49,19 +49,19 @@ public class Medicament extends Objet {
 				case 4:
 					cible.heal(soin=cible.stats[2][1]); System.out.println(cible.nom+" regagne "+soin+" PV");
 					break;
-				default: System.out.println("Medicament utilis� avec effet invalide:"+effet);
+				default: System.out.println("Medicament utilise avec effet invalide:"+effet);
 			}
 			switch(flagSoin){
 				case 2:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soign� de son affliction");
+					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
 					break;
 				case 3:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soign� de son affliction");
+					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
 					break;
 				case 4:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soign� de son affliction");
+					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
 					break;
-				default: System.out.println("Medicament utilis� avec flagSoin invalide:"+flagSoin);
+				default: System.out.println("Medicament utilise avec flagSoin invalide:"+flagSoin);
 			}
 			return 0;
 		}
