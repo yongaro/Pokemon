@@ -2,25 +2,20 @@ package pokemon.launcher;
 
 
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Vector;
 
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 import pokemon.vue.DialogBox;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -28,7 +23,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -48,7 +42,6 @@ public class TestRender implements Screen,InputProcessor{
 	OrthographicCamera cam;
 	int width=640;//Gdx.graphics.getWidth();
 	int height=360;//Gdx.graphics.getHeight();
-	private BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
 	//private Stage stage = new Stage(new FitViewport(width,height));
     private Stage stage;
 	Texture t=new Texture(Gdx.files.internal("sprite.png"));
@@ -61,7 +54,6 @@ public class TestRender implements Screen,InputProcessor{
 	boolean move=false;
 	Vector<Direction> input=new Vector<Direction>();
 	DialogBox box = null;
-	boolean inDialog = false;
 	
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -161,53 +153,62 @@ public class TestRender implements Screen,InputProcessor{
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if(Gdx.input.isKeyPressed(Keys.RIGHT))
-		{
-			if(input.size()<2 && !input.contains(Direction.East))
+		if(!j.isTalking()) {		
+			if(Gdx.input.isKeyPressed(Keys.RIGHT))
+			{
+				if(input.size()<2 && !input.contains(Direction.East))
 				{input.add(0, Direction.East);
-			j.move(input.firstElement());
-			a=this.rightwalk;}
-
-		}
-		if(Gdx.input.isKeyPressed(Keys.LEFT) ){
-			
-			if(input.size()<2 && !input.contains(Direction.West))
+				j.move(input.firstElement());
+				a=this.rightwalk;}
+				
+			}
+			if(Gdx.input.isKeyPressed(Keys.LEFT) ){
+				
+				if(input.size()<2 && !input.contains(Direction.West))
 				{input.add(0, Direction.West);
 				j.move(input.firstElement());
 				a=this.leftwalk;}
 			}
-		if(Gdx.input.isKeyPressed(Keys.DOWN)){
-		
-			if(input.size()<2 && !input.contains(Direction.South))
+			if(Gdx.input.isKeyPressed(Keys.DOWN)){
+				
+				if(input.size()<2 && !input.contains(Direction.South))
 				{input.add(0, Direction.South);
-			j.move(input.firstElement());
-			a=this.southwalk;}
-
-		}
-		if(Gdx.input.isKeyPressed(Keys.UP))
-		{
-			if(input.size()<2){
-				input.add(0, Direction.North);
-			j.move(input.firstElement());
-
-			a=this.northwalk;}
-
+				j.move(input.firstElement());
+				a=this.southwalk;}
+				
+			}
+			if(Gdx.input.isKeyPressed(Keys.UP))
+			{
+				if(input.size()<2){
+					input.add(0, Direction.North);
+					j.move(input.firstElement());
+					
+					a=this.northwalk;}
+				
+			}
 		}
 		if(Gdx.input.isKeyPressed(Keys.A)) {
-			String text = j.interact(MyGdxGame.npcList);
-			if(text != null) {
-				if(!inDialog){
-					DialogBox box = new DialogBox(text);
+			if(box == null) {
+				String text = j.interact(MyGdxGame.npcList);
+				if(text != null) {
+					j.setTalking(true);
+					box = new DialogBox(text);
 					stage.addActor(box);
-					inDialog = true;
 				}
+			}
+			else
+			{
+				j.setTalking(false);
+				stage.clear();
+				box.remove();
+				box = null;
 			}
 		}
 
-		for(Direction c:input)
-		{
-			System.out.println(c.name());
-		}
+//		for(Direction c:input)
+//		{
+//			System.out.println(c.name());
+//		}
 		return false;
 	}
 
@@ -253,6 +254,8 @@ public class TestRender implements Screen,InputProcessor{
 
 			case West:
 				a=this.leftwalk;
+				break;
+			default:
 				break;
 			}
 		}

@@ -19,7 +19,7 @@ public class Joueur {
 	protected int[] badges;
 	protected Vector<Stockage<Objet>> inventaire; //  0 Medicaments | 1 Objets Rares | 2 CT/CM | 3 Pokeball | 4 Objets
 	
-	//Attributs de l'équipe de Pokémon
+	//Attributs de l'equipe de Pokemon
 	protected Pkm[] team;
 	protected int teamsize;
 	protected Vector<Vector<Pkm>> boites;
@@ -28,6 +28,7 @@ public class Joueur {
 	protected int spriteWidth = 14;
 	protected int spriteHeight = 19;
 	protected Vector2 pos;
+	protected boolean isTalking;
 	protected Direction moveDirection;
 	protected Direction orientation;
 	protected Map currentMap;
@@ -41,6 +42,7 @@ public class Joueur {
 		for(int i=0;i<5;i++){ inventaire.add(i,new Stockage<Objet>(30));}
 		
 		pos = new Vector2(400f, 400f);
+		isTalking = false;
 		speed=new Vector2(0,0);
 		moveDirection = Direction.South;
 		orientation = Direction.South;
@@ -54,6 +56,7 @@ public class Joueur {
 		for(int i=0;i<5;i++){ inventaire.add(new Stockage<Objet>(30));}
 		
 		pos = new Vector2(0f, 0f);
+		isTalking = false;
 		moveDirection = Direction.South;
 		orientation = Direction.South;
 		currentMap = null;
@@ -143,7 +146,7 @@ public class Joueur {
 	}
 	
 	//Methodes de mouvement
-	public void move(Direction orientation) {
+	public void move(Direction orientation) {		
 		this.moveDirection = orientation;
 		switch(this.moveDirection){
 		case South:
@@ -244,7 +247,13 @@ public class Joueur {
 	{
 		speed.y=sy;
 	}
-	
 	public boolean isMoving(){
-		return !speed.isZero();}
+		return !speed.isZero();
+	}
+	public boolean isTalking() {
+		return isTalking;
+	}
+	public void setTalking(boolean isTalking) {
+		this.isTalking = isTalking;
+	}
 }
