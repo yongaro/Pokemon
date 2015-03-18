@@ -6,6 +6,7 @@ import java.util.Stack;
 public class PokemonCombat implements Comparable<PokemonCombat> {
 	protected Pkm pkm;
 	protected boolean isIA;
+	protected int listeIndice;
 	//protected int equipe;
 	protected PokemonCombat[] equipe;
 	protected Joueur prop;
@@ -16,6 +17,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	public PokemonCombat(Pkm p,boolean isIA,Joueur j){
 		pkm=p;
 		this.isIA=isIA;
+		listeIndice=-1;
 		prop=j;
 		this.XpStack=new Stack<Pkm>();
 		this.adv=new PokemonCombat[5];
@@ -42,4 +44,18 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	}
 	
 	public void setPokemon(Pkm p){ pkm=p; }
+	
+	//A modifier pour prendre en compte les differents bonus
+	public void XPreward(){
+		Pkm temp;
+		int XP=(int)( (Pokedex.values()[pkm.ID-1].baseXP*pkm.stats[0][0]*1.5)/7 );
+		
+		while(!XpStack.empty()){
+			temp=XpStack.pop();
+			temp.addXP(XP);
+			System.out.println(temp.nom+" gagne "+XP+" pts d'experience: "+temp.stats[1][0]+"/"+temp.stats[1][1]);
+		}
+		
+	}
+	
 }

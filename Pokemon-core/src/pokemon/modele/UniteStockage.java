@@ -1,9 +1,8 @@
 package pokemon.modele;
 
-import pokemon.annotations.Tps;
 
 
-@Tps(nbhours=1)
+
 public class UniteStockage<A extends Qmax & Infos> /*implements Comparable*/ {
 	protected A cible;
 	protected int quantite;//ou PP

@@ -13,8 +13,13 @@ public enum Pokedex {
 	Rattata,Rattatac,Piafabec,Rapasdepic,Abo,Arbok,Pikachu;
 	
 	protected Pkm pkm;
+	
 	protected String description;
+	//liste des capacites apprises et evolutions lors de la progression
 	protected Event[] events;
+	//Base de la recompense d'experience donnee a l'adversaire en cas de défaite du pokemon
+	protected int baseXP;
+	//liste de capacites passives - chaque pokemon dispose d'une capP obtenue au hasard dans cette liste
 	protected CapacitePassive[] capP;
 	XmlReader reader = new XmlReader();
 
@@ -41,6 +46,7 @@ public enum Pokedex {
 				capP[i]=CapacitePassive.valueOf(subtemp.getChild(i).get("nom"));
 			}
 			description=pk.get("description");
+			baseXP=pk.getInt("XP");
 		}
 		catch(IOException e){
 			e.printStackTrace();

@@ -9,12 +9,13 @@ import java.util.Vector;
 import pokemon.annotations.Tps;
 import pokemon.launcher.MyGdxGame;
 
-@Tps(nbhours=12)
+@Tps(nbhours=14)
 public class Combat {
 	protected Terrain terrain;
 	protected Climat climat;
 	protected PokemonCombat[] equipe1;
 	protected PokemonCombat[] equipe2;
+	protected PokemonCombat[] pkmListe;
 	protected Scanner sc = new Scanner(System.in); //BERK
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
@@ -43,7 +44,7 @@ public class Combat {
 		System.out.println(j1.teamsize+" "+j2.teamsize);
 		equipe1=new PokemonCombat[j1.teamsize]; System.out.println(j1.team[0]);
 		equipe2=new PokemonCombat[j2.teamsize];
-		PokemonCombat[] pkmListe=new PokemonCombat[2];
+		pkmListe=new PokemonCombat[2];
 		
 		for(int i=0;i<j1.teamsize;i++){
 			equipe1[i]=new PokemonCombat(j1.team[i],false,j1); equipe1[i].equipe=equipe1;
@@ -55,6 +56,8 @@ public class Combat {
 		pkmListe[1]=equipe2[0];
 		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
 		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
+		pkmListe[0].listeIndice=0; pkmListe[1].listeIndice=1;
+		
 		while(this.gagnant(j1,j2)==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
@@ -65,7 +68,7 @@ public class Combat {
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){ 
 					p.pkm.statut.StatEffect(p.pkm,1);
 					p.pkm.supTemp.StatEffect(p.pkm,1);
-					if(p.pkm.stats[2][0]<=0){pokeswap(p);}
+					if(p.pkm.stats[2][0]<=0){ p.XPreward(); pokeswap(p); }
 				}
 			}
 		}
@@ -95,16 +98,16 @@ public class Combat {
 					user.pkm.cap.at(act).script(user.pkm,cible.pkm,this);
 				}
 				//Conséquences de l'action
-				if(user.pkm.stats[2][0]<=0){ user=pokeswap(user); }
-				if(cible.pkm.stats[2][0]<=0){ cible=pokeswap(cible); }
-				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2)){
+				if(user.pkm.stats[2][0]<=0){ user.XPreward(); pokeswap(user); }
+				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(); pokeswap(cible); }
+				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 					if(user.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)user.pkm.objTenu;
 						System.out.println(user.pkm.nom+" utilise sa baie");
 						if(m.baie){ m.script(user.pkm); user.pkm.objTenu=null; }
 					}
 				}
-				if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2)){
+				if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 					if(cible.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)cible.pkm.objTenu;
 						System.out.println(cible.pkm.nom+" utilise sa baie");
@@ -132,22 +135,36 @@ public class Combat {
 		//sc.close();
 	}
 	
-	public PokemonCombat pokeswap(PokemonCombat user){
-		int i=0; int act=0; int done=0;
+	public void ajoutXpStack(PokemonCombat pkmc){
+		for(PokemonCombat p:pkmListe){
+			if(p.equipe!=pkmc.equipe && !p.XpStack.contains(pkmc.pkm)){
+				p.XpStack.push(pkmc.pkm);
+			}
+		}
+	}
+	
+	
+	public void pokeswap(PokemonCombat user){
+		int i=0; int act=0; int done=0; Pkm pkmRef; Stack<Pkm> stackRef; 
 		if(!user.isIA){
 			while(done==0){
 				System.out.println("Qui voulez vous envoyer ?");
 				for(PokemonCombat p: user.equipe){
-					System.out.println(i+" "+p.pkm.nom+" LV."+p.pkm.stats[0][1]+" "+p.pkm.stats[2][0]+"/"+p.pkm.stats[2][1]+" "+p.pkm.statut);
+					System.out.println(i+" "+p.pkm.nom+" LV."+p.pkm.stats[0][0]+" "+p.pkm.stats[2][0]+"/"+p.pkm.stats[2][1]+" "+p.pkm.statut);
 					i++;
 				}
 				act=sc.nextInt();
 				if(user.equipe[act].pkm.statut!=Statut.KO){
 					System.out.println(user.equipe[act].pkm.nom+" remplace "+user.pkm.nom);
-					return user.equipe[act];
+					pkmRef=user.pkm; stackRef=user.XpStack;
+					user.pkm=user.equipe[act].pkm; user.XpStack=user.equipe[act].XpStack;
+					user.equipe[act].pkm=pkmRef; user.equipe[act].XpStack=stackRef;
+					ajoutXpStack(user);
+					done=1;
 				}
 				else{
 					System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
+					i=0;
 				}
 			}
 		}
@@ -155,11 +172,13 @@ public class Combat {
 			for(PokemonCombat p:user.equipe){
 				if(p.pkm.statut!=Statut.KO){
 					System.out.println(user.prop+" envoie "+p.pkm.nom+" au combat");
-					return p;
+					pkmRef=user.pkm; stackRef=user.XpStack;
+					user.pkm=p.pkm; user.XpStack=stackRef;
+					p.pkm=pkmRef; p.XpStack=stackRef;
+					ajoutXpStack(user);
 				}
 			}
 		}
-		return null;
 	}
 	
 	

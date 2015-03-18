@@ -14,8 +14,6 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected Statut supTemp;
 	protected int[] IV;
 	protected int[] EV;
-	//R�compenses donn�es a l'adversaire
-	protected int XPReward;
 	protected int prevXpPal;
 	protected Nature personnalite;
 	protected Vector <Type> type;
@@ -296,7 +294,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		return (ID+" "+nom+" LV."+stats[0][0]+
 				"\n XP:"+stats[1][0]+"/"+stats[1][1]+
 				"\n PV:"+stats[2][0]+"/"+stats[2][1]+" "+statut+
-				"\n"+objTenu+
+				"\n"+objTenu.nom+
 				"\n ATT:"+stats[3][1]+" DEF:"+stats[4][1]+
 				"\n ASP:"+stats[5][1]+" DSP:"+stats[6][1]+
 				"\n VIT:"+stats[7][1]+" "+personnalite);

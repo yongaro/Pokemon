@@ -4,6 +4,10 @@ import java.util.Vector;
 import java.lang.Iterable;
 import java.util.Iterator;
 
+import pokemon.annotations.Tps;
+
+
+@Tps(nbhours=6)
 public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<A>> {
 	protected Vector<UniteStockage<A>> contenu;
 	protected int max;
