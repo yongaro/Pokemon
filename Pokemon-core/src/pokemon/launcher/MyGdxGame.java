@@ -32,10 +32,10 @@ public class MyGdxGame extends Game {
 	public void create () {
 		MyGdxGame.initStatic();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
-		MenuListener menu=new MenuListener(this);
+		//MenuListener menu=new MenuListener(this);
 		
 		//TestMap2 test = new TestMap2();
-		//this.setScreen(new TestRender());
+		this.setScreen(new TestRender());
 //		Combat test=new Combat();
 	}
 	//@Tps(nbhours=2)

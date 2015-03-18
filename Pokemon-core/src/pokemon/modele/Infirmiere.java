@@ -22,8 +22,16 @@ public class Infirmiere extends NPC {
 	//Fonctionnalites principales
 	public void soignerEquipe(Pkm[] equipe) {
 		for(Pkm p : equipe) {
-			//Normalement, c'est cette formule
+			//PV
 			p.stats[2][0] = p.stats[2][1];
+			
+			//PP
+			for(UniteStockage<Capacite> cap : p.cap) {
+				cap.quantite = cap.quantitemax;
+			}
+			
+			//Status
+			p.statut = Statut.Normal;
 		}
 	}
 }

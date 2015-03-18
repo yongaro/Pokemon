@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
+import pokemon.vue.DialogBox;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -44,9 +46,11 @@ public class TestRender implements Screen,InputProcessor{
 	Animation a=rightwalk;
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera cam;
-	int width=640;
-	int height=360;
-   // private Stage stage;
+	int width=640;//Gdx.graphics.getWidth();
+	int height=360;//Gdx.graphics.getHeight();
+	private BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
+	//private Stage stage = new Stage(new FitViewport(width,height));
+    private Stage stage;
 	Texture t=new Texture(Gdx.files.internal("sprite.png"));
 	TiledMapTileLayer layerCollision;
 	float posx=0;
@@ -56,6 +60,8 @@ public class TestRender implements Screen,InputProcessor{
 	float animationtime;
 	boolean move=false;
 	Vector<Direction> input=new Vector<Direction>();
+	DialogBox box = null;
+	boolean inDialog = false;
 	
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -105,6 +111,7 @@ public class TestRender implements Screen,InputProcessor{
 		//renderer.renderTileLayer((TiledMapTileLayer) map.getLayers().get(2));
 
 		renderer.getBatch().end();
+		stage.draw();
 		
 
 
@@ -112,10 +119,10 @@ public class TestRender implements Screen,InputProcessor{
 
 	@Override
 	public void resize(int arg0, int arg1) {
-		cam.viewportWidth=arg0/2f;
-		cam.viewportHeight=arg1/2f;
-		//stage.getViewport().update(arg0, arg1, true);
-		//stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
+		//cam.viewportWidth=arg0/2f;
+		//cam.viewportHeight=arg1/2f;
+		stage.getViewport().update(arg0, arg1, true);
+		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
 	}
 
 	@Override
@@ -136,7 +143,7 @@ public class TestRender implements Screen,InputProcessor{
 			r.flip(true, false);
 		}
 
-//	   stage = new Stage(new FitViewport(width,height,cam));
+		stage = new Stage(new FitViewport(width,height,cam));
 	   //cam.zoom-=0.5;
 	}
 	
@@ -189,7 +196,11 @@ public class TestRender implements Screen,InputProcessor{
 		if(Gdx.input.isKeyPressed(Keys.A)) {
 			String text = j.interact(MyGdxGame.npcList);
 			if(text != null) {
-				System.out.println(text);
+				if(!inDialog){
+					DialogBox box = new DialogBox(text);
+					stage.addActor(box);
+					inDialog = true;
+				}
 			}
 		}
 
