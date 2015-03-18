@@ -43,7 +43,7 @@ public class UniteStockage<A extends Qmax & Infos> /*implements Comparable*/ {
 	 public void utiliser(Pkm user,Pkm pcible,Combat context){
 		 if(quantite>0){
 			 
-			 if(cible instanceof Objet){ ((Objet)cible).script(pcible); quantite--;}
+			 //if(cible instanceof Objet){ ((Objet)cible).script(pcible);}
 			 if(cible instanceof Medicament){ ((Medicament)cible).script(pcible); quantite--;}
 			 if(cible instanceof ObjetRare){ ((ObjetRare)cible).script(pcible); }
 			 if(cible instanceof Pokeball){ ((Pokeball)cible).script(pcible); quantite--;}
