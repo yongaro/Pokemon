@@ -1,4 +1,34 @@
 <Capacite>
+		<!--Liste des classes d'attaque
+		Dans le cas d'une AtkCS, préciser fof (0 adversaire, 1 soi même) et Tstats (0 debuff 1 buff)
+		0 : debuff d'1 lvl 	1 : buff d'1 lvl 	2 : debuff de 2 lvl 	3 : buff de 2 lvl 
+		exemple : 08-13
+		Atk
+		AtkSoin
+		Heal -->
+		<!--Liste des Types
+		3 attaque Physique	5 Attaque Spé-->
+		<!-- Flags des stats 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base) -->
+		<Abime
+			ID="2" class="Atk"
+			nom="Abime"
+			description="Le lanceur fait tomber l'ennemi dans une crevasse. Si cette attaque touche, elle met K.O sur le coup. "
+			power="9999" type="3" pre="30" CC="7" element="Sol" maxPP="8" effet="Normal">
+		</Abime>
+		<Acidarmure
+			ID="3" class="AtkCS"
+			nom="Aciarmure"
+			description="Le lanceur modifie sa structure moléculaire pour se liquéfier et augmenter fortement sa Défense. "
+			power="0" type="3" pre="100" CC="7" element="Sol" maxPP="64" effet="Normal"
+			Tstats="14" ChangeProc="100" fof="1">
+		</Acidarmure>
+		<Acide
+			ID="5" class="AtkCs"
+			nom="Acide"
+			description="Le lanceur attaque l'ennemi avec un jet d'acide corrosif. Peut aussi baisser la Déf. Spé de l'ennemi. "
+			power="40" type="3" pre="100" CC="7" element="Sol" maxPP="64" effet="Normal"
+			Tstats="14" ChangeProc="100" fof="1">
+		</Acide>
 		<Balayage
 			ID="7" class="Atk"
 			nom="Balayage"
