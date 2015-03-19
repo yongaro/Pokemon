@@ -1,11 +1,15 @@
 package pokemon.controle;
 
 import pokemon.launcher.MyGdxGame;
+import pokemon.launcher.TestRender;
+import pokemon.modele.Joueur;
 import pokemon.modele.Minimap;
 import pokemon.vue.menuPokematosMap;
+import pokemon.modele.Map;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Vector2;
 
 public class PokematosMapMenuListener implements InputProcessor{
 
@@ -14,7 +18,8 @@ public class PokematosMapMenuListener implements InputProcessor{
 	menuPokematosMap menu;
 	Minimap minimap=MyGdxGame.m;
 	int actualcity=1;
-	
+	Joueur joueur= MyGdxGame.Jtest;
+
 	PokematosMapMenuListener(menuPokematosMap menu,MyGdxGame myGdxGame, MenuListener menuListener)
 	{
 		this.menu=menu;
@@ -32,6 +37,9 @@ public class PokematosMapMenuListener implements InputProcessor{
 			if(minimap.getCities().get(actualcity).hasNeighbourAt("South"))
 				actualcity=minimap.getCities().indexOf(minimap.getCities().get(actualcity).getNeighbour("South"));
 		menu.update(actualcity);
+		case Keys.ENTER:
+			joueur.setCurrentMap(new Map("maps/test.tmx"));
+			myGdxGame.setScreen(new TestRender());
 			return true;
 		}
 		}

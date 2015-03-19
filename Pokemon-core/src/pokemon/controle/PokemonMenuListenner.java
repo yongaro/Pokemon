@@ -82,8 +82,10 @@ public class PokemonMenuListenner implements InputProcessor{
 			case A:
 				if(state==1)
 					if(menuListener.state==2)
-						{joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).script(joueur.getTeam()[pkselector]);
+						{
+						//joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).script(joueur.getTeam()[pkselector]);
 						System.out.println("Je donne"+joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).getNom());
+						joueur.getPoche(menuListener.slotInventaire[0]).utiliser(menuListener.slotInventaire[1], null,joueur.getTeam()[pkselector] ,null);
 						menuListener.state=0;
 						}
 					else
@@ -112,7 +114,7 @@ public class PokemonMenuListenner implements InputProcessor{
 					joueur.getTeam()[pkselector]= joueur.getTeam()[change];
 					joueur.getTeam()[change]=swap;
 					//team.swap(team.elementAt(change), team.elementAt(pkselector-1));
-					
+					menu.healthbarswap(change, pkselector);
 					state=1;
 					menu.update(state,pkselector,atkselector);
 					break;

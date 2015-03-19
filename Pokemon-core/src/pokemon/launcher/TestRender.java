@@ -136,7 +136,7 @@ public class TestRender implements Screen,InputProcessor{
 		}
 
 		stage = new Stage(new FitViewport(width,height,cam));
-	   //cam.zoom-=0.5;
+	   cam.zoom-=0.5;
 	}
 	
 	public void update(float delta)

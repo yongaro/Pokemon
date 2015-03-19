@@ -285,5 +285,9 @@ public class menuPokemon  implements Screen {
 	        // add myActor to stage
 	        stage.addActor(myActor);
 		}*/
-
+	public void healthbarswap(int i,int j){
+		int temp=healthbars[i];
+		healthbars[i]=healthbars[j];
+		healthbars[j]=temp;
+	}
 }
