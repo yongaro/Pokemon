@@ -3,6 +3,11 @@ package pokemon.modele;
 import java.util.Random;
 
 public class AtkRecul extends Atk {
+	
+	public AtkRecul(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
+		super(pw,pre,cc,nom,d,el,type,pp,effet);
+	}
+	
 	public void script(Pkm user,Pkm cible,Combat context){
 		System.out.println(user.nom+" utilise "+nom);
 		 Random random=new Random();
