@@ -1,7 +1,6 @@
 <Capacite>
 		<!--Liste des classes d'attaque
-		Dans le cas d'une AtkCS, préciser fof (0 adversaire, 1 soi même) et Tstats (0 debuff 1 buff)
-		0 : debuff d'1 lvl 	1 : buff d'1 lvl 	2 : debuff de 2 lvl 	3 : buff de 2 lvl 
+		Dans le cas d'une AtkCS, préciser fof (0 adversaire, 1 soi même) et Tstats (0 : debuff d'1 lvl 	1 : buff d'1 lvl 	2 : debuff de 2 lvl 	3 : buff de 2 lvl )		
 		exemple : 08-13
 		Atk
 		AtkSoin
@@ -19,24 +18,67 @@
 			ID="3" class="AtkCS"
 			nom="Aciarmure"
 			description="Le lanceur modifie sa structure moléculaire pour se liquéfier et augmenter fortement sa Défense. "
-			power="0" type="3" pre="100" CC="7" element="Sol" maxPP="64" effet="Normal"
-			Tstats="14" ChangeProc="100" fof="1">
+			power="0" type="3" pre="100" CC="0" element="Poison" maxPP="64" effet="Normal"
+			Tstats="34" ChangeProc="100" fof="1">
 		</Acidarmure>
 		<Acide
 			ID="5" class="AtkCs"
 			nom="Acide"
 			description="Le lanceur attaque l'ennemi avec un jet d'acide corrosif. Peut aussi baisser la Déf. Spé de l'ennemi. "
-			power="40" type="3" pre="100" CC="7" element="Sol" maxPP="64" effet="Normal"
-			Tstats="14" ChangeProc="100" fof="1">
+			power="40" type="5" pre="100" CC="7" element="Poison" maxPP="48" effet="Normal"
+			Tstats="06" ChangeProc="10" fof="0">
 		</Acide>
+		<Affutage
+			ID="7" class="AtkCs"
+			nom="Affutage"
+			description="Le lanceur réduit son nombre de polygones pour accentuer ses angles et augmenter son Attaque. "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
+			Tstats="13" ChangeProc="100" fof="1">
+		</Affutage>
+		<Amnesie
+			ID="11" class="AtkCs"
+			nom="Amnesie"
+			description="Le lanceur fait le vide dans son esprit pour oubier ses soucis. Augmente fortement sa Déf. Spé."
+			power="0" type="3" pre="100" CC="0" element="Psy" maxPP="32" effet="Normal"
+			Tstats="36" ChangeProc="100" fof="1">
+		</Amnesie>
+		<Armure
+			ID="13" class="AtkCs"
+			nom="Armure"
+			description="Contracte les muscles pour augmenter la Défense du lanceur d'un niveau. "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
+			Tstats="14" ChangeProc="100" fof="1">
+		</Armure>
 		<Balayage
-			ID="7" class="Atk"
+			ID="17" class="Atk"
 			nom="Balayage"
 			description="Un puissant coup de pied bas qui fauche l'ennemi."
 			power="50" type="3" pre="100" CC="7" element="Combat" maxPP="32" effet="Peur">
 		</Balayage>
+		<BecVrille
+			ID="19" class="Atk"
+			nom="Bec Vrille"
+			description="Une attaque utilisant le bec comme perceuse."
+			power="80" type="3" pre="100" CC="7" element="Vol" maxPP="32" effet="Normal">
+		</BecVrille>
+		
+		
+		<Belier
+			ID="23" class="Atk"
+			nom="Bec Vrille"
+			description="Une attaque utilisant le bec comme perceuse."
+			power="80" type="3" pre="100" CC="7" element="Vol" maxPP="32" effet="Normal">
+		</Belier>
+		<Berceuse
+			ID="29" class="Atk"
+			nom="Berceuse"
+			description="Berceuse plongeant l'ennemi dans un profond sommeil."
+			power="0" type="3" pre="55" CC="0" element="Normal" maxPP="24" effet="Endormi">
+		</Berceuse>
+		
+		
 		<Blizzard
-			ID="11" class="Atk"
+			ID="19" class="Atk"
 			nom="Blizzard"
 			description="Déclenche une tempête de neige pouvant geler l'ennemi."
 			power="110" type="5" pre="70" CC="7" element="Glace" maxPP="8" effet="Gele">
