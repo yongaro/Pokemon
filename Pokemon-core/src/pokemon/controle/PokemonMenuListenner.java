@@ -125,7 +125,7 @@ public class PokemonMenuListenner implements InputProcessor{
 					joueur.getTeam()[pkselector-1].getCap().swap(joueur.getTeam()[pkselector-1].getCap().elementAt(atkselector-1), joueur.getTeam()[pkselector-1].getCap().elementAt(change));
 					state=2;
 					menu.update(state,pkselector,atkselector);
-					break;
+					break;//
 				}
 				break;
 			case RIGHT:
