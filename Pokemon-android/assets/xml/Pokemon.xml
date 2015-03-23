@@ -2,7 +2,7 @@
 	<Bulbizarre
 		ID="1" nom="Bulbizarre"
 		description="Il a une étrange graine plantée sur son dos. Elle grandit avec lui depuis sa naissance."
-		PV="45" ATT="49" DEF="49" ATTSP="65" DEFSP="65" VIT="45" type1="Plante" type2="Poison" XP="64">
+		PV="45" ATT="49" DEF="49" ATTSP="65" DEFSP="65" VIT="45" type1="Plante" type2="Poison" XP="64" attacks="42">
 		<CapacitePassive>
 			<Engrais nom="Engrais"></Engrais>
 			<Chlorophylle nom="Chlorophylle"></Chlorophylle>

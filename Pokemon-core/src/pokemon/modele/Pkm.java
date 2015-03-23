@@ -20,7 +20,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected Stockage<Capacite> cap;
 	protected CapacitePassive capP;
 	protected Objet objTenu;
-	
+	protected long attacks;
 	
 	public Pkm(Pkm base,int level){
 		//creation d'un nouveau Pokemon par copie de la base
