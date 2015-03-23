@@ -15,7 +15,7 @@
 			power="9999" type="3" pre="30" CC="7" element="Sol" maxPP="8" effet="Normal">
 		</Abime>
 		<Acidarmure
-			ID="3" class="AtkCS"
+			ID="3" class="AtkCs"
 			nom="Aciarmure"
 			description="Le lanceur modifie sa structure moléculaire pour se liquéfier et augmenter fortement sa Défense. "
 			power="0" type="3" pre="100" CC="0" element="Poison" maxPP="64" effet="Normal"
@@ -60,35 +60,100 @@
 			nom="Bec Vrille"
 			description="Une attaque utilisant le bec comme perceuse."
 			power="80" type="3" pre="100" CC="7" element="Vol" maxPP="32" effet="Normal">
-		</BecVrille>
-		
-		
+		</BecVrille>	
 		<Belier
-			ID="23" class="Atk"
-			nom="Bec Vrille"
-			description="Une attaque utilisant le bec comme perceuse."
-			power="80" type="3" pre="100" CC="7" element="Vol" maxPP="32" effet="Normal">
+			ID="23" class="AtkRecul"
+			nom="Belier"
+			description="Une charge violente qui blesse aussi le lanceur. "
+			power="90" type="3" pre="85" CC="7" element="Normal" maxPP="32" effet="Normal">
 		</Belier>
 		<Berceuse
 			ID="29" class="Atk"
 			nom="Berceuse"
 			description="Berceuse plongeant l'ennemi dans un profond sommeil."
 			power="0" type="3" pre="55" CC="0" element="Normal" maxPP="24" effet="Endormi">
-		</Berceuse>
-		
-		
+		</Berceuse>				
 		<Blizzard
-			ID="19" class="Atk"
+			ID="31" class="Atk"
 			nom="Blizzard"
 			description="Déclenche une tempête de neige pouvant geler l'ennemi."
 			power="110" type="5" pre="70" CC="7" element="Glace" maxPP="8" effet="Gele">
 		</Blizzard>
+		<BombOeuf
+			ID="37" class="Atk"
+			nom="Bomb' Oeuf"
+			description="Le lanceur crée une barrière qui augmente beaucoup sa défense. "
+			power="0" type="3" pre="100" CC="0" element="Psy" maxPP="48" effet="Normal">
+		</BombOeuf>
+		<Bouclier
+			ID="41" class="AtkCS"
+			nom="Bouclier"
+			description="De toute ses forces, le lanceur jette un gros oeuf sur l'ennemi pour lui infliger des dégâts. "
+			power="100" type="3" pre="75" CC="7" element="Normal" maxPP="16" effet="Normal"
+			Tstats="14" ChangeProc="100" fof="1">
+		</Bouclier>
+		<BoulArmure
+			ID="43" class="AtkCS"
+			nom="Boul'Armure"
+			description="Le lanceur s'enroule pour cacher ses points faibles, ce qui augmente sa Défense. "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="64" effet="Normal"
+			Tstats="14" ChangeProc="100" fof="1">
+		</BoulArmure>
+		<Brouillard
+			ID="47" class="AtkCS"
+			nom="Brouillard"
+			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
+			Tstats="08" ChangeProc="100" fof="0">
+		</Brouillard>
+		<Brume<!--
+			ID="53" class="AtkCS"
+			nom="Brume"
+			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
+			Tstats="08" ChangeProc="100" fof="0"-->>
+		</Brume>
+		<BueeNoire<!--
+			ID="59" class="AtkCs"
+			nom="Buée Noire"
+			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
+			Tstats="08" ChangeProc="100" fof="0"-->>
+		</BueeNoire>
+		<BullesDo
+			ID="61" class="AtkCs"
+			nom="Bulles d'O"
+			description="Des bulles sont envoyées avec puissance sur l'ennemi. Peut aussi baisser sa Vitesse. "
+			power="65" type="5" pre="100" CC="7" element="Eau" maxPP="32" effet="Normal"
+			Tstats="07" ChangeProc="10" fof="0">			
+		</BullesDo>
+		<CageEclair
+			ID="67" class="Atk"
+			nom="Cage Eclair"
+			description="Un faible choc électrique frappe l'ennemi. Si l'attaque le touche, celui-ci est paralysé."
+			power="0" type="3" pre="100" CC="0" element="Electrique" maxPP="24" effet="Paralyse">			
+		</CageEclair>
+		<Cascade  
+			ID="71" class="Atk"
+			nom="Cascade"
+			description="Le lanceur charge l'ennemi à une vitesse remarquable. Permet aussi de franchir une cascade. "
+			power="80" type="3" pre="100" CC="7" element="Eau" maxPP="32" effet="Paralyse">			
+		</Cascade><!-- CS -->		
 		<Charge	
-			ID="31" class="Atk"
+			ID="73" class="Atk"
 			nom="Charge"
 			description="Le lanceur charge l'ennemi et le percute de tout son corps."
 			power="50" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
-		</Charge>
+		</Chargerge>
+		<ChocMental
+			ID="79" class="Atk"
+			nom="Choc Mental"
+			description="Une faible vague télékinésique frappe l'ennemi. Peut aussi le plonger dans la confusion. "
+			power="50" type="5" pre="100" CC="7" element="Psy" maxPP="40" effet="Confus">
+		</ChocMental>
+		
+		
+		
 		<CrochetVenin
 			ID="999" class="Atk"
 			nom="Crochet Venin"
