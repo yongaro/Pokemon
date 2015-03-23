@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class AtkRecul extends Atk {
 	
-	public AtkRecul(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
-		super(pw,pre,cc,nom,d,el,type,pp,effet);
+	public AtkRecul(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc){
+		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc);
 	}
 	
 	public void script(Pkm user,Pkm cible,Combat context){
@@ -22,7 +22,7 @@ public class AtkRecul extends Atk {
 		}
 		if(touche==1 && esquive==0 && power>0){
 			if(power>0){this.atkdamage(user,cible,context.climat);}
-			if(random.nextInt(100)<=10 && this.effet!=Statut.Normal){cible.statut=effet; System.out.println(cible.nom+" est "+effet);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		
 			//Traitement des dégats du Recul
 			if(user.capP!=CapacitePassive.TeteDeRoc){

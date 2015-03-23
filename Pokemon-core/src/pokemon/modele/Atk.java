@@ -5,12 +5,13 @@ import java.util.Random;
 
 public class Atk extends Capacite {
 	protected Statut effet;
+	protected int effetProc;
 	
 	public Atk(){
 		super(); this.effet=Statut.Normal;
 	}
-	public Atk(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
-		super(pw,pre,cc,nom,d,el,type,pp); this.effet=effet;
+	public Atk(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet, int efprc){
+		super(pw,pre,cc,nom,d,el,type,pp); this.effet=effet; effetProc=efprc;
 	}
 	
 	public void script(Pkm user,Pkm cible,Combat context){
@@ -27,7 +28,7 @@ public class Atk extends Capacite {
 		}
 		if(touche==1 && esquive==0 && power>0){
 			if(power>0){this.atkdamage(user,cible,context.climat);}
-			if(random.nextInt(100)<=10 && this.effet!=Statut.Normal){effet.applique(cible);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		
 			//Traitement capacite passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){

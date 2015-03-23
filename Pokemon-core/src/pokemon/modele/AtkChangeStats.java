@@ -12,8 +12,8 @@ public class AtkChangeStats extends Atk {
 	public AtkChangeStats(){
 		super();
 	}
-	public AtkChangeStats(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,String code,int proc,int fof){
-		super(pw,pre,cc,nom,d,el,type,pp,effet); 
+	public AtkChangeStats(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc,String code,int proc,int fof){
+		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc); 
 		Tstats=code; ChangeProc=proc; this.fof=fof;
 	}
 	public void script(Pkm user,Pkm cible,Combat context){
@@ -34,7 +34,7 @@ public class AtkChangeStats extends Atk {
 				if(fof==1){user.buff(Tstats);}
 				if(fof==0){cible.debuff(Tstats);}
 			}
-			if(random.nextInt(100)<=10 && this.effet!=Statut.Normal){cible.statut=effet; System.out.println(cible.nom+" est "+effet);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		
 			//Traitement capacité passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){

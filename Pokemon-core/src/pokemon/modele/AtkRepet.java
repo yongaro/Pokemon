@@ -6,8 +6,8 @@ import java.util.Random;
 public class AtkRepet extends Atk {
 	
 	public AtkRepet(){super();}
-	public AtkRepet(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
-		super(pw,pre,cc,nom,d,el,type,pp,effet);
+	public AtkRepet(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc){
+		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc);
 	}
 	public void script(Pkm user,Pkm cible,Combat context){
 		System.out.println(user.nom+" utilise "+description);
@@ -23,6 +23,7 @@ public class AtkRepet extends Atk {
 			int  nbcoups=random.nextInt();
 			for(int i=0;i<=nbcoups;i++){
 				System.out.println("Touche "+i+" fois"+this.atkdamage(user,cible,context.climat));
+				if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 			}
 			System.out.println("Touche "+nbcoups+" fois");
 			
