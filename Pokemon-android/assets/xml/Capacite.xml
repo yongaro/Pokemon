@@ -5,296 +5,363 @@
 		Atk
 		AtkRep
 		AtkSoin
-		Heal -->
+		Heal attribut code : 1 soin du statut	2 soin des stats	3 les deux		0 les pv	la puissance est le % de pv soignés-->
 		<!--Liste des Types
 		3 attaque Physique	5 Attaque Spé-->
 		<!-- Flags des stats 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base) -->
 		<Abime
-			ID="2" class="Atk"
+			ID="2" effetProc="10" class="Atk"
 			nom="Abime"
 			description="Le lanceur fait tomber l'ennemi dans une crevasse. Si cette attaque touche, elle met K.O sur le coup. "
 			power="9999" type="3" pre="30" CC="7" element="Sol" maxPP="8" effet="Normal">
 		</Abime>
 		<Acidarmure
-			ID="3" class="AtkCs"
+			ID="3" effetProc="10" class="AtkCs"
 			nom="Aciarmure"
 			description="Le lanceur modifie sa structure moléculaire pour se liquéfier et augmenter fortement sa Défense. "
 			power="0" type="3" pre="100" CC="0" element="Poison" maxPP="64" effet="Normal"
 			Tstats="34" ChangeProc="100" fof="1">
 		</Acidarmure>
 		<Acide
-			ID="5" class="AtkCs"
+			ID="5" effetProc="10" class="AtkCs"
 			nom="Acide"
 			description="Le lanceur attaque l'ennemi avec un jet d'acide corrosif. Peut aussi baisser la Déf. Spé de l'ennemi. "
 			power="40" type="5" pre="100" CC="7" element="Poison" maxPP="48" effet="Normal"
 			Tstats="06" ChangeProc="10" fof="0">
 		</Acide>
 		<Affutage
-			ID="7" class="AtkCs"
+			ID="7" effetProc="10" class="AtkCs"
 			nom="Affutage"
 			description="Le lanceur réduit son nombre de polygones pour accentuer ses angles et augmenter son Attaque. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
 			Tstats="13" ChangeProc="100" fof="1">
 		</Affutage>
 		<Amnesie
-			ID="11" class="AtkCs"
+			ID="11" effetProc="10" class="AtkCs"
 			nom="Amnesie"
 			description="Le lanceur fait le vide dans son esprit pour oubier ses soucis. Augmente fortement sa Déf. Spé."
 			power="0" type="3" pre="100" CC="0" element="Psy" maxPP="32" effet="Normal"
 			Tstats="36" ChangeProc="100" fof="1">
 		</Amnesie>
 		<Armure
-			ID="13" class="AtkCs"
+			ID="13" effetProc="10" class="AtkCs"
 			nom="Armure"
 			description="Contracte les muscles pour augmenter la Défense du lanceur d'un niveau. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
 			Tstats="14" ChangeProc="100" fof="1">
 		</Armure>
 		<Balayage
-			ID="17" class="Atk"
+			ID="17" effetProc="10" class="Atk"
 			nom="Balayage"
 			description="Un puissant coup de pied bas qui fauche l'ennemi."
 			power="50" type="3" pre="100" CC="7" element="Combat" maxPP="32" effet="Peur">
 		</Balayage>
 		<BecVrille
-			ID="19" class="Atk"
+			ID="19" effetProc="10" class="Atk"
 			nom="Bec Vrille"
 			description="Une attaque utilisant le bec comme perceuse."
 			power="80" type="3" pre="100" CC="7" element="Vol" maxPP="32" effet="Normal">
 		</BecVrille>	
 		<Belier
-			ID="23" class="AtkRecul"
+			ID="23" effetProc="10" class="AtkRecul"
 			nom="Belier"
 			description="Une charge violente qui blesse aussi le lanceur. "
 			power="90" type="3" pre="85" CC="7" element="Normal" maxPP="32" effet="Normal">
 		</Belier>
 		<Berceuse
-			ID="29" class="Atk"
+			ID="29" effetProc="10" class="Atk"
 			nom="Berceuse"
 			description="Berceuse plongeant l'ennemi dans un profond sommeil."
 			power="0" type="3" pre="55" CC="0" element="Normal" maxPP="24" effet="Endormi">
 		</Berceuse>				
 		<Blizzard
-			ID="31" class="Atk"
+			ID="31" effetProc="10" class="Atk"
 			nom="Blizzard"
 			description="Déclenche une tempête de neige pouvant geler l'ennemi."
 			power="110" type="5" pre="70" CC="7" element="Glace" maxPP="8" effet="Gele">
 		</Blizzard>
 		<BombOeuf
-			ID="37" class="Atk"
+			ID="37" effetProc="10" class="Atk"
 			nom="Bomb' Oeuf"
 			description="Le lanceur crée une barrière qui augmente beaucoup sa défense. "
 			power="0" type="3" pre="100" CC="0" element="Psy" maxPP="48" effet="Normal">
 		</BombOeuf>
 		<Bouclier
-			ID="41" class="AtkCS"
+			ID="41" effetProc="10" class="AtkCS"
 			nom="Bouclier"
 			description="De toute ses forces, le lanceur jette un gros oeuf sur l'ennemi pour lui infliger des dégâts. "
 			power="100" type="3" pre="75" CC="7" element="Normal" maxPP="16" effet="Normal"
 			Tstats="14" ChangeProc="100" fof="1">
 		</Bouclier>
 		<BoulArmure
-			ID="43" class="AtkCS"
+			ID="43" effetProc="10" class="AtkCS"
 			nom="Boul'Armure"
 			description="Le lanceur s'enroule pour cacher ses points faibles, ce qui augmente sa Défense. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="64" effet="Normal"
 			Tstats="14" ChangeProc="100" fof="1">
 		</BoulArmure>
 		<Brouillard
-			ID="47" class="AtkCS"
+			ID="47" effetProc="10" class="AtkCS"
 			nom="Brouillard"
 			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0">
 		</Brouillard>
 		<Brume<!--
-			ID="53" class="AtkCS"
+			ID="53" effetProc="10" class="AtkCS"
 			nom="Brume"
 			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0"-->>
 		</Brume>
 		<BueeNoire<!--
-			ID="59" class="AtkCs"
+			ID="59" effetProc="10" class="AtkCs"
 			nom="Buée Noire"
 			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0"-->>
 		</BueeNoire>
 		<BullesDo
-			ID="61" class="AtkCs"
+			ID="61" effetProc="10" class="AtkCs"
 			nom="Bulles d'O"
 			description="Des bulles sont envoyées avec puissance sur l'ennemi. Peut aussi baisser sa Vitesse. "
 			power="65" type="5" pre="100" CC="7" element="Eau" maxPP="32" effet="Normal"
 			Tstats="07" ChangeProc="10" fof="0">			
 		</BullesDo>
 		<CageEclair
-			ID="67" class="Atk"
+			ID="67" effetProc="10" class="Atk"
 			nom="Cage Eclair"
 			description="Un faible choc électrique frappe l'ennemi. Si l'attaque le touche, celui-ci est paralysé."
 			power="0" type="3" pre="100" CC="0" element="Electrique" maxPP="24" effet="Paralyse">			
 		</CageEclair>
 		<Cascade  
-			ID="71" class="Atk"
+			ID="71" effetProc="10" class="Atk"
 			nom="Cascade"
 			description="Le lanceur charge l'ennemi à une vitesse remarquable. Permet aussi de franchir une cascade. "
 			power="80" type="3" pre="100" CC="7" element="Eau" maxPP="32" effet="Paralyse">			
 		</Cascade><!-- CS -->		
 		<Charge	
-			ID="73" class="Atk"
+			ID="73" effetProc="10" class="Atk"
 			nom="Charge"
 			description="Le lanceur charge l'ennemi et le percute de tout son corps."
 			power="50" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
 		</Chargerge>
 		<ChocMental
-			ID="79" class="Atk"
+			ID="79" effetProc="10" class="Atk"
 			nom="Choc Mental"
 			description="Une faible vague télékinésique frappe l'ennemi. Peut aussi le plonger dans la confusion. "
 			power="50" type="5" pre="100" CC="7" element="Psy" maxPP="40" effet="Confus">
 		</ChocMental>
 		<Claquoir
-			ID="83" class="AtkRep"
+			ID="83" effetProc="10" class="AtkRep"
 			nom="Claquoir"
 			description="Piège l'ennemi et l'écrase pendant 2 à 5 tours. "
 			power="35" type="3" pre="75" CC="7" element="Eau" maxPP="16" effet="Normal">
 		</Claquoir>
 		<!--Clonage
-			ID="89" class="Atk"
+			ID="89" effetProc="10" class="Atk"
 			nom="Claquoir"
 			description="Une faible vague télékinésique frappe l'ennemi. Peut aussi le plonger dans la confusion. "
 			power="50" type="5" pre="100" CC="7" element="Psy" maxPP="40" effet="Confus">
 		</Clonage-->
 		<ComboGriffe
-			ID="97" class="AtkRep"
+			ID="97" effetProc="10" class="AtkRep"
 			nom="Combo Griffes"
 			description="L'ennemi est lacéré par des faux ou des griffes de 2 à 5 fois. "
 			power="18" type="3" pre="80" CC="7" element="Normal" maxPP="24" effet="Normal">
 		</ComboGriffe>
 		<Constriction
-			ID="101" class="AtkCs"
+			ID="101" effetProc="10" class="AtkCs"
 			nom="Constriction"
 			description="De longs tentacules ou lianes attaquent l'ennemi. Peut aussi baisser sa Vitesse. "
 			power="10" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal"
 			Tstats="07" ChangeProc="10" fof="0">
 		</Constriction>
 		<CoupDBoule
-			ID="103" class="Atk"
+			ID="103" effetProc="30" class="Atk"
 			nom="Coup d'Boule"
 			description="Le lanceur lève la tête avant d'asséner un coup vers l'avant. Peut apeurer l'ennemi."
 			power="70" type="3" pre="100" CC="7" element="Normal" maxPP="24" effet="Peur">
 		</CoupDBoule>
 		<Coupe
-			ID="107" class="Atk"
+			ID="107" effetProc="10" class="Atk"
 			nom="Coupe"
 			description="Coupe l'ennemi avec des lames ou des griffes."
 			power="50" type="3" pre="95" CC="7" element="Normal" maxPP="48" effet="Normal">
 		</Coupe>
 		<Coupe
-			ID="107" class="Atk"
+			ID="107" effetProc="10" class="Atk"
 			nom="Coupe"
 			description="Coupe l'ennemi avec des lames ou des griffes."
 			power="50" type="3" pre="95" CC="7" element="Normal" maxPP="48" effet="Normal">
 		</Coupe>
-		
-		
-		
-		
-		
-		
-		<CrochetVenin
-			ID="999" class="Atk"
-			nom="Crochet Venin"
-			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisées. Peut aussi apeurer l'ennemi. "
-			power="50" type="3" pre="100" CC="7" element="Poison" maxPP="15" effet="Empoisonne">
-		</CrochetVenin>
 		<CrocDeMort
-			ID="999" class="Atk"
+			ID="109" effetProc="10" class="Atk"
 			nom="Croc de Mort"
 			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisées. Peut aussi apeurer l'ennemi. "
 			power="80" type="3" pre="90" CC="7" element="Normal" maxPP="15" effet="Peur">
 		</CrocDeMort>
+		<!--CrocFatal
+			ID="113" effetProc="10" class="Atk"
+			nom="Croc de Mort"
+			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisées. Peut aussi apeurer l'ennemi. "
+			power="80" type="3" pre="90" CC="7" element="Normal" maxPP="15" effet="Peur">
+		</CrocFatal-->
+		<Croissance
+			ID="127" effetProc="10" class="AtkCs"
+			nom="Croissance"
+			description="Le lanceur se développe. Augmente l'Atq. Spé "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="64 effet="Normal"
+			Tstats="15" ChangeProc="100" fof="1">
+		</CrocDeMort>
 		<CruAile	
-			ID="999" class="Atk"
+			ID="131" effetProc="10" class="Atk"
 			nom="Cru-Aile"
 			description="L'ennemi est frappé par de larges ailes déployées pour infliger des dégâts. "
-			power="60" type="3" pre="100" CC="7" element="Vol" maxPP="35" effet="Normal">
-		</CruAile>
+			power="60" type="3" pre="100" CC="7" element="Vol" maxPP="56" effet="Normal">
+		</CruAile>		
+		<CrochetVenin
+			ID="137" effetProc="10" class="Atk"
+			nom="Crochet Venin"
+			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisées. Peut aussi apeurer l'ennemi. "
+			power="50" type="3" pre="100" CC="7" element="Poison" maxPP="15" effet="Empoisonne">
+		</CrochetVenin>
+		<!--Cyclone
+			ID="139" effetProc="10" class="Atk"
+			nom="Cyclone"
+			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisées. Peut aussi apeurer l'ennemi. "
+			power="50" type="3" pre="100" CC="7" element="Poison" maxPP="15" effet="Empoisonne">
+		</Cyclone-->
+		<Eboulement
+			ID="149" effetProc="30" class="Atk"
+			nom="Eboulement"
+			description="Envoie de gros rochers sur l'ennemi pour infliger des dégâts. Peut aussi l'apeurer."
+			power="75" type="3" pre="90" CC="7" element="Roche" maxPP="16" effet="Peur">
+		</Eboulement>
+		<ECoque
+			ID="151" effetProc="30" class="Atk"
+			nom="E-Coque"
+			description="Regagne jusqu'à la moitié des PV max du lanceur. "
+			power="50" type="3" pre="100" CC="7" element="Normal" maxPP="16" effet="Normal"
+			code="3">
+		</ECoque>		
 		<Eclair
-			ID="13" class="Atk"
+			ID="157" effetProc="10" class="Atk"
 			nom="Eclair"
 			description="Une décharge électrique tombe sur l'ennemi. Peut aussi le paralyser "
 			power="40" type="5" pre="100" CC="7" element="Electrique" maxPP="48" effet="Paralyse">
 		</Eclair>
+		<Ecrasement
+			ID="163" effetProc="30" class="Atk"
+			nom="Ecrasement"
+			description="Écrase l'ennemi avec un énorme pied. Peut aussi l'apeurer. "
+			power="65" type="3" pre="100" CC="7" element="Normal" maxPP="32" effet="Peur">
+		</Erasement>
+		<EcrasFace
+			ID="167" effetProc="30" class="Atk"
+			nom="Ecras'Face"
+			description="Ecrase l'ennemi avec les pattes avant ou la queue."
+			power="40" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
+		</EcrasFace>
+		<Ecume
+			ID="173" effetProc="30" class="AtkCs"
+			nom="Ecume"
+			description="De nombreuses bulles sont lancée à l'ennemi, peut baisser sa vitesse."
+			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
+			Tstats="07" ChangeProc="10" fof="0">
+		</Ecume>
+		<!--EmpalKorne
+			ID="179" effetProc="30" class="AtkCs"
+			nom="Ecume"
+			description="De nombreuses bulles sont lancée à l'ennemi, peut baisser sa vitesse."
+			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
+			Tstats="07" ChangeProc="10" fof="0">
+		</EmpalKorne-->
+		<!--Entrave
+			ID="179" effetProc="30" class="AtkCs"
+			nom="Ecume"
+			description="De nombreuses bulles sont lancée à l'ennemi, peut baisser sa vitesse."
+			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
+			Tstats="07" ChangeProc="10" fof="0">
+		</Entrave-->
+		<Explosion
+			ID="179" effetProc="30" class="AtkRecul"
+			nom="Explosion"
+			description="Le lanceur explose et inflige des dégâts tout autour de lui. Met le lanceur K.O.."
+			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
+			Tstats="07" ChangeProc="10" fof="0">
+		</Explosion><!--ATKRECUL ???-->
+		
 		<Griffe	
-			ID="29" class="Atk"
+			ID="29" effetProc="10" class="Atk"
 			nom="Griffe"
 			description="Lacère l'ennemi avec des griffes acérées pour lui infliger des dégâts."
 			power="40" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
 		</Griffe>
 		<JetDeSable
-			ID="3" class="AtkCS"
+			ID="3" effetProc="10" class="AtkCS"
 			nom="Jet de Sable"
 			description="Lance du sable au visage de l'ennemi pour baisser sa precision."
 			power="0" type="5" pre="100" CC="0" element="Sol" maxPP="35" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0" >
 		</JetDeSable>
 		<JetPierres 
-			ID="47" class="Atk"
+			ID="47" effetProc="10" class="Atk"
 			nom="Jet-Pierres"
 			description="Le lanceur lâche une pierre sur l'ennemi."
 			power="50" type="5" pre="90" CC="7" element="Roche" maxPP="24" effet="Normal" >
 		</JetPierres>
 		<MegaSangsue 
-			ID="999" class="AtkSoin"
+			ID="999" effetProc="10" class="AtkSoin"
 			nom="Mega-Sangsue"
 			description="Une attaque qui convertit la moitié des dégâts infligés en PV. "
 			power="40" type="5" pre="100" CC="7" element="Plante" maxPP="15" effet="Normal" >
 		</MegaSangsue>
 		<PoingDeFeu
-			ID="17" class="Atk"
+			ID="17" effetProc="10" class="Atk"
 			nom="Poing de Feu"
 			description="Le lanceur frappe l'adversaire avec un poing enflammé. Peut aussi le brûler"
 			power="75" type="3" pre="100" CC="7" element="Feu" maxPP="24" effet="Brule">
 		</PoingDeFeu>
 		<PoingEclair	
-			ID="23" class="Atk"
+			ID="23" effetProc="10" class="Atk"
 			nom="Poing-Eclair"
 			description="Un coup de poing électrique vient frapper l'ennemi. Peut le paralyser."
 			power="75" type="3" pre="100" CC="7" element="Electrique" maxPP="24" effet="Paralyse">
 		</PoingEclair>
 		<PoingGlace	
-			ID="19" class="Atk"
+			ID="19" effetProc="10" class="Atk"
 			nom="Poing-Glace"
 			description="Un coup de poing glacé vient frapper l'ennemi. Peut le geler."
 			power="75" type="3" pre="100" CC="7" element="Glace" maxPP="24" effet="Gele">
 		</PoingGlace>
 		<RafalePsy 
-			ID="41" class="Atk"
+			ID="41" effetProc="10" class="Atk"
 			nom="Rafale Psu"
 			description="Un étrange rayon frappe l'ennemi. Peut aussi le rendre confus."
 			power="65" type="5" pre="100" CC="7" element="Psy" maxPP="32" effet="Confus" >
 		</RafalePsy>
 		<Repos
-			ID="5" class="Heal"
+			ID="5" effetProc="10" class="Heal"
 			nom="Repos"
 			description="Le lanceur dort pendant deux tours. Il regagne tous ses PVs et n'a plus de problèmes de statut."
 			power="100" type="5" pre="100" CC="0" element="Psy" maxPP="10" effet="Endormi"
 			code="3" >
 		</Repos>
 		<Seisme 
-			ID="43" class="Atk"
+			ID="43" effetProc="10" class="Atk"
 			nom="Séisme"
 			description="Le lanceur provoque un tremblement de terre touchant tous les Pokémon autour de lui."
 			power="100" type="5" pre="100" CC="7" element="Sol" maxPP="16" effet="Normal" >
 		</Seisme>
 		<Surf	
-			ID="37" class="Atk"
+			ID="37" effetProc="10" class="Atk"
 			nom="Surf"
 			description="Une énorme vague s'abat sur le champ de bataille. Permet aussi de voyager sur l'eau. "
 			power="90" type="5" pre="100" CC="7" element="Eau" maxPP="24" effet="Normal">
 		</Surf>
 		<Tonnerre 
-			ID="2" class="Atk"
+			ID="2" effetProc="10" class="Atk"
 			nom="Tonnerre"
 			description="Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser."
 			power="100" type="5" pre="100" CC="7" element="Electrique" maxPP="35" effet="Paralyse" >

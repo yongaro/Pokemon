@@ -31,6 +31,40 @@ public abstract class Capacite implements Qmax,Infos {
 	public Capacite(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp){
 		power=pw; this.type=type; this.pre=pre; this.CC=cc;this.nom=nom; description=d; element=el; maxPP=pp;
 	}
+	public boolean  peutApprendre(Pkm user){
+		boolean ok=false;
+		boolean fini = false;
+		long atks = user.attacks;
+		int i=2;
+		Vector res = new Vector();
+		while (!fini){
+			if (atks % i ==0){
+				res.addElement(i);
+				atks=atks/i;}
+			if (atks==1){
+				fini=true;}
+			i++;
+			while(!isPremier(i)){
+				i++;}
+
+		}
+		ok=res.contains(this.ID);
+		return ok;
+	}
+	public boolean isPremier(int n) {
+		boolean isPremier = true;
+		if (n < 0) {
+			isPremier = false;
+		} else if (n != 0 && n != 1) {
+			for (int i = 2; i <= n/2; i++) {
+				if (n != i && n % i == 0) {
+					isPremier = false;
+					break;
+				}
+			}
+		}
+		return isPremier;
+	}
 	protected int atkdamage(Pkm user,Pkm cible,Climat climat){
 		double STAB=1;double weakness=1.0; Random random=new Random(); double climatmod;
 		//recherche de l'affinite de l'utilisateur avec l'element de l'attaque
