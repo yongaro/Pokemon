@@ -31,18 +31,18 @@ public enum bddCapacite {
 			//La capacite courante est une Atk
 			if(e.get("class").compareTo("Atk")==0){ 
 				this.cap=new Atk(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
-						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")));
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"));
 			}
 			//La capacite courante est une AtkChangeStats		
 			if(e.get("class").compareTo("AtkCS")==0){
 				this.cap=new AtkChangeStats(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
-						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.get("Tstats"),
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"),e.get("Tstats"),
 						e.getInt("ChangeProc"),e.getInt("fof"));
 			}
 			//La capacite courante est une AtkRepet
 			if(e.get("class").compareTo("AtkRep")==0){
 				this.cap=new AtkRepet(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
-						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")));
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"));
 				System.out.println(cap);
 			}
 			//La capacite courante est un Heal
@@ -52,11 +52,11 @@ public enum bddCapacite {
 			}
 			if(e.get("class").compareTo("AtkSoin")==0){
 				this.cap=new AtkSoin(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
-						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")));
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"));
 			}
 			if(e.get("class").compareTo("AtkRecul")==0){
 				this.cap=new AtkRecul(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
-						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")));
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"),e.getInt("recul"));
 			}
 			cap.ID=e.getInt("ID");
 		}

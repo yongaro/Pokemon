@@ -7,8 +7,8 @@ public class AtkSoin extends Atk {
 	public AtkSoin(){
 		super(); this.effet=Statut.Normal;
 	}
-	public AtkSoin(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet){
-		super(pw,pre,cc,nom,d,el,type,pp,effet);
+	public AtkSoin(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc){
+		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc);
 	}
 	
 	
@@ -27,7 +27,7 @@ public class AtkSoin extends Atk {
 		if(touche==1 && esquive==0 && power>0){
 			int soin=0;
 			if(power>0){soin=(int)(this.atkdamage(user,cible,context.climat)/2);}
-			if(random.nextInt(100)<=10 && this.effet!=Statut.Normal){cible.statut=effet; System.out.println(cible.nom+" est "+effet);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 			
 			//Test de capacite Passive Suintement
 			if(cible.capP==CapacitePassive.Suintement){
