@@ -3,6 +3,7 @@
 		Dans le cas d'une AtkCS, préciser fof (0 adversaire, 1 soi même) et Tstats (0 : debuff d'1 lvl 	1 : buff d'1 lvl 	2 : debuff de 2 lvl 	3 : buff de 2 lvl )		
 		exemple : 08-13
 		Atk
+		AtkRep
 		AtkSoin
 		Heal -->
 		<!--Liste des Types
@@ -151,6 +152,52 @@
 			description="Une faible vague télékinésique frappe l'ennemi. Peut aussi le plonger dans la confusion. "
 			power="50" type="5" pre="100" CC="7" element="Psy" maxPP="40" effet="Confus">
 		</ChocMental>
+		<Claquoir
+			ID="83" class="AtkRep"
+			nom="Claquoir"
+			description="Piège l'ennemi et l'écrase pendant 2 à 5 tours. "
+			power="35" type="3" pre="75" CC="7" element="Eau" maxPP="16" effet="Normal">
+		</Claquoir>
+		<!--Clonage
+			ID="89" class="Atk"
+			nom="Claquoir"
+			description="Une faible vague télékinésique frappe l'ennemi. Peut aussi le plonger dans la confusion. "
+			power="50" type="5" pre="100" CC="7" element="Psy" maxPP="40" effet="Confus">
+		</Clonage-->
+		<ComboGriffe
+			ID="97" class="AtkRep"
+			nom="Combo Griffes"
+			description="L'ennemi est lacéré par des faux ou des griffes de 2 à 5 fois. "
+			power="18" type="3" pre="80" CC="7" element="Normal" maxPP="24" effet="Normal">
+		</ComboGriffe>
+		<Constriction
+			ID="101" class="AtkCs"
+			nom="Constriction"
+			description="De longs tentacules ou lianes attaquent l'ennemi. Peut aussi baisser sa Vitesse. "
+			power="10" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal"
+			Tstats="07" ChangeProc="10" fof="0">
+		</Constriction>
+		<CoupDBoule
+			ID="103" class="Atk"
+			nom="Coup d'Boule"
+			description="Le lanceur lève la tête avant d'asséner un coup vers l'avant. Peut apeurer l'ennemi."
+			power="70" type="3" pre="100" CC="7" element="Normal" maxPP="24" effet="Peur">
+		</CoupDBoule>
+		<Coupe
+			ID="107" class="Atk"
+			nom="Coupe"
+			description="Coupe l'ennemi avec des lames ou des griffes."
+			power="50" type="3" pre="95" CC="7" element="Normal" maxPP="48" effet="Normal">
+		</Coupe>
+		<Coupe
+			ID="107" class="Atk"
+			nom="Coupe"
+			description="Coupe l'ennemi avec des lames ou des griffes."
+			power="50" type="3" pre="95" CC="7" element="Normal" maxPP="48" effet="Normal">
+		</Coupe>
+		
+		
+		
 		
 		
 		
