@@ -3,9 +3,10 @@ package pokemon.modele;
 import java.util.Random;
 
 public class AtkRecul extends Atk {
+	protected int recul;
 	
-	public AtkRecul(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc){
-		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc);
+	public AtkRecul(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc,int recul){
+		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc); this.recul=recul;
 	}
 	
 	public void script(Pkm user,Pkm cible,Combat context){
@@ -21,13 +22,17 @@ public class AtkRecul extends Atk {
 			System.out.println(user.nom+" rate son attaque...");
 		}
 		if(touche==1 && esquive==0 && power>0){
-			if(power>0){this.atkdamage(user,cible,context.climat);}
+			int reculdmg=0;
+			if(power>0){
+				reculdmg=this.atkdamage(user,cible,context.climat);
+			}
 			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		
 			//Traitement des dégats du Recul
 			if(user.capP!=CapacitePassive.TeteDeRoc){
-				System.out.println("Le recul inflige des degats a "+user.nom);
-				user.stats[2][0]-=(int)(user.stats[2][1]/16);
+				reculdmg=(int)(reculdmg*(recul/100));
+				System.out.println("Le recul inflige "+reculdmg+" pts de degats a "+user.nom);
+				user.infliger(reculdmg);
 			}
 			
 			//Traitement capacite passive

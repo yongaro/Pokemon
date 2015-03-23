@@ -56,7 +56,7 @@ public enum bddCapacite {
 			}
 			if(e.get("class").compareTo("AtkRecul")==0){
 				this.cap=new AtkRecul(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
-						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"));
+						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"),e.getInt("recul"));
 			}
 			cap.ID=e.getInt("ID");
 		}
