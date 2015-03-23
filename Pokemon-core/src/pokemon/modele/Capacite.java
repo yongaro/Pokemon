@@ -24,7 +24,7 @@ public abstract class Capacite implements Qmax,Infos {
 	protected Type element;
 	//nombre d'utilisations de la capacite directement apres apprentissage
 	protected int maxPP;
-	//blbl
+	//blblbl
 	public  Capacite(){
 		 description="TODO";
 	}

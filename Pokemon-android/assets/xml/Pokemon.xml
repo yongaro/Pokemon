@@ -6,7 +6,7 @@
 		<CapacitePassive>
 			<Engrais nom="Engrais"></Engrais>
 			<Chlorophylle nom="Chlorophylle"></Chlorophylle>
-		</CapacitePassive>
+		</CapacitePassive><!--! qsd--> 
 		<Events>
 			<E niveau="1" Capacite="Charge" Evolution=""></E>
 			<E niveau="3" Capacite="Rugissement" Evolution=""></E>

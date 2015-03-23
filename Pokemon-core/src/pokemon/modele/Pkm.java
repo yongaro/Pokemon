@@ -23,7 +23,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected long attacks;
 	
 	public Pkm(Pkm base,int level){
-		//creation d'un nouveau Pokemon par copie de la base
+		//creation d'un nouveau Pokemon par copie de la base bl
 		this.ID=base.ID;
 		this.nom=base.nom;
 		int i=0;
