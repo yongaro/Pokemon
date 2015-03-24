@@ -1,7 +1,7 @@
 package pokemon.controle;
 
 import pokemon.launcher.MyGdxGame;
-import pokemon.launcher.TestRender;
+import pokemon.launcher.MapScreen;
 import pokemon.modele.Joueur;
 import pokemon.modele.Minimap;
 import pokemon.vue.menuPokematosMap;
@@ -39,7 +39,7 @@ public class PokematosMapMenuListener implements InputProcessor{
 		menu.update(actualcity);
 		case Keys.ENTER:
 			joueur.setCurrentMap(new Map("maps/test.tmx"));
-			myGdxGame.setScreen(new TestRender());
+			myGdxGame.setScreen(new MapScreen());
 			return true;
 		}
 		}

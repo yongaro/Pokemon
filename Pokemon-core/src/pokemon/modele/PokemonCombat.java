@@ -40,8 +40,73 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		else{
 			//IA de meilleur choix
 			
+			
+			
+			
 		}
 	}
+	
+	//Choix de l'attaque la plus puissante
+	public int bestdmg(PokemonCombat cible,Combat context){
+		int maxdmg=0; int dmgtemp=0; int ind=0;
+		for(int i=0;i<pkm.cap.contenu.size();i++){
+			dmgtemp=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm, context.climat,true);
+			//Choix de l'attaque la plus forte
+			if(dmgtemp>maxdmg){ ind=i; maxdmg=dmgtemp; }
+			//En cas d'égalité de dégats
+			if(dmgtemp==maxdmg){
+				//Choix de l'attaque la plus précise
+				if(pkm.cap.contenu.elementAt(i).cible.pre>pkm.cap.contenu.elementAt(ind).cible.pre){
+					ind=i;
+				}
+				else{
+					//Sinon choix de l'attaque la plus réutilisable
+					if(pkm.cap.contenu.elementAt(i).quantite>pkm.cap.contenu.elementAt(ind).quantite){
+						ind=i;
+					}
+				}
+			}
+		}
+		return ind;
+	}
+	
+	//
+	public int bestdot(PokemonCombat cible,Combat context){
+		int ind=0; int maxdmg=0; int tempdmg=0;
+		for(int i=0;i<pkm.cap.contenu.size();i++){
+			//Dans le cas ou l'adversaire n'pas de changement de statut on cherche d'abord a lui en infliger un
+				//On choisit l'attaque qui a le plus de chance de changer le statut
+				if(pkm.cap.contenu.elementAt(i).cible instanceof Atk){
+					if(((Atk)pkm.cap.contenu.elementAt(i).cible).effetProc>((Atk)pkm.cap.contenu.elementAt(ind).cible).effetProc){
+						ind=i;
+					}
+					//En cas de probabilites egales
+					if(((Atk)pkm.cap.contenu.elementAt(i).cible).effetProc==((Atk)pkm.cap.contenu.elementAt(ind).cible).effetProc){
+						
+						//On choisit l'attaque la plus precise
+						if(pkm.cap.contenu.elementAt(i).cible.pre>pkm.cap.contenu.elementAt(ind).cible.pre){
+							ind=i;
+						}
+						else{
+							//sinon on choisit la  plus forte
+							tempdmg=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm,context.climat,true);
+							if(tempdmg>maxdmg){
+								maxdmg=tempdmg; ind =i;
+							}
+							else{
+								//sinon on choisit la plus réutilisable
+								if(pkm.cap.contenu.elementAt(i).quantite>pkm.cap.contenu.elementAt(ind).quantite){
+									ind=i;
+								}
+							}
+						}
+					}
+				}
+			}
+		return ind;
+	}
+	
+	
 	
 	public void setPokemon(Pkm p){ pkm=p; }
 	

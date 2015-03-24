@@ -65,7 +65,7 @@ public abstract class Capacite implements Qmax,Infos {
 		}
 		return isPremier;
 	}
-	protected int atkdamage(Pkm user,Pkm cible,Climat climat){
+	protected int atkdamage(Pkm user,Pkm cible,Climat climat,boolean quiet){
 		double STAB=1;double weakness=1.0; Random random=new Random(); double climatmod;
 		//recherche de l'affinite de l'utilisateur avec l'element de l'attaque
 		if(user.type.contains(this.element)){STAB=1.5;}
@@ -75,7 +75,10 @@ public abstract class Capacite implements Qmax,Infos {
 		for(Type t:cible.type){weakness*=t.isweak(element);} 
 		//test de chance pour le critique
 		double ccmult=1.0;
-		if(random.nextInt(100)<=this.CC){ccmult=1.5; System.out.println("Coup critique");}
+		if(random.nextInt(100)<=this.CC){
+			ccmult=1.5;
+			if(!quiet){System.out.println("Coup critique");}
+		}
 		//formule de calcul des degats
 		double mod=(double)STAB*(double)weakness*(double)ccmult;
 		double A=(2*user.stats[0][0]+10)/250.0;
@@ -89,12 +92,14 @@ public abstract class Capacite implements Qmax,Infos {
 				if(user.objTenu.buffedType==this.element){damage+=(int)(damage/2);}
 			}
 		}
-		if(weakness==0){System.out.println("Aucun effet"); return 0;}
+		if(weakness==0){ if(!quiet){System.out.println("Aucun effet");} return 0;}
 		else{
-		if(weakness>=2){System.out.println("C'est super efficace");}
-		if(weakness<1 && weakness>0){System.out.println("Ce n'est pas tres efficace");}
-		System.out.println("-"+(int)damage+" PV");
-		cible.infliger((int)damage);
+			if(!quiet){
+				if(weakness>=2){System.out.println("C'est super efficace");}
+				if(weakness<1 && weakness>0){System.out.println("Ce n'est pas tres efficace");}
+				System.out.println("-"+(int)damage+" PV");
+			}
+		//cible.infliger((int)damage);
 		//cible.stats[2][0]-=(int)damage;
 		return (int)damage;
 		}
