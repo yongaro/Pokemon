@@ -22,7 +22,7 @@ public class PokemonSprite extends Actor{
 	        b.setColor(0.2f, 0.2f, 0.2f,1); 
 	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
     }
-    
+    //
     
     
     public void draw (Batch batch, float parentAlpha) {
