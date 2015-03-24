@@ -24,7 +24,8 @@ public class AtkRecul extends Atk {
 		if(touche==1 && esquive==0 && power>0){
 			int reculdmg=0;
 			if(power>0){
-				reculdmg=this.atkdamage(user,cible,context.climat);
+				reculdmg=this.atkdamage(user,cible,context.climat,true);
+				cible.infliger(reculdmg);
 			}
 			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		

@@ -27,7 +27,7 @@ public class Atk extends Capacite {
 			System.out.println(user.nom+" rate son attaque...");
 		}
 		if(touche==1 && esquive==0 && power>0){
-			if(power>0){this.atkdamage(user,cible,context.climat);}
+			if(power>0){cible.infliger(this.atkdamage(user,cible,context.climat,false));}
 			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		
 			//Traitement capacite passive

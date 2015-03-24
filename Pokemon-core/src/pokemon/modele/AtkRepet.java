@@ -22,7 +22,7 @@ public class AtkRepet extends Atk {
 			//Nombre de coups portes par l'attaque
 			int  nbcoups=random.nextInt();
 			for(int i=0;i<=nbcoups;i++){
-				System.out.println("Touche "+i+" fois"+this.atkdamage(user,cible,context.climat));
+				System.out.println("Touche "+i+" fois"+this.atkdamage(user,cible,context.climat,false));
 				if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 			}
 			System.out.println("Touche "+nbcoups+" fois");

@@ -29,14 +29,14 @@ public class AtkChangeStats extends Atk {
 			System.out.println(user.nom+" rate son attaque...");
 		}
 		if(touche==1 && esquive==0){
-			if(power>0){this.atkdamage(user,cible,context.climat);}
+			if(power>0){cible.infliger(this.atkdamage(user,cible,context.climat,false));}
 			if(random.nextInt(100)<=ChangeProc){
 				if(fof==1){user.buff(Tstats);}
 				if(fof==0){cible.debuff(Tstats);}
 			}
 			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		
-			//Traitement capacité passive
+			//Traitement capacitï¿½ passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){
 				try{
 					CapacitePassive.class.getMethod(cible.capP.name(),Pkm.class,Pkm.class).invoke(null,user,cible);
