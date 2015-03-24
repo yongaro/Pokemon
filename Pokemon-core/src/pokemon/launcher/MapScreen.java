@@ -14,7 +14,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -22,11 +21,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class TestRender implements Screen,InputProcessor{
+public class MapScreen implements Screen,InputProcessor{
 	TiledMap map = new TmxMapLoader().load("maps/bigmap.tmx");
 	TextureAtlas atlaswest=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
 	TextureAtlas atlaseast=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
@@ -42,14 +40,8 @@ public class TestRender implements Screen,InputProcessor{
 	OrthographicCamera cam;
 	int width=640;//Gdx.graphics.getWidth();
 	int height=360;//Gdx.graphics.getHeight();
-	//private Stage stage = new Stage(new FitViewport(width,height));
     private Stage stage;
-	Texture t=new Texture(Gdx.files.internal("sprite.png"));
 	TiledMapTileLayer layerCollision;
-	float posx=0;
-	float posy=17;
-	Vector2 speed;
-	Vector2 nextPos=new Vector2(posx,posy);
 	float animationtime;
 	boolean move=false;
 	Vector<Direction> input=new Vector<Direction>();
