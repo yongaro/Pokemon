@@ -63,7 +63,7 @@ public class Combat {
 			for(int i=0;i<pkmListe.length;i++){
 				pkmListe[i].action(pkmListe[i].adv[0],this);
 			}
-			//Application des dégats sur la durée
+			//Application des dï¿½gats sur la durï¿½e
 			for(PokemonCombat p:pkmListe){
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){ 
 					p.pkm.statut.StatEffect(p.pkm,1);
@@ -97,7 +97,7 @@ public class Combat {
 				if(ch1==1 && ch2==1){
 					user.pkm.cap.at(act).script(user.pkm,cible.pkm,this);
 				}
-				//Conséquences de l'action
+				//Consï¿½quences de l'action
 				if(user.pkm.stats[2][0]<=0){ user.XPreward(); pokeswap(user); }
 				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(); pokeswap(cible); }
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
@@ -119,7 +119,7 @@ public class Combat {
 			case 2:
 				pokeswap(user);
 				isdone=1;
-				//traitement capacité passive ici
+				//traitement capacitï¿½ passive ici
 				break;
 			case 3:
 				System.out.println("TODO");
@@ -150,7 +150,7 @@ public class Combat {
 			while(done==0){
 				System.out.println("Qui voulez vous envoyer ?");
 				for(PokemonCombat p: user.equipe){
-					System.out.println(i+" "+p.pkm.nom+" LV."+p.pkm.stats[0][0]+" "+p.pkm.stats[2][0]+"/"+p.pkm.stats[2][1]+" "+p.pkm.statut);
+					System.out.println(i+" "+p.pkm.nom+" LV."+p.pkm.stats[0][0]+" "+p.pkm.stats[0][1]+"% "+p.pkm.stats[2][0]+"/"+p.pkm.stats[2][1]+" "+p.pkm.statut);
 					i++;
 				}
 				act=sc.nextInt();

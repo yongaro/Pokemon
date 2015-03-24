@@ -107,19 +107,19 @@
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0">
 		</Brouillard>
-		<Brume<!--
+		<Brume
 			ID="53" effetProc="10" class="AtkCS"
 			nom="Brume"
 			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
-			Tstats="08" ChangeProc="100" fof="0"-->>
+			Tstats="08" ChangeProc="100" fof="0">
 		</Brume>
-		<BueeNoire<!--
+		<BueeNoire
 			ID="59" effetProc="10" class="AtkCs"
 			nom="Buée Noire"
 			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
-			Tstats="08" ChangeProc="100" fof="0"-->>
+			Tstats="08" ChangeProc="100" fof="0">
 		</BueeNoire>
 		<BullesDo
 			ID="61" effetProc="10" class="AtkCs"
@@ -211,7 +211,7 @@
 			ID="127" effetProc="10" class="AtkCs"
 			nom="Croissance"
 			description="Le lanceur se développe. Augmente l'Atq. Spé "
-			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="64 effet="Normal"
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="64" effet="Normal"
 			Tstats="15" ChangeProc="100" fof="1">
 		</CrocDeMort>
 		<CruAile	
