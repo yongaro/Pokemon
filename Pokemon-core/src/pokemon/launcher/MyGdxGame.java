@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import pokemon.annotations.Tps;
 import pokemon.controle.MenuListener;
 import pokemon.modele.*;
+import pokemon.vue.CombatV;
 
 
 @Tps(nbhours=2)
@@ -32,8 +33,8 @@ public class MyGdxGame extends Game {
 	public void create () {
 		MyGdxGame.initStatic();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
-		MenuListener menu=new MenuListener(this);
-		
+		//MenuListener menu=new MenuListener(this);
+		this.setScreen(new CombatV());
 		//TestMap2 test = new TestMap2();
 		//this.setScreen(new TestRender());
 //		Combat test=new Combat();
