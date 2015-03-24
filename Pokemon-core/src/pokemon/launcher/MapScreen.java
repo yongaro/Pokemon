@@ -83,8 +83,7 @@ public class MapScreen implements Screen,InputProcessor{
 			else{
 				move=false;
 				animationtime=0;
-			}
-				
+			}				
 		}
 		
 		//renderer.getBatch().draw(atlassouth.getRegions().get(1),0,0);
