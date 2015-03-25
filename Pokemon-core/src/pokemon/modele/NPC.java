@@ -82,7 +82,7 @@ public class NPC {
 		this.pos = pos;
 	}
 	//Fonctions privees
-	private void lireXML(String path) {
+	protected void lireXML(String path) {
 		XmlReader reader = new XmlReader();
 		Element temp = null;
 		try {

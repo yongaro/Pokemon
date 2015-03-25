@@ -59,15 +59,21 @@ public class Map {
 		MapLayer objectLayer = tiledMap.getLayers().get("NPCs");
 		if(objectLayer != null) {			
 			for(MapObject o : objectLayer.getObjects()) {
+				NPC npc = null;
 				float x = Float.parseFloat(o.getProperties().get("x").toString());
 				float y = Float.parseFloat(o.getProperties().get("y").toString());
 				if(o.getProperties().containsKey("dialogs")) {
-					NPC npc = new NPC(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
+					if(o.getProperties().containsKey("trainer")) {
+						npc = new Dresseur(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
+					}
+					else {						
+						npc = new NPC(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
+					}
 					npcs.addElement(npc);
 					npcList.addNPC(npc);
 				}
 				else {
-					NPC npc = new NPC(new Vector2(x, y));
+					npc = new NPC(new Vector2(x, y));
 					npcs.addElement(npc);
 					npcList.addNPC(npc);
 				}
