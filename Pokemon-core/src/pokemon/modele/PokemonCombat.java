@@ -74,7 +74,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	public int bestdot(PokemonCombat cible,Combat context){
 		int ind=0; int maxdmg=0; int tempdmg=0;
 		for(int i=0;i<pkm.cap.contenu.size();i++){
-			//Dans le cas ou l'adversaire n'pas de changement de statut on cherche d'abord a lui en infliger un
+			//Dans le cas ou l'adversaire n'pas statut on cherche d'abord a lui en infliger un
 				//On choisit l'attaque qui a le plus de chance de changer le statut
 				if(pkm.cap.contenu.elementAt(i).cible instanceof Atk){
 					if(((Atk)pkm.cap.contenu.elementAt(i).cible).effetProc>((Atk)pkm.cap.contenu.elementAt(ind).cible).effetProc){
@@ -103,6 +103,17 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 					}
 				}
 			}
+		return ind;
+	}
+	
+	
+	//Permet de choisir la meilleur attaque de controle pour empecher son adversaire d'attaquer et lui infliger des dégats
+	public int bestControl(PokemonCombat cible,Combat context){
+		int ind=0; int maxdmg=0; int tempdmg=0;
+		
+		
+		
+		
 		return ind;
 	}
 	
