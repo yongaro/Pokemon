@@ -61,6 +61,6 @@ public class CombatV implements Screen{
 		stage.addActor(new PokemonSprite(PokemonSprite.e2,"Sprites/99.png"));
 		stage.addActor(new PokemonSprite(PokemonSprite.a1,"Sprites/pikachu-f.png"));
 		
-	}////
+	}//////
 
 }
