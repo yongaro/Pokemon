@@ -8,9 +8,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
+/* La classe Dresseur (herite de NPC) decrit le modele d'un dresseur
+ * ainsi que son equipe de pokemon, lue depuis un fichier xml */
+
 public class Dresseur extends NPC {
-	private Vector<Pkm> team = new Vector<Pkm>();
+	private Vector<Pkm> team;
 	
+	//Constructeurs
 	public Dresseur() {
 		super();
 	}
@@ -42,7 +46,7 @@ public class Dresseur extends NPC {
 	}
 	public void removePkm(String s) {
 		for(int i = 0;i<team.size();i++) {
-			if(team.get(i).nom.equals(s)) {
+			if(team.get(i).nom.compareTo(s) == 0) {
 				team.remove(i);
 			}
 		}
@@ -62,36 +66,40 @@ public class Dresseur extends NPC {
 			id = root.getInt("id");
 			
 			//On parcourt chaque dialogues
-			for(int i = 0;i<root.getChildCount();i++) {
-				temp = root.getChild(i);
+			for(int i = 0;i<root.getChildrenByName("dialogue").size;i++) {
+				temp = root.getChildrenByName("dialogue").get(i);
 				
-				if(temp.getName() == "dialogue") {					
-					Element text = temp.getChildByName("text");
-					Element status = temp.getChildByName("status");
-					int newStatus = 0, target = 0;
-					if(status != null) {
-						newStatus = status.getInt("value");
-						target = status.getInt("npc");
-					}
-					dialogs.addElement(new Dialog(text.getText(), target, newStatus));
+//				System.out.println("Nouveau dialogue");
+				Element text = temp.getChildByName("text");
+				Element status = temp.getChildByName("status");
+				int newStatus = 0, target = 0;
+				if(status != null) {
+					newStatus = status.getInt("value");
+					target = status.getInt("npc");
 				}
-				//On recupere l'equipe
-				else if(temp.getName() == "equipe") {
-					for(int j = 0;j<temp.getChildCount();j++) {
-						Element pokemonElt = temp.getChild(j);
-						int id = pokemonElt.getInt("id");
-						int lvl = pokemonElt.getInt("niveau");
-						Pkm pokemon = new Pkm(Pokedex.values()[id-1].get(), lvl);
-						System.out.println(pokemon.nom);
-						for(int k = 0;k<pokemonElt.getChildCount();k++) {
-							Element cap = pokemonElt.getChild(k);
-							pokemon.add(bddCapacite.valueOf(cap.getAttribute("nom")).get());
-							System.out.println("Ajout de " + cap.getAttribute("nom"));
-						}
-						team.add(pokemon);
+				dialogs.addElement(new Dialog(text.getText(), target, newStatus));
+			}
+			
+			//On recupere l'equipe
+			Element equipe = root.getChildByName("equipe");
+			if(equipe != null) {
+				team = new Vector<Pkm>();
+				for(int j = 0;j<equipe.getChildCount();j++) {
+					Element pokemonElt = equipe.getChild(j);
+					int id = pokemonElt.getInt("id");
+					int lvl = pokemonElt.getInt("niveau");
+					
+					Pkm pokemon = new Pkm(Pokedex.values()[id-1].get(), lvl);
+//					System.out.println(pokemon.nom);
+					for(int k = 0;k<pokemonElt.getChildCount();k++) {
+						Element cap = pokemonElt.getChild(k);
+						pokemon.add(bddCapacite.valueOf(cap.getAttribute("nom")).get());
+//						System.out.println("Ajout de " + cap.getAttribute("nom"));
 					}
+					addPkm(pokemon);
 				}
 			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
