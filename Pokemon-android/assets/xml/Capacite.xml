@@ -107,20 +107,20 @@
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0">
 		</Brouillard>
-		<Brume
+		<!--<Brume
 			ID="53" effetProc="10" class="AtkCS"
 			nom="Brume"
 			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0">
-		</Brume>
-		<BueeNoire
+		</Brume>-->
+		<!--<BueeNoire
 			ID="59" effetProc="10" class="AtkCs"
 			nom="Buée Noire"
 			description="Le lanceur disperse un nuage d'encre ou de fumée. Réduit la précision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0">
-		</BueeNoire>
+		</BueeNoire>-->
 		<BullesDo
 			ID="61" effetProc="10" class="AtkCs"
 			nom="Bulles d'O"
@@ -153,10 +153,10 @@
 			power="50" type="5" pre="100" CC="7" element="Psy" maxPP="40" effet="Confus">
 		</ChocMental>
 		<Claquoir
-			ID="83" effetProc="10" class="AtkRep"
+			ID="83" effetProc="10" class="Atk"
 			nom="Claquoir"
 			description="Piège l'ennemi et l'écrase pendant 2 à 5 tours. "
-			power="35" type="3" pre="75" CC="7" element="Eau" maxPP="16" effet="Normal">
+			power="35" type="3" pre="75" CC="7" element="Eau" maxPP="16" effet="Stuck">
 		</Claquoir>
 		<!--Clonage
 			ID="89" effetProc="10" class="Atk"
@@ -291,20 +291,168 @@
 			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
 			Tstats="07" ChangeProc="10" fof="0">
 		</Explosion><!--ATKRECUL ???-->
-		
+		<PoingKarate	
+			ID="181" effetProc="0" class="Atk"
+			nom="Poing Karaté"
+			description="L'ennemi est tranché violemment. Taux de critiques élevé. "
+			power="50" type="3" pre="100" CC="13" element="Combat" maxPP="40" effet="Normal">
+		</PoingKarate>
+		<Torgnoles	
+			ID="191" effetProc="0" class="AtkRep"
+			nom="Torgnoles"
+			description="Gifle rapidement l'ennemi 2 à 5 fois d'affilée. "
+			power="15" type="3" pre="85" CC="7" element="Normal" maxPP="16" effet="Normal">
+		</Torgnoles>
+		<PoingComete	
+			ID="193" effetProc="0" class="AtkRep"
+			nom="Torgnoles"
+			description="Une tornade de coups de poing frappe de 2 à 5 fois d'affilée. "
+			power="18" type="3" pre="85" CC="7" element="Normal" maxPP="24" effet="Normal">
+		</PoingComete>
+		<Ultimapoing	
+			ID="197" effetProc="0" class="Atk"
+			nom="Ultimapoing"
+			description="Un coup de poing d'une puissance incroyable. "
+			power="80" type="3" pre="85" CC="7" element="Normal" maxPP="32" effet="Normal">
+		</Ultimapoing>
+		<Jackpot	
+			ID="199" effetProc="0" class="Atk"
+			nom="Jackpot"
+			description="Des pièces sont lancées sur l'ennemi. Permet d'obtenir de l'argent à la fin du combat. "
+			power="40" type="3" pre="100" CC="7" element="Normal" maxPP="32" effet="Normal">
+		</Jackpot><!-- MANQUE LE GAIN D'ARGENT -->
+		<PoingDeFeu	
+			ID="211" effetProc="15" class="Atk"
+			nom="Poing de Feu"
+			description="Le lanceur frappe l'adversaire avec un poing enflammé. Peut aussi le brûler. "
+			power="75" type="3" pre="100" CC="7" element="Feu" maxPP="24" effet="Brule">
+		</PoingDeFeu>
+		<PoingEclair	
+			ID="223" effetProc="10" class="Atk"
+			nom="Poing-Eclair"
+			description="Un coup de poing électrique vient frapper l'ennemi. Peut le paralyser."
+			power="75" type="3" pre="100" CC="7" element="Electrique" maxPP="24" effet="Paralyse">
+		</PoingEclair>
+		<PoingGlace	
+			ID="227" effetProc="10" class="Atk"
+			nom="Poing-Glace"
+			description="Un coup de poing glacé vient frapper l'ennemi. Peut le geler."
+			power="75" type="3" pre="100" CC="7" element="Glace" maxPP="24" effet="Gele">
+		</PoingGlace>
 		<Griffe	
-			ID="29" effetProc="10" class="Atk"
+			ID="229" effetProc="10" class="Atk"
 			nom="Griffe"
 			description="Lacère l'ennemi avec des griffes acérées pour lui infliger des dégâts."
 			power="40" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
 		</Griffe>
+		<ForcePoigne	
+			ID="233" effetProc="10" class="Atk"
+			nom="Force Poigne"
+			description="Empoigne l'ennemi avec de puissantes pinces. "
+			power="55" type="3" pre="100" CC="7" element="Normal" maxPP="48" effet="Normal">
+		</ForcePoigne>
+		<!--<Guillotine	
+			ID="239" effetProc="10" class="Atk"
+			nom="Guillotine"
+			description="Empoigne l'ennemi avec de puissantes pinces. "
+			power="55" type="3" pre="100" CC="7" element="Normal" maxPP="48" effet="Normal">
+		</Guillotine> OHKO ATK-->
+		<DanseLames	
+			ID="241" effetProc="10" class="AtkCs"
+			nom="Danse-Lames"
+			description="Une danse frénétique qui augmente l'esprit combatif. Elle augmente fortement l'Attaque de l'utilisateur. "
+			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
+			Tstats="33" ChangeProc="100" fof="1" >
+		</DanseLames>
+		<Tornade	
+			ID="251" effetProc="10" class="Atk"
+			nom="Tornade"
+			description="Le lanceur bat des ailes pour générer une bourrasque qui blesse l'ennemi. "
+			power="40" type="3" pre="100" CC="7" element="Vol" maxPP="56" effet="Normal">
+		</Tornade><!-- SCRIPT : DOUBLE LES DEGATS SUR UN ADVERSAIRE EN TRAIN DE VOLER -->
+		<Vol	
+			ID="257" effetProc="10" class="AtkRet"
+			nom="Vol"
+			description="Le lanceur s'envole au premier tour et frappe au deuxième. Permet aussi de voler jusqu'à une ville déjà visitée. "
+			power="90" type="3" pre="95" CC="7" element="Vol" maxPP="24" effet="Normal">
+		</Vol> <!-- CLASSE ATKRET A CREER-->
+		<Etreinte	
+			ID="263" effetProc="10" class="Atk"
+			nom="Etreinte"
+			description="Ligote l'ennemi avec les tentacules ou le corps pour l'écraser durant 2 à 5 tours. "
+			power="15" type="3" pre="85" CC="7" element="Normal" maxPP="32" effet="Stuck">
+		</Etreinte>
+		<Souplesse	
+			ID="269" effetProc="10" class="Atk"
+			nom="Souplesse"
+			description="Fouette l'ennemi avec la queue, une liane, etc pour infliger des dégâts. "
+			power="80" type="3" pre="75" CC="7" element="Normal" maxPP="32" effet="Normal">
+		</Souplesse>
+		<FouetLianes	
+			ID="271" effetProc="10" class="Atk"
+			nom="Fouet Lianes"
+			description="Fouette l'ennemi avec de fines lianes pour infliger des dégâts. "
+			power="45" type="3" pre="100" CC="7" element="Plante" maxPP="40" effet="Normal">
+		</FouetLianes>
+		<DoublePied	
+			ID="277" effetProc="10" class="Atk"
+			nom="Double Pied"
+			description="Un coup de pied qui frappe l'ennemi deux fois d'affilée. "
+			power="30" type="3" pre="100" CC="7" element="Combat" maxPP="48" effet="Normal">
+		</DoublePied><!-- L'ATTAQUE TOUCHE DEUX FOIS, SCRIPT A FAIRE-->
+		<Ultimawashi	
+			ID="281" effetProc="10" class="Atk"
+			nom="Ultimawashi"
+			description="Un coup de pied super puissant et intense."
+			power="120" type="3" pre="75" CC="7" element="Normal" maxPP="8" effet="Normal">
+		</Ultimawashi>
+		<!--<PiedSaute	
+			ID="283" effetProc="10" class="Atk"
+			nom="Pied Sauté"
+			description="Un coup de pied super puissant et intense."
+			power="120" type="3" pre="75" CC="7" element="Normal" maxPP="8" effet="Normal">
+		</PiedSaute>GROS SCRIPT A FAIRE-->
+		<MawashiGeri	
+			ID="293" effetProc="30" class="Atk"
+			nom="Mawashi Geri"
+			description="Le lanceur effectue un coup de pied tournoyant et extrêmement rapide. "
+			power="60" type="3" pre="85" CC="7" element="Combat" maxPP="24" effet="Peur">
+		</MawashiGeri>
 		<JetDeSable
-			ID="3" effetProc="10" class="AtkCS"
+			ID="307" effetProc="10" class="AtkCS"
 			nom="Jet de Sable"
 			description="Lance du sable au visage de l'ennemi pour baisser sa precision."
 			power="0" type="5" pre="100" CC="0" element="Sol" maxPP="35" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0" >
 		</JetDeSable>
+		<KoudKorne	
+			ID="311" effetProc="10" class="Atk"
+			nom="Koud'Korne"
+			description=" Frappe l'ennemi d'un coup de corne pointue pour infliger des dégâts. "
+			power="65" type="3" pre="100" CC="7" element="Normal" maxPP="40" effet="Normal">
+		</KoudKorne>
+		<Furie	
+			ID="313" effetProc="10" class="AtkRep"
+			nom="Furie"
+			description="Frappe l'ennemi 2 à 5 fois d'affilée avec un bec ou une corne. "
+			power="15" type="3" pre="85" CC="7" element="Normal" maxPP="56" effet="Normal">
+		</Furie>
+		<Plaquage	
+			ID="317" effetProc="30" class="Atk"
+			nom="Plaquage"
+			description="Le lanceur se laisse tomber sur l'ennemi de tout son poids. Peut le paralyser."
+			power="85" type="3" pre="100" CC="7" element="Normal" maxPP="24" effet="Paralyse">
+		</Plaquage>
+		<Ligotage	
+			ID="331" effetProc="30" class="Atk"
+			nom="Ligotage"
+			description="Le lanceur ligote l'ennemi avec des lianes ou son corps pour l'écraser durant 2 à 5 tours. "
+			power="15" type="3" pre="90" CC="7" element="Normal" maxPP="24" effet="Stuck">
+		</Ligotage>
+
+
+
+
 		<JetPierres 
 			ID="47" effetProc="10" class="Atk"
 			nom="Jet-Pierres"
@@ -316,25 +464,8 @@
 			nom="Mega-Sangsue"
 			description="Une attaque qui convertit la moitié des dégâts infligés en PV. "
 			power="40" type="5" pre="100" CC="7" element="Plante" maxPP="15" effet="Normal" >
-		</MegaSangsue>
-		<PoingDeFeu
-			ID="17" effetProc="10" class="Atk"
-			nom="Poing de Feu"
-			description="Le lanceur frappe l'adversaire avec un poing enflammé. Peut aussi le brûler"
-			power="75" type="3" pre="100" CC="7" element="Feu" maxPP="24" effet="Brule">
-		</PoingDeFeu>
-		<PoingEclair	
-			ID="23" effetProc="10" class="Atk"
-			nom="Poing-Eclair"
-			description="Un coup de poing électrique vient frapper l'ennemi. Peut le paralyser."
-			power="75" type="3" pre="100" CC="7" element="Electrique" maxPP="24" effet="Paralyse">
-		</PoingEclair>
-		<PoingGlace	
-			ID="19" effetProc="10" class="Atk"
-			nom="Poing-Glace"
-			description="Un coup de poing glacé vient frapper l'ennemi. Peut le geler."
-			power="75" type="3" pre="100" CC="7" element="Glace" maxPP="24" effet="Gele">
-		</PoingGlace>
+		</MegaSangsue>		
+		
 		<RafalePsy 
 			ID="41" effetProc="10" class="Atk"
 			nom="Rafale Psu"
