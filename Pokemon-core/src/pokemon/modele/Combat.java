@@ -67,7 +67,9 @@ public class Combat {
 			for(PokemonCombat p:pkmListe){
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){ 
 					p.pkm.statut.StatEffect(p.pkm,1);
-					p.pkm.supTemp.StatEffect(p.pkm,1);
+					for(Statut s: p.pkm.supTemp){
+						s.StatEffect(p.pkm,1);
+					}
 					if(p.pkm.stats[2][0]<=0){ p.XPreward(); pokeswap(p); }
 				}
 			}
@@ -92,8 +94,12 @@ public class Combat {
 				//while((act=sc.nextInt())<user.cap.max){System.out.println(act); }
 				act=sc.nextInt();
 				//Application des statuts pouvant empecher l'action
-				ch1=user.pkm.statut.StatEffect(user.pkm,1);
-				ch2=user.pkm.supTemp.StatEffect(user.pkm,1);
+				ch1=user.pkm.statut.StatEffect(user.pkm,0);
+				for(Statut s: user.pkm.supTemp){
+					if(s.StatEffect(user.pkm,0)==1){
+						ch2=1;
+					}
+				}
 				if(ch1==1 && ch2==1){
 					user.pkm.cap.at(act).script(user.pkm,cible.pkm,this);
 				}
@@ -180,6 +186,7 @@ public class Combat {
 			}
 		}
 	}
-	
+	public Terrain getTerrain(){ return terrain; }
+	public Climat getClimat(){ return climat; }
 	
 }
