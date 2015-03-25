@@ -37,7 +37,7 @@ public class CombatV implements Screen{
 	}
 	@Override
 	public void render(float arg0) {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0.5f, 0.5f, 5.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
 		stage.act(arg0);
@@ -57,7 +57,9 @@ public class CombatV implements Screen{
 	}
 	@Override
 	public void show() {
-		stage.addActor(new PokemonSprite());
+		stage.addActor(new PokemonSprite(PokemonSprite.e1,"Sprites/80.png"));
+		stage.addActor(new PokemonSprite(PokemonSprite.e2,"Sprites/99.png"));
+		stage.addActor(new PokemonSprite(PokemonSprite.a1,"Sprites/pikachu-f.png"));
 		
 	}
 
