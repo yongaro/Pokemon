@@ -5,12 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-import pokemon.controle.JoueurController;
+import pokemon.modele.ChangeMapException;
+import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 
 public class JoueurVue {
-	private JoueurController controller;
 	private TextureAtlas atlaswest=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
 	private TextureAtlas atlaseast=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
 	private TextureAtlas atlassouth=new TextureAtlas(Gdx.files.internal("player/w_south.pack"));
@@ -56,13 +57,35 @@ public class JoueurVue {
 		}
 		batch.draw(a.getKeyFrame(animationtime,true), j.getPos().x, j.getPos().y);
 	}
-	
-	//Accesseurs
-	public Joueur getJ() {
-		return j;
+	public void updatePosition(OrthogonalTiledMapRenderer renderer) {
+		try {
+			j.updatePosition();
+		} catch (ChangeMapException e) {
+			renderer.setMap(j.getCurrentMap().getTiledMap());
+		}
 	}
 	
-	public void setJ(Joueur j) {
-		this.j = j;
+	//Accesseurs
+	public void setAnimation(Direction dir) {
+		switch(dir)
+		{
+		case East:
+			a = this.rightwalk;
+			break;
+		case North:
+			a = this.northwalk;
+			break;
+		case South:
+			a = this.southwalk;
+			break;
+		case West:
+			a = this.leftwalk;
+			break;
+		default:
+			break;
+		}
+	}
+	public Joueur getJoueur() {
+		return j;
 	}
 }

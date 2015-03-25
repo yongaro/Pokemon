@@ -174,7 +174,7 @@ public class Joueur {
 			speed.x=0;
 		}
 	}
-	public boolean updatePosition() {
+	public void updatePosition() throws ChangeMapException {
 		Vector2 nextPos = new Vector2(getPos());
 
 		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
@@ -184,9 +184,9 @@ public class Joueur {
 		/*Verif si non debordement de map*/
 
 		if(nextPos.x>800-spriteWidth || nextPos.x<0 ) 
-		{setSpeedX(0);System.out.println("REACH BORDER");return false;}
+		{setSpeedX(0);System.out.println("REACH BORDER");nextPos = getPos();}
 		if( nextPos.y>800-spriteHeight || nextPos.y<0)
-		{setSpeedY(0);System.out.println("REACH BORDER");return false;}
+		{setSpeedY(0);System.out.println("REACH BORDER");nextPos = getPos();}
 		/*verif si collision avec decors*/
 		if(currentMap.collide(nextPos, spriteWidth, spriteHeight))
 		{
@@ -196,7 +196,7 @@ public class Joueur {
 				setSpeedY(0);
 			System.out.println("Collision DETECTE A " + nextPos);
 			//System.out.println("Speed:" +getSpeed());
-			return false;
+			nextPos = getPos();
 		}
 		//System.out.println("GOING TO NEXT POS");
 		//speed.x+=10*delta;
@@ -204,7 +204,10 @@ public class Joueur {
 		//posy=nextPos.y;
 		
 		//On retourne vrai si le joueur a change de Map
-		return changeMap();
+		if(changeMap())
+		{
+			throw new ChangeMapException();
+		}
 	}
 	
 	public String interact(NPCList npcList) {
