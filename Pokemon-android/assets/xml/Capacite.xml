@@ -1,7 +1,7 @@
 <Capacite>
 		<!--Liste des classes d'attaque
 		Dans le cas d'une AtkCS, préciser fof (0 adversaire, 1 soi même) et Tstats (0 : debuff d'1 lvl 	1 : buff d'1 lvl 	2 : debuff de 2 lvl 	3 : buff de 2 lvl )		
-		exemples : 08-13
+		exemple : 08-13
 		Atk
 		AtkRep
 		AtkSoin
