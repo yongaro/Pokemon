@@ -11,7 +11,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	//0-niveau | 1-XP | 2-PV | 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base)
 	protected int[][] stats;
 	protected Statut statut;
-	protected Statut supTemp;
+	protected Vector<Statut> supTemp;
 	protected int[] IV;
 	protected int[] EV;
 	protected int prevXpPal;
@@ -33,7 +33,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		this.stats[9][0]=5;this.stats[9][1]=5;
 		this.stats[0][0]=level; this.stats[0][1]=level;
 		this.statut=Statut.Normal;
-		this.supTemp=Statut.Normal;
+		this.supTemp=new Vector<Statut>();
 		this.personnalite=Nature.getRandom(this);
 		this.type=new Vector <Type>();
 		for(Type t: base.type){ this.type.addElement(t);}
@@ -42,12 +42,12 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		//Gestion de l'aleatoire et de la mise a niveau
 		Random rand=new Random();
 		this.capP=Pokedex.values()[ID-1].randCapP(rand);
-		int IV=(int)rand.nextInt(32);
+		int IV=(int)rand.nextInt(31)+1;
 		this.IV=new int[6];
 		this.EV=new int[6];
 		this.IV[0]=IV;
 		for(i=3;i<8;i++){
-			IV=(int)rand.nextInt(32);
+			IV=(int)rand.nextInt(31)+1;
 		}
 		//niveau
 		this.stats[0][0]=level;
@@ -64,7 +64,6 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		//copie des stats
 		this.ID=ID;
 		this.statut=Statut.Normal;
-		this.supTemp=Statut.Normal;
 		this.nom=nom;
 		int i=0;
 		this.stats=new int[10][2];
@@ -242,7 +241,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	}
 	
 	public void infliger(int dmg){
-		if(dmg>=this.stats[2][0]){ this.stats[2][0]=0; this.statut=Statut.KO; this.supTemp=Statut.Normal; }
+		if(dmg>=this.stats[2][0]){ this.stats[2][0]=0; this.statut=Statut.KO; this.supTemp.clear(); }
 		else{ stats[2][0]-=dmg; }
 	}
 	

@@ -3,13 +3,20 @@ package pokemon.modele;
 import java.util.Random;
 
 public enum Statut {
-	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur;
+	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur,Requiem,Stuck;
 	
-	//useless ?
+	protected int nbtours;
+	
+	
+	
 	public void applique(Pkm cible){
 		if(this==Brule || this==Empoisonne || this==Endormi || this==Gele || this==Paralyse){
 			if(cible.statut==Normal){
 				cible.statut=this;
+				if(this==Endormi){
+					Random rand=new Random();
+					nbtours=rand.nextInt(5)+1;
+				}
 				System.out.println(cible.nom+" ");
 				if(cible.objTenu instanceof Medicament){
 					Medicament m=(Medicament)cible.objTenu;
@@ -21,10 +28,14 @@ public enum Statut {
 				}
 			}
 		}
-		if(this==KO){cible.statut=this;}
+		if(this==KO){cible.statut=this; cible.supTemp.clear();}
 		if(this==Attraction || this==Confus || this==Peur){
-			if(cible.supTemp==Normal){
-				cible.supTemp=this;
+			if(this==Confus){
+				Random rand=new Random();
+				nbtours=rand.nextInt(4)+1;
+			}
+			if(this==Requiem){nbtours=3;}
+			if(!cible.supTemp.contains(this)){
 				if(cible.objTenu instanceof Medicament){
 					Medicament m=(Medicament)cible.objTenu;
 					if(m.baie && (m.flagSoin==2 || m.flagSoin==4)){
@@ -32,7 +43,9 @@ public enum Statut {
 						m.script(cible);
 						cible.objTenu=null;
 					}
+					else{ cible.supTemp.add(this);}
 				}
+				else{ cible.supTemp.add(this); }
 			}
 		}
 	}
@@ -45,14 +58,16 @@ public enum Statut {
 				return 1;
 		}
 	    if(this==Statut.Endormi && flag==0){
-	    	Random rand=new Random();
-	    	if(rand.nextInt()<=25){
-	    		System.out.println(cible.nom+" se r�veille");
-	    		cible.statut=Statut.Normal;
+	    	if(nbtours==0){
+	    		System.out.println(cible.nom+" se réveille");
 	    		return 1;
 	    	}
-	    	System.out.println(cible.nom+" dort");
-	    	return 0;
+	    	else{
+	    		System.out.println(cible.nom+" dort profondement");
+	    		nbtours--;
+	    		return 0;
+	    	}
+	    	
 	    }
 	    if(this==Statut.Gele && flag==0){
 	    	Random rand=new Random();
@@ -79,18 +94,22 @@ public enum Statut {
 	    }
 	    if(this==Statut.Confus && flag==0){
 	    	Random rand=new Random();
-	    	if(rand.nextInt()<=25){
+	    	if(nbtours==0){
+	    		cible.supTemp.remove(this);
 	    		System.out.println(cible.nom+" sort de sa confusion");
-	    		cible.supTemp=Statut.Normal;
 	    		return 1;
 	    	}
-	    	if(rand.nextInt()<=50){
-	    	System.out.println(cible.nom+" est Confus");
-	    	System.out.println(cible.nom+" se blesse dans sa follie");
+	    	else{
+		    	if(rand.nextInt()<=50){
+			    	System.out.println(cible.nom+" est Confus");
+			    	System.out.println(cible.nom+" se blesse dans sa follie");
+			    	//infliger les degats d'une attaque a 40 de dégats sans type
+		    	}
+		    	nbtours--;
 	    	}
 	    }
 	    if(this==Statut.Peur && flag==0){
-	    	cible.supTemp=Statut.Normal;
+	    	cible.supTemp.remove(this);
 	    	System.out.println(cible.nom+" a peur");
 	    	return 0;
 	    }
