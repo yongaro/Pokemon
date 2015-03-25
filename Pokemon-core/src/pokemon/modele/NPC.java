@@ -91,9 +91,10 @@ public class NPC {
 			id = root.getInt("id");
 			
 			//On parcourt chaque dialogues
-			for(int i = 0;i<root.getChildCount();i++) {
-				temp = root.getChild(i);
+			for(int i = 0;i<root.getChildrenByName("dialogue").size;i++) {
+				temp = root.getChildrenByName("dialogue").get(i);
 				
+//				System.out.println("Nouveau dialogue");
 				Element text = temp.getChildByName("text");
 				Element status = temp.getChildByName("status");
 				int newStatus = 0, target = 0;
