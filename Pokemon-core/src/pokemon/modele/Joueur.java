@@ -215,7 +215,7 @@ public class Joueur {
 		Vector2 center = new Vector2();
 		center.x = pos.x + (spriteWidth/2);
 		center.y = pos.y + (spriteWidth/2); //Car spriteHeight - 5 = spriteWidth
-		int range = 8;
+		int range = 12;
 		switch(this.orientation) {
 		case East:
 			target.x = center.x + range;
@@ -258,5 +258,11 @@ public class Joueur {
 	}
 	public void setTalking(boolean isTalking) {
 		this.isTalking = isTalking;
+	}
+	public Direction getOrientation() {
+		return orientation;
+	}
+	public void setOrientation(Direction orientation) {
+		this.orientation = orientation;
 	}
 }

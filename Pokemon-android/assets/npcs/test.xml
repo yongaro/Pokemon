@@ -6,5 +6,9 @@
 	</dialogue>
 	<dialogue>
 		<text>Ca va ?</text>
+		<status npc="1" value="2"/>
 	</dialogue>
+	<dialogue>
+		<text>Moi je vais bien</text>
+	</dialogue>	
 </PNJ>

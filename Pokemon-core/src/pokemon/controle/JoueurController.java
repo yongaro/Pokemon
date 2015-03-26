@@ -68,6 +68,8 @@ public class JoueurController implements InputProcessor{
 				}
 			}
 			if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
+				j.setSpeedX(0);
+				j.setSpeedY(0);
 				new MenuListener(game);
 			}
 		}

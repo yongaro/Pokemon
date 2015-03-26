@@ -29,7 +29,7 @@ public class MapChange {
 		dim = new Vector2(d);
 		targetPos = new Vector2(t);
 		
-		System.out.println("Ajout de : " + dest + " a " + pos + " : " + dim);
+//		System.out.println("Ajout de : " + dest + " a " + pos + " : " + dim);
 	}
 
 	//Accesseurs

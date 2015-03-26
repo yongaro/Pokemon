@@ -15,8 +15,8 @@ public class NPCVue {
 	private TextureAtlas atlaseast;
 	private TextureAtlas atlassouth;
 	private TextureAtlas atlasnorth;
-	private Animation rightwalk;
-	private Animation leftwalk;
+	private Animation eastwalk;
+	private Animation westwalk;
 	private Animation southwalk;
 	private Animation northwalk;
 	private Animation a;
@@ -55,8 +55,8 @@ public class NPCVue {
 		atlaseast=new TextureAtlas(Gdx.files.internal(path + "/right.pack"));
 		atlassouth=new TextureAtlas(Gdx.files.internal(path + "/south.pack"));
 		atlasnorth=new TextureAtlas(Gdx.files.internal(path + "/north.pack"));
-		rightwalk=new Animation(1f/5f,atlaswest.getRegions());
-		leftwalk=new Animation(1f/5f,atlaseast.getRegions());
+		eastwalk=new Animation(1f/5f,atlaswest.getRegions());
+		westwalk=new Animation(1f/5f,atlaseast.getRegions());
 		southwalk=new Animation(1f/5f,atlassouth.getRegions());
 		northwalk=new Animation(1f/5f,atlasnorth.getRegions());
 		a=southwalk;
@@ -66,7 +66,7 @@ public class NPCVue {
 	public void render(Batch batch, float deltatime) {
 		switch(npc.getOrientation()) {
 		case East:
-			a = rightwalk;
+			a = eastwalk;
 			break;
 		case North:
 			a = northwalk;
@@ -75,7 +75,7 @@ public class NPCVue {
 			a = southwalk;
 			break;
 		case West:
-			a = leftwalk;
+			a = westwalk;
 			break;
 		default:
 			break;

@@ -20,7 +20,7 @@ public class JoueurVue {
 	private Animation leftwalk=new Animation(1f/5f,atlaseast.getRegions());
 	private Animation southwalk=new Animation(1f/5f,atlassouth.getRegions());
 	private Animation northwalk=new Animation(1f/5f,atlasnorth.getRegions());
-	private Animation a=rightwalk;
+	private Animation a;
 	float animationtime;
 	boolean move=false;
 	private Joueur j;
@@ -32,6 +32,7 @@ public class JoueurVue {
 		{
 			r.flip(true, false);
 		}
+		setAnimation(j.getOrientation());
 	}
 	public JoueurVue(Joueur j) {
 		this.j = j;
@@ -39,6 +40,7 @@ public class JoueurVue {
 		{
 			r.flip(true, false);
 		}
+		setAnimation(j.getOrientation());
 	}
 	
 	//Fonctionalites principales

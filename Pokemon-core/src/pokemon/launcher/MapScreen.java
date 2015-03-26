@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MapScreen implements Screen{
 	
+	@SuppressWarnings("unused")
 	private MyGdxGame game;
 	
 	//Attributs joueur
