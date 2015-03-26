@@ -26,16 +26,19 @@ public class PokemonSprite extends Actor{
     		s=new Texture(Gdx.files.internal(nom));
     	pos=new Vector2(v);
    	   	this.setBounds(pos.x, pos.y, s.getWidth()*1.2f, s.getHeight()*1.2f);
-   	   		if(pos.x<320)
-   	   			this.addAction(Actions.moveTo(pos.x+420, v.y, 2.0f));
-   	   		else
-   	    	   	this.addAction(Actions.moveTo(pos.x-420, v.y, 2.0f));
-   	   		this.addAction(Actions.scaleTo(1.5f, 1.5f,2.0f));
-	        b.setColor(0.2f, 0.2f, 0.2f,1); 
+   	   		
 	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
     }
     ////
-    
+    public void addSlideAction(){
+    	if(pos.x<320)
+	   			this.addAction(Actions.moveTo(pos.x+420, pos.y, 2.0f));
+	   		else
+	    	   	this.addAction(Actions.moveTo(pos.x-420, pos.y, 2.0f));
+	   		this.addAction(Actions.scaleTo(1.5f, 1.5f,2.0f));
+        b.setColor(0.2f, 0.2f, 0.2f,1); 
+    	
+    }
     
     public void draw (Batch batch, float parentAlpha) {
  
@@ -44,8 +47,8 @@ public class PokemonSprite extends Actor{
 	     b.begin();
 	     	if(this.getX()==pos.x+420 || this.getX()==pos.x-420)
 	     		b.setColor(Color.WHITE);
-		   System.out.print("Scale:"+this.getScaleX());
-		   System.out.print("Pos:"+this.getX()+";"+this.getY());
+		   //System.out.print("Scale:"+this.getScaleX());
+		   //System.out.print("Pos:"+this.getX()+";"+this.getY());
 	       b.draw(s,this.getX(),this.getY(),s.getWidth()*this.getScaleX(),s.getHeight()*this.getScaleY());
 	      // b.setColor(color);
 	       b.end();
