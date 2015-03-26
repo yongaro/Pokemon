@@ -51,10 +51,10 @@ public class NPCVue {
 	
 	//Fonctions privees
 	private void initAnimation(String path) {
-		atlaswest=new TextureAtlas(Gdx.files.internal(path + "_right.pack"));
-		atlaseast=new TextureAtlas(Gdx.files.internal(path + "_right.pack"));
-		atlassouth=new TextureAtlas(Gdx.files.internal(path + "_south.pack"));
-		atlasnorth=new TextureAtlas(Gdx.files.internal(path + "_north.pack"));
+		atlaswest=new TextureAtlas(Gdx.files.internal(path + "/right.pack"));
+		atlaseast=new TextureAtlas(Gdx.files.internal(path + "/right.pack"));
+		atlassouth=new TextureAtlas(Gdx.files.internal(path + "/south.pack"));
+		atlasnorth=new TextureAtlas(Gdx.files.internal(path + "/north.pack"));
 		rightwalk=new Animation(1f/5f,atlaswest.getRegions());
 		leftwalk=new Animation(1f/5f,atlaseast.getRegions());
 		southwalk=new Animation(1f/5f,atlassouth.getRegions());
@@ -64,6 +64,22 @@ public class NPCVue {
 	
 	//Fonctionnalitees principales
 	public void render(Batch batch, float deltatime) {
-		batch.draw(a.getKeyFrame(0), npc.getPos().x, npc.getPos().y);
+		switch(npc.getOrientation()) {
+		case East:
+			a = rightwalk;
+			break;
+		case North:
+			a = northwalk;
+			break;
+		case South:
+			a = southwalk;
+			break;
+		case West:
+			a = leftwalk;
+			break;
+		default:
+			break;
+		}
+		batch.draw(a.getKeyFrame(0), npc.getPos().x, npc.getPos().y+16);
 	}
 }

@@ -1,9 +1,13 @@
 package pokemon.launcher;
 
+import java.util.Vector;
+
 import pokemon.controle.JoueurController;
 import pokemon.modele.Joueur;
+import pokemon.modele.NPC;
 import pokemon.vue.DialogBox;
 import pokemon.vue.JoueurVue;
+import pokemon.vue.NPCVue;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -18,6 +22,9 @@ public class MapScreen implements Screen{
 	private Joueur j=MyGdxGame.Jtest;
 	private JoueurVue joueur= new JoueurVue(j);
 	private JoueurController controller = new JoueurController(this, joueur);
+	
+	//Attributs NPC
+	private Vector<NPCVue> npcs = new Vector<NPCVue>();
 	
 	//Attributs affichage
 	private int width=640;//Gdx.graphics.getWidth();
@@ -40,6 +47,9 @@ public class MapScreen implements Screen{
 		renderer.setView(cam);
 		renderer.render();
 		renderer.getBatch().begin();
+		for(NPCVue npc : npcs) {
+			npc.render(renderer.getBatch(), delta);
+		}
 		joueur.render(delta, renderer.getBatch());
 
 		renderer.getBatch().end();
@@ -54,13 +64,22 @@ public class MapScreen implements Screen{
 	}
 	@Override
 	public void show() {
+		//Affichage de la TiledMap
 		renderer=new OrthogonalTiledMapRenderer(j.getCurrentMap().getTiledMap());
 		cam=new OrthographicCamera();
 		cam.zoom-=0.5;
 		
-		Gdx.input.setInputProcessor(controller);
+		//Affichage des NPC
+		for(NPC npc : j.getCurrentMap().getNpcs()) {
+			NPCVue npcvue = new NPCVue(npc);
+			npcs.add(npcvue);
+		}
 		
+		//Generation du Stage
 		stage = new Stage(new FitViewport(width,height,cam));
+		
+		//Definition de l'input
+		Gdx.input.setInputProcessor(controller);
 	}
 	public void update(float delta)
 	{
