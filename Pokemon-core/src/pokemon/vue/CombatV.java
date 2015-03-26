@@ -3,20 +3,23 @@ package pokemon.vue;
 import pokemon.launcher.MyGdxGame;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class CombatV implements Screen{
+public class CombatV implements Screen,InputProcessor{
 	int width=640;//Gdx.graphics.getWidth();
 	int height=360;//Gdx.graphics.getHeight();
 	public Stage stage = new Stage(new FitViewport(width,height));
 	MyGdxGame mygdxgame;
-	
+	int state=0;
 	public CombatV(){
 		
-		
+		Gdx.input.setInputProcessor(this);
 	}
 	
 	
@@ -64,5 +67,68 @@ public class CombatV implements Screen{
 		stage.addActor(new DialogBox("Un pokemon sauvage apparait"));
 		
 	}///////
+
+
+	@Override
+	public boolean keyDown(int arg0) {
+		switch(arg0){
+		case Keys.ENTER:
+		{
+			if(state==0 && stage.getActors().get(2).getActions().size==0)
+				stage.getActors().get(2).addAction(Actions.moveTo(stage.getActors().get(2).getX(), -80,0.5f));
+			break;
+		}
+		}
+		return false;
+	}
+
+
+	@Override
+	public boolean keyTyped(char arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean keyUp(int arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean mouseMoved(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean scrolled(int arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean touchDragged(int arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
