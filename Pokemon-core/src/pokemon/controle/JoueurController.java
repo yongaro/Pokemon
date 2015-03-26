@@ -3,6 +3,7 @@ package pokemon.controle;
 import java.util.Vector;
 
 import pokemon.launcher.MapScreen;
+import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 import pokemon.vue.JoueurVue;
@@ -14,26 +15,18 @@ import com.badlogic.gdx.Input.Keys;
 /* La classe JoueurController gere les inputs sur la map*/
 
 public class JoueurController implements InputProcessor{
+	private MyGdxGame game;
 	private Vector<Direction> input=new Vector<Direction>();
 	private JoueurVue jv;
 	private Joueur j;
 	private MapScreen screen;
 	
-	//Constructeurs
-	public JoueurController() {
-		this.jv = new JoueurVue();
-		j = jv.getJoueur();
-		screen = new MapScreen();
-	}
-	public JoueurController(JoueurVue jv) {
-		this.jv = jv;
-		this.j = jv.getJoueur();
-		screen = new MapScreen();
-	}
-	public JoueurController(MapScreen screen, JoueurVue jv) {
+	//Constructeur
+	public JoueurController(MapScreen screen, JoueurVue jv, MyGdxGame game) {
 		this.jv = jv;
 		this.j = jv.getJoueur();
 		this.screen = screen;
+		this.game = game;
 	}
 	
 	//Pour Desktop
@@ -73,10 +66,12 @@ public class JoueurController implements InputProcessor{
 					j.move(input.firstElement());				
 					jv.setAnimation(Direction.North);
 				}
-				
+			}
+			if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
+				new MenuListener(game);
 			}
 		}
-		if(Gdx.input.isKeyPressed(Keys.A)) {
+		if(Gdx.input.isKeyPressed(Keys.ENTER)) {
 			screen.updateDialogBox(j);
 		}
 		return false;

@@ -39,7 +39,7 @@ public class PokematosMapMenuListener implements InputProcessor{
 		menu.update(actualcity);
 		case Keys.ENTER:
 			joueur.setCurrentMap(new Map("maps/test.tmx"));
-			myGdxGame.setScreen(new MapScreen());
+			myGdxGame.setScreen(new MapScreen(myGdxGame));
 			return true;
 		}
 		}

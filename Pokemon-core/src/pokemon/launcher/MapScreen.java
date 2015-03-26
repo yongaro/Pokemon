@@ -18,10 +18,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MapScreen implements Screen{
+	
+	private MyGdxGame game;
+	
 	//Attributs joueur
 	private Joueur j=MyGdxGame.Jtest;
 	private JoueurVue joueur= new JoueurVue(j);
-	private JoueurController controller = new JoueurController(this, joueur);
+	private JoueurController controller;
 	
 	//Attributs NPC
 	private Vector<NPCVue> npcs = new Vector<NPCVue>();
@@ -35,6 +38,12 @@ public class MapScreen implements Screen{
     //Attributs cinematiques
 	private Stage stage;
     private DialogBox box = null;
+
+    //Constructeur
+    public MapScreen(MyGdxGame game) {
+		this.game = game;
+		controller = new JoueurController(this, joueur, game);
+	}
     
     @Override
 	public void render(float delta) {

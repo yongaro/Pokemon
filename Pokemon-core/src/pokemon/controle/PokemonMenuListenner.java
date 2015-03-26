@@ -1,6 +1,7 @@
 package pokemon.controle;
 
 import pokemon.annotations.Tps;
+import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Joueur;
 import pokemon.modele.Pkm;
@@ -149,8 +150,13 @@ public class PokemonMenuListenner implements InputProcessor{
 			return true;
 		}
 		
-		else
+		else{
+			if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)){
+				myGdxGame.setScreen(new MapScreen(myGdxGame));
+			}
+		
 			return false;
+			}
 			
 	}
 
