@@ -77,7 +77,7 @@ public class Dresseur extends NPC {
 					newStatus = status.getInt("value");
 					target = status.getInt("npc");
 				}
-				dialogs.addElement(new Dialog(text.getText(), target, newStatus));
+//				dialogs.addElement(new Dialog(text.getText(), target, newStatus));
 			}
 			
 			//On recupere l'equipe

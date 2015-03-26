@@ -82,4 +82,8 @@ public class NPCVue {
 		}
 		batch.draw(a.getKeyFrame(0), npc.getPos().x, npc.getPos().y+16);
 	}
+	
+	public void updatePosition() {
+		//TODO
+	}
 }

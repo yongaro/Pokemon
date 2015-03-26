@@ -15,6 +15,7 @@ public class NPC {
 	//status determine quelle ligne de dialogue le PNJ doit reciter
 	protected int id;
 	protected int status;
+	protected int newStatus;
 	protected Direction orientation;
 	protected Vector<Dialog> dialogs;
 	protected Vector2 pos;
@@ -57,11 +58,25 @@ public class NPC {
 		lireXML(path);
 	}
 
-	//Accesseurs
-	public String executeDialog(Joueur j, NPCList npcList) {
-		return dialogs.get(status).execute(npcList);
+	//Fonctionnalitees principales
+	public String executeDialog(Joueur j, NPCList npcList) throws NoMoreInstructionException {
+		try {
+			return dialogs.get(status).execute(npcList, j);
+		} catch (NoMoreInstructionException e) {
+			updateStatus();
+			throw new NoMoreInstructionException();
+		}
+	}
+	public void setNewStatus(int s) {
+		newStatus = s;
 	}
 	
+	//Fonction privee
+	private void updateStatus() {
+		status = newStatus;
+	}
+	
+	//Accesseurs	
 	public int getStatus() {
 		return status;
 	}
@@ -89,7 +104,8 @@ public class NPC {
 	//Fonctions privees
 	protected void lireXML(String path) {
 		XmlReader reader = new XmlReader();
-		Element temp = null;
+		Element dialog = null;
+		Element instruction = null;
 		try {
 			//On recupere la racine, et l'id du NPC
 			Element root = reader.parse(Gdx.files.internal(path));
@@ -97,17 +113,28 @@ public class NPC {
 			
 			//On parcourt chaque dialogues
 			for(int i = 0;i<root.getChildrenByName("dialogue").size;i++) {
-				temp = root.getChildrenByName("dialogue").get(i);
+				dialog = root.getChildrenByName("dialogue").get(i);
+				Dialog newDialog = new Dialog();
 				
-//				System.out.println("Nouveau dialogue");
-				Element text = temp.getChildByName("text");
-				Element status = temp.getChildByName("status");
-				int newStatus = 0, target = 0;
-				if(status != null) {
-					newStatus = status.getInt("value");
-					target = status.getInt("npc");
+				//On parcourt chaque instruction du dialogue
+				for(int j = 0;j<dialog.getChildCount();j++) {
+					instruction = dialog.getChild(j);
+					
+					//Si l'instruction est un texte a afficher
+					if(instruction.getName().compareTo("text") == 0) {
+						InstructionTexte newInst = new InstructionTexte(instruction.getText());
+						newDialog.addInstruction(newInst);
+						System.out.println("Ajout du texte \"" + instruction.getText() + "\"");
+					}
+					else if (instruction.getName().compareTo("status") == 0) {
+						int id = instruction.getInt("npc");
+						int value = instruction.getInt("value");
+						InstructionStatus newInst = new InstructionStatus(value, id);
+						newDialog.addInstruction(newInst);
+						System.out.println("Ajout de changement de status");
+					}
 				}
-				dialogs.addElement(new Dialog(text.getText(), target, newStatus));
+				dialogs.addElement(newDialog);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

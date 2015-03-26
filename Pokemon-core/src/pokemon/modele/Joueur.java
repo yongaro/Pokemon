@@ -28,7 +28,7 @@ public class Joueur {
 	protected int spriteWidth = 14;
 	protected int spriteHeight = 19;
 	protected Vector2 pos;
-	protected boolean isTalking;
+	protected boolean canMove;
 	protected Direction moveDirection;
 	protected Direction orientation;
 	protected Map currentMap;
@@ -42,7 +42,7 @@ public class Joueur {
 		for(int i=0;i<5;i++){ inventaire.add(i,new Stockage<Objet>(30));}
 		
 		pos = new Vector2(400f, 400f);
-		isTalking = false;
+		canMove = true;
 		speed=new Vector2(0,0);
 		moveDirection = Direction.South;
 		orientation = Direction.South;
@@ -56,7 +56,7 @@ public class Joueur {
 		for(int i=0;i<5;i++){ inventaire.add(new Stockage<Objet>(30));}
 		
 		pos = new Vector2(0f, 0f);
-		isTalking = false;
+		canMove = true;
 		moveDirection = Direction.South;
 		orientation = Direction.South;
 		currentMap = null;
@@ -210,7 +210,7 @@ public class Joueur {
 		}
 	}
 	
-	public String interact(NPCList npcList) {
+	public String interact(NPCList npcList) throws NoMoreInstructionException {
 		Vector2 target = new Vector2();
 		Vector2 center = new Vector2();
 		center.x = pos.x + (spriteWidth/2);
@@ -253,11 +253,11 @@ public class Joueur {
 	public boolean isMoving(){
 		return !speed.isZero();
 	}
-	public boolean isTalking() {
-		return isTalking;
+	public boolean canMove() {
+		return canMove;
 	}
-	public void setTalking(boolean isTalking) {
-		this.isTalking = isTalking;
+	public void setMove(boolean canMove) {
+		this.canMove = canMove;
 	}
 	public Direction getOrientation() {
 		return orientation;

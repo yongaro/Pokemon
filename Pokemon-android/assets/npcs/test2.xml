@@ -3,8 +3,10 @@
 	<dialogue>
 		<text>Bonjour !</text>
 		<status npc="1" value="1"/>
+		<text>Ca va ?</text>
+		<text>Moi ca va !</text>
 	</dialogue>
 	<dialogue>
-		<text>Ca va ?</text>
+		<text>On s'est deja parle non ?</text>
 	</dialogue>
 </PNJ>

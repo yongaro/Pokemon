@@ -19,9 +19,9 @@
   </data>
  </layer>
  <objectgroup name="NPCs">
-  <object id="4" type="dress" gid="2805" x="289" y="269.5" width="16" height="16">
+  <object id="4" gid="2805" x="289" y="269.5" width="16" height="16">
    <properties>
-    <property name="dialogs" value="npcs/dress.xml"/>
+    <property name="dialogs" value="npcs/test2.xml"/>
    </properties>
   </object>
  </objectgroup>

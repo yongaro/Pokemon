@@ -5,6 +5,7 @@ import java.util.Vector;
 import pokemon.controle.JoueurController;
 import pokemon.modele.Joueur;
 import pokemon.modele.NPC;
+import pokemon.modele.NoMoreInstructionException;
 import pokemon.vue.DialogBox;
 import pokemon.vue.JoueurVue;
 import pokemon.vue.NPCVue;
@@ -118,17 +119,45 @@ public class MapScreen implements Screen{
 	
 	//Autres fonctions
 	public void updateDialogBox(Joueur j) {
-		if(box == null) {
-			String text = j.interact(MyGdxGame.npcList);
-			if(text != null) {
-				j.setTalking(true);
+//		if(box == null) {
+//			String text = j.interact(MyGdxGame.npcList);
+//			if(text != null) {
+//				j.setMove(true);
+//				box = new DialogBox(text);
+//				stage.addActor(box);
+//			}
+//		}
+//		else
+//		{
+//			j.setMove(false);
+//			stage.clear();
+//			box.remove();
+//			box = null;
+//		}
+		String text = null;
+		while(text == null) {
+			try {
+				text = j.interact(MyGdxGame.npcList);
+			} catch (NoMoreInstructionException e) {
+				//Si le dialogue est fini, on quitte la boucle
+				break;
+			}
+		}
+		if(text != null) {
+			//Si on vient de commencer le dialogue, il faut creer la boite
+			if(box == null) {				
+				j.setMove(false);
 				box = new DialogBox(text);
 				stage.addActor(box);
 			}
+			//Si on poursuit la conversation, on modifie la boite deja existante
+			else {
+				box.setMessage(text);
+			}
 		}
-		else
-		{
-			j.setTalking(false);
+		else {
+			//Sinon, on finit la conversation
+			j.setMove(true);
 			stage.clear();
 			box.remove();
 			box = null;

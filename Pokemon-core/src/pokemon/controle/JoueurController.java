@@ -32,7 +32,7 @@ public class JoueurController implements InputProcessor{
 	//Pour Desktop
 	@Override
 	public boolean keyDown(int arg0) {
-		if(!j.isTalking()) {		
+		if(j.canMove()) {		
 			if(Gdx.input.isKeyPressed(Keys.RIGHT))
 			{
 				if(input.size()<2 && !input.contains(Direction.East)) {
