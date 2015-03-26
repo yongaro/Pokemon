@@ -16,6 +16,9 @@ public class CombatV implements Screen,InputProcessor{
 	int height=360;//Gdx.graphics.getHeight();
 	public Stage stage = new Stage(new FitViewport(width,height));
 	MyGdxGame mygdxgame;
+	PokemonSprite e1=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
+	PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
+	PokemonSprite a=new PokemonSprite(PokemonSprite.a1,"trainerS.png");
 	int state=0;
 	public CombatV(){
 		
@@ -60,10 +63,12 @@ public class CombatV implements Screen,InputProcessor{
 	}
 	@Override
 	public void show() {
-		stage.addActor(new PokemonSprite(PokemonSprite.e1,"Sprites/10.png"));
-		stage.addActor(new PokemonSprite(PokemonSprite.e2,"Sprites/99.png"));
-		
-		stage.addActor(new PokemonSprite(PokemonSprite.a1,"trainerS.png"));
+		stage.addActor(e1);
+		stage.addActor(e2);
+		e1.addSlideAction();
+		e2.addSlideAction();
+		stage.addActor(a);
+		a.addSlideAction();
 		stage.addActor(new DialogBox("Un pokemon sauvage apparait"));
 		
 	}///////

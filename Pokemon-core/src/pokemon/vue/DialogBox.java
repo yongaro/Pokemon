@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /* La classe DialogBox permet d'afficher le message d'un PNJ a l'ecran*/
@@ -13,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class DialogBox extends Actor {
 	
 	//Attributs graphiques
-	private int width=Gdx.graphics.getWidth();
-//	private int height=Gdx.graphics.getHeight();
+	private int width;
+	private int height;
 	private BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
 	private SpriteBatch sBatch = new SpriteBatch();
 	private ShapeRenderer shapeRenderer = new ShapeRenderer();
@@ -22,12 +23,30 @@ public class DialogBox extends Actor {
 	//Attributs modele
 	private String message;
 	
+
 	//Constructeurs
 	public DialogBox() {
 		message = "Bonjour !";
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 	}
 	public DialogBox(String msg) {
 		message = msg;
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
+	}
+	public DialogBox(String msg, Vector2 size) {
+		message = msg;
+		width = (int) size.x;
+		height = (int) size.y;
+	}
+	
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	//Fonctionnalites principales
@@ -56,4 +75,5 @@ public class DialogBox extends Actor {
 		sBatch.end();
 		batch.begin();
 	}
+	
 }
