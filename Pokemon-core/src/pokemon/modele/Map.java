@@ -107,6 +107,7 @@ public class Map {
 	
 	//Fonctionnalites principales
 	public boolean collide(Vector2 nextPos, int spriteWidth, int spriteHeight) {
+		//Collision avec les tiles
 		TiledMapTileLayer layerCollision = (TiledMapTileLayer) tiledMap.getLayers().get(1);
 		if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
 				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)(nextPos.y/16f))!=null ||
@@ -114,10 +115,12 @@ public class Map {
 				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null) {
 			return true;
 		}
+		
+		//Collision avec les NPC
 		Rectangle playerHitbox = new Rectangle(nextPos.x, nextPos.y, spriteWidth, spriteHeight-5);
 		for(NPC npc : npcs) {
 			Vector2 npcPos = npc.getPos();
-			Rectangle npcHitbox = new Rectangle(npcPos.x, npcPos.y+16, 16, 16);
+			Rectangle npcHitbox = new Rectangle(npcPos.x+1, npcPos.y+16, 13, 19);
 			if(playerHitbox.overlaps(npcHitbox)) {
 				return true;
 			}
@@ -130,6 +133,22 @@ public class Map {
 		for(NPC npc : npcs) {
 			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
 			if(npcHitbox.contains(target)) {
+				switch(j.orientation) {
+				case East:
+					npc.setOrientation(Direction.West);
+					break;
+				case North:
+					npc.setOrientation(Direction.South);
+					break;
+				case South:
+					npc.setOrientation(Direction.North);
+					break;
+				case West:
+					npc.setOrientation(Direction.East);
+					break;
+				default:
+					break;			
+				}
 				return npc.executeDialog(j, npcList);
 			}
 		}
@@ -154,5 +173,8 @@ public class Map {
 	}
 	public void setMapChanges(Vector<MapChange> mapChanges) {
 		this.mapChanges = mapChanges;
+	}
+	public Vector<NPC> getNpcs() {
+		return npcs;
 	}
 }
