@@ -57,10 +57,12 @@ public class CombatV implements Screen{
 	}
 	@Override
 	public void show() {
-		stage.addActor(new PokemonSprite(PokemonSprite.e1,"Sprites/80.png"));
+		stage.addActor(new PokemonSprite(PokemonSprite.e1,"Sprites/10.png"));
 		stage.addActor(new PokemonSprite(PokemonSprite.e2,"Sprites/99.png"));
-		stage.addActor(new PokemonSprite(PokemonSprite.a1,"Sprites/pikachu-f.png"));
 		
-	}//////
+		stage.addActor(new PokemonSprite(PokemonSprite.a1,"trainerS.png"));
+		stage.addActor(new DialogBox("Un pokemon sauvage apparait"));
+		
+	}///////
 
 }
