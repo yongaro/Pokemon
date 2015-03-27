@@ -6,6 +6,7 @@ import pokemon.controle.JoueurController;
 import pokemon.modele.Joueur;
 import pokemon.modele.NPC;
 import pokemon.modele.NoMoreInstructionException;
+import pokemon.modele.NoNPCException;
 import pokemon.vue.DialogBox;
 import pokemon.vue.JoueurVue;
 import pokemon.vue.NPCVue;
@@ -119,25 +120,13 @@ public class MapScreen implements Screen{
 	
 	//Autres fonctions
 	public void updateDialogBox(Joueur j) {
-//		if(box == null) {
-//			String text = j.interact(MyGdxGame.npcList);
-//			if(text != null) {
-//				j.setMove(true);
-//				box = new DialogBox(text);
-//				stage.addActor(box);
-//			}
-//		}
-//		else
-//		{
-//			j.setMove(false);
-//			stage.clear();
-//			box.remove();
-//			box = null;
-//		}
 		String text = null;
 		while(text == null) {
 			try {
 				text = j.interact(MyGdxGame.npcList);
+			} catch (NoNPCException e) {
+				//Si il n'y a pas de NPC, on quitte la boucle
+				break;
 			} catch (NoMoreInstructionException e) {
 				//Si le dialogue est fini, on quitte la boucle
 				break;
@@ -155,7 +144,7 @@ public class MapScreen implements Screen{
 				box.setMessage(text);
 			}
 		}
-		else {
+		else if(box != null){
 			//Sinon, on finit la conversation
 			j.setMove(true);
 			stage.clear();

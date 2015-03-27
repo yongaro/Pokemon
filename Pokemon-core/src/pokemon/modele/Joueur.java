@@ -210,7 +210,7 @@ public class Joueur {
 		}
 	}
 	
-	public String interact(NPCList npcList) throws NoMoreInstructionException {
+	public String interact(NPCList npcList) throws NoMoreInstructionException, NoNPCException {
 		Vector2 target = new Vector2();
 		Vector2 center = new Vector2();
 		center.x = pos.x + (spriteWidth/2);

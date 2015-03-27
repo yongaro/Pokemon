@@ -129,7 +129,7 @@ public class Map {
 	}
 	/* Interagit avec le NPC de la position donnee
 	 * Renvoie null si aucun NPC n'est present sur place.*/
-	public String interact(Joueur j, Vector2 target, NPCList npcList) throws NoMoreInstructionException {
+	public String interact(Joueur j, Vector2 target, NPCList npcList) throws NoMoreInstructionException, NoNPCException {
 		for(NPC npc : npcs) {
 			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
 			if(npcHitbox.contains(target)) {
@@ -152,7 +152,11 @@ public class Map {
 				return npc.executeDialog(j, npcList);
 			}
 		}
-		return null;
+		throw new NoNPCException();
+	}
+	public void addNPC(NPC npc, NPCList npcList) {
+		npcs.addElement(npc);
+		npcList.addNPC(npc);
 	}
 	
 	//Accesseurs
