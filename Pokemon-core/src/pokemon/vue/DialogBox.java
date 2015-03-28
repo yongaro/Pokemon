@@ -27,8 +27,10 @@ public class DialogBox extends Actor {
 	//Constructeurs
 	public DialogBox() {
 		message = "Bonjour !";
-		width = Gdx.graphics.getWidth();
-		height = Gdx.graphics.getHeight();
+		width = 640;
+		height = 100;
+        sBatch.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
+
 	}
 	public DialogBox(String msg) {
 		message = msg;
@@ -42,6 +44,9 @@ public class DialogBox extends Actor {
 	}
 	
 	
+	public void setWidth(int width) {
+		this.width = width;
+	}
 	public String getMessage() {
 		return message;
 	}
@@ -56,10 +61,10 @@ public class DialogBox extends Actor {
 		batch.end();
 		
 		//Dessin du rectangle
-		shapeRenderer.setProjectionMatrix(sBatch.getProjectionMatrix());
+		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-	    shapeRenderer.rect(10, 0, width-20, 110);
+	    shapeRenderer.rect(10, 0, width-20, height);
 	    shapeRenderer.end();
 		
 		sBatch.begin();
@@ -69,7 +74,7 @@ public class DialogBox extends Actor {
 		f.setScale(1.2f);
 		
 		//On affiche le texte + rectangle
-		f.drawWrapped(sBatch, message, 20, 100, 600);
+		f.drawWrapped(sBatch, message, 20, height-2, width-20);
 		
 		//Quit
 		sBatch.end();
