@@ -18,8 +18,11 @@ public class PokemonSprite extends Actor{
 	public static Vector2 a1=new Vector2(440,60);
     public Texture s=new Texture(Gdx.files.internal("Sprites/6.png"));
     SpriteBatch b=new SpriteBatch();
-	ShapeRenderer shapeRenderer=new ShapeRenderer();
-	Sound sound;
+    boolean soundplayed=false;
+    ShapeRenderer shapeRenderer=new ShapeRenderer();
+	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
+	
+	
     private Vector2 pos;
     public PokemonSprite(Vector2 v,String nom){
     	super();	
@@ -38,7 +41,6 @@ public class PokemonSprite extends Actor{
     		this.addAction(Actions.moveTo(pos.x-420, pos.y, 2.0f));
     	this.addAction(Actions.scaleTo(1.5f, 1.5f,2.0f));
     	b.setColor(0.2f, 0.2f, 0.2f,1); 
-
     }
 
     public void hideTrainer(){
@@ -55,24 +57,16 @@ public class PokemonSprite extends Actor{
     }
     
     public void draw (Batch batch, float parentAlpha) {
- 
 
-       
-	     b.begin();
-	     	if(this.getX()==pos.x+420 || this.getX()==pos.x-420)
-	     		b.setColor(Color.WHITE);
-		   //System.out.print("Scale:"+this.getScaleX());
-		   //System.out.print("Pos:"+this.getX()+";"+this.getY());
-	       b.draw(s,this.getX(),this.getY(),s.getWidth()*this.getScaleX(),s.getHeight()*this.getScaleY());
-	      // b.setColor(color);
-	       b.end();
-	       // System.out.println(this.getX()+"+"+this.getY());
-	       /* shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
-	        shapeRenderer.begin(ShapeType.Filled);
-			shapeRenderer.rect(0, 0, 640, 100);
-			shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
-			shapeRenderer.end();*/
-	    	//batch.draw(t,this.getX(),this.getY(),t.getWidth(),t.getHeight());
-	    	//batch.draw(s,this.getX()+Minimap.BourgPalette.getX(),this.getY()+Minimap.BourgPalette.getY(),30,30);
-	    }
+
+
+    	b.begin();
+    	if(this.getX()==pos.x+420 || this.getX()==pos.x-420)
+    		b.setColor(Color.WHITE);
+    	b.draw(s,this.getX(),this.getY(),s.getWidth()*this.getScaleX(),s.getHeight()*this.getScaleY());
+    	// b.setColor(color);
+    	b.end();
+
+    }
 }
+
