@@ -62,12 +62,12 @@ public class Map {
 				NPC npc = null;
 				float x = Float.parseFloat(o.getProperties().get("x").toString());
 				float y = Float.parseFloat(o.getProperties().get("y").toString());
-				if(o.getProperties().containsKey("dialogs")) {
+				if(o.getProperties().containsKey("name")) {
 					if(o.getProperties().containsKey("trainer")) {
-						npc = new Dresseur(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
+						npc = new Dresseur(o.getProperties().get("name").toString(), new Vector2(x, y));
 					}
 					else {						
-						npc = new NPC(o.getProperties().get("dialogs").toString(), new Vector2(x, y));
+						npc = new NPC(o.getProperties().get("name").toString(), new Vector2(x, y));
 					}
 					npcs.addElement(npc);
 					npcList.addNPC(npc);

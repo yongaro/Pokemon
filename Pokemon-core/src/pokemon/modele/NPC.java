@@ -108,7 +108,7 @@ public class NPC {
 		Element instruction = null;
 		try {
 			//On recupere la racine, et l'id du NPC
-			Element root = reader.parse(Gdx.files.internal(path));
+			Element root = reader.parse(Gdx.files.internal("npcs/" + path + "/dialogs.xml"));
 			id = root.getInt("id");
 			
 			//On parcourt chaque dialogues
@@ -124,14 +124,12 @@ public class NPC {
 					if(instruction.getName().compareTo("text") == 0) {
 						InstructionTexte newInst = new InstructionTexte(instruction.getText());
 						newDialog.addInstruction(newInst);
-						System.out.println("Ajout du texte \"" + instruction.getText() + "\"");
 					}
 					else if (instruction.getName().compareTo("status") == 0) {
 						int id = instruction.getInt("npc");
 						int value = instruction.getInt("value");
 						InstructionStatus newInst = new InstructionStatus(value, id);
 						newDialog.addInstruction(newInst);
-						System.out.println("Ajout de changement de status");
 					}
 				}
 				dialogs.addElement(newDialog);

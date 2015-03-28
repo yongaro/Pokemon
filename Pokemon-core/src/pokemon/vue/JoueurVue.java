@@ -59,11 +59,12 @@ public class JoueurVue {
 		}
 		batch.draw(a.getKeyFrame(animationtime,true), j.getPos().x, j.getPos().y);
 	}
-	public void updatePosition(OrthogonalTiledMapRenderer renderer) {
+	public void updatePosition(OrthogonalTiledMapRenderer renderer) throws ChangeMapException{
 		try {
 			j.updatePosition();
 		} catch (ChangeMapException e) {
 			renderer.setMap(j.getCurrentMap().getTiledMap());
+			throw e;
 		}
 	}
 	
