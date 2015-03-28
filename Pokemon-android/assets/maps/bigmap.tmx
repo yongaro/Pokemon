@@ -21,7 +21,8 @@
  <objectgroup name="NPCs">
   <object id="4" gid="2805" x="289" y="269.5" width="16" height="16">
    <properties>
-    <property name="dialogs" value="npcs/test2.xml"/>
+    <property name="name" value="npc"/>
+    <property name="trainer" value=""/>
    </properties>
   </object>
  </objectgroup>

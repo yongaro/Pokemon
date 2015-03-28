@@ -3,6 +3,7 @@ package pokemon.launcher;
 import java.util.Vector;
 
 import pokemon.controle.JoueurController;
+import pokemon.modele.ChangeMapException;
 import pokemon.modele.Joueur;
 import pokemon.modele.NPC;
 import pokemon.modele.NoMoreInstructionException;
@@ -82,10 +83,7 @@ public class MapScreen implements Screen{
 		cam.zoom-=0.5;
 		
 		//Affichage des NPC
-		for(NPC npc : j.getCurrentMap().getNpcs()) {
-			NPCVue npcvue = new NPCVue(npc);
-			npcs.add(npcvue);
-		}
+		updateNPCs();
 		
 		//Generation du Stage
 		stage = new Stage(new FitViewport(width,height,cam));
@@ -95,7 +93,12 @@ public class MapScreen implements Screen{
 	}
 	public void update(float delta)
 	{
-		joueur.updatePosition(renderer);
+		try {
+			joueur.updatePosition(renderer);
+		} catch (ChangeMapException e) {
+			npcs.clear();
+			updateNPCs();
+		}
 	}
 	
 	@Override
@@ -134,7 +137,7 @@ public class MapScreen implements Screen{
 		}
 		if(text != null) {
 			//Si on vient de commencer le dialogue, il faut creer la boite
-			if(box == null) {				
+			if(box == null) {	
 				j.setMove(false);
 				box = new DialogBox(text);
 				stage.addActor(box);
@@ -150,6 +153,14 @@ public class MapScreen implements Screen{
 			stage.clear();
 			box.remove();
 			box = null;
+		}
+	}
+	
+	//Fonctions privees
+	public void updateNPCs() {
+		for(NPC npc : j.getCurrentMap().getNpcs()) {
+			NPCVue npcvue = new NPCVue(npc);
+			npcs.add(npcvue);
 		}
 	}
 }
