@@ -1,6 +1,7 @@
 package pokemon.vue;
 
 import pokemon.launcher.MyGdxGame;
+import pokemon.modele.Pkm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -18,6 +19,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	PokemonSprite e1=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
 	PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
 	PokemonSprite a=new PokemonSprite(PokemonSprite.a1,"trainerS.png");
+	Pkm[] pkms=MyGdxGame.Jtest.getTeam();
 	PokemonSprite p1;
 	DialogBox dbox;
 	Sound s;
@@ -85,8 +87,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 		{
 			if(state==0 && stage.getActors().get(2).getActions().size==0){
 				a.hideTrainer();
-				dbox.setMessage("En avant douchebag");
-				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/6.png");
+				dbox.setMessage("En avant "+pkms[0].getNom());
+				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/"+pkms[0].getID()+".png");
 				p1.popPokemon();
 				stage.addActor(p1);
 				}
