@@ -13,7 +13,7 @@ public class AtkSoin extends Atk {
 	
 	
 	public void script(Pkm user,Pkm cible,Combat context){
-		System.out.println(user.nom+" utilise "+nom); 
+		context.ajoutBuffer(user.nom+" utilise "+nom,false); 
 		Random random=new Random();
 		//test de precision
 		int touche=0;
@@ -22,12 +22,12 @@ public class AtkSoin extends Atk {
 		int esquive=0;
 		if(random.nextInt(100)<=cible.stats[9][0]){esquive=1;}
 		if(touche==0 || esquive==1){
-			System.out.println(user.nom+" rate son attaque...");
+			context.ajoutBuffer(user.nom+" rate son attaque...",true);
 		}
 		if(touche==1 && esquive==0 && power>0){
 			int soin=0;
 			if(power>0){
-				soin=this.atkdamage(user,cible,context.climat,false);
+				soin=this.atkdamage(user,cible,context,false);
 				cible.infliger(soin);
 				soin=(int)(soin/2);
 			}
@@ -35,12 +35,12 @@ public class AtkSoin extends Atk {
 			
 			//Test de capacite Passive Suintement
 			if(cible.capP==CapacitePassive.Suintement){
-				System.out.println("Suitement de "+cible.nom+" fait perdre des PV a "+user.nom);
+				context.ajoutBuffer("Suitement de "+cible.nom+" fait perdre des PV a "+user.nom,true);
 				//user.stats[2][0]-=soin;
 				user.infliger(soin);
 			}
 			else{
-				System.out.println("L'attaque soigne "+user.nom);
+				context.ajoutBuffer("L'attaque soigne "+user.nom,true);
 				user.heal(soin);
 			}
 			

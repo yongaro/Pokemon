@@ -17,7 +17,7 @@ public class AtkChangeStats extends Atk {
 		Tstats=code; ChangeProc=proc; this.fof=fof;
 	}
 	public void script(Pkm user,Pkm cible,Combat context){
-		System.out.println(user.nom+" utilise "+description);
+		context.ajoutBuffer(user.nom+" utilise "+description,false);
 		 Random random=new Random();
 		//test de precision
 		int touche=0;
@@ -26,10 +26,10 @@ public class AtkChangeStats extends Atk {
 		int esquive=0;
 		if(random.nextInt(100)<=cible.stats[9][0]){esquive=1;}
 		if(touche==0 || esquive==1){
-			System.out.println(user.nom+" rate son attaque...");
+			context.ajoutBuffer(user.nom+" rate son attaque...",true);
 		}
 		if(touche==1 && esquive==0){
-			if(power>0){cible.infliger(this.atkdamage(user,cible,context.climat,false));}
+			if(power>0){cible.infliger(this.atkdamage(user,cible,context,false));}
 			if(random.nextInt(100)<=ChangeProc){
 				if(fof==1){user.buff(Tstats);}
 				if(fof==0){cible.debuff(Tstats);}
