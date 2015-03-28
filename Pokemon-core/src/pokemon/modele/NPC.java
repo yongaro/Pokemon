@@ -101,39 +101,47 @@ public class NPC {
 	public void setPos(Vector2 pos) {
 		this.pos = pos;
 	}
+	
 	//Fonctions privees
-	protected void lireXML(String path) {
+	protected Element getDialogs(String path) throws IOException {
 		XmlReader reader = new XmlReader();
 		Element dialog = null;
 		Element instruction = null;
-		try {
-			//On recupere la racine, et l'id du NPC
-			Element root = reader.parse(Gdx.files.internal("npcs/" + path + "/dialogs.xml"));
-			id = root.getInt("id");
+		
+		//On recupere la racine, et l'id du NPC
+		Element root = null;
+		root = reader.parse(Gdx.files.internal("npcs/" + path + "/dialogs.xml"));
+		id = root.getInt("id");
+		
+		//On parcourt chaque dialogues
+		for(int i = 0;i<root.getChildrenByName("dialogue").size;i++) {
+			dialog = root.getChildrenByName("dialogue").get(i);
+			Dialog newDialog = new Dialog();
 			
-			//On parcourt chaque dialogues
-			for(int i = 0;i<root.getChildrenByName("dialogue").size;i++) {
-				dialog = root.getChildrenByName("dialogue").get(i);
-				Dialog newDialog = new Dialog();
+			//On parcourt chaque instruction du dialogue
+			for(int j = 0;j<dialog.getChildCount();j++) {
+				instruction = dialog.getChild(j);
 				
-				//On parcourt chaque instruction du dialogue
-				for(int j = 0;j<dialog.getChildCount();j++) {
-					instruction = dialog.getChild(j);
-					
-					//Si l'instruction est un texte a afficher
-					if(instruction.getName().compareTo("text") == 0) {
-						InstructionTexte newInst = new InstructionTexte(instruction.getText());
-						newDialog.addInstruction(newInst);
-					}
-					else if (instruction.getName().compareTo("status") == 0) {
-						int id = instruction.getInt("npc");
-						int value = instruction.getInt("value");
-						InstructionStatus newInst = new InstructionStatus(value, id);
-						newDialog.addInstruction(newInst);
-					}
+				//Si l'instruction est un texte a afficher
+				if(instruction.getName().compareTo("text") == 0) {
+					InstructionTexte newInst = new InstructionTexte(instruction.getText());
+					newDialog.addInstruction(newInst);
 				}
-				dialogs.addElement(newDialog);
+				else if (instruction.getName().compareTo("status") == 0) {
+					int id = instruction.getInt("npc");
+					int value = instruction.getInt("value");
+					InstructionStatus newInst = new InstructionStatus(value, id);
+					newDialog.addInstruction(newInst);
+				}
 			}
+			dialogs.addElement(newDialog);
+		}
+		
+		return root;
+	}
+	protected void lireXML(String path) {
+		try {
+			getDialogs(path);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

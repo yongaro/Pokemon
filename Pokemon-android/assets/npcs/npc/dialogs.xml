@@ -9,4 +9,13 @@
 	<dialogue>
 		<text>On s'est deja parle non ?</text>
 	</dialogue>
+	
+	<equipe>
+		<pokemon id="25" niveau="25">
+			<capacite nom="Tonnerre"/>
+			<capacite nom="JetDeSable"/>
+			<capacite nom="PoingGlace"/>
+			<capacite nom="Repos"/>
+		</pokemon>
+	</equipe>
 </PNJ>

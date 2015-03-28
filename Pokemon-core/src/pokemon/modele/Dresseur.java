@@ -3,9 +3,7 @@ package pokemon.modele;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 /* La classe Dresseur (herite de NPC) decrit le modele d'un dresseur
@@ -62,37 +60,10 @@ public class Dresseur extends NPC {
 	//Fonctions privees
 	@Override
 	protected void lireXML(String path) {
-		XmlReader reader = new XmlReader();
-		Element dialog = null;
-		Element instruction = null;
+		System.out.println("Dresseur");
 		try {
-			//On recupere la racine, et l'id du NPC
-			Element root = reader.parse(Gdx.files.internal("npcs/" + path + "/dialogs.xml"));
-			id = root.getInt("id");
-			
-			//On parcourt chaque dialogues
-			for(int i = 0;i<root.getChildrenByName("dialogue").size;i++) {
-				dialog = root.getChildrenByName("dialogue").get(i);
-				Dialog newDialog = new Dialog();
-				
-				//On parcourt chaque instruction du dialogue
-				for(int j = 0;j<dialog.getChildCount();j++) {
-					instruction = dialog.getChild(j);
-					
-					//Si l'instruction est un texte a afficher
-					if(instruction.getName().compareTo("text") == 0) {
-						InstructionTexte newInst = new InstructionTexte(instruction.getText());
-						newDialog.addInstruction(newInst);
-					}
-					else if (instruction.getName().compareTo("status") == 0) {
-						int id = instruction.getInt("npc");
-						int value = instruction.getInt("value");
-						InstructionStatus newInst = new InstructionStatus(value, id);
-						newDialog.addInstruction(newInst);
-					}
-				}
-				dialogs.addElement(newDialog);
-			}
+			//On recupere les dialogues
+			Element root = getDialogs(path);
 			
 			//On recupere l'equipe
 			Element equipe = root.getChildByName("equipe");
@@ -104,11 +75,11 @@ public class Dresseur extends NPC {
 					int lvl = pokemonElt.getInt("niveau");
 					
 					Pkm pokemon = new Pkm(Pokedex.values()[id-1].get(), lvl);
-//					System.out.println(pokemon.nom);
+					System.out.println(pokemon.nom);
 					for(int k = 0;k<pokemonElt.getChildCount();k++) {
 						Element cap = pokemonElt.getChild(k);
 						pokemon.add(bddCapacite.valueOf(cap.getAttribute("nom")).get());
-//						System.out.println("Ajout de " + cap.getAttribute("nom"));
+						System.out.println("Ajout de " + cap.getAttribute("nom"));
 					}
 					addPkm(pokemon);
 				}
