@@ -55,6 +55,10 @@ public class Dresseur extends NPC {
 		team.remove(i);
 	}
 	
+	public Vector<Pkm> getTeam() {
+		return team;
+	}
+	
 	//Fonctions privees
 	@Override
 	protected void lireXML(String path) {
