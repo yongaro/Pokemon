@@ -17,6 +17,9 @@ public class Combat {
 	protected PokemonCombat[] equipe2;
 	protected PokemonCombat[] pkmListe;
 	protected Scanner sc = new Scanner(System.in); //BERK
+	protected static String buffer="";
+	protected static int act=-1;
+	
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
 	
@@ -189,4 +192,38 @@ public class Combat {
 	public Terrain getTerrain(){ return terrain; }
 	public Climat getClimat(){ return climat; }
 	
+	
+	
+	// Fonctions de manipulation des objets synchronisés entre modele et vue
+	public synchronized void ajoutBuffer(String s,boolean notify){ 
+		Combat.buffer+=s;
+		if(notify){ notify(); }
+	}
+	
+	public synchronized String readBuffer(){
+		while(Combat.buffer.compareTo("")==0){
+			try { wait(); } 
+			catch(InterruptedException ie) { ie.printStackTrace(); }
+		}
+		return Combat.buffer;
+	}
+	public synchronized void resetBuffer(){ Combat.buffer=""; }
+	
+	public synchronized void ajoutAct(int act){
+		while(Combat.act!=-1){
+			try { wait(); } 
+			catch(InterruptedException ie) { ie.printStackTrace(); }
+		}
+		Combat.act=act;
+		notify();
+	}
+	
+	public synchronized int getAct(){
+		while(Combat.act==-1){
+			try { wait(); } 
+			catch(InterruptedException ie) { ie.printStackTrace(); }
+		}
+		return Combat.act;
+	}
+	public synchronized void resetAct(){ Combat.act=-1; notify(); }
 }
