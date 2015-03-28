@@ -65,7 +65,7 @@ public abstract class Capacite implements Qmax,Infos {
 		}
 		return isPremier;
 	}
-	protected int atkdamage(Pkm user,Pkm cible,Climat climat,boolean quiet){
+	protected int atkdamage(Pkm user,Pkm cible,Combat context,boolean quiet){
 		double STAB=1;double weakness=1.0; Random random=new Random(); double climatmod;
 		//recherche de l'affinite de l'utilisateur avec l'element de l'attaque
 		if(user.type.contains(this.element)){STAB=1.5;}
@@ -77,14 +77,14 @@ public abstract class Capacite implements Qmax,Infos {
 		double ccmult=1.0;
 		if(random.nextInt(100)<=this.CC){
 			ccmult=1.5;
-			if(!quiet){System.out.println("Coup critique");}
+			if(!quiet){context.ajoutBuffer("Coup critique",false);}
 		}
 		//formule de calcul des degats
 		double mod=(double)STAB*(double)weakness*(double)ccmult;
 		double A=(2*user.stats[0][0]+10)/250.0;
 		double B=(user.stats[type][0]/(double)cible.stats[type+1][0]);
 		damage=A*B*((double)power+2.0)*mod;
-		climatmod=climat.mod(this.element);
+		climatmod=context.climat.mod(this.element);
 		damage=(int)((double)damage*climatmod);
 		//Traitement de l'objet du pokemon (buff passifs des objets)
 		if(user.objTenu!=null){
@@ -92,12 +92,12 @@ public abstract class Capacite implements Qmax,Infos {
 				if(user.objTenu.buffedType==this.element){damage+=(int)(damage/2);}
 			}
 		}
-		if(weakness==0){ if(!quiet){System.out.println("Aucun effet");} return 0;}
+		if(weakness==0){ if(!quiet){context.ajoutBuffer("Aucun effet",true);} return 0;}
 		else{
 			if(!quiet){
-				if(weakness>=2){System.out.println("C'est super efficace");}
-				if(weakness<1 && weakness>0){System.out.println("Ce n'est pas tres efficace");}
-				System.out.println("-"+(int)damage+" PV");
+				if(weakness>=2){context.ajoutBuffer("C'est super efficace",false);}
+				if(weakness<1 && weakness>0){context.ajoutBuffer("Ce n'est pas tres efficace",false);}
+				context.ajoutBuffer("-"+(int)damage+" PV",true);
 			}
 		//cible.infliger((int)damage);
 		//cible.stats[2][0]-=(int)damage;
@@ -119,9 +119,10 @@ public abstract class Capacite implements Qmax,Infos {
 	public String getDesc(){return description;}
 	public String getInfos(){ return power+" "+pre+" "+type+" "+element;}
 	
-	public int getPower() {
-		return power;
-	}
+	public int getPower() { return power; }
+	public int getPre(){ return pre; }
+	public int getType(){ return type; }
+	public Type getElement(){ return element; }
 	public String toString(){
 		if(type==3){
 		return (nom+": "+"pw:"+power+" pre:"+pre+" "+element+" ATT");

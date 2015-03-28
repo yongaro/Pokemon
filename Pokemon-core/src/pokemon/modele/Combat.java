@@ -19,6 +19,7 @@ public class Combat {
 	protected Scanner sc = new Scanner(System.in); //BERK
 	protected static String buffer="";
 	protected static int act=-1;
+	protected static int swapInd=-1;
 	
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
@@ -27,25 +28,24 @@ public class Combat {
 		terrain=Terrain.Plaine; climat=Climat.Normal;
 	}
 	
-	public int gagnant(Joueur j1,Joueur j2){
+	public int gagnant(){
 		int nbko1=0; int nbko2=0;
 		
-		for(int i=0;i<j1.teamsize;i++){
-			if(j1.team[i].stats[2][0]<=0){ nbko1++; }
+		for(int i=0;i<equipe1.length;i++){
+			if(equipe1[i].pkm.stats[2][0]<=0){ nbko1++; }
 		}
 		
-		for(int i=0;i<j2.teamsize;i++){
-			if(j2.team[i].stats[2][0]<=0){ nbko2++; }
+		for(int i=0;i<equipe2.length;i++){
+			if(equipe2[i].pkm.stats[2][0]<=0){ nbko2++; }
 		}
-		if(nbko2==j2.teamsize){ return 1; }
-		if(nbko1==j1.teamsize){ return 2; }
+		if(nbko2==equipe2.length){ return 1; }
+		if(nbko1==equipe1.length){ return 2; }
 		return 0;
 	}
 	
 	
-	public int combatsolo(Joueur j1,Joueur j2){
-		System.out.println(j1.teamsize+" "+j2.teamsize);
-		equipe1=new PokemonCombat[j1.teamsize]; System.out.println(j1.team[0]);
+	public void initSolo(Joueur j1,Joueur j2){
+		equipe1=new PokemonCombat[j1.teamsize];
 		equipe2=new PokemonCombat[j2.teamsize];
 		pkmListe=new PokemonCombat[2];
 		
@@ -60,8 +60,29 @@ public class Combat {
 		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
 		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
 		pkmListe[0].listeIndice=0; pkmListe[1].listeIndice=1;
+	}
+	
+	public void initSolo(Joueur j,Dresseur d){
+		equipe1=new PokemonCombat[j.teamsize];
+		equipe2=new PokemonCombat[d.getTeam().size()];
+		pkmListe=new PokemonCombat[2];
+		for(int i=0;i<j.teamsize;i++){
+			equipe1[i]=new PokemonCombat(j.team[i],false,j); equipe1[i].equipe=equipe1;
+		}
+		for(int i=0;i<d.getTeam().size();i++){
+			equipe2[i]=new PokemonCombat(d.getTeam().elementAt(i),false,d); equipe2[i].equipe=equipe2;
+		}
+		pkmListe[0]=equipe1[0];
+		pkmListe[1]=equipe2[0];
+		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
+		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
+		pkmListe[0].listeIndice=0; pkmListe[1].listeIndice=1;
+	}
+	
+	
+	public int combatsolo(){
 		
-		while(this.gagnant(j1,j2)==0){
+		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
 				pkmListe[i].action(pkmListe[i].adv[0],this);
@@ -77,7 +98,7 @@ public class Combat {
 				}
 			}
 		}
-		return this.gagnant(j1,j2);
+		return this.gagnant();
 	}
 	
 	
@@ -196,7 +217,7 @@ public class Combat {
 	
 	// Fonctions de manipulation des objets synchronisés entre modele et vue
 	public synchronized void ajoutBuffer(String s,boolean notify){ 
-		Combat.buffer+=s;
+		Combat.buffer+=s+"\n";
 		if(notify){ notify(); }
 	}
 	

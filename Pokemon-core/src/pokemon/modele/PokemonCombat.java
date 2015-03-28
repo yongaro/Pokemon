@@ -9,12 +9,12 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	protected int listeIndice;
 	//protected int equipe;
 	protected PokemonCombat[] equipe;
-	protected Joueur prop;
+	protected Object prop;
 	protected Stack<Pkm> XpStack;
 	protected PokemonCombat[] adv;
 	protected PokemonCombat[] voisins;
 
-	public PokemonCombat(Pkm p,boolean isIA,Joueur j){
+	public PokemonCombat(Pkm p,boolean isIA,Object j){
 		pkm=p;
 		this.isIA=isIA;
 		listeIndice=-1;
@@ -50,7 +50,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	public int bestdmg(PokemonCombat cible,Combat context){
 		int maxdmg=0; int dmgtemp=0; int ind=0;
 		for(int i=0;i<pkm.cap.contenu.size();i++){
-			dmgtemp=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm, context.climat,true);
+			dmgtemp=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm, context,true);
 			//Choix de l'attaque la plus forte
 			if(dmgtemp>maxdmg){ ind=i; maxdmg=dmgtemp; }
 			//En cas d'égalité de dégats
@@ -89,7 +89,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 						}
 						else{
 							//sinon on choisit la  plus forte
-							tempdmg=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm,context.climat,true);
+							tempdmg=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm,context,true);
 							if(tempdmg>maxdmg){
 								maxdmg=tempdmg; ind =i;
 							}
