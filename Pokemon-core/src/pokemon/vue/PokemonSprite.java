@@ -1,6 +1,7 @@
 package pokemon.vue;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -18,7 +19,7 @@ public class PokemonSprite extends Actor{
     public Texture s=new Texture(Gdx.files.internal("Sprites/6.png"));
     SpriteBatch b=new SpriteBatch();
 	ShapeRenderer shapeRenderer=new ShapeRenderer();
-
+	Sound sound;
     private Vector2 pos;
     public PokemonSprite(Vector2 v,String nom){
     	super();	
@@ -32,11 +33,24 @@ public class PokemonSprite extends Actor{
     ////
     public void addSlideAction(){
     	if(pos.x<320)
-	   			this.addAction(Actions.moveTo(pos.x+420, pos.y, 2.0f));
-	   		else
-	    	   	this.addAction(Actions.moveTo(pos.x-420, pos.y, 2.0f));
-	   		this.addAction(Actions.scaleTo(1.5f, 1.5f,2.0f));
-        b.setColor(0.2f, 0.2f, 0.2f,1); 
+    		this.addAction(Actions.moveTo(pos.x+420, pos.y, 2.0f));
+    	else
+    		this.addAction(Actions.moveTo(pos.x-420, pos.y, 2.0f));
+    	this.addAction(Actions.scaleTo(1.5f, 1.5f,2.0f));
+    	b.setColor(0.2f, 0.2f, 0.2f,1); 
+
+    }
+
+    public void hideTrainer(){
+    	if(pos.x>320)
+   			this.addAction(Actions.sequence(Actions.moveTo(this.getX(), -70,0.5f),Actions.visible(false)));
+    	
+   	
+    }
+    
+    public void popPokemon(){
+    	this.setVisible(false);
+    	this.addAction(Actions.delay(0.5f,Actions.parallel(Actions.visible(true),Actions.scaleTo(1.5f, 1.5f,0.5f))));
     	
     }
     
@@ -52,7 +66,7 @@ public class PokemonSprite extends Actor{
 	       b.draw(s,this.getX(),this.getY(),s.getWidth()*this.getScaleX(),s.getHeight()*this.getScaleY());
 	      // b.setColor(color);
 	       b.end();
-	        System.out.println(this.getX()+"+"+this.getY());
+	       // System.out.println(this.getX()+"+"+this.getY());
 	       /* shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
 	        shapeRenderer.begin(ShapeType.Filled);
 			shapeRenderer.rect(0, 0, 640, 100);

@@ -34,9 +34,9 @@ public class MyGdxGame extends Game {
 		MyGdxGame.initStatic();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
 		MenuListener menu=new MenuListener(this);
-		//this.setScreen(new CombatV());
+		this.setScreen(new CombatV());
 		//TestMap2 test = new TestMap2();
-		this.setScreen(new MapScreen(this));
+		//this.setScreen(new MapScreen(this));
 //		Combat test=new Combat();
 	}
 	//@Tps(nbhours=2)

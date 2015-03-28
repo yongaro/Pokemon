@@ -6,7 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -16,10 +18,15 @@ public class CombatV extends GameScreen implements InputProcessor{
 	PokemonSprite e1=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
 	PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
 	PokemonSprite a=new PokemonSprite(PokemonSprite.a1,"trainerS.png");
+	PokemonSprite p1;
+	DialogBox dbox;
+	Sound s;
 	int state=0;
 	public CombatV(){
 		
 		Gdx.input.setInputProcessor(this);
+		dbox=new DialogBox();
+		dbox.setMessage("Un pokemon sauvage apparait");
 	}
 	
 	
@@ -65,7 +72,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 		e2.addSlideAction();
 		stage.addActor(a);
 		a.addSlideAction();
-		stage.addActor(new DialogBox("Un pokemon sauvage apparait"));
+		stage.addActor(dbox);
+		
 		
 	}///////
 
@@ -75,8 +83,13 @@ public class CombatV extends GameScreen implements InputProcessor{
 		switch(arg0){
 		case Keys.ENTER:
 		{
-			if(state==0 && stage.getActors().get(2).getActions().size==0)
-				stage.getActors().get(2).addAction(Actions.moveTo(stage.getActors().get(2).getX(), -80,0.5f));
+			if(state==0 && stage.getActors().get(2).getActions().size==0){
+				a.hideTrainer();
+				dbox.setMessage("En avant douchebag");
+				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/6.png");
+				p1.popPokemon();
+				stage.addActor(p1);
+				}
 			break;
 		}
 		}
