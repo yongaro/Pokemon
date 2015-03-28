@@ -14,13 +14,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class menuPokematosMap implements Screen{
-	int width=640;//Gdx.graphics.getWidth();
-	int height=360;//Gdx.graphics.getHeight();
-	public Stage stage = new Stage(new FitViewport(width,height));
+public class menuPokematosMap extends GameScreen{
+
 	MyGdxGame mygdxgame;
-	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
-	ShapeRenderer shapeRenderer=new ShapeRenderer();
 	Texture map;
 	MyActor a;
 	Minimap minimap=MyGdxGame.m;

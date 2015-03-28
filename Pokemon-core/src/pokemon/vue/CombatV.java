@@ -11,10 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class CombatV implements Screen,InputProcessor{
-	int width=640;//Gdx.graphics.getWidth();
-	int height=360;//Gdx.graphics.getHeight();
-	public Stage stage = new Stage(new FitViewport(width,height));
+public class CombatV extends GameScreen implements InputProcessor{
 	MyGdxGame mygdxgame;
 	PokemonSprite e1=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
 	PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
@@ -52,8 +49,7 @@ public class CombatV implements Screen,InputProcessor{
 	}
 	@Override
 	public void resize(int arg0, int arg1) {
-	 	stage.getViewport().update(arg0, arg1, true);
-        stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+		super.resize(arg0, arg1);
 		
 	}
 	@Override

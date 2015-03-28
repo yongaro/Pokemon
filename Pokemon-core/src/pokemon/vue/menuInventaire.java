@@ -21,17 +21,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 @Tps(nbhours=3)
-public class menuInventaire implements Screen{
+public class menuInventaire  extends GameScreen{
 
 	MyGdxGame myGdxGame;
 	MenuListener menuListener;
 	Joueur joueur= MyGdxGame.Jtest;
 	private Texture texture = new Texture(Gdx.files.internal("Dresseur.png"));
-	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
-	ShapeRenderer shapeRenderer=new ShapeRenderer();
-	int width=640;
-	int height=360;
-    private Stage stage = new Stage(new FitViewport(width,height));
     int pktselector=1;
     int state=1;
     int actionselector=1;
@@ -170,14 +165,8 @@ public class menuInventaire implements Screen{
 
 	}
 
-	@Override
-	public void resize(int arg0, int arg1) {
-    	stage.getViewport().update(arg0, arg1, true);
-        stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-		Gdx.graphics.requestRendering();
 
-		
-	}
+
 	 public void update(int state,int pktselector, int objectselector0,int objectselector1,int actionselector,int displayedAtk)
 	    {
 	    	this.state=state;

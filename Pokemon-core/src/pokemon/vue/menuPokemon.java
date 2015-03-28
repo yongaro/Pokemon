@@ -40,36 +40,25 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 @Tps(nbhours=5)
-public class menuPokemon  implements Screen {
+public class menuPokemon  extends GameScreen {
 
 	MyGdxGame myGdxGame;
 	Joueur joueur= MyGdxGame.Jtest;
 	private Texture texture;
-	//private Image splashImage = new Image(texture);
-	int width=640;//Gdx.graphics.getWidth();
-	int height=360;//Gdx.graphics.getHeight();
-	/*TextureAtlas atlas=new TextureAtlas(Gdx.files.internal("pkm.pack"));
-		TextureRegion sp=atlas.findRegion("1");*/
-	public Stage stage = new Stage(new FitViewport(width,height));
-	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
-	Random r=new Random();
-	ShapeRenderer shapeRenderer=new ShapeRenderer();
 	int state=1;
 	public int pkselector=0;
 	int atkselector=1;
 	int offset=0;
 	int posx=0;
-	//String[] str; //bufferisation de la definition de l'attaque
-	public Vector<String> nom=new Vector<String>();
-	public Vector<String> attaque=new Vector<String>();
+
 	int[] healthbars;
 
 	public menuPokemon(MyGdxGame myGdxGame) {
+		super();
+		System.out.println("Police d ecriture "+f);
 		this.myGdxGame=myGdxGame;
 		//str=textCut("Envoie un puissant jet d'eau\npour frapper l'ennemi.");
 		//listener=new PokemonMenuListenner(this,myGdxGame);
-		nom.add("Dracaufeu");nom.add("Pikaderp");nom.add("Bulbiboule");nom.add("Sorboul");nom.add("Saladerp");nom.add("Taupiqueur");
-		attaque.add("Hydro-canon");attaque.add("Fatal Foudre");attaque.add("Griffe");attaque.add("Smashing");
 		healthbars=new int[6];
 	}
 
@@ -80,7 +69,7 @@ public class menuPokemon  implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 	    Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		stage.act();
+	    stage.act();
 		stage.draw();
 		// stage.getBatch().begin();
 		// f.draw(stage.getBatch(),message,(Gdx.graphics.getWidth()/2)-(f.getBounds(message).width)/2, 200);
@@ -235,13 +224,6 @@ public class menuPokemon  implements Screen {
 			texture = new Texture(Gdx.files.internal("Sprites/"+joueur.getTeam()[pkselector].getID()+".png")); /*pick random pkm*/
 		else
 			texture = new Texture(Gdx.files.internal("Sprites/0.png"));
-	}
-
-	@Override
-	public void resize(int width, int height) {     //https://github.com/libgdx/libgdx/wiki/Scene2d
-		stage.getViewport().update(width, height, true);
-		stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, this.width,this.height);
-		Gdx.graphics.requestRendering();
 	}
 
 

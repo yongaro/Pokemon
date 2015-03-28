@@ -17,19 +17,16 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class menuPokematos implements Screen{
+public class menuPokematos extends  GameScreen{
 
 
-	int width=640;//Gdx.graphics.getWidth();
-	int height=360;//Gdx.graphics.getHeight();
-	public Stage stage = new Stage(new FitViewport(width,height));
+
+
 	MyGdxGame mygdxgame;
 	int state;
 	int pkselector,optselector;
 	int page;
 	int offset;
-	ShapeRenderer shapeRenderer;
-	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
 	Texture spritepokemon,map;
 	Vector<String> nom=new Vector<String>();
 

@@ -92,7 +92,7 @@ public class PokematosMenuListener implements   InputProcessor{
 				if(state==3)
 					state--;
 				if(state==4){
-					for(Actor a:menu.stage.getActors())
+					for(Actor a:menu.getStage().getActors())
 						a.remove();
 					state--;
 						;}

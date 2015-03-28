@@ -22,7 +22,6 @@ public class PokemonMenuListenner implements InputProcessor{
 
 	menuPokemon menu;
 	MyGdxGame myGdxGame;
-	//Screen nextScreen=null;
 	MenuListener menuListener;
 	Joueur joueur= MyGdxGame.Jtest;
 	int state;
@@ -109,6 +108,8 @@ public class PokemonMenuListenner implements InputProcessor{
 				case 2:
 					state=4;
 					change=atkselector-1;
+					System.out.println("State to 4 Selectec atk "+change);
+
 					break;
 				case 3://switch des pokemons
 					Pkm swap=joueur.getTeam()[pkselector];
@@ -120,10 +121,10 @@ public class PokemonMenuListenner implements InputProcessor{
 					menu.update(state,pkselector,atkselector);
 					break;
 				case 4://switch des attaques
-					String attaque=menu.attaque.get(atkselector-1);
+					//String attaque=menu.attaque.get(atkselector-1);
 					//menu.attaque.set(atkselector-1, menu.attaque.get(change));
 					//menu.attaque.set(change, attaque);
-					joueur.getTeam()[pkselector-1].getCap().swap(joueur.getTeam()[pkselector-1].getCap().elementAt(atkselector-1), joueur.getTeam()[pkselector-1].getCap().elementAt(change));
+					joueur.getTeam()[pkselector].getCap().swap(joueur.getTeam()[pkselector].getCap().elementAt(atkselector-1), joueur.getTeam()[pkselector].getCap().elementAt(change));
 					state=2;
 					menu.update(state,pkselector,atkselector);
 					break;//
@@ -183,7 +184,7 @@ public class PokemonMenuListenner implements InputProcessor{
 			int i=280;
 			int count=1;
 			Vector2 v=new Vector2(x,y);
-			menu.stage.screenToStageCoordinates(v);
+			menu.getStage().screenToStageCoordinates(v);
 			System.out.println(v.x+" "+v.y);
 			if(v.x>15 && v.x<200 && v.y>10 && v.y<275){
 				
