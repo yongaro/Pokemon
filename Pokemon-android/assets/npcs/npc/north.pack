@@ -1,23 +1,23 @@
 
-w_north.png
+north.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-s0
+n0
   rotate: false
   xy: 1, 1
   size: 14, 19
   orig: 14, 19
   offset: 0, 0
   index: -1
-s1
+n1
   rotate: false
   xy: 17, 1
   size: 14, 19
   orig: 14, 19
   offset: 0, 0
   index: -1
-s2
+n2
   rotate: false
   xy: 33, 1
   size: 14, 19

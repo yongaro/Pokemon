@@ -1,26 +1,26 @@
 
-w_right.png
+right.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-r01
+e0
   rotate: false
   xy: 1, 1
-  size: 14, 19
-  orig: 14, 19
+  size: 12, 19
+  orig: 12, 19
   offset: 0, 0
   index: -1
-r02
+e1
   rotate: false
-  xy: 17, 1
-  size: 14, 19
-  orig: 14, 19
+  xy: 15, 1
+  size: 12, 19
+  orig: 12, 19
   offset: 0, 0
   index: -1
-r03
+e2
   rotate: false
-  xy: 33, 1
-  size: 14, 19
-  orig: 14, 19
+  xy: 29, 1
+  size: 12, 19
+  orig: 12, 19
   offset: 0, 0
   index: -1

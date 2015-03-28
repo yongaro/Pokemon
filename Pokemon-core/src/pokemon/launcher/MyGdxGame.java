@@ -36,7 +36,7 @@ public class MyGdxGame extends Game {
 		MenuListener menu=new MenuListener(this);
 		//this.setScreen(new CombatV());
 		//TestMap2 test = new TestMap2();
-		//this.setScreen(new MapScreen());
+		this.setScreen(new MapScreen(this));
 //		Combat test=new Combat();
 	}
 	//@Tps(nbhours=2)

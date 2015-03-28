@@ -1,27 +1,26 @@
 
-w_south.png
+south.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 s0
   rotate: false
-  xy: 35, 1
+  xy: 1, 1
   size: 14, 19
   orig: 14, 19
   offset: 0, 0
   index: -1
 s1
   rotate: false
-  xy: 1, 1
-  size: 15, 19
-  orig: 15, 19
+  xy: 17, 1
+  size: 14, 19
+  orig: 14, 19
   offset: 0, 0
   index: -1
 s2
   rotate: false
-  xy: 18, 1
-  size: 15, 19
-  orig: 15, 19
+  xy: 33, 1
+  size: 14, 19
+  orig: 14, 19
   offset: 0, 0
   index: -1
-
