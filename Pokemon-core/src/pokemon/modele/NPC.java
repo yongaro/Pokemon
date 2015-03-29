@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 /*La classe NPC permet de stocker toutes les informatiosn relatives au comportement d'un PNJ, 
  * c'est a dire les lignes de texte que le personnage doit communiquer au joueur*/
 
-@Tps(nbhours=5)
+@Tps(nbhours=6)
 public class NPC {
 	//Attributs d'interaction
 	protected int id;

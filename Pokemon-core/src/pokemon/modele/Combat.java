@@ -53,7 +53,7 @@ public class Combat {
 			equipe1[i]=new PokemonCombat(j1.team[i],false,j1); equipe1[i].equipe=equipe1;
 		}
 		for(int i=0;i<j2.teamsize;i++){
-			equipe2[i]=new PokemonCombat(j2.team[i],false,j2); equipe2[i].equipe=equipe2;
+			equipe2[i]=new PokemonCombat(j2.team[i],true,j2); equipe2[i].equipe=equipe2;
 		}
 		pkmListe[0]=equipe1[0];
 		pkmListe[1]=equipe2[0];
@@ -81,7 +81,6 @@ public class Combat {
 	
 	
 	public int combatsolo(){
-		
 		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
@@ -103,7 +102,7 @@ public class Combat {
 	
 	
 	public void action(PokemonCombat user,PokemonCombat cible){
-		int isdone=0;  int act=0; int i=0; int ch1=0; int ch2=0;
+		int isdone=0;  int act=0; int i=0; int ch1=0; int ch2=1;
 		while(isdone==0){
 			System.out.println("Que doit faire "+user.pkm.nom+" ? "+user.pkm.stats[2][0]+"/"+user.pkm.stats[2][1]+" "+user.pkm.statut);
 			System.out.println("1-Attaque   2-Pkm");
@@ -113,21 +112,24 @@ public class Combat {
 			switch(act){
 			case 1:
 				for(UniteStockage<Capacite> u:user.pkm.cap){
-						System.out.println(i+" "+u); i++;				
+						System.out.println(i+" "+u+" "+u.quantite+"/"+u.quantitemax); i++;				
 				}
 				//while((act=sc.nextInt())<user.cap.max){System.out.println(act); }
 				act=sc.nextInt();
 				//Application des statuts pouvant empecher l'action
 				ch1=user.pkm.statut.StatEffect(user.pkm,0);
 				for(Statut s: user.pkm.supTemp){
-					if(s.StatEffect(user.pkm,0)==1){
-						ch2=1;
+					if(s.StatEffect(user.pkm,0)==0){
+						ch2=0;
 					}
 				}
+				System.out.println(ch1+" "+ch2);
 				if(ch1==1 && ch2==1){
-					user.pkm.cap.at(act).script(user.pkm,cible.pkm,this);
+					user.pkm.cap.utiliser(act,user.pkm,cible.pkm,this);
+					System.out.println("UTILISER");
 				}
-				//Cons�quences de l'action
+				System.out.println(user.pkm.stats[2][0]+" "+cible.pkm.stats[2][0]);
+				//Consequences de l'action
 				if(user.pkm.stats[2][0]<=0){ user.XPreward(); pokeswap(user); }
 				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(); pokeswap(cible); }
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
@@ -219,6 +221,7 @@ public class Combat {
 	public synchronized void ajoutBuffer(String s,boolean notify){ 
 		Combat.buffer+=s+"\n";
 		if(notify){ notify(); }
+		System.out.println(s);
 	}
 	
 	public synchronized String readBuffer(){

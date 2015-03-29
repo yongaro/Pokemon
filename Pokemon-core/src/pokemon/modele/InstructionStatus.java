@@ -17,6 +17,7 @@ public class InstructionStatus extends Instruction{
 	//Surcharge
 	@Override
 	public String execute(NPCList list, Joueur j) {
+		System.out.println("STATUS");
 		if(id != 0) {
 			list.getNPC(id).setNewStatus(newStatus);
 		}

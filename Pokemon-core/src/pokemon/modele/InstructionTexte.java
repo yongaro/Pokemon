@@ -14,6 +14,7 @@ public class InstructionTexte extends Instruction{
 	//Surcharge
 	@Override
 	public String execute(NPCList list, Joueur j) {
+		System.out.println("TEXTE");
 		return text;
 	}
 

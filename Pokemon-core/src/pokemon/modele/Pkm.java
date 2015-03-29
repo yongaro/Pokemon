@@ -160,6 +160,8 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		return capP;
 	}
 
+	public void setIAbh(int iabh){ IAbh=iabh; }
+	
 	public void buff(String code){
 		for(char c:code.toCharArray()){
 		if(c=='3'){
