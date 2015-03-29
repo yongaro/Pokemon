@@ -2,6 +2,8 @@ package pokemon.modele;
 
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
+
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.math.Vector2;
  * concernant une map, notemment sa TiledMap, ainsi que tout les
  * objets present sur la map */
 
+@Tps(nbhours=10)
 public class Map {
 	//Proprietes de la Map
 	private TiledMap tiledMap;
@@ -129,7 +132,7 @@ public class Map {
 	}
 	/* Interagit avec le NPC de la position donnee
 	 * Renvoie null si aucun NPC n'est present sur place.*/
-	public String interact(Joueur j, Vector2 target, NPCList npcList) throws NoMoreInstructionException, NoNPCException {
+	public String interact(Joueur j, Vector2 target, NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {
 		for(NPC npc : npcs) {
 			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
 			if(npcHitbox.contains(target)) {
@@ -149,7 +152,11 @@ public class Map {
 				default:
 					break;			
 				}
-				return npc.executeDialog(j, npcList);
+				String res = npc.executeDialog(j, npcList);
+				if(npc.getMoveDistance() > 0) {
+					throw new MovementException();
+				}
+				return res;
 			}
 		}
 		throw new NoNPCException();

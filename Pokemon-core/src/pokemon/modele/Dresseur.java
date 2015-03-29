@@ -3,12 +3,15 @@ package pokemon.modele;
 import java.io.IOException;
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 /* La classe Dresseur (herite de NPC) decrit le modele d'un dresseur
  * ainsi que son equipe de pokemon, lue depuis un fichier xml */
 
+@Tps(nbhours=3)
 public class Dresseur extends NPC {
 	private Vector<Pkm> team;
 	
@@ -87,6 +90,7 @@ public class Dresseur extends NPC {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+			dialogs.add(new Dialog());
 		}
 	}
 }

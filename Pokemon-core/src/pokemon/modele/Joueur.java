@@ -2,6 +2,8 @@ package pokemon.modele;
 
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
  * de Pokemon ainsi que son etat (argent, badges...). 
  * Contient aussi la base de donnees afin de stocker les pokemons */
 
+@Tps(nbhours=5)
 public class Joueur {
 	//Attributs du dresseur
 	protected int ID;
@@ -210,7 +213,7 @@ public class Joueur {
 		}
 	}
 	
-	public String interact(NPCList npcList) throws NoMoreInstructionException, NoNPCException {
+	public String interact(NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {
 		Vector2 target = new Vector2();
 		Vector2 center = new Vector2();
 		center.x = pos.x + (spriteWidth/2);

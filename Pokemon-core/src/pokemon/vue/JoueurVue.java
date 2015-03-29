@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import pokemon.annotations.Tps;
 import pokemon.modele.ChangeMapException;
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 
+@Tps(nbhours=2)
 public class JoueurVue {
 	private TextureAtlas atlaswest=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));
 	private TextureAtlas atlaseast=new TextureAtlas(Gdx.files.internal("player/w_right.pack"));

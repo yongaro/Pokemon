@@ -2,6 +2,7 @@ package pokemon.controle;
 
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
 import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Direction;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.Input.Keys;
 
 /* La classe JoueurController gere les inputs sur la map*/
 
+@Tps(nbhours=2)
 public class JoueurController implements InputProcessor{
 	private MyGdxGame game;
 	private Vector<Direction> input=new Vector<Direction>();

@@ -7,6 +7,12 @@
 		<text>Moi ca va !</text>
 	</dialogue>
 	<dialogue>
+		<text>Viens on se promene !</text>
+		<move id="1" dir="North" distance="50"/>
+		<text>Ouah ! Je peux me deplacer maintenant !</text>
+		<status npc="1" value="2"/>
+	</dialogue>
+	<dialogue>
 		<text>On s'est deja parle non ?</text>
 	</dialogue>
 	

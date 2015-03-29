@@ -3,59 +3,81 @@ package pokemon.modele;
 import java.io.IOException;
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 /*La classe NPC permet de stocker toutes les informatiosn relatives au comportement d'un PNJ, 
- * c'est a� dire les lignes de texte que le personnage doit communiquer au joueur*/
+ * c'est a dire les lignes de texte que le personnage doit communiquer au joueur*/
 
+@Tps(nbhours=5)
 public class NPC {
-	//status determine quelle ligne de dialogue le PNJ doit reciter
+	//Attributs d'interaction
 	protected int id;
-	protected int status;
+	protected int status; // determine quelle dialogue le PNJ doit reciter
 	protected int newStatus;
-	protected Direction orientation;
 	protected Vector<Dialog> dialogs;
+	
+	//Attributs de mouvement
+	protected Direction orientation;
 	protected Vector2 pos;
+	protected float moveDistance;
+	protected Direction moveDirection;
 	
 	//Constructeurs
 	public NPC() {
 		setStatus(0);
 		setId(0);
-		setOrientation(Direction.South);
 		dialogs = new Vector<Dialog>();
 		dialogs.add(new Dialog());
+		
+		setOrientation(Direction.South);
 		pos = new Vector2(0, 0);
+		setMoveDistance(0);
+		setMoveDirection(Direction.Standing);
 	}
 	public NPC(String path) {
 		setStatus(0);
-		setOrientation(Direction.South);
 		dialogs = new Vector<Dialog>();
-		pos = new Vector2(0, 0);
 		lireXML(path);
+		
+		setOrientation(Direction.South);
+		pos = new Vector2(0, 0);
+		setMoveDistance(0);
+		setMoveDirection(Direction.Standing);
 	}
 	public NPC(Vector2 pos) {
 		setStatus(0);
-		setOrientation(Direction.South);
 		dialogs = new Vector<Dialog>();
 		dialogs.add(new Dialog());
+		
+		setOrientation(Direction.South);
 		this.pos = new Vector2(pos);
+		setMoveDistance(0);
+		setMoveDirection(Direction.Standing);
 	}
 	public NPC(String path, Vector2 pos) {
 		setStatus(0);
-		setOrientation(Direction.South);
 		dialogs = new Vector<Dialog>();
-		this.pos = new Vector2(pos);
 		lireXML(path);
+		
+		setOrientation(Direction.South);
+		this.pos = new Vector2(pos);
+		setMoveDistance(0);
+		setMoveDirection(Direction.Standing);
 	}
 	public NPC(String path, Vector2 pos, int status) {
 		setStatus(status);
-		setOrientation(Direction.South);
 		dialogs = new Vector<Dialog>();
-		this.pos = new Vector2(pos);
 		lireXML(path);
+		
+		setOrientation(Direction.South);
+		this.pos = new Vector2(pos);
+		setMoveDistance(0);
+		setMoveDirection(Direction.Standing);
 	}
 
 	//Fonctionnalitees principales
@@ -64,15 +86,43 @@ public class NPC {
 			return dialogs.get(status).execute(npcList, j);
 		} catch (NoMoreInstructionException e) {
 			updateStatus();
-			throw new NoMoreInstructionException();
+			throw e;
 		}
 	}
 	public void setNewStatus(int s) {
 		newStatus = s;
 	}
-	
+	public void updatePosition() {
+		if(moveDistance > 0) {
+			float speed = 60;
+			Vector2 targetPosition = new Vector2(getPos());
+			
+			switch(moveDirection) {
+			case East:
+				targetPosition.x += Gdx.graphics.getDeltaTime()*speed;
+				break;
+			case North:
+				targetPosition.y += Gdx.graphics.getDeltaTime()*speed;
+				break;
+			case South:
+				targetPosition.y -= Gdx.graphics.getDeltaTime()*speed;
+				break;
+			case West:
+				targetPosition.x -= Gdx.graphics.getDeltaTime()*speed;
+				break;
+			default:
+				break;
+			}
+			moveDistance -= Gdx.graphics.getDeltaTime()*speed;
+			setPos(targetPosition);
+			setOrientation(moveDirection);
+		}
+		else {
+			setMoveDirection(Direction.Standing);
+		}
+	}
 	//Fonction privee
-	private void updateStatus() {
+	protected void updateStatus() {
 		status = newStatus;
 	}
 	
@@ -102,6 +152,19 @@ public class NPC {
 		this.pos = pos;
 	}
 	
+	public float getMoveDistance() {
+		return moveDistance;
+	}
+	public void setMoveDistance(float moveDistance) {
+		this.moveDistance = moveDistance;
+	}
+	public Direction getMoveDirection() {
+		return moveDirection;
+	}
+	public void setMoveDirection(Direction moveDirection) {
+		this.moveDirection = moveDirection;
+	}
+	
 	//Fonctions privees
 	protected Element getDialogs(String path) throws IOException {
 		XmlReader reader = new XmlReader();
@@ -127,10 +190,23 @@ public class NPC {
 					InstructionTexte newInst = new InstructionTexte(instruction.getText());
 					newDialog.addInstruction(newInst);
 				}
+				
+				//Si l'instruction est un changement de status
 				else if (instruction.getName().compareTo("status") == 0) {
 					int id = instruction.getInt("npc");
 					int value = instruction.getInt("value");
+					
 					InstructionStatus newInst = new InstructionStatus(value, id);
+					newDialog.addInstruction(newInst);
+				}
+				
+				//Si l'instruction est un mouvement
+				else if(instruction.getName().compareTo("move") == 0) {
+					int id = instruction.getInt("id");
+					Direction dir = Direction.valueOf(instruction.get("dir"));
+					int dist = instruction.getInt("distance");
+					
+					InstructionMouvement newInst = new InstructionMouvement(id, dir, dist);
 					newDialog.addInstruction(newInst);
 				}
 			}
@@ -144,6 +220,7 @@ public class NPC {
 			getDialogs(path);
 		} catch (IOException e) {
 			e.printStackTrace();
+			dialogs.add(new Dialog());
 		}
 	}
 }

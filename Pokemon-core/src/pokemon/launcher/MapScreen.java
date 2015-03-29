@@ -2,9 +2,11 @@ package pokemon.launcher;
 
 import java.util.Vector;
 
+import pokemon.annotations.Tps;
 import pokemon.controle.JoueurController;
 import pokemon.modele.ChangeMapException;
 import pokemon.modele.Joueur;
+import pokemon.modele.MovementException;
 import pokemon.modele.NPC;
 import pokemon.modele.NoMoreInstructionException;
 import pokemon.modele.NoNPCException;
@@ -20,6 +22,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+@Tps(nbhours=8)
 public class MapScreen implements Screen{
 	
 	@SuppressWarnings("unused")
@@ -60,9 +63,13 @@ public class MapScreen implements Screen{
 		renderer.setView(cam);
 		renderer.render();
 		renderer.getBatch().begin();
+		
+		//Rendu des NPCs
 		for(NPCVue npc : npcs) {
 			npc.render(renderer.getBatch(), delta);
 		}
+		
+		//Rendu du joueur
 		joueur.render(delta, renderer.getBatch());
 
 		renderer.getBatch().end();
@@ -99,6 +106,9 @@ public class MapScreen implements Screen{
 			npcs.clear();
 			updateNPCs();
 		}
+		for(NPC npc : j.getCurrentMap().getNpcs()) {
+			npc.updatePosition();
+		}
 	}
 	
 	@Override
@@ -128,10 +138,13 @@ public class MapScreen implements Screen{
 			try {
 				text = j.interact(MyGdxGame.npcList);
 			} catch (NoNPCException e) {
-				//Si il n'y a pas de NPC, on quitte la boucle
+				//Si il n'y a pas de NPC, on quitte la boucle...
 				break;
 			} catch (NoMoreInstructionException e) {
-				//Si le dialogue est fini, on quitte la boucle
+				//Si le dialogue est fini, on quitte la boucle...
+				break;
+			} catch (MovementException e) {
+				//Si un mouvement est en cours...
 				break;
 			}
 		}

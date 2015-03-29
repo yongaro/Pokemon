@@ -21,7 +21,8 @@ public class InstructionMouvement extends Instruction{
 	@Override
 	public String execute(NPCList list, Joueur j) {
 		if(id != 0) {
-			list.getNPC(id).setOrientation(dir);
+			list.getNPC(id).setMoveDistance(dist);
+			list.getNPC(id).setMoveDirection(dir);
 		}
 		else
 		{
