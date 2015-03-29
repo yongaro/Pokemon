@@ -20,6 +20,7 @@ public class InstructionMouvement extends Instruction{
 	//Surcharge
 	@Override
 	public String execute(NPCList list, Joueur j) {
+		System.out.println("BOUGER");
 		if(id != 0) {
 			list.getNPC(id).setMoveDistance(dist);
 			list.getNPC(id).setMoveDirection(dir);

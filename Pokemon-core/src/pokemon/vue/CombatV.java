@@ -59,8 +59,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 	}
 	@Override
 	public void render(float arg0) {
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
+       // Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+
 		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
 				stage.getBatch().begin();
 			stage.getBatch().draw(fond,0,0);
@@ -68,21 +71,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		switch(state){
 		
 		case 2:
-	
-			shapeRenderer.begin(ShapeType.Filled);
-			shapeRenderer.setColor(1f, 1f, 1f, 1f);
-			shapeRenderer.rect(310, 0,310,100);
-			offset=50;
-			if(selector<2)
-				offset+=offset*selector;
-			else
-				offset+=offset*(selector-2);
-			shapeRenderer.setColor(1f, 0, 0f, 1f);
-			if(selector<2)
-			shapeRenderer.rect(310,100-offset, 5, 50);
-			else
-			shapeRenderer.rect(450,100-(offset), 5, 50);
-			shapeRenderer.end();
+			drawPanel();
 			offset=0;
 			stage.getBatch().begin();
 			
@@ -95,15 +84,36 @@ public class CombatV extends GameScreen implements InputProcessor{
 				if(i==2)
 					offset=0;
 				if(i>=2)
-					f.draw(stage.getBatch(),actions[i],480,85-offset);
+					f.draw(stage.getBatch(),actions[i],490,85-offset);
 				//f.draw(stage.getBatch(),cap.getQte()+"/"+cap.getQteMax(),385-f.getBounds(cap.getQte()+" / "+cap.getQteMax()).width,113-offset);
 				offset+=50;
 			}
 			stage.getBatch().end();
-
+			break;
+		case 3:
+			drawPanel();
+			stage.getBatch().begin();
+			offset=0;
+			f.setColor(0.58f, 0.59f, 0.57f, 1);
+			for(int i=0;i<actions.length;i++)//affichage des attaques
+			{
+				//f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
+				if(i<2)
+				f.draw(stage.getBatch(),pkms[0].getCap().at(i).getNom(),330,85-offset);
+				if(i==2)
+					offset=0;
+				if(i>=2)
+					f.draw(stage.getBatch(),pkms[0].getCap().at(i).getNom(),490,85-offset);
+				//f.draw(stage.getBatch(),cap.getQte()+"/"+cap.getQteMax(),385-f.getBounds(cap.getQte()+" / "+cap.getQteMax()).width,113-offset);
+				offset+=50;
+			}
+			stage.getBatch().end();
+			dbox.setMessage(descGen(pkms[0].getCap().elementAt(selector)));
+			break;
 		}
 		stage.act(arg0);
 		stage.draw();
+		Gdx.gl.glDisable(GL20.GL_BLEND);
 		
 	}
 	@Override
@@ -149,10 +159,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state++;
+				break;
 			}
 			if(state==2){
 				if(selector==0){
-					dbox.setMessage(descGen(pkms[0].getCap().elementAt(0)));
+					state++;
 				}
 			}
 			break;
@@ -188,15 +199,31 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 
 	private String descGen(UniteStockage<Capacite> element) {
-		String str="Type :"+element.get().getElement().name();
+		String str="Type: "+element.get().getElement().name();
 		str+="\n\n          PP: ";
 		str+=element.getQte()+"/"+element.getQteMax();
 		//str+="Puissance: "+element.get().getPower();
 		
 		return str;
 	}
-
-
+	private void drawPanel(){
+	shapeRenderer.begin(ShapeType.Filled);
+	Gdx.gl.glEnable(GL20.GL_BLEND);
+	shapeRenderer.setColor(1f, 1f, 1f, 0.8f);
+	shapeRenderer.rect(310, 0,320,100);
+	offset=50;
+	if(selector<2)
+		offset+=offset*selector;
+	else
+		offset+=offset*(selector-2);
+	shapeRenderer.setColor(1f, 0, 0f, 0.2f);
+	if(selector<2)
+	shapeRenderer.rect(310,100-offset, 160, 50);
+	else
+	shapeRenderer.rect(470,100-(offset), 160, 50);
+	shapeRenderer.end();
+	Gdx.gl.glDisable(GL20.GL_BLEND);
+	}
 	@Override
 	public boolean keyTyped(char arg0) {
 		// TODO Auto-generated method stub

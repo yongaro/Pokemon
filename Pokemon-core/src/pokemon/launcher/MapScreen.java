@@ -9,7 +9,6 @@ import pokemon.modele.Joueur;
 import pokemon.modele.MovementException;
 import pokemon.modele.NPC;
 import pokemon.modele.NoMoreInstructionException;
-import pokemon.modele.NoNPCException;
 import pokemon.vue.DialogBox;
 import pokemon.vue.JoueurVue;
 import pokemon.vue.NPCVue;
@@ -22,7 +21,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-@Tps(nbhours=8)
+@Tps(nbhours=10)
 public class MapScreen implements Screen{
 	
 	@SuppressWarnings("unused")
@@ -33,7 +32,7 @@ public class MapScreen implements Screen{
 	private JoueurVue joueur= new JoueurVue(j);
 	private JoueurController controller;
 	
-	//Attributs NPC
+	//Attributs NPCs
 	private Vector<NPCVue> npcs = new Vector<NPCVue>();
 	
 	//Attributs affichage
@@ -43,6 +42,7 @@ public class MapScreen implements Screen{
 	private OrthographicCamera cam;
 
     //Attributs cinematiques
+	private NPC talkingNPC;
 	private Stage stage;
     private DialogBox box = null;
 
@@ -100,14 +100,22 @@ public class MapScreen implements Screen{
 	}
 	public void update(float delta)
 	{
+		//On met a jour la position du joueur.
 		try {
 			joueur.updatePosition(renderer);
 		} catch (ChangeMapException e) {
 			npcs.clear();
 			updateNPCs();
 		}
+		
+		//On met a jour la position des NPC
 		for(NPC npc : j.getCurrentMap().getNpcs()) {
 			npc.updatePosition();
+		}
+		
+		//On met a jour la cinematique en cas de mouvement de personnage.
+		if(talkingNPC != null && box == null) {
+			updateDialogBox(j);
 		}
 	}
 	
@@ -133,44 +141,63 @@ public class MapScreen implements Screen{
 	
 	//Autres fonctions
 	public void updateDialogBox(Joueur j) {
-		String text = null;
-		while(text == null) {
-			try {
-				text = j.interact(MyGdxGame.npcList);
-			} catch (NoNPCException e) {
-				//Si il n'y a pas de NPC, on quitte la boucle...
-				break;
-			} catch (NoMoreInstructionException e) {
-				//Si le dialogue est fini, on quitte la boucle...
-				break;
-			} catch (MovementException e) {
-				//Si un mouvement est en cours...
-				break;
-			}
+		//Si aucune cinematique est en train d'etre jouee ...
+		if(talkingNPC == null) {
+			//... on recupere le NPC cible.
+			talkingNPC = j.getCurrentMap().getNPC(j);
 		}
-		if(text != null) {
-			//Si on vient de commencer le dialogue, il faut creer la boite
-			if(box == null) {	
-				j.setMove(false);
-				box = new DialogBox(text);
-				stage.addActor(box);
+		if(talkingNPC != null && talkingNPC.getMoveDistance() <= 0) {
+			String textToDisplay = null;
+			boolean isCutsceneEnded = false;
+			//Tant qu'on a pas de texte ...
+			while(textToDisplay == null) {
+				try {
+					//... on exectue le dialogue du NPC.
+					textToDisplay = j.interact(talkingNPC, MyGdxGame.npcList);
+				} catch (NoMoreInstructionException e) {
+					//Si le dialogue est fini, on quitte la boucle.
+					isCutsceneEnded = true;
+					break;
+				} catch (MovementException e) {
+					//Si un personnage doit bouger, on detruit la boite de dialogue (si il y en a une).
+					if(box != null) {
+						stage.clear();
+						box.remove();
+						box = null;
+					}
+					//Enfin, on sort de la boucle.
+					break;
+				}
 			}
-			//Si on poursuit la conversation, on modifie la boite deja existante
-			else {
-				box.setMessage(text);
+			//Si on a un texte a afficher ...
+			if(textToDisplay != null) {
+				//... alors si il n'y a pas de boite ...
+				if(box == null) {
+					//... alors on cree une nouvelle boite, et on met le joueur en mode cinematique.
+					j.setMove(false);
+					box = new DialogBox(textToDisplay);
+					stage.addActor(box);
+				}
+				//... sinon ...
+				else {
+					//... on met a jour la boite existante.
+					box.setMessage(textToDisplay);
+				}
 			}
-		}
-		else if(box != null){
-			//Sinon, on finit la conversation
-			j.setMove(true);
-			stage.clear();
-			box.remove();
-			box = null;
+			//... sinon, si aucun texte n'est a afficher ...
+			else if(box != null && isCutsceneEnded) {
+				//... on detruit la boite.
+				j.setMove(true);
+				stage.clear();
+				box.remove();
+				box = null;
+				talkingNPC = null;
+			}
 		}
 	}
 	
 	//Fonctions privees
-	public void updateNPCs() {
+	private void updateNPCs() {
 		for(NPC npc : j.getCurrentMap().getNpcs()) {
 			NPCVue npcvue = new NPCVue(npc);
 			npcs.add(npcvue);
