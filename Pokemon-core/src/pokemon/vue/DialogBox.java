@@ -53,7 +53,7 @@ public class DialogBox extends Actor {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+	//
 	//Fonctionnalites principales
 	public void draw(Batch batch, float parentAlpha) {
 		//Init
