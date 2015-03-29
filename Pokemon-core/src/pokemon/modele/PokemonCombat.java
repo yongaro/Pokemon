@@ -3,6 +3,9 @@ package pokemon.modele;
 import java.util.Random;
 import java.util.Stack;
 
+import pokemon.annotations.Tps;
+
+@Tps(nbhours=3)
 public class PokemonCombat implements Comparable<PokemonCombat> {
 	protected Pkm pkm;
 	protected boolean isIA;
@@ -38,11 +41,23 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			context.action(this,cible);
 		}
 		else{
+			int ind=0;
 			//IA de meilleur choix
-			
-			
-			
-			
+			switch(pkm.IAbh){
+			case 1:
+				ind=bestdmg(cible,context);
+				break;
+			case 2:
+				ind=this.bestdot(cible, context);
+				break;
+			case 3:
+				ind=this.bestControl(cible, context);
+				break;
+			default:
+				ind=0;
+				break;
+			}
+			pkm.cap.utiliser(ind,pkm,cible.pkm,context);
 		}
 	}
 	
@@ -53,14 +68,14 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			dmgtemp=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm, context,true);
 			//Choix de l'attaque la plus forte
 			if(dmgtemp>maxdmg){ ind=i; maxdmg=dmgtemp; }
-			//En cas d'égalité de dégats
+			//En cas d'egalité de degats
 			if(dmgtemp==maxdmg){
-				//Choix de l'attaque la plus précise
+				//Choix de l'attaque la plus precise
 				if(pkm.cap.contenu.elementAt(i).cible.pre>pkm.cap.contenu.elementAt(ind).cible.pre){
 					ind=i;
 				}
 				else{
-					//Sinon choix de l'attaque la plus réutilisable
+					//Sinon choix de l'attaque la plus reutilisable
 					if(pkm.cap.contenu.elementAt(i).quantite>pkm.cap.contenu.elementAt(ind).quantite){
 						ind=i;
 					}
@@ -70,54 +85,111 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		return ind;
 	}
 	
-	//
-	public int bestdot(PokemonCombat cible,Combat context){
-		int ind=0; int maxdmg=0; int tempdmg=0;
-		for(int i=0;i<pkm.cap.contenu.size();i++){
-			//Dans le cas ou l'adversaire n'pas statut on cherche d'abord a lui en infliger un
-				//On choisit l'attaque qui a le plus de chance de changer le statut
-				if(pkm.cap.contenu.elementAt(i).cible instanceof Atk){
-					if(((Atk)pkm.cap.contenu.elementAt(i).cible).effetProc>((Atk)pkm.cap.contenu.elementAt(ind).cible).effetProc){
-						ind=i;
-					}
-					//En cas de probabilites egales
-					if(((Atk)pkm.cap.contenu.elementAt(i).cible).effetProc==((Atk)pkm.cap.contenu.elementAt(ind).cible).effetProc){
-						
-						//On choisit l'attaque la plus precise
-						if(pkm.cap.contenu.elementAt(i).cible.pre>pkm.cap.contenu.elementAt(ind).cible.pre){
-							ind=i;
-						}
-						else{
-							//sinon on choisit la  plus forte
-							tempdmg=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm,context,true);
-							if(tempdmg>maxdmg){
-								maxdmg=tempdmg; ind =i;
-							}
-							else{
-								//sinon on choisit la plus réutilisable
-								if(pkm.cap.contenu.elementAt(i).quantite>pkm.cap.contenu.elementAt(ind).quantite){
-									ind=i;
-								}
-							}
-						}
-					}
+	//Scores : Requiem 100 | Picots,Stuck 75 | Poison,Brule = 70 | Confus,Maudit =60 | Paralysie,Sommeil,Gel = 40
+	public int dotScore(Capacite c,Pkm user,Pkm cible){
+		int score=0;
+		if(c instanceof Heal){ return 0; }
+		if(c instanceof Atk){
+			if(cible.statut==Statut.Normal){
+				if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
+					score+=70;
+				}
+				if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
+					score+=40;
 				}
 			}
+			else if(cible.supTemp.contains(((Atk) c).effet)){
+				if(((Atk) c).effet==Statut.Requiem){ score+=100; }
+				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Stuck){ score+=75; }
+				if(((Atk) c).effet==Statut.Confus || (((Atk) c).effet==Statut.Maudit && user.type.contains(Type.Spectre))){
+					score+=60;
+				}
+			}
+			//Ajout d'une base au score
+			score+=c.pre;
+			score+=(int)(c.maxPP/5);
+			if(c instanceof AtkRecul && (user.stats[2][0]<(int)(user.stats[2][1]/2))){
+				score-=15;
+			}
+			if(c instanceof AtkSoin ){
+				if(user.stats[2][0]<(int)(user.stats[2][1]/2)){
+					score+=20;
+				}
+				else if(cible.capP==CapacitePassive.Suintement){
+					score-=20;
+				}
+			}
+		}
+		return score;
+	}
+	
+	
+	
+	public int bestdot(PokemonCombat cible,Combat context){
+		int ind=0; int maxScore=0; int scoreTemp=0;
+		for(int i=0;i<pkm.cap.contenu.size();i++){
+			//Dans le cas ou l'adversaire n'pas statut on cherche d'abord a lui en infliger un
+			//Strat�gie qui vise a infliger Poison ou Brulure + Maudit + Requiem + Stuck
+			//On cherche d'abord a infliger Requiem
+			scoreTemp=dotScore(this.pkm.cap.elementAt(i).get(),pkm,cible.pkm);
+			if(maxScore<scoreTemp){ maxScore=scoreTemp; ind=i; }
+			if(maxScore==scoreTemp){
+				ind=bestdmg(cible,context);
+			}
+		}
 		return ind;
 	}
 	
 	
 	//Permet de choisir la meilleur attaque de controle pour empecher son adversaire d'attaquer et lui infliger des dégats
-	public int bestControl(PokemonCombat cible,Combat context){
-		int ind=0; int maxdmg=0; int tempdmg=0;
-		
-		
-		
-		
-		return ind;
+	public int controlScore(Capacite c,Pkm user,Pkm cible){
+		int score=0;
+		//On cherche a infliger Sommeil ou Paralysie ou Gel + confusion + Attraction + Peur
+		if(c instanceof Atk){
+			if(cible.statut==Statut.Normal){
+				if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
+					score+=20;
+				}
+				if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
+					score+=70;
+				}
+			}
+			else if(cible.supTemp.contains(((Atk) c).effet)){
+				if(((Atk) c).effet==Statut.Requiem){ score+=10; }
+				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Stuck){ score+=30; }
+				if(((Atk) c).effet==Statut.Confus || ((Atk) c).effet==Statut.Attraction || ((Atk) c).effet==Statut.Peur ){
+					score+=50;
+				}
+				//Ajout d'une base au score
+				score+=c.pre;
+				score+=(int)(c.maxPP/5);
+				if(c instanceof AtkRecul && (user.stats[2][0]<(int)(user.stats[2][1]/2))){
+					score-=15;
+				}
+				if(c instanceof AtkSoin ){
+					if(user.stats[2][0]<(int)(user.stats[2][1]/2)){
+						score+=20;
+					}
+					else if(cible.capP==CapacitePassive.Suintement){
+						score-=20;
+					}
+				}
+			}
+		}
+		return score;
 	}
 	
-	
+	public int bestControl(PokemonCombat cible,Combat context){
+		int ind=0; int maxScore=0; int scoreTemp=0;
+		for(int i=0;i<pkm.cap.contenu.size();i++){
+			scoreTemp=controlScore(this.pkm.cap.elementAt(i).get(),pkm,cible.pkm);
+			if(maxScore<scoreTemp){ maxScore=scoreTemp; ind=i; }
+			if(maxScore==scoreTemp){
+				ind=bestdmg(cible,context);
+			}
+		}
+		return ind;
+	}
 	
 	public void setPokemon(Pkm p){ pkm=p; }
 	

@@ -16,6 +16,8 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	protected int[] EV;
 	protected int prevXpPal;
 	protected Nature personnalite;
+	//1 - Agressif(BestDmg) || 2 - Dot || 3 - Control A remplir que pour les pkm sous IA
+	protected int IAbh;
 	protected Vector <Type> type;
 	protected Stockage<Capacite> cap;
 	protected CapacitePassive capP;

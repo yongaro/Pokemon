@@ -9,7 +9,7 @@ import java.util.Vector;
 import pokemon.annotations.Tps;
 import pokemon.launcher.MyGdxGame;
 
-@Tps(nbhours=14)
+@Tps(nbhours=17)
 public class Combat {
 	protected Terrain terrain;
 	protected Climat climat;

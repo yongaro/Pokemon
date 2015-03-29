@@ -3,7 +3,7 @@ package pokemon.modele;
 import java.util.Random;
 
 public enum Statut {
-	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur,Requiem,Stuck;
+	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur,Picots,Requiem,Stuck;
 	
 	protected int nbtours;
 	
