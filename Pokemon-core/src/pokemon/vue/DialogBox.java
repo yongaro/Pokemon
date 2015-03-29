@@ -19,34 +19,34 @@ public class DialogBox extends Actor {
 	private BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
 	private SpriteBatch sBatch = new SpriteBatch();
 	private ShapeRenderer shapeRenderer = new ShapeRenderer();
-	
-	//Attributs modele
+	boolean usestagematrix;	//Attributs modele
 	private String message;
 	
 
 	//Constructeurs
 	public DialogBox() {
-		message = "Bonjour !";
 		width = 640;
 		height = 100;
-        sBatch.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
-
+		sBatch.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
+		usestagematrix=false;
 	}
 	public DialogBox(String msg) {
+		this();
 		message = msg;
-		width = Gdx.graphics.getWidth();
-		height = Gdx.graphics.getHeight();
 	}
-	public DialogBox(String msg, Vector2 size) {
-		message = msg;
+	public DialogBox(Vector2 size, boolean usestagematrix) {
+	
 		width = (int) size.x;
 		height = (int) size.y;
+		sBatch.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
+		this.usestagematrix=usestagematrix;
 	}
 	
-	
-	public void setWidth(int width) {
-		this.width = width;
+	public void setWidth(int width)
+	{
+		this.width=width;
 	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -61,7 +61,12 @@ public class DialogBox extends Actor {
 		batch.end();
 		
 		//Dessin du rectangle
-		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
+		
+		if(usestagematrix)
+		shapeRenderer.setProjectionMatrix(this.getStage().getCamera().combined);
+		else
+		shapeRenderer.setProjectionMatrix(sBatch.getProjectionMatrix());
+		
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
 	    shapeRenderer.rect(10, 0, width-20, height);
@@ -74,7 +79,7 @@ public class DialogBox extends Actor {
 		f.setScale(1.2f);
 		
 		//On affiche le texte + rectangle
-		f.drawWrapped(sBatch, message, 20, height-2, width-20);
+		f.drawWrapped(sBatch, message, 20, 98, width-5);
 		
 		//Quit
 		sBatch.end();

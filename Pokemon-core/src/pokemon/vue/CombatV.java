@@ -37,7 +37,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	public CombatV(){
 		
 		Gdx.input.setInputProcessor(this);
-		dbox=new DialogBox();
+		dbox=new DialogBox(new Vector2(640,100),true);
 		dbox.setMessage("Un pokemon sauvage apparait");
 	}
 	

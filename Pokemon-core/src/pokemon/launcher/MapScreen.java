@@ -74,6 +74,7 @@ public class MapScreen implements Screen{
 
 		renderer.getBatch().end();
 		stage.draw();
+		stage.act(delta);
 	}
 	@Override
 	public void resize(int arg0, int arg1) {
@@ -165,7 +166,7 @@ public class MapScreen implements Screen{
 			j.setMove(true);
 			stage.clear();
 			box.remove();
-			box = null;
+			box = null; 
 		}
 	}
 	
