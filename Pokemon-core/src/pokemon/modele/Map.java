@@ -132,34 +132,80 @@ public class Map {
 	}
 	/* Interagit avec le NPC de la position donnee
 	 * Renvoie null si aucun NPC n'est present sur place.*/
-	public String interact(Joueur j, Vector2 target, NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {
+//	public String interact(Joueur j, Vector2 target, NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {
+//		for(NPC npc : npcs) {
+//			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
+//			if(npcHitbox.contains(target)) {
+//				switch(j.orientation) {
+//				case East:
+//					npc.setOrientation(Direction.West);
+//					break;
+//				case North:
+//					npc.setOrientation(Direction.South);
+//					break;
+//				case South:
+//					npc.setOrientation(Direction.North);
+//					break;
+//				case West:
+//					npc.setOrientation(Direction.East);
+//					break;
+//				default:
+//					break;			
+//				}
+//				String res = npc.executeDialog(j, npcList);
+//				if(npc.getMoveDistance() > 0) {
+//					throw new MovementException();
+//				}
+//				return res;
+//			}
+//		}
+//		throw new NoNPCException();
+//	}
+	
+	//Fait interagir le joueur j avec le NPC npc
+	public String interact(Joueur j, NPC npc, NPCList list) throws NoMoreInstructionException {
+		return npc.executeDialog(j, list);
+	}
+	//Renvoie le NPC devant le joueur. Si il y en a pas, renvoie null.
+	public NPC getNPC(Joueur j) {
+		//On determine le point cible
+		Vector2 target = new Vector2();
+		Vector2 center = new Vector2();
+		center.x = j.getPos().x + (14/2);
+		center.y = j.getPos().y + (14/2); //Car spriteHeight - 5 = spriteWidth
+		int range = 12;
+		switch(j.getOrientation()) {
+		case East:
+			target.x = center.x + range;
+			target.y = center.y;
+			break;
+		case North:
+			target.x = center.x;
+			target.y = center.y + range;
+			break;
+		case South:
+			target.x = center.x;
+			target.y = center.y - range;
+			break;
+		case West:
+			target.x = center.x - range;
+			target.y = center.y;
+			break;
+		default:
+			break;	
+		}
+		
+		//Pour chaque NPC de la map...
 		for(NPC npc : npcs) {
+			//... on vérifie si un NPC se trouve au point cible ...
 			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
 			if(npcHitbox.contains(target)) {
-				switch(j.orientation) {
-				case East:
-					npc.setOrientation(Direction.West);
-					break;
-				case North:
-					npc.setOrientation(Direction.South);
-					break;
-				case South:
-					npc.setOrientation(Direction.North);
-					break;
-				case West:
-					npc.setOrientation(Direction.East);
-					break;
-				default:
-					break;			
-				}
-				String res = npc.executeDialog(j, npcList);
-				if(npc.getMoveDistance() > 0) {
-					throw new MovementException();
-				}
-				return res;
+				//... et on renvoie le NPC en question.
+				return npc;
 			}
 		}
-		throw new NoNPCException();
+		//Sinon, on renvoie null.
+		return null;
 	}
 	public void addNPC(NPC npc, NPCList npcList) {
 		npcs.addElement(npc);

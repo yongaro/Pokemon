@@ -213,33 +213,45 @@ public class Joueur {
 		}
 	}
 	
-	public String interact(NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {
-		Vector2 target = new Vector2();
-		Vector2 center = new Vector2();
-		center.x = pos.x + (spriteWidth/2);
-		center.y = pos.y + (spriteWidth/2); //Car spriteHeight - 5 = spriteWidth
-		int range = 12;
-		switch(this.orientation) {
-		case East:
-			target.x = center.x + range;
-			target.y = center.y;
-			break;
-		case North:
-			target.x = center.x;
-			target.y = center.y + range;
-			break;
-		case South:
-			target.x = center.x;
-			target.y = center.y - range;
-			break;
-		case West:
-			target.x = center.x - range;
-			target.y = center.y;
-			break;
-		default:
-			break;	
+//	public String interact(NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {
+//		Vector2 target = new Vector2();
+//		Vector2 center = new Vector2();
+//		center.x = pos.x + (spriteWidth/2);
+//		center.y = pos.y + (spriteWidth/2); //Car spriteHeight - 5 = spriteWidth
+//		int range = 12;
+//		switch(this.orientation) {
+//		case East:
+//			target.x = center.x + range;
+//			target.y = center.y;
+//			break;
+//		case North:
+//			target.x = center.x;
+//			target.y = center.y + range;
+//			break;
+//		case South:
+//			target.x = center.x;
+//			target.y = center.y - range;
+//			break;
+//		case West:
+//			target.x = center.x - range;
+//			target.y = center.y;
+//			break;
+//		default:
+//			break;	
+//		}
+//		NPC npc = null;
+//		npc = currentMap.getNPC(target);
+//		if(npc == null) {
+//			throw new NoNPCException();
+//		}
+//		return currentMap.interact(this, npc, npcList);
+//	}
+	public String interact(NPC npc, NPCList list) throws NoMoreInstructionException, MovementException {
+		String res = npc.executeDialog(this, list);
+		if(npc.getMoveDistance() > 0) {
+			throw new MovementException();
 		}
-		return currentMap.interact(this, target, npcList);
+		return res;
 	}
 	
 	public Vector2 getSpeed() {
