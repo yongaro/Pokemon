@@ -22,6 +22,7 @@ public class InstructionMouvement extends Instruction{
 	public String execute(NPCList list, Joueur j) {
 		System.out.println("BOUGER");
 		if(id != 0) {
+			list.getNPC(id).setOrientation(dir);
 			list.getNPC(id).setMoveDistance(dist);
 			list.getNPC(id).setMoveDirection(dir);
 		}

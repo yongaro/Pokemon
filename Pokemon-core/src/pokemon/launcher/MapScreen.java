@@ -5,6 +5,7 @@ import java.util.Vector;
 import pokemon.annotations.Tps;
 import pokemon.controle.JoueurController;
 import pokemon.modele.ChangeMapException;
+import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 import pokemon.modele.MovementException;
 import pokemon.modele.NPC;
@@ -145,6 +146,23 @@ public class MapScreen implements Screen{
 		if(talkingNPC == null) {
 			//... on recupere le NPC cible.
 			talkingNPC = j.getCurrentMap().getNPC(j);
+			switch(j.getOrientation()) {
+			case East:
+				talkingNPC.setOrientation(Direction.West);
+				break;
+			case North:
+				talkingNPC.setOrientation(Direction.South);
+				break;
+			case South:
+				talkingNPC.setOrientation(Direction.North);
+				break;
+			case West:
+				talkingNPC.setOrientation(Direction.East);
+				break;
+			default:
+				break;
+			
+			}
 		}
 		if(talkingNPC != null && talkingNPC.getMoveDistance() <= 0) {
 			String textToDisplay = null;

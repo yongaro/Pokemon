@@ -9,6 +9,8 @@
 	<dialogue>
 		<text>Viens on se promene !</text>
 		<move id="1" dir="North" distance="50"/>
+		<move id="1" dir="South" distance="0"/>
+		<move id="0" dir="North" distance="0"/>
 		<text>Ouah ! Je peux me deplacer maintenant !</text>
 		<status npc="1" value="2"/>
 	</dialogue>

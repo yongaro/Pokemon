@@ -40,7 +40,6 @@ public class JoueurController implements InputProcessor{
 				if(input.size()<2 && !input.contains(Direction.East)) {
 					input.add(0, Direction.East);
 					j.move(input.firstElement());
-					jv.setAnimation(Direction.East);
 				}
 				
 			}
@@ -49,7 +48,6 @@ public class JoueurController implements InputProcessor{
 				if(input.size()<2 && !input.contains(Direction.West)) {
 					input.add(0, Direction.West);
 					j.move(input.firstElement());
-					jv.setAnimation(Direction.West);
 				}
 			}
 			if(Gdx.input.isKeyPressed(Keys.DOWN)){
@@ -57,7 +55,6 @@ public class JoueurController implements InputProcessor{
 				if(input.size()<2 && !input.contains(Direction.South)) {
 					input.add(0, Direction.South);
 					j.move(input.firstElement());
-					jv.setAnimation(Direction.South);
 				}
 				
 			}
@@ -66,7 +63,6 @@ public class JoueurController implements InputProcessor{
 				if(input.size()<2) {
 					input.add(0, Direction.North);
 					j.move(input.firstElement());				
-					jv.setAnimation(Direction.North);
 				}
 			}
 			if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {

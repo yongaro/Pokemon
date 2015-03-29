@@ -47,6 +47,7 @@ public class JoueurVue {
 	
 	//Fonctionalites principales
 	public void render(float delta, Batch batch) {
+		setAnimation(j.getOrientation());
 		if(j.isMoving()){
 			animationtime+=delta;
 			move=true;
