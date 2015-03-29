@@ -21,7 +21,7 @@ public class DialogBox extends Actor {
 	private ShapeRenderer shapeRenderer = new ShapeRenderer();
 	boolean usestagematrix;	//Attributs modele
 	private String message;
-	
+	//
 
 	//Constructeurs
 	public DialogBox() {
