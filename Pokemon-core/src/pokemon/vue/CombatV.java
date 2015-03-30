@@ -4,6 +4,7 @@ package pokemon.vue;
 
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
+import pokemon.modele.Combat;
 import pokemon.modele.Pkm;
 import pokemon.modele.UniteStockage;
 
@@ -22,7 +23,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class CombatV extends GameScreen implements InputProcessor{
 	MyGdxGame mygdxgame;
-	PokemonSprite e1=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
+	PokemonSprite e1;//=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
 	PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
 	PokemonSprite a=new PokemonSprite(PokemonSprite.a1,"trainerS.png");
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
@@ -33,18 +34,25 @@ public class CombatV extends GameScreen implements InputProcessor{
 	int state=0;
 	int offset;
 	int selector=0;
+	Combat c;
 	 String[] actions = {"Attaque","Objets","Pkm","Fuite"};
-	public CombatV(){
+	public CombatV(Combat c){
 		
 		Gdx.input.setInputProcessor(this);
 		dbox=new DialogBox(new Vector2(640,100),true);
 		dbox.setMessage("Un pokemon sauvage apparait");
+		this.c=c;
+		if(this.c.getPkmListe()[1].isIA())
+		{
+			e1=new PokemonSprite(PokemonSprite.e1,"Sprites/"+c.getPkmListe()[1].getPkm().getID()+".png");
+		}
+
 	}
 	
 	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		
 	
 	}
 	@Override
@@ -130,7 +138,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	public void show() {
 		
 		stage.addActor(e1);
-		stage.addActor(e2);
+		//stage.addActor(e2);
 		e1.addSlideAction();
 		e2.addSlideAction();
 		stage.addActor(a);
@@ -149,7 +157,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			if(state==0 && stage.getActors().get(2).getActions().size==0){
 				a.hideTrainer();
 				dbox.setMessage("En avant "+pkms[0].getNom());
-				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/"+pkms[0].getID()+".png");
+				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/"+c.getPkmListe()[0].getPkm().getID()+".png");
 				p1.popPokemon();
 				stage.getActors().insert(0, p1);
 				stage.addActor(new BattleHud(420,105,pkms[0]));
@@ -166,6 +174,9 @@ public class CombatV extends GameScreen implements InputProcessor{
 				if(selector==0){
 					state++;
 				}
+			}
+			if(state==3){
+				
 			}
 			break;
 		}

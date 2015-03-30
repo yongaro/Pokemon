@@ -27,6 +27,14 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		this.voisins=new PokemonCombat[2];
 	}
 	
+	public Pkm getPkm() {
+		return pkm;
+	}
+
+	public boolean isIA() {
+		return isIA;
+	}
+
 	public int compareTo(PokemonCombat p) {
 		if(p.pkm.stats[7][0]==this.pkm.stats[7][0])
 				return 0;

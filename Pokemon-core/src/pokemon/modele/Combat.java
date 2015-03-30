@@ -16,6 +16,7 @@ public class Combat extends Thread {
 	protected PokemonCombat[] equipe1;
 	protected PokemonCombat[] equipe2;
 	protected PokemonCombat[] pkmListe;
+
 	protected Scanner sc = new Scanner(System.in); //BERK
 	protected static String buffer="";
 	protected static int act=-1;
@@ -42,7 +43,9 @@ public class Combat extends Thread {
 		if(nbko1==equipe1.length){ return 2; }
 		return 0;
 	}
-	
+		public PokemonCombat[] getPkmListe() {
+		return pkmListe;
+	}
 	public void run(){ this.combatsolo();
 	}
 	
