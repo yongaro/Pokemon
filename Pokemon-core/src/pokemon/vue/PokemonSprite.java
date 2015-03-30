@@ -34,6 +34,7 @@ public class PokemonSprite extends Actor{
 	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
     }
     ////
+    
     public void addSlideAction(){
     	if(pos.x<320)
     		this.addAction(Actions.moveTo(pos.x+420, pos.y, 2.0f));

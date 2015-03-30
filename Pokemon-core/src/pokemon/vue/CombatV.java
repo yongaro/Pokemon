@@ -136,7 +136,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		stage.addActor(a);
 		a.addSlideAction();
 		stage.addActor(dbox);
-		
+		stage.addActor(new BattleHud(420,105,pkms[0]));
 		
 	}///////
 
@@ -192,6 +192,12 @@ public class CombatV extends GameScreen implements InputProcessor{
 				selector+=2;
 			break;
 		}
+		case Keys.PLUS:
+			pkms[0].heal(20);
+			break;
+		case Keys.MINUS:
+			pkms[0].infliger(20);
+			break;
 
 		}
 		return false;//
