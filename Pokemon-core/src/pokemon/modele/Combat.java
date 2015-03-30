@@ -10,7 +10,7 @@ import pokemon.annotations.Tps;
 import pokemon.launcher.MyGdxGame;
 
 @Tps(nbhours=17)
-public class Combat {
+public class Combat extends Thread {
 	protected Terrain terrain;
 	protected Climat climat;
 	protected PokemonCombat[] equipe1;
@@ -24,9 +24,9 @@ public class Combat {
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
 	
-	public Combat(){
-		terrain=Terrain.Plaine; climat=Climat.Normal;
-	}
+	public Combat(){ terrain=Terrain.Plaine; climat=Climat.Normal; }
+	public Combat(Joueur j1,Joueur j2){ this(); this.initSolo(j1,j2); } 
+	public Combat(Joueur j,Dresseur d){ this(); this.initSolo(j,d); }
 	
 	public int gagnant(){
 		int nbko1=0; int nbko2=0;
@@ -41,6 +41,9 @@ public class Combat {
 		if(nbko2==equipe2.length){ return 1; }
 		if(nbko1==equipe1.length){ return 2; }
 		return 0;
+	}
+	
+	public void run(){ this.combatsolo();
 	}
 	
 	
