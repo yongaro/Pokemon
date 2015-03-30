@@ -136,7 +136,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		stage.addActor(a);
 		a.addSlideAction();
 		stage.addActor(dbox);
-		stage.addActor(new BattleHud(420,105,pkms[0]));
+
 		
 	}///////
 
@@ -152,6 +152,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/"+pkms[0].getID()+".png");
 				p1.popPokemon();
 				stage.getActors().insert(0, p1);
+				stage.addActor(new BattleHud(420,105,pkms[0]));
 				state++;
 				break;
 				}

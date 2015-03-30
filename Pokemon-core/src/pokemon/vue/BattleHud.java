@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class BattleHud extends Actor{
 
@@ -22,10 +23,11 @@ public class BattleHud extends Actor{
 	int speed;
 	boolean increase;
 	public BattleHud(int x,int y,Pkm p){
-		this.setX(x);
+		this.setX(x+220);
 		this.setY(y);
 		this.setHeight(55);
 		this.setWidth(210);
+		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveTo(x, y,0.5f)));
 		this.p=p;
 		oldpv=p.get(2);
 		pvperc=new float[2];
@@ -37,7 +39,7 @@ public class BattleHud extends Actor{
 	}
 
 	public void act(float delta){
-
+		super.act(delta);
 		if(p.get(2)!=oldpv)
 		{
 			if(p.get(2)>oldpv){
@@ -87,6 +89,9 @@ public void draw (Batch batch, float parentAlpha) {
 	f.setScale(0.7f);
 	f.setColor(1,1, 1, 1);
 	f.draw(b, p.getNom()+"                 Lv"+p.get(0), this.getX()+30, this.getY()+this.getHeight()-f.getCapHeight());
+	f.setScale(0.5f);
+	f.draw(b,"HP",getX()+20,getY()+22);
+	f.draw(b,p.get(2)+"/"+p.getmax(2), this.getX()+140, this.getY()+10);
 	b.end();
 }
 
