@@ -192,10 +192,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 				selector+=2;
 			break;
 		}
-		case Keys.PLUS:
+		case Keys.O:
 			pkms[0].heal(20);
 			break;
-		case Keys.MINUS:
+		case Keys.P:
 			pkms[0].infliger(20);
 			break;
 
