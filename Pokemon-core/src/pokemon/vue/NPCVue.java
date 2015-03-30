@@ -19,13 +19,17 @@ public class NPCVue {
 	private Animation westwalk;
 	private Animation southwalk;
 	private Animation northwalk;
+	
 	private Animation a;
+	private boolean move;
+	private float animationTime;
 	
 	private NPC npc;
 	
 	//Constructeurs
 	public NPCVue() {
 		initAnimation("npcs/npc");
+		animationTime = 0;
 		for(TextureRegion r:atlaseast.getRegions())
 		{
 			r.flip(true, false);
@@ -34,6 +38,7 @@ public class NPCVue {
 	}
 	public NPCVue(NPC npc) {
 		initAnimation("npcs/npc");
+		animationTime = 0;
 		for(TextureRegion r:atlaseast.getRegions())
 		{
 			r.flip(true, false);
@@ -42,6 +47,7 @@ public class NPCVue {
 	}
 	public NPCVue(NPC npc, String path) {
 		initAnimation(path);
+		animationTime = 0;
 		for(TextureRegion r:atlaseast.getRegions())
 		{
 			r.flip(true, false);
@@ -80,7 +86,19 @@ public class NPCVue {
 		default:
 			break;
 		}
-		batch.draw(a.getKeyFrame(0), npc.getPos().x, npc.getPos().y+16);
+		if(npc.getMoveDistance() > 0) {
+			animationTime += deltatime;
+			move = true;
+		}
+		else {
+			if(a.getKeyFrameIndex(animationTime)<2 && move) //on va jusqua la derniere frame
+				animationTime+=deltatime;
+			else {
+				move=false;
+				animationTime=0;
+			}	
+		}
+		batch.draw(a.getKeyFrame(animationTime, true), npc.getPos().x, npc.getPos().y+16);
 	}
 	
 	public void updatePosition() {
