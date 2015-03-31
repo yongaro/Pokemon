@@ -19,6 +19,7 @@ public class Combat extends Thread {
 
 	protected Scanner sc = new Scanner(System.in); //BERK
 	protected  String buffer="";
+	protected int actflag=-1;
 	protected  int act=-1;
 	protected  int ind=-1;
 	protected  int swapInd=-1;
@@ -115,15 +116,18 @@ public class Combat extends Thread {
 			System.out.println("Que doit faire "+user.pkm.nom+" ? "+user.pkm.stats[2][0]+"/"+user.pkm.stats[2][1]+" "+user.pkm.statut);
 			System.out.println("1-Attaque   2-Pkm");
 			System.out.println("3-Objet     4-Fuite ");
-			act=sc.nextInt();
 			
-			switch(act){
-			case 1:
+			
+			//act=sc.nextInt();
+			this.getAct();
+			
+			switch(actflag){
+			case 0:
 				for(UniteStockage<Capacite> u:user.pkm.cap){
 						System.out.println(i+" "+u+" "+u.quantite+"/"+u.quantitemax); i++;				
 				}
 				//while((act=sc.nextInt())<user.cap.max){System.out.println(act); }
-				act=sc.nextInt();
+				//act=sc.nextInt();
 				//Application des statuts pouvant empecher l'action
 				ch1=user.pkm.statut.StatEffect(user.pkm,0);
 				for(Statut s: user.pkm.supTemp){
@@ -153,16 +157,16 @@ public class Combat extends Thread {
 				}
 				isdone=1;
 				break;
+			case 1:
+				System.out.println("SWAP DE POKEMON A REMETTRE");
+				break;
 			case 2:
 				pokeswap(user);
 				isdone=1;
 				//traitement capacit� passive ici
 				break;
 			case 3:
-				System.out.println("TODO");
-				break;
-			case 4:
-				System.out.println("TODO");
+				System.out.println("FUITE");
 				break;
 			default :
 				System.out.println("ENCORE");
@@ -240,22 +244,19 @@ public class Combat extends Thread {
 	}
 	public synchronized void resetBuffer(){ this.buffer=""; }
 	
-	public synchronized void ajoutAct(int act){
-		while(this.act!=-1){
+	public synchronized void getAct(){
+		while(actflag==-1 && act==-1){
 			try { wait(); } 
 			catch(InterruptedException ie) { ie.printStackTrace(); }
 		}
-		this.act=act;
-		notify();
 	}
 	
-	public synchronized int getAct(){
-		while(this.act==-1){
-			try { wait(); } 
-			catch(InterruptedException ie) { ie.printStackTrace(); }
-		}
-		return this.act;
+	
+	public synchronized void setAct(int aflag,int act){
+		actflag=aflag; this.act=act; notify();
 	}
+	
+	
 	public synchronized void resetAct(){ this.act=-1; notify(); }
 
 	public synchronized void setfreeze(boolean f){ 
