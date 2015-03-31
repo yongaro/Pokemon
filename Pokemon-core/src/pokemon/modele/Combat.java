@@ -19,6 +19,7 @@ public class Combat extends Thread {
 
 	protected Scanner sc = new Scanner(System.in); //BERK
 	protected  String buffer="";
+	protected boolean bufferReady;
 	protected PokemonCombat pCourant;
 	protected int actflag=-1;
 	protected  int act=-1;
@@ -29,7 +30,11 @@ public class Combat extends Thread {
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
 	
-	public Combat(){ terrain=Terrain.Plaine; climat=Climat.Normal; }
+	public Combat(){
+		terrain=Terrain.Plaine; climat=Climat.Normal;
+		bufferReady=false;
+		
+	}
 	public Combat(Joueur j1,Joueur j2){ this(); this.initSolo(j1,j2); } 
 	public Combat(Joueur j,Dresseur d){ this(); this.initSolo(j,d); }
 	
@@ -94,6 +99,8 @@ public class Combat extends Thread {
 		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
+				this.resetAct();
+				this.setBufferState(false);
 				pCourant=pkmListe[i];
 				pkmListe[i].action(pkmListe[i].adv[0],this);
 			}
@@ -113,21 +120,14 @@ public class Combat extends Thread {
 	
 	
 	public void action(PokemonCombat user,PokemonCombat cible){
-		int isdone=0;  int act=0; int i=0; int ch1=0; int ch2=1;
+		int isdone=0; int i=0; int ch1=0; int ch2=1;
 		while(isdone==0){
-			System.out.println("Que doit faire "+user.pkm.nom+" ? "+user.pkm.stats[2][0]+"/"+user.pkm.stats[2][1]+" "+user.pkm.statut);
-			System.out.println("1-Attaque   2-Pkm");
-			System.out.println("3-Objet     4-Fuite ");
-			
-			
-			//act=sc.nextInt();
+			System.out.println("Debut du tour du joueur");
 			this.getAct();
 			
 			switch(actflag){
 			case 0:
-				for(UniteStockage<Capacite> u:user.pkm.cap){
-						System.out.println(i+" "+u+" "+u.quantite+"/"+u.quantitemax); i++;				
-				}
+				System.out.println("Execution d'une Capacite");
 				//while((act=sc.nextInt())<user.cap.max){System.out.println(act); }
 				//act=sc.nextInt();
 				//Application des statuts pouvant empecher l'action
@@ -146,7 +146,7 @@ public class Combat extends Thread {
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 					if(user.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)user.pkm.objTenu;
-						System.out.println(user.pkm.nom+" utilise sa baie");
+						this.ajoutBuffer(user.pkm.nom+" utilise sa baie");
 						if(m.baie){ m.script(user.pkm); user.pkm.objTenu=null; }
 					}
 				}
@@ -158,6 +158,7 @@ public class Combat extends Thread {
 					}
 				}
 				isdone=1;
+				this.setBufferState(true);
 				break;
 			case 1:
 				System.out.println("SWAP DE POKEMON A REMETTRE");
@@ -231,22 +232,27 @@ public class Combat extends Thread {
 	
 	
 	// Fonctions de manipulation des objets synchronis�s entre modele et vue
-	public synchronized void ajoutBuffer(String s,boolean notify){ 
+	public synchronized void ajoutBuffer(String s){ 
 		this.buffer+=s+"\n";
-		if(notify){ notify(); }
-		System.out.println(s);
+		notify();
 	}
 	
 	public synchronized boolean bufferIsEmpty(){ return this.buffer.compareTo("")==0; }
+	public synchronized boolean bufferIsReady(){ return bufferReady; }
 	
 	public synchronized String readBuffer(){
 		while(this.buffer.compareTo("")==0){
 			try { wait(); } 
 			catch(InterruptedException ie) { ie.printStackTrace(); }
 		}
+		System.out.println(buffer);
 		return this.buffer;
 	}
 	public synchronized void resetBuffer(){ this.buffer=""; }
+	public synchronized void setBufferState(boolean st){
+		bufferReady=st;
+		if(bufferReady){ notify(); }
+	}
 	
 	public synchronized void getAct(){
 		while(actflag==-1 && act==-1){
@@ -261,18 +267,18 @@ public class Combat extends Thread {
 	}
 	
 	
-	public synchronized void resetAct(){ this.act=-1; notify(); }
+	public synchronized void resetAct(){ this.actflag=-1; this.act=-1; notify(); }
 
 	public synchronized void setfreeze(boolean f){ 
 		freeze=f;
-		if(!freeze){ notify();}
-	}
-
-	protected synchronized void freeze(){ 
-		while(freeze){
-			try { wait(); } 
-			catch(InterruptedException ie) { ie.printStackTrace(); }
+		if(!freeze){ System.out.println("SETFREEZE "+f); notify();}
+		else{
+			while(freeze){
+				try { System.out.println("SETFREEZE "+f);  wait(); } 
+				catch(InterruptedException ie) { ie.printStackTrace(); }
+			}
 		}
+		System.out.println("sortie de sommeil");
 	}
 	
 	public synchronized PokemonCombat getPCourant(){ return pCourant;}

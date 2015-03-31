@@ -77,7 +77,7 @@ public abstract class Capacite implements Qmax,Infos {
 		double ccmult=1.0;
 		if(random.nextInt(100)<=this.CC){
 			ccmult=1.5;
-			if(!quiet){context.ajoutBuffer("Coup critique",false);}
+			if(!quiet){context.ajoutBuffer("Coup critique");}
 		}
 		//formule de calcul des degats
 		double mod=(double)STAB*(double)weakness*(double)ccmult;
@@ -92,12 +92,12 @@ public abstract class Capacite implements Qmax,Infos {
 				if(user.objTenu.buffedType==this.element){damage+=(int)(damage/2);}
 			}
 		}
-		if(weakness==0){ if(!quiet){context.ajoutBuffer("Aucun effet",true);} return 0;}
+		if(weakness==0){ if(!quiet){context.ajoutBuffer("Aucun effet");} return 0;}
 		else{
 			if(!quiet){
-				if(weakness>=2){context.ajoutBuffer("C'est super efficace",false);}
-				if(weakness<1 && weakness>0){context.ajoutBuffer("Ce n'est pas tres efficace",false);}
-				context.ajoutBuffer("-"+(int)damage+" PV",true);
+				if(weakness>=2){context.ajoutBuffer("C'est super efficace");}
+				if(weakness<1 && weakness>0){context.ajoutBuffer("Ce n'est pas tres efficace");}
+				context.ajoutBuffer("-"+(int)damage+" PV");
 			}
 		//cible.infliger((int)damage);
 		//cible.stats[2][0]-=(int)damage;

@@ -49,10 +49,11 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			context.action(this,cible);
 		}
 		else{
-			context.freeze();
+			context.ajoutBuffer("Tour de l'IA");
+			context.setfreeze(true);
 			int ind=0;
 			//IA de meilleur choix
-			System.out.println("Tour de l'IA");
+			
 			switch(pkm.IAbh){
 			case 1:
 				ind=bestdmg(cible,context);
@@ -73,20 +74,18 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			if(pkm.stats[2][0]<=(int)(pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 				if(pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 					Medicament m=(Medicament)pkm.objTenu;
-					System.out.println(pkm.nom+" utilise sa baie");
+					context.ajoutBuffer(pkm.nom+" utilise sa baie");
 					if(m.baie){ m.script(pkm); pkm.objTenu=null; }
 				}
 			}
 			if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 				if(cible.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 					Medicament m=(Medicament)cible.pkm.objTenu;
-					System.out.println(cible.pkm.nom+" utilise sa baie");
+					context.ajoutBuffer(cible.pkm.nom+" utilise sa baie");
 					if(m.baie){ m.script(cible.pkm); cible.pkm.objTenu=null; }
 				}
 			}
 		}
-		System.out.println(context.buffer);
-		//context.buffer="";
 	}
 	
 	//Choix de l'attaque la plus puissante

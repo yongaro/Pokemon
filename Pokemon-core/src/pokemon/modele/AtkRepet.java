@@ -10,7 +10,7 @@ public class AtkRepet extends Atk {
 		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc);
 	}
 	public void script(Pkm user,Pkm cible,Combat context){
-		context.ajoutBuffer(user.nom+" utilise "+description,false);
+		context.ajoutBuffer(user.nom+" utilise "+description);
 		 Random random=new Random();
 		//test de precision
 		int touche=0;
@@ -22,10 +22,10 @@ public class AtkRepet extends Atk {
 			//Nombre de coups portes par l'attaque
 			int  nbcoups=random.nextInt();
 			for(int i=0;i<=nbcoups;i++){
-				context.ajoutBuffer("Touche "+i+" fois"+this.atkdamage(user,cible,context,false),true);
+				context.ajoutBuffer("Touche "+i+" fois"+this.atkdamage(user,cible,context,false));
 				if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 			}
-			context.ajoutBuffer("Touche "+nbcoups+" fois",true);
+			context.ajoutBuffer("Touche "+nbcoups+" fois");
 			
 			//Traitement capacit� passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){
@@ -37,6 +37,6 @@ public class AtkRepet extends Atk {
 				catch(Exception ex){System.out.println("DAMNIT JAVA");}
 			}
 		}
-		else{context.ajoutBuffer(user.nom+" rate son attaque...",true);}
+		else{context.ajoutBuffer(user.nom+" rate son attaque...");}
 	}
 }

@@ -10,7 +10,7 @@ public class AtkRecul extends Atk {
 	}
 	
 	public void script(Pkm user,Pkm cible,Combat context){
-		context.ajoutBuffer(user.nom+" utilise "+nom,false);
+		context.ajoutBuffer(user.nom+" utilise "+nom);
 		 Random random=new Random();
 		//test de precision
 		int touche=0;
@@ -19,7 +19,7 @@ public class AtkRecul extends Atk {
 		int esquive=0;
 		if(random.nextInt(100)<=cible.stats[9][0]){esquive=1;}
 		if(touche==0 || esquive==1){
-			context.ajoutBuffer(user.nom+" rate son attaque...",true);
+			context.ajoutBuffer(user.nom+" rate son attaque...");
 		}
 		if(touche==1 && esquive==0 && power>0){
 			int reculdmg=0;
@@ -32,7 +32,7 @@ public class AtkRecul extends Atk {
 			//Traitement des dégats du Recul
 			if(user.capP!=CapacitePassive.TeteDeRoc){
 				reculdmg=(int)(reculdmg*(recul/100));
-				context.ajoutBuffer("Le recul inflige "+reculdmg+" pts de degats a "+user.nom,true);
+				context.ajoutBuffer("Le recul inflige "+reculdmg+" pts de degats a "+user.nom);
 				user.infliger(reculdmg);
 			}
 			
