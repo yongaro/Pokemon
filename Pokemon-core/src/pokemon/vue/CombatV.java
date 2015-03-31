@@ -202,7 +202,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				
 				c.setAct(flag, selector);
 				System.out.println("SETACT "+flag+","+selector);
-
+				selector=0;
 				break;
 			}
 			if(state==5){
@@ -214,6 +214,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 					retval=null;
 					c.setfreeze(false);
 					state=2;}
+				break;
 			}
 
 		}
