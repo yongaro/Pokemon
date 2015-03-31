@@ -32,6 +32,7 @@ public class PokemonSprite extends Actor{
    	   	this.setBounds(pos.x, pos.y, s.getWidth()*1.2f, s.getHeight()*1.2f);
    	   		
 	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
+
     }
     ////
     

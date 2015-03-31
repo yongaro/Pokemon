@@ -34,61 +34,74 @@ public class CombatV extends GameScreen implements InputProcessor{
 	int state=0;
 	int offset;
 	int selector=0;
+	int flag;
 	Combat c;
-	 String[] actions = {"Attaque","Objets","Pkm","Fuite"};
+	String[] actions = {"Attaque","Objets","Pkm","Fuite"};
+	String text;
+	String[] retval;
+	int textinc=1;
 	public CombatV(Combat c){
-		
+
 		Gdx.input.setInputProcessor(this);
 		dbox=new DialogBox(new Vector2(640,100),true);
 		dbox.setMessage("Un pokemon sauvage apparait");
 		this.c=c;
-		if(this.c.getPkmListe()[1].isIA())
-		{
-			e1=new PokemonSprite(PokemonSprite.e1,"Sprites/"+c.getPkmListe()[1].getPkm().getID()+".png");
+		for( int i=0;i<c.getPkmListe().length;i++){
+			if(this.c.getPkmListe()[i].isIA())
+			{
+				e1=new PokemonSprite(PokemonSprite.e1,"Sprites/"+c.getPkmListe()[i].getPkm().getID()+".png");
+			}
 		}
 
 	}
-	
-	
+
+
 	@Override
 	public void dispose() {
-		
-	
+
+
 	}
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void render(float arg0) {
+		if(!c.bufferIsEmpty()){
+			text=c.readBuffer();
+			c.resetBuffer();
+			retval=text.split("\n");
+			dbox.setWidth(width);
+			dbox.setMessage(retval[0]);
+			state=5;
+		}
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
-       // Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
+		// Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-
 		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
-				stage.getBatch().begin();
-			stage.getBatch().draw(fond,0,0);
-			stage.getBatch().end();
+		stage.getBatch().begin();
+		stage.getBatch().draw(fond,0,0);
+		stage.getBatch().end();
+
 		switch(state){
-		
 		case 2:
 			drawPanel();
 			offset=0;
 			stage.getBatch().begin();
-			
+
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
 			for(int i=0;i<actions.length;i++)//affichage des attaques
 			{
 				//f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
 				if(i<2)
-				f.draw(stage.getBatch(),actions[i],330,85-offset);
+					f.draw(stage.getBatch(),actions[i],330,85-offset);
 				if(i==2)
 					offset=0;
 				if(i>=2)
@@ -107,7 +120,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			{
 				//f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
 				if(i<2)
-				f.draw(stage.getBatch(),pkms[0].getCap().at(i).getNom(),330,85-offset);
+					f.draw(stage.getBatch(),pkms[0].getCap().at(i).getNom(),330,85-offset);
 				if(i==2)
 					offset=0;
 				if(i>=2)
@@ -118,25 +131,26 @@ public class CombatV extends GameScreen implements InputProcessor{
 			stage.getBatch().end();
 			dbox.setMessage(descGen(pkms[0].getCap().elementAt(selector)));
 			break;
+
 		}
 		stage.act(arg0);
 		stage.draw();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
-		
+
 	}
 	@Override
 	public void resize(int arg0, int arg1) {
 		super.resize(arg0, arg1);
-		
+
 	}
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void show() {
-		
+
 		stage.addActor(e1);
 		//stage.addActor(e2);
 		e1.addSlideAction();
@@ -145,7 +159,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		a.addSlideAction();
 		stage.addActor(dbox);
 
-		
+
 	}///////
 
 
@@ -154,7 +168,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		switch(arg0){
 		case Keys.ENTER:
 		{
-			if(state==0 && stage.getActors().get(2).getActions().size==0){
+			if(state==0 && stage.getActors().get(1).getActions().size==0){
 				a.hideTrainer();
 				dbox.setMessage("En avant "+pkms[0].getNom());
 				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/"+c.getPkmListe()[0].getPkm().getID()+".png");
@@ -163,7 +177,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				stage.addActor(new BattleHud(420,105,pkms[0]));
 				state++;
 				break;
-				}
+			}
 			if(state==1){
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
@@ -173,24 +187,38 @@ public class CombatV extends GameScreen implements InputProcessor{
 			if(state==2){
 				if(selector==0){
 					state++;
+					flag=selector;
 				}
+				break;
 			}
 			if(state==3){
-				
+				c.setfreeze(true);
+				c.setAct(flag, selector);
+
+				break;
 			}
-			break;
+			if(state==5){
+				if(textinc<retval.length)
+					dbox.setMessage(retval[textinc++]);
+				else{
+					dbox.setWidth(width/2);
+					dbox.setMessage("Que faire ?");
+					c.setfreeze(false);
+					state=2;}
+			}
+
 		}
 		case Keys.DOWN:
 		{	System.out.println("Gne");
-			if(selector==0 || selector==2)
-				selector++;
-			break;
+		if(selector==0 || selector==2)
+			selector++;
+		break;
 		}
 		case Keys.UP:
 		{	System.out.println("Gne");
-			if(selector!=0 && selector!=2)
-				selector--;
-			break;
+		if(selector!=0 && selector!=2)
+			selector--;
+		break;
 		}
 		case Keys.LEFT:
 		{	
@@ -221,26 +249,26 @@ public class CombatV extends GameScreen implements InputProcessor{
 		str+="\n\n          PP: ";
 		str+=element.getQte()+"/"+element.getQteMax();
 		//str+="Puissance: "+element.get().getPower();
-		
+
 		return str;
 	}
 	private void drawPanel(){
-	shapeRenderer.begin(ShapeType.Filled);
-	Gdx.gl.glEnable(GL20.GL_BLEND);
-	shapeRenderer.setColor(1f, 1f, 1f, 0.8f);
-	shapeRenderer.rect(310, 0,320,100);
-	offset=50;
-	if(selector<2)
-		offset+=offset*selector;
-	else
-		offset+=offset*(selector-2);
-	shapeRenderer.setColor(1f, 0, 0f, 0.2f);
-	if(selector<2)
-	shapeRenderer.rect(310,100-offset, 160, 50);
-	else
-	shapeRenderer.rect(470,100-(offset), 160, 50);
-	shapeRenderer.end();
-	Gdx.gl.glDisable(GL20.GL_BLEND);
+		shapeRenderer.begin(ShapeType.Filled);
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		shapeRenderer.setColor(1f, 1f, 1f, 0.8f);
+		shapeRenderer.rect(310, 0,320,100);
+		offset=50;
+		if(selector<2)
+			offset+=offset*selector;
+		else
+			offset+=offset*(selector-2);
+		shapeRenderer.setColor(1f, 0, 0f, 0.2f);
+		if(selector<2)
+			shapeRenderer.rect(310,100-offset, 160, 50);
+		else
+			shapeRenderer.rect(470,100-(offset), 160, 50);
+		shapeRenderer.end();
+		Gdx.gl.glDisable(GL20.GL_BLEND);
 	}
 	@Override
 	public boolean keyTyped(char arg0) {
