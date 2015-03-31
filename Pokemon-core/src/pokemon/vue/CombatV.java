@@ -185,15 +185,16 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==2){
-				if(selector==0){
+			
 					state++;
 					flag=selector;
-				}
+			
 				break;
 			}
 			if(state==3){
 				c.setfreeze(true);
 				c.setAct(flag, selector);
+				System.out.println("SETACT "+flag+","+selector);
 
 				break;
 			}

@@ -34,7 +34,7 @@ public class BattleHud extends Actor{
 		pvperc[1]=(160*p.get(2))/p.getmax(2);
 		pvperc[0]=pvperc[1];
 		b.getProjectionMatrix().setToOrtho2D(0, 0, 640, 320);
-		speed=30;
+		speed=50;
 		increase=false;
 	}
 
