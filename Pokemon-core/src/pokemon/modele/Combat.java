@@ -19,6 +19,7 @@ public class Combat extends Thread {
 
 	protected Scanner sc = new Scanner(System.in); //BERK
 	protected  String buffer="";
+	protected PokemonCombat pCourant;
 	protected int actflag=-1;
 	protected  int act=-1;
 	protected  int ind=-1;
@@ -93,6 +94,7 @@ public class Combat extends Thread {
 		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
+				pCourant=pkmListe[i];
 				pkmListe[i].action(pkmListe[i].adv[0],this);
 			}
 			//Application des d�gats sur la dur�e
@@ -223,6 +225,8 @@ public class Combat extends Thread {
 	}
 	public Terrain getTerrain(){ return terrain; }
 	public Climat getClimat(){ return climat; }
+	public PokemonCombat[] getEquipe1(){ return equipe1;}
+	public PokemonCombat[] getEquipe2(){ return equipe2;}
 	
 	
 	
@@ -264,12 +268,14 @@ public class Combat extends Thread {
 		if(!freeze){ notify();}
 	}
 
-	public synchronized void freeze(){ 
+	protected synchronized void freeze(){ 
 		while(freeze){
 			try { wait(); } 
 			catch(InterruptedException ie) { ie.printStackTrace(); }
 		}
 	}
+	
+	public synchronized PokemonCombat getPCourant(){ return pCourant;}
 	
 }
 
