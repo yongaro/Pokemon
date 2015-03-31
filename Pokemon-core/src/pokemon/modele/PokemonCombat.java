@@ -49,6 +49,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			context.action(this,cible);
 		}
 		else{
+			context.freeze();
 			int ind=0;
 			//IA de meilleur choix
 			System.out.println("Tour de l'IA");
@@ -84,8 +85,8 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 				}
 			}
 		}
-		System.out.println(Combat.buffer);
-		Combat.buffer="";
+		System.out.println(context.buffer);
+		//context.buffer="";
 	}
 	
 	//Choix de l'attaque la plus puissante
@@ -156,7 +157,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		int ind=0; int maxScore=0; int scoreTemp=0;
 		for(int i=0;i<pkm.cap.contenu.size();i++){
 			//Dans le cas ou l'adversaire n'pas statut on cherche d'abord a lui en infliger un
-			//Stratégie qui vise a infliger Poison ou Brulure + Maudit + Requiem + Stuck
+			//Stratï¿½gie qui vise a infliger Poison ou Brulure + Maudit + Requiem + Stuck
 			//On cherche d'abord a infliger Requiem
 			scoreTemp=dotScore(this.pkm.cap.elementAt(i).get(),pkm,cible.pkm);
 			if(maxScore<scoreTemp){ maxScore=scoreTemp; ind=i; }

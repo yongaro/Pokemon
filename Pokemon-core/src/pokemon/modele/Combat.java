@@ -18,9 +18,11 @@ public class Combat extends Thread {
 	protected PokemonCombat[] pkmListe;
 
 	protected Scanner sc = new Scanner(System.in); //BERK
-	protected static String buffer="";
-	protected static int act=-1;
-	protected static int swapInd=-1;
+	protected  String buffer="";
+	protected  int act=-1;
+	protected  int ind=-1;
+	protected  int swapInd=-1;
+	protected boolean freeze=false;
 	
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
@@ -129,12 +131,9 @@ public class Combat extends Thread {
 						ch2=0;
 					}
 				}
-				System.out.println(ch1+" "+ch2);
 				if(ch1==1 && ch2==1){
 					user.pkm.cap.utiliser(act,user.pkm,cible.pkm,this);
-					System.out.println("UTILISER");
 				}
-				System.out.println(user.pkm.stats[2][0]+" "+cible.pkm.stats[2][0]);
 				//Consequences de l'action
 				if(user.pkm.stats[2][0]<=0){ user.XPreward(); pokeswap(user); }
 				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(); pokeswap(cible); }
@@ -223,37 +222,54 @@ public class Combat extends Thread {
 	
 	
 	
-	// Fonctions de manipulation des objets synchronisés entre modele et vue
+	// Fonctions de manipulation des objets synchronisï¿½s entre modele et vue
 	public synchronized void ajoutBuffer(String s,boolean notify){ 
-		Combat.buffer+=s+"\n";
+		this.buffer+=s+"\n";
 		if(notify){ notify(); }
 		System.out.println(s);
 	}
 	
+	public synchronized boolean bufferIsEmpty(){ return this.buffer.compareTo("")==0; }
+	
 	public synchronized String readBuffer(){
-		while(Combat.buffer.compareTo("")==0){
+		while(this.buffer.compareTo("")==0){
 			try { wait(); } 
 			catch(InterruptedException ie) { ie.printStackTrace(); }
 		}
-		return Combat.buffer;
+		return this.buffer;
 	}
-	public synchronized void resetBuffer(){ Combat.buffer=""; }
+	public synchronized void resetBuffer(){ this.buffer=""; }
 	
 	public synchronized void ajoutAct(int act){
-		while(Combat.act!=-1){
+		while(this.act!=-1){
 			try { wait(); } 
 			catch(InterruptedException ie) { ie.printStackTrace(); }
 		}
-		Combat.act=act;
+		this.act=act;
 		notify();
 	}
 	
 	public synchronized int getAct(){
-		while(Combat.act==-1){
+		while(this.act==-1){
 			try { wait(); } 
 			catch(InterruptedException ie) { ie.printStackTrace(); }
 		}
-		return Combat.act;
+		return this.act;
 	}
-	public synchronized void resetAct(){ Combat.act=-1; notify(); }
+	public synchronized void resetAct(){ this.act=-1; notify(); }
+
+	public synchronized void setfreeze(boolean f){ 
+		freeze=f;
+		if(!freeze){ notify();}
+	}
+
+	public synchronized void freeze(){ 
+		while(freeze){
+			try { wait(); } 
+			catch(InterruptedException ie) { ie.printStackTrace(); }
+		}
+	}
+	
 }
+
+
