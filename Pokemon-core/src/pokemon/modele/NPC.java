@@ -81,7 +81,7 @@ public class NPC {
 	}
 
 	//Fonctionnalitees principales
-	public String executeDialog(Joueur j, NPCList npcList) throws NoMoreInstructionException {
+	public String executeDialog(Joueur j, NPCList npcList) throws NoMoreInstructionException, CombatException {
 		try {
 			return dialogs.get(status).execute(npcList, j);
 		} catch (NoMoreInstructionException e) {
@@ -207,6 +207,10 @@ public class NPC {
 					int dist = instruction.getInt("distance");
 					
 					InstructionMouvement newInst = new InstructionMouvement(id, dir, dist);
+					newDialog.addInstruction(newInst);
+				}
+				else if(instruction.getName().compareTo("battle") == 0) {
+					InstructionCombat newInst = new InstructionCombat();
 					newDialog.addInstruction(newInst);
 				}
 			}

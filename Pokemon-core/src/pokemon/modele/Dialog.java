@@ -2,9 +2,7 @@ package pokemon.modele;
 
 import java.util.Vector;
 
-/* La classe Dialog permet de stocker toutes les informations relatives � un dialogue d'un PNJ :
- * -Le texte du dialogue
- * -Le changement de status d'un autre PNJ*/
+/* La classe Dialog permet de stocker toutes les instructions relatives a un dialogue d'un PNJ*/
 
 public class Dialog {
 	private int currentInstruction;
@@ -20,8 +18,13 @@ public class Dialog {
 	public void addInstruction(Instruction inst) {
 		instructions.addElement(inst);
 	}
-	public String execute(NPCList list, Joueur j) throws NoMoreInstructionException {
-		if(currentInstruction < getCount()) {			
+	public String execute(NPCList list, Joueur j) throws NoMoreInstructionException, CombatException {
+		if(currentInstruction < getCount()) {
+			if(instructions.get(currentInstruction) instanceof InstructionCombat) {
+				currentInstruction++;
+				System.out.println("COMBAT");
+				throw new CombatException();
+			}
 			return instructions.get(currentInstruction++).execute(list, j);
 		}
 		else{

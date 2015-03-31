@@ -72,7 +72,7 @@ public class JoueurController implements InputProcessor{
 			}
 		}
 		if(Gdx.input.isKeyPressed(Keys.ENTER)) {
-			screen.updateDialogBox(j);
+			screen.updateCutscene(j);
 		}
 		return false;
 	}

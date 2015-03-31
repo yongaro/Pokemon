@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="5">
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="6">
  <tileset firstgid="1" name="pokemon_tileset_from_public_tiles_by_chaoticcherrycake-d5xdb0y" tilewidth="16" tileheight="16">
   <image source="pokemon_tileset_from_public_tiles_by_chaoticcherrycake-d5xdb0y.png" width="2240" height="2400"/>
  </tileset>
@@ -22,6 +22,11 @@
   <object id="4" gid="2805" x="289" y="269.5" width="16" height="16">
    <properties>
     <property name="name" value="npc"/>
+   </properties>
+  </object>
+  <object id="5" gid="2805" x="302.5" y="415" width="16" height="16">
+   <properties>
+    <property name="name" value="dresseurTest"/>
     <property name="trainer" value=""/>
    </properties>
   </object>

@@ -246,7 +246,7 @@ public class Joueur {
 //		}
 //		return currentMap.interact(this, npc, npcList);
 //	}
-	public String interact(NPC npc, NPCList list) throws NoMoreInstructionException, MovementException {
+	public String interact(NPC npc, NPCList list) throws NoMoreInstructionException, MovementException, CombatException {
 		String res = npc.executeDialog(this, list);
 		if(npc.getMoveDistance() > 0) {
 			throw new MovementException();

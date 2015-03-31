@@ -60,6 +60,19 @@ public class Dresseur extends NPC {
 		return team;
 	}
 	
+	@Override
+	public String executeDialog(Joueur j, NPCList npcList) throws NoMoreInstructionException, CombatException {
+		try {
+			return dialogs.get(status).execute(npcList, j);
+		} catch (NoMoreInstructionException e) {
+			updateStatus();
+			throw e;
+		} catch (CombatException e) {
+			e.setDresseur(this);
+			throw e;
+		}
+	}
+	
 	//Fonctions privees
 	@Override
 	protected void lireXML(String path) {

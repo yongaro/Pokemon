@@ -5,11 +5,14 @@ import java.util.Vector;
 import pokemon.annotations.Tps;
 import pokemon.controle.JoueurController;
 import pokemon.modele.ChangeMapException;
+import pokemon.modele.Combat;
+import pokemon.modele.CombatException;
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 import pokemon.modele.MovementException;
 import pokemon.modele.NPC;
 import pokemon.modele.NoMoreInstructionException;
+import pokemon.vue.CombatV;
 import pokemon.vue.DialogBox;
 import pokemon.vue.JoueurVue;
 import pokemon.vue.NPCVue;
@@ -25,7 +28,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 @Tps(nbhours=10)
 public class MapScreen implements Screen{
 	
-	@SuppressWarnings("unused")
 	private MyGdxGame game;
 	
 	//Attributs joueur
@@ -116,7 +118,7 @@ public class MapScreen implements Screen{
 		
 		//On met a jour la cinematique en cas de mouvement de personnage.
 		if(talkingNPC != null && box == null) {
-			updateDialogBox(j);
+			updateCutscene(j);
 		}
 	}
 	
@@ -141,7 +143,7 @@ public class MapScreen implements Screen{
 	}
 	
 	//Autres fonctions
-	public void updateDialogBox(Joueur j) {
+	public void updateCutscene(Joueur j) {
 		//Si aucune cinematique est en train d'etre jouee ...
 		if(talkingNPC == null) {
 			//... on recupere le NPC cible.
@@ -185,6 +187,12 @@ public class MapScreen implements Screen{
 					}
 					//Enfin, on sort de la boucle.
 					break;
+				} catch (CombatException e) {
+					//Si le dresseur a une equipe...
+					if(e.getDresseur()!= null) {
+						//... on lance un combat
+						game.setScreen(new CombatV(new Combat(j, e.getDresseur())));
+					}
 				}
 			}
 			//Si on a un texte a afficher ...

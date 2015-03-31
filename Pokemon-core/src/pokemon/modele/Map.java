@@ -163,7 +163,7 @@ public class Map {
 //	}
 	
 	//Fait interagir le joueur j avec le NPC npc
-	public String interact(Joueur j, NPC npc, NPCList list) throws NoMoreInstructionException {
+	public String interact(Joueur j, NPC npc, NPCList list) throws NoMoreInstructionException, CombatException {
 		return npc.executeDialog(j, list);
 	}
 	//Renvoie le NPC devant le joueur. Si il y en a pas, renvoie null.
@@ -197,7 +197,7 @@ public class Map {
 		
 		//Pour chaque NPC de la map...
 		for(NPC npc : npcs) {
-			//... on vérifie si un NPC se trouve au point cible ...
+			//... on vï¿½rifie si un NPC se trouve au point cible ...
 			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
 			if(npcHitbox.contains(target)) {
 				//... et on renvoie le NPC en question.
