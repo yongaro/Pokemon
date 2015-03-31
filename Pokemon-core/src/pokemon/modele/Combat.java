@@ -111,7 +111,7 @@ public class Combat extends Thread {
 					for(Statut s: p.pkm.supTemp){
 						s.StatEffect(p.pkm,1);
 					}
-					if(p.pkm.stats[2][0]<=0){ p.XPreward(); pokeswap(p); }
+					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p); }
 				}
 			}
 		}
@@ -141,20 +141,20 @@ public class Combat extends Thread {
 					user.pkm.cap.utiliser(act,user.pkm,cible.pkm,this);
 				}
 				//Consequences de l'action
-				if(user.pkm.stats[2][0]<=0){ user.XPreward(); pokeswap(user); }
-				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(); pokeswap(cible); }
+				if(user.pkm.stats[2][0]<=0){ user.XPreward(this); pokeswap(user); }
+				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(this); pokeswap(cible); }
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 					if(user.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)user.pkm.objTenu;
 						this.ajoutBuffer(user.pkm.nom+" utilise sa baie");
-						if(m.baie){ m.script(user.pkm); user.pkm.objTenu=null; }
+						if(m.baie){ m.script(user.pkm,this); user.pkm.objTenu=null; }
 					}
 				}
 				if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 					if(cible.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)cible.pkm.objTenu;
-						System.out.println(cible.pkm.nom+" utilise sa baie");
-						if(m.baie){ m.script(cible.pkm); cible.pkm.objTenu=null; }
+						this.ajoutBuffer(cible.pkm.nom+" utilise sa baie");
+						if(m.baie){ m.script(cible.pkm,this); cible.pkm.objTenu=null; }
 					}
 				}
 				isdone=1;
@@ -245,10 +245,9 @@ public class Combat extends Thread {
 			try { wait(); } 
 			catch(InterruptedException ie) { ie.printStackTrace(); }
 		}
-		System.out.println(buffer);
 		return this.buffer;
 	}
-	public synchronized void resetBuffer(){ this.buffer=""; }
+	public synchronized void resetBuffer(){ this.buffer=""; setBufferState(false);}
 	public synchronized void setBufferState(boolean st){
 		bufferReady=st;
 		if(bufferReady){ notify(); }
@@ -274,7 +273,7 @@ public class Combat extends Thread {
 		if(!freeze){ System.out.println("SETFREEZE "+f); notify();}
 		else{
 			while(freeze){
-				try { System.out.println("SETFREEZE "+f);  wait(); } 
+				try { System.out.println("SETFREEZE "+f);  this.wait(); } 
 				catch(InterruptedException ie) { ie.printStackTrace(); }
 			}
 		}

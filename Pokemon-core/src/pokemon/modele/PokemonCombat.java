@@ -50,7 +50,6 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		}
 		else{
 			context.ajoutBuffer("Tour de l'IA");
-			context.setfreeze(true);
 			int ind=0;
 			//IA de meilleur choix
 			
@@ -69,23 +68,25 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 				break;
 			}
 			pkm.cap.utiliser(ind,pkm,cible.pkm,context);
-			if(pkm.stats[2][0]<=0){ XPreward(); context.pokeswap(this); }
-			if(cible.pkm.stats[2][0]<=0){ cible.XPreward(); context.pokeswap(cible); }
+			if(pkm.stats[2][0]<=0){ XPreward(context); context.pokeswap(this); }
+			if(cible.pkm.stats[2][0]<=0){ cible.XPreward(context); context.pokeswap(cible); }
 			if(pkm.stats[2][0]<=(int)(pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 				if(pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 					Medicament m=(Medicament)pkm.objTenu;
 					context.ajoutBuffer(pkm.nom+" utilise sa baie");
-					if(m.baie){ m.script(pkm); pkm.objTenu=null; }
+					if(m.baie){ m.script(pkm,context); pkm.objTenu=null; }
 				}
 			}
 			if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 				if(cible.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 					Medicament m=(Medicament)cible.pkm.objTenu;
 					context.ajoutBuffer(cible.pkm.nom+" utilise sa baie");
-					if(m.baie){ m.script(cible.pkm); cible.pkm.objTenu=null; }
+					if(m.baie){ m.script(cible.pkm,context); cible.pkm.objTenu=null; }
 				}
 			}
 		}
+		context.setBufferState(true);
+		context.setfreeze(true);
 	}
 	
 	//Choix de l'attaque la plus puissante
@@ -221,14 +222,14 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	public void setPokemon(Pkm p){ pkm=p; }
 	
 	//A modifier pour prendre en compte les differents bonus
-	public void XPreward(){
+	public void XPreward(Combat context){
 		Pkm temp;
 		int XP=(int)( (Pokedex.values()[pkm.ID-1].baseXP*pkm.stats[0][0]*1.5)/7 );
 		
 		while(!XpStack.empty()){
 			temp=XpStack.pop();
 			temp.addXP(XP);
-			System.out.println(temp.nom+" gagne "+XP+" pts d'experience: "+temp.stats[1][0]+"/"+temp.stats[1][1]);
+			context.ajoutBuffer(temp.nom+" gagne "+XP+" pts d'experience: "+temp.stats[1][0]+"/"+temp.stats[1][1]);
 		}
 		
 	}

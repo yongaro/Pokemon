@@ -33,33 +33,33 @@ public class Medicament extends Objet {
 		}
 	}
 	
-	public int script(Pkm cible){
+	public int script(Pkm cible,Combat context){
 		if(this.utilisable(cible)){
 			int soin=0;
 			switch(effet){
 				case 1: 
-					cible.heal(soin=(int)(15*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=(int)(15*cible.stats[2][1]/100)); context.ajoutBuffer(cible.nom+" regagne "+soin+" PV");
 					break;
 				case 2:
-					cible.heal(soin=(int)(25*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=(int)(25*cible.stats[2][1]/100)); context.ajoutBuffer(cible.nom+" regagne "+soin+" PV");
 					break;
 				case 3:
-					cible.heal(soin=(int)(33*cible.stats[2][1]/100)); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=(int)(33*cible.stats[2][1]/100)); context.ajoutBuffer(cible.nom+" regagne "+soin+" PV");
 					break;
 				case 4:
-					cible.heal(soin=cible.stats[2][1]); System.out.println(cible.nom+" regagne "+soin+" PV");
+					cible.heal(soin=cible.stats[2][1]); context.ajoutBuffer(cible.nom+" regagne "+soin+" PV");
 					break;
 				default: System.out.println("Medicament utilise avec effet invalide:"+effet);
 			}
 			switch(flagSoin){
 				case 2:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
+					cible.statut=Statut.Normal; context.ajoutBuffer(cible.nom+" est soigne de son affliction");
 					break;
 				case 3:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
+					cible.statut=Statut.Normal; context.ajoutBuffer(cible.nom+" est soigne de son affliction");
 					break;
 				case 4:
-					cible.statut=Statut.Normal; System.out.println(cible.nom+" est soigne de son affliction");
+					cible.statut=Statut.Normal; context.ajoutBuffer(cible.nom+" est soigne de son affliction");
 					break;
 				default: System.out.println("Medicament utilise avec flagSoin invalide:"+flagSoin);
 			}
