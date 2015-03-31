@@ -2,6 +2,8 @@ package pokemon.vue;
 
 
 
+import java.util.Arrays;
+
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
 import pokemon.modele.Combat;
@@ -77,9 +79,13 @@ public class CombatV extends GameScreen implements InputProcessor{
 			text=c.readBuffer();
 			c.resetBuffer();
 			retval=text.split("\n");
+			System.out.println("---"+text+"---");
+			System.out.println("RETVAL"+Arrays.toString(retval));
+			System.out.println("RETVALEND");
 			dbox.setWidth(width);
 			dbox.setMessage(retval[0]);
-			state=5;
+			textinc=1;
+			state=5;			
 		}
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
 		// Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -116,7 +122,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			stage.getBatch().begin();
 			offset=0;
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
-			for(int i=0;i<actions.length;i++)//affichage des attaques
+			for(int i=0;i<pkms[0].getCap().size();i++)//affichage des attaques
 			{
 				//f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
 				if(i<2)
@@ -158,7 +164,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		stage.addActor(a);
 		a.addSlideAction();
 		stage.addActor(dbox);
-
+		stage.addActor(new BattleHud(10, 300, c.getPkmListe()[1].getPkm()));
 
 	}///////
 
@@ -182,17 +188,18 @@ public class CombatV extends GameScreen implements InputProcessor{
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state++;
+				selector=0;
 				break;
 			}
-			if(state==2){
+			if(state==2){ //selection action
 			
 					state++;
 					flag=selector;
-			
+					selector=0;
 				break;
 			}
-			if(state==3){
-				c.setfreeze(true);
+			if(state==3){ //selection atq
+				
 				c.setAct(flag, selector);
 				System.out.println("SETACT "+flag+","+selector);
 
@@ -204,6 +211,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				else{
 					dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
+					retval=null;
 					c.setfreeze(false);
 					state=2;}
 			}

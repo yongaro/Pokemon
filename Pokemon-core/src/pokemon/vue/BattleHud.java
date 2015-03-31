@@ -33,7 +33,7 @@ public class BattleHud extends Actor{
 		pvperc=new float[2];
 		pvperc[1]=(160*p.get(2))/p.getmax(2);
 		pvperc[0]=pvperc[1];
-		b.getProjectionMatrix().setToOrtho2D(0, 0, 640, 320);
+		b.getProjectionMatrix().setToOrtho2D(0, 0, 640, 360);
 		speed=50;
 		increase=false;
 	}
@@ -88,10 +88,10 @@ public void draw (Batch batch, float parentAlpha) {
 	b.begin();
 	f.setScale(0.7f);
 	f.setColor(1,1, 1, 1);
-	f.draw(b, p.getNom()+"                 Lv"+p.get(0), this.getX()+30, this.getY()+this.getHeight()-f.getCapHeight());
+	f.draw(b, p.getNom()+"                 Lv"+p.get(0), this.getX()+30, this.getY()+this.getHeight()+2);
 	f.setScale(0.5f);
-	f.draw(b,"HP",getX()+20,getY()+22);
-	f.draw(b,p.get(2)+"/"+p.getmax(2), this.getX()+140, this.getY()+10);
+	f.draw(b,"HP",getX()+20,getY()+38);
+	f.draw(b,p.get(2)+"/"+p.getmax(2), this.getX()+140, this.getY()+25);
 	b.end();
 }
 
