@@ -17,7 +17,7 @@ public class AtkChangeStats extends Atk {
 		Tstats=code; ChangeProc=proc; this.fof=fof;
 	}
 	public void script(Pkm user,Pkm cible,Combat context){
-		context.ajoutBuffer(user.nom+" utilise "+description,false);
+		context.ajoutBuffer(user.nom+" utilise "+nom,false);
 		 Random random=new Random();
 		//test de precision
 		int touche=0;
