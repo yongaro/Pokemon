@@ -191,38 +191,41 @@ public class Combat extends Thread {
 	
 	
 	public void pokeswap(PokemonCombat user){
-		int i=0; int act=0; int done=0; Pkm pkmRef; Stack<Pkm> stackRef; 
+		/*int i=0;*/ int act=0; int done=0; Pkm pkmRef; Stack<Pkm> stackRef; 
 		if(!user.isIA){
-			user.waitPlswap();
 			while(done==0){
+				/*i=0;
 				System.out.println("Qui voulez vous envoyer ?");
 				for(PokemonCombat p: user.equipe){
 					System.out.println(i+" "+p.pkm.nom+" LV."+p.pkm.stats[0][0]+" "+p.pkm.stats[0][1]+"% "+p.pkm.stats[2][0]+"/"+p.pkm.stats[2][1]+" "+p.pkm.statut);
 					i++;
-				}
+				}*/
+				user.waitPlswap();
 				act=sc.nextInt();
 				if(user.equipe[act].pkm.statut!=Statut.KO){
 					System.out.println(user.equipe[act].pkm.nom+" remplace "+user.pkm.nom);
-					pkmRef=user.pkm; stackRef=user.XpStack;
+					//pkmRef=user.pkm; stackRef=user.XpStack;
 					user.pkm=user.equipe[act].pkm; user.XpStack=user.equipe[act].XpStack;
-					user.equipe[act].pkm=pkmRef; user.equipe[act].XpStack=stackRef;
+					//user.equipe[act].pkm=pkmRef; user.equipe[act].XpStack=stackRef;
 					ajoutXpStack(user);
 					done=1;
 				}
 				else{
 					System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
-					i=0;
+					//i=0;
 				}
 			}
 		}
 		else{
-			for(PokemonCombat p:user.equipe){
-				if(p.pkm.statut!=Statut.KO){
-					System.out.println(user.prop+" envoie "+p.pkm.nom+" au combat");
-					pkmRef=user.pkm; stackRef=user.XpStack;
-					user.pkm=p.pkm; user.XpStack=stackRef;
-					p.pkm=pkmRef; p.XpStack=stackRef;
+			for(int i=0;i<user.equipe.length;i++){
+				if(user.equipe[i].pkm.statut!=Statut.KO){
+					System.out.println(user.prop+" envoie "+user.equipe[i].pkm.nom+" au combat");
+					//pkmRef=user.pkm; stackRef=user.XpStack;
+					user.pkm=user.equipe[i].pkm; user.XpStack=user.equipe[i].XpStack;
+					//p.pkm=pkmRef; p.XpStack=stackRef;
 					ajoutXpStack(user);
+					user.setSwap(i);
+					break;
 				}
 			}
 			user.waitIAswap();

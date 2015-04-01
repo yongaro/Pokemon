@@ -29,13 +29,13 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		swap=-1;
 	}
 	
-	public Pkm getPkm() {
-		return pkm;
-	}
-
-	public boolean isIA() {
-		return isIA;
-	}
+	public Pkm getPkm() { return pkm; }
+	public boolean isIA() { return isIA; }
+	public String getNom(){ return pkm.nom;}
+	public int getId(){ return pkm.ID; }
+	public Statut getStatut(){ return pkm.statut;}
+	public PokemonCombat[] getAdv(){ return adv;}
+	public PokemonCombat[] getEquipe(){ return equipe; }
 
 	public int compareTo(PokemonCombat p) {
 		if(p.pkm.stats[7][0]==this.pkm.stats[7][0])
