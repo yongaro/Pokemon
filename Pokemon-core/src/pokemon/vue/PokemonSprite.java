@@ -1,5 +1,7 @@
 package pokemon.vue;
 
+import pokemon.modele.PokemonCombat;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -21,7 +23,7 @@ public class PokemonSprite extends Actor{
     boolean soundplayed=false;
     ShapeRenderer shapeRenderer=new ShapeRenderer();
 	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
-	
+	PokemonCombat p;
 	
     private Vector2 pos;
     public PokemonSprite(Vector2 v,String nom){
@@ -35,6 +37,19 @@ public class PokemonSprite extends Actor{
 
     }
     ////
+    
+    public PokemonSprite(Vector2 v, PokemonCombat pc){
+    	super();
+    	p=pc;
+    	if(pc.isIA())
+    		s=new Texture(Gdx.files.internal(""+pc.getPkm().getID()));
+    	else
+    		s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
+    	pos=new Vector2(v);
+   	   	this.setBounds(pos.x, pos.y, s.getWidth()*1.2f, s.getHeight()*1.2f);
+   	   		
+	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
+    }
     
     public void addSlideAction(){
     	if(pos.x<320)

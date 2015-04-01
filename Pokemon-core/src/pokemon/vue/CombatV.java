@@ -60,7 +60,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				ennemiesHUD.add(new BattleHud(10, 300,c.getPkmListe()[i]));
 			}
 			else
-				friends.add(new PokemonSprite(PokemonSprite.a1,"Sprites/"+c.getPkmListe()[i].getPkm().getID()+".png"));
+				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i]));
 
 		}
 
@@ -192,9 +192,14 @@ public class CombatV extends GameScreen implements InputProcessor{
 			if(state==0 && stage.getActors().get(1).getActions().size==0){
 				a.hideTrainer();
 				dbox.setMessage("En avant "+pkms[0].getNom());
-				p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/"+c.getPkmListe()[0].getPkm().getID()+".png");
-				p1.popPokemon();
-				stage.getActors().insert(0, p1);
+				for(PokemonSprite fr:friends){
+					stage.getActors().insert(0, fr);
+					fr.popPokemon();
+					
+				}
+				//p1=new PokemonSprite(new Vector2(20,60),"Sprites/back/"+c.getPkmListe()[0].getPkm().getID()+".png");
+				//p1.popPokemon();
+				//stage.getActors().insert(0, p1);
 				stage.addActor(new BattleHud(420,105,c.getPkmListe()[0]));
 				state++;
 				break;
