@@ -64,7 +64,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 				ind=this.bestControl(cible, context);
 				break;
 			default:
-				ind=0;
+				ind=bestdmg(cible,context);
 				break;
 			}
 			pkm.cap.utiliser(ind,pkm,cible.pkm,context);
