@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <PNJ id="1">
 	<dialogue>
-		<text>Le Brocoli a été introduit en France par Catherine de Medicis.</text>
+		<text>Le Brocoli a ete introduit en France par Catherine de Medicis.</text>
 		<battle/>
 	</dialogue>
 	
 	<equipe>
-		<pokemon id="25" niveau="25">
+		<pokemon id="8" niveau="25">
 			<capacite nom="Tonnerre"/>
 			<capacite nom="JetDeSable"/>
 			<capacite nom="PoingGlace"/>

@@ -191,7 +191,9 @@ public class MapScreen implements Screen{
 					//Si le dresseur a une equipe...
 					if(e.getDresseur()!= null) {
 						//... on lance un combat
-						game.setScreen(new CombatV(new Combat(j, e.getDresseur())));
+						Combat c = new Combat(j, e.getDresseur());
+						c.start();
+						game.setScreen(new CombatV(c));
 					}
 				}
 			}
