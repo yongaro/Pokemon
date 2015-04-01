@@ -84,7 +84,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	}
 	@Override
 	public void render(float arg0) {
-		if(!c.bufferIsEmpty()){
+		if(!c.bufferIsEmpty() && state>1){
 			text=c.readBuffer();
 			c.resetBuffer();
 			retval=text.split("\n");
