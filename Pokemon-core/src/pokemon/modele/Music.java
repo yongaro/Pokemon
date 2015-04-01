@@ -10,14 +10,14 @@ public class Music {
 	private String path;
 	
 	public Music() {
-		setPath("music.mp3");
+		setPath("musics/music.mp3");
 	}
 	
 	public Music(TiledMap tiledMap) {
 		MapProperties prop = tiledMap.getProperties();
 		path = prop.get("music", String.class);
 		if(path == null)
-			setPath("music.mp3");
+			setPath("musics/music.mp3");
 	}
 
 	public String getPath() {

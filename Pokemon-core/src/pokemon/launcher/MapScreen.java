@@ -19,6 +19,7 @@ import pokemon.vue.NPCVue;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -48,6 +49,9 @@ public class MapScreen implements Screen{
 	private NPC talkingNPC;
 	private Stage stage;
     private DialogBox box = null;
+    
+    //Attribut sonore
+    private Music music = Gdx.audio.newMusic(Gdx.files.internal(j.getCurrentMap().getMusique().getPath()));
 
     //Constructeur
     public MapScreen(MyGdxGame game) {
@@ -100,6 +104,10 @@ public class MapScreen implements Screen{
 		
 		//Definition de l'input
 		Gdx.input.setInputProcessor(controller);
+		
+		//Musique
+		music.setVolume(0.5f);
+		playMusic(0);
 	}
 	public void update(float delta)
 	{
@@ -128,7 +136,7 @@ public class MapScreen implements Screen{
 		
 	}
 	public void dispose() {
-		// TODO Auto-generated method stub
+		music.dispose();
 		
 	}
 	@Override
@@ -191,6 +199,7 @@ public class MapScreen implements Screen{
 					//Si le dresseur a une equipe...
 					if(e.getDresseur()!= null) {
 						//... on lance un combat
+						music.stop();
 						Combat c = new Combat(j, e.getDresseur());
 						c.start();
 						game.setScreen(new CombatV(c));
@@ -230,5 +239,17 @@ public class MapScreen implements Screen{
 			NPCVue npcvue = new NPCVue(npc);
 			npcs.add(npcvue);
 		}
+	}
+	
+	//Fonctions de la musique
+	public float getMusicPosition() {
+		return music.getPosition();
+	}
+	public void playMusic(float pos) {
+		music.setPosition(pos);
+		music.play();
+	}
+	public void stopMusic() {
+		music.stop();
 	}
 }
