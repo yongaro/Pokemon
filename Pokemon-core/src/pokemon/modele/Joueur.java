@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
  * Contient aussi la base de donnees afin de stocker les pokemons */
 
 @Tps(nbhours=5)
-public class Joueur {
+public class Joueur implements CombatInfos {
 	//Attributs du dresseur
 	protected int ID;
 	protected String nom;
@@ -280,4 +280,7 @@ public class Joueur {
 	public void setOrientation(Direction orientation) {
 		this.orientation = orientation;
 	}
+	
+	public Pkm teamAt(int ind){ return team[ind]; }
+	public Pkm[] Team(){ return team; }
 }

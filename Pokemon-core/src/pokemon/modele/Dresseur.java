@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
  * ainsi que son equipe de pokemon, lue depuis un fichier xml */
 
 @Tps(nbhours=3)
-public class Dresseur extends NPC {
+public class Dresseur extends NPC implements CombatInfos {
 	private Vector<Pkm> team;
 	
 	//Constructeurs
@@ -106,4 +106,7 @@ public class Dresseur extends NPC {
 			dialogs.add(new Dialog());
 		}
 	}
+	
+	public Pkm teamAt(int ind){ return this.team.elementAt(ind); }
+	public Pkm[] Team(){ return (Pkm[])team.toArray(); }
 }

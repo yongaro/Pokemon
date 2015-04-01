@@ -12,12 +12,13 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	protected int listeIndice;
 	//protected int equipe;
 	protected PokemonCombat[] equipe;
-	protected Object prop;
+	protected CombatInfos prop;
 	protected Stack<Pkm> XpStack;
 	protected PokemonCombat[] adv;
 	protected PokemonCombat[] voisins;
+	protected int swap;
 
-	public PokemonCombat(Pkm p,boolean isIA,Object j){
+	public PokemonCombat(Pkm p,boolean isIA,CombatInfos j){
 		pkm=p;
 		this.isIA=isIA;
 		listeIndice=-1;
@@ -25,6 +26,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		this.XpStack=new Stack<Pkm>();
 		this.adv=new PokemonCombat[5];
 		this.voisins=new PokemonCombat[2];
+		swap=-1;
 	}
 	
 	public Pkm getPkm() {
@@ -235,6 +237,21 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			context.ajoutBuffer(temp.nom+" gagne "+XP+" pts d'experience: "+temp.stats[1][0]+"/"+temp.stats[1][1]);
 		}
 		
+	}
+	
+	public synchronized void setSwap(int sw){ swap=sw; notify();	 }
+	
+	public synchronized void waitIAswap(){
+		while(swap!=-1){
+			try { wait(); } 
+			catch(InterruptedException ie) { ie.printStackTrace(); }
+		}
+	}
+	public synchronized void waitPlswap(){
+		while(swap==-1){
+			try { wait(); } 
+			catch(InterruptedException ie) { ie.printStackTrace(); }
+		}
 	}
 	
 }

@@ -18,22 +18,23 @@ public class Combat extends Thread {
 	protected PokemonCombat[] pkmListe;
 
 	protected Scanner sc = new Scanner(System.in); //BERK
-	protected  String buffer="";
+	protected  String buffer;
 	protected boolean bufferReady;
-	protected PokemonCombat pCourant;
-	protected int actflag=-1;
-	protected  int act=-1;
-	protected  int ind=-1;
-	protected  int swapInd=-1;
-	protected boolean freeze=false;
+	protected PokemonCombat pCourant; 
+	protected int actflag;
+	protected int act;
+	protected int ind;
+	protected boolean freeze;
 	
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
 	
 	public Combat(){
 		terrain=Terrain.Plaine; climat=Climat.Normal;
+		buffer="";
 		bufferReady=false;
-		
+		actflag=-1; act=-1; ind=-1;
+		freeze=false;
 	}
 	public Combat(Joueur j1,Joueur j2){ this(); this.initSolo(j1,j2); } 
 	public Combat(Joueur j,Dresseur d){ this(); this.initSolo(j,d); }
@@ -81,6 +82,7 @@ public class Combat extends Thread {
 		equipe1=new PokemonCombat[j.teamsize];
 		equipe2=new PokemonCombat[d.getTeam().size()];
 		pkmListe=new PokemonCombat[2];
+		
 		for(int i=0;i<j.teamsize;i++){
 			equipe1[i]=new PokemonCombat(j.team[i],false,j); equipe1[i].equipe=equipe1;
 		}
@@ -191,6 +193,7 @@ public class Combat extends Thread {
 	public void pokeswap(PokemonCombat user){
 		int i=0; int act=0; int done=0; Pkm pkmRef; Stack<Pkm> stackRef; 
 		if(!user.isIA){
+			user.waitPlswap();
 			while(done==0){
 				System.out.println("Qui voulez vous envoyer ?");
 				for(PokemonCombat p: user.equipe){
@@ -222,6 +225,7 @@ public class Combat extends Thread {
 					ajoutXpStack(user);
 				}
 			}
+			user.waitIAswap();
 		}
 	}
 	public Terrain getTerrain(){ return terrain; }
@@ -280,6 +284,9 @@ public class Combat extends Thread {
 	}
 	
 	public synchronized PokemonCombat getPCourant(){ return pCourant;}
+	
+	
+	
 	
 }
 
