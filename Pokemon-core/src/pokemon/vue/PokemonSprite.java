@@ -20,7 +20,7 @@ public class PokemonSprite extends Actor{
 	public static Vector2 a1=new Vector2(440,60);
     public Texture s=new Texture(Gdx.files.internal("Sprites/6.png"));
     SpriteBatch b=new SpriteBatch();
-    boolean soundplayed=false;
+    boolean finished=false;
     ShapeRenderer shapeRenderer=new ShapeRenderer();
 	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
 	PokemonCombat p;
@@ -108,7 +108,12 @@ public class PokemonSprite extends Actor{
     		die();
     		p=null;
     		}
-    	
+    	if( (getScaleX()==1.5) && !finished)
+    		{
+    		finished=true;
+    		b.setColor(Color.WHITE);
+    		son.play();    		
+    		}    	
     }
 }
 

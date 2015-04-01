@@ -28,7 +28,6 @@ public class BattleHud extends Actor{
 		this.setHeight(55);
 		this.setWidth(210);
 		if(p.isIA()){
-			System.out.println("IA APPEARS");
 			this.setX(-210);
 			this.setY(300);
 			this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(220, 0,0.5f)));
