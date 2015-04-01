@@ -1,6 +1,7 @@
 package pokemon.vue;
 
 import pokemon.modele.Pkm;
+import pokemon.modele.PokemonCombat;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,24 +23,31 @@ public class BattleHud extends Actor{
 	float[] pvperc;
 	int speed;
 	boolean increase;
-	public BattleHud(int x,int y,Pkm p){
+	public BattleHud(int x,int y,PokemonCombat pokemonCombat){
 		this.setX(x+220);
 		this.setY(y);
 		this.setHeight(55);
 		this.setWidth(210);
 		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveTo(x, y,0.5f)));
-		this.p=p;
-		oldpv=p.get(2);
+		this.p=pokemonCombat.getPkm();
+		oldpv=pokemonCombat.getPkm().get(2);
 		pvperc=new float[2];
-		pvperc[1]=(160*p.get(2))/p.getmax(2);
+		pvperc[1]=(160*pokemonCombat.getPkm().get(2))/pokemonCombat.getPkm().getmax(2);
 		pvperc[0]=pvperc[1];
 		b.getProjectionMatrix().setToOrtho2D(0, 0, 640, 360);
 		speed=50;
 		increase=false;
 	}
-
+	
+	public void hideRight(){
+		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(210, 0, 0.5f),Actions.visible(false)));
+	
+	}
+	
 	public void act(float delta){
 		super.act(delta);
+		if(oldpv==0 && this.isVisible())
+			hideRight();
 		if(p.get(2)!=oldpv)
 		{
 			if(p.get(2)>oldpv){
