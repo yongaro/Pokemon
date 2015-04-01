@@ -17,19 +17,28 @@ public class BattleHud extends Actor{
 
 	ShapeRenderer shapeRenderer=new ShapeRenderer();
 	SpriteBatch b=new SpriteBatch();
-	Pkm p;
+	PokemonCombat p;
 	BitmapFont f=new BitmapFont(Gdx.files.internal("pkm1.fnt"), Gdx.files.internal("pkm1.png"), false);
 	int oldpv;
 	float[] pvperc;
 	int speed;
 	boolean increase;
 	public BattleHud(int x,int y,PokemonCombat pokemonCombat){
-		this.setX(x+220);
-		this.setY(y);
+		p=pokemonCombat;
 		this.setHeight(55);
 		this.setWidth(210);
-		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveTo(x, y,0.5f)));
-		this.p=pokemonCombat.getPkm();
+		if(p.isIA()){
+			System.out.println("IA APPEARS");
+			this.setX(-210);
+			this.setY(300);
+			this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(220, 0,0.5f)));
+		}
+		else{
+			this.setX(640);
+			this.setY(110);
+			this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(-220, 0,0.5f)));
+		}
+		
 		oldpv=pokemonCombat.getPkm().get(2);
 		pvperc=new float[2];
 		pvperc[1]=(160*pokemonCombat.getPkm().get(2))/pokemonCombat.getPkm().getmax(2);
@@ -48,16 +57,16 @@ public class BattleHud extends Actor{
 		super.act(delta);
 		if(oldpv==0 && this.isVisible())
 			hideRight();
-		if(p.get(2)!=oldpv)
+		if(p.getPkm().get(2)!=oldpv)
 		{
-			if(p.get(2)>oldpv){
+			if(p.getPkm().get(2)>oldpv){
 				increase=true;
 			}
 			else
 				increase=false;
-			pvperc[1]=(160*p.get(2))/p.getmax(2);
+			pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
 
-			oldpv=p.get(2);
+			oldpv=p.getPkm().get(2);
 		}
 		if(pvperc[1]!=pvperc[0]){
 			if(increase){
@@ -96,10 +105,10 @@ public void draw (Batch batch, float parentAlpha) {
 	b.begin();
 	f.setScale(0.7f);
 	f.setColor(1,1, 1, 1);
-	f.draw(b, p.getNom()+"                 Lv"+p.get(0), this.getX()+30, this.getY()+this.getHeight()+2);
+	f.draw(b, p.getPkm().getNom()+"                 Lv"+p.getPkm().get(0), this.getX()+30, this.getY()+this.getHeight()+2);
 	f.setScale(0.5f);
 	f.draw(b,"HP",getX()+20,getY()+38);
-	f.draw(b,p.get(2)+"/"+p.getmax(2), this.getX()+140, this.getY()+25);
+	f.draw(b,p.getPkm().get(2)+"/"+p.getPkm().getmax(2), this.getX()+140, this.getY()+25);
 	b.end();
 }
 

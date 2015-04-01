@@ -31,6 +31,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	Vector<PokemonSprite> ennemies=new Vector<PokemonSprite>();
 	Vector<BattleHud> ennemiesHUD=new Vector<BattleHud>();
 	Vector<PokemonSprite> friends=new Vector<PokemonSprite>();
+	Vector<BattleHud> friendHUD=new Vector<BattleHud>();
 	PokemonSprite a=new PokemonSprite(PokemonSprite.a1,"trainerS.png");
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
 	Pkm[] pkms=MyGdxGame.Jtest.getTeam();
