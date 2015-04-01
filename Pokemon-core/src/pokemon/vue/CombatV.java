@@ -58,11 +58,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 			if(this.c.getPkmListe()[i].isIA())
 			{
 				ennemies.add(new PokemonSprite(PokemonSprite.e1,c.getPkmListe()[i]));
-				ennemiesHUD.add(new BattleHud(10, 300,c.getPkmListe()[i]));
+				ennemiesHUD.add(new BattleHud(c.getPkmListe()[i]));
 			}
 			else{
 				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i]));
-				friendHUD.add(new BattleHud(10, 300,c.getPkmListe()[i]));
+				friendHUD.add(new BattleHud(c.getPkmListe()[i]));
 			}
 		}
 	}
