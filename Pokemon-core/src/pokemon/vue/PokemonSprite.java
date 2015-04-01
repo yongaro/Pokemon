@@ -41,20 +41,25 @@ public class PokemonSprite extends Actor{
     public PokemonSprite(Vector2 v, PokemonCombat pc){
     	super();
     	p=pc;
-    	if(pc.isIA())
-    		s=new Texture(Gdx.files.internal(""+pc.getPkm().getID()));
-    	else
+    	if(pc.isIA()){
+    		s=new Texture(Gdx.files.internal("Sprites/"+pc.getPkm().getID()+".png"));
+    		this.setBounds(60, 220, s.getWidth()*1.2f, s.getHeight()*1.2f);
+    	}
+    		
+    	else{
+ 
     		s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
-    	pos=new Vector2(v);
-   	   	this.setBounds(pos.x, pos.y, s.getWidth()*1.2f, s.getHeight()*1.2f);
-   	   		
-	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
+       	   	this.setBounds(10, 60, s.getWidth()*1.2f, s.getHeight()*1.2f);
+
+    	}
+    	pos=v;
+    	b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
     }
     
     public void addSlideAction(){
-    	if(pos.x<320)
-    		this.addAction(Actions.moveTo(pos.x+420, pos.y, 2.0f));
-    	else
+    	if(p!=null && p.isIA())
+    		this.addAction(Actions.moveBy(400, 0, 2.0f));
+    	if(pos.x>320)
     		this.addAction(Actions.moveTo(pos.x-420, pos.y, 2.0f));
     	this.addAction(Actions.scaleTo(1.5f, 1.5f,2.0f));
     	b.setColor(0.2f, 0.2f, 0.2f,1); 
@@ -64,11 +69,19 @@ public class PokemonSprite extends Actor{
     	if(pos.x>320)
    			this.addAction(Actions.sequence(Actions.moveTo(this.getX(), -70,0.5f),Actions.visible(false)));
     	
-   	
+   	}
+    
+    public void die(){
+    	if(p.isIA())
+    		this.addAction(Actions.moveBy(0,100, 0.3f));
+    	else
+    		this.addAction(Actions.moveBy(0,-150, 0.3f));
+    	
     }
     
     public void popPokemon(){
     	this.setVisible(false);
+    	if(!p.isIA())
     	this.addAction(Actions.delay(0.5f,Actions.parallel(Actions.visible(true),Actions.scaleTo(1.5f, 1.5f,0.5f))));
     	
     }
@@ -78,12 +91,24 @@ public class PokemonSprite extends Actor{
 
 
     	b.begin();
-    	if(this.getX()==pos.x+420 || this.getX()==pos.x-420)
+    	if(p!=null)
+    	//System.out.println(p.getPkm().getNom()+"  "+getX());
+    	if( (this.getX()<=461 && this.getX()>=459) || this.getX()==pos.x-420)
     		b.setColor(Color.WHITE);
     	b.draw(s,this.getX(),this.getY(),s.getWidth()*this.getScaleX(),s.getHeight()*this.getScaleY());
     	// b.setColor(color);
     	b.end();
 
+    }
+    public void act(float delta){
+    
+    	super.act(delta);
+    	if(p!=null && p.getPkm().get(2)==0)
+    		{
+    		die();
+    		p=null;
+    		}
+    	
     }
 }
 
