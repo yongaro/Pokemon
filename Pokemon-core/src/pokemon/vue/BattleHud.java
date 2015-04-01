@@ -23,9 +23,11 @@ public class BattleHud extends Actor{
 	float[] pvperc;
 	int speed;
 	boolean increase;
+	CombatV combatv;
 	
-	public BattleHud(PokemonCombat pokemonCombat){
+	public BattleHud(CombatV vuecombat,PokemonCombat pokemonCombat){
 		p=pokemonCombat;
+		combatv=vuecombat;	
 		this.setHeight(55);
 		this.setWidth(210);
 		if(p.isIA()){
@@ -38,7 +40,7 @@ public class BattleHud extends Actor{
 			this.setY(110);
 			this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(-220, 0,0.5f)));
 		}
-		
+
 		oldpv=pokemonCombat.getPkm().get(2);
 		pvperc=new float[2];
 		pvperc[1]=(160*pokemonCombat.getPkm().get(2))/pokemonCombat.getPkm().getmax(2);
@@ -47,69 +49,71 @@ public class BattleHud extends Actor{
 		speed=50;
 		increase=false;
 	}
-	
+
 	public void hideRight(){
 		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(210, 0, 0.5f),Actions.visible(false)));
-	
+
 	}
-	
+
 	public void act(float delta){
 		super.act(delta);
-		if(oldpv==0 && this.isVisible())
-			hideRight();
-		if(p.getPkm().get(2)!=oldpv)
-		{
-			if(p.getPkm().get(2)>oldpv){
-				increase=true;
-			}
-			else
-				increase=false;
-			pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
-
-			oldpv=p.getPkm().get(2);
-		}
-		if(pvperc[1]!=pvperc[0]){
-			if(increase){
-				if(pvperc[0]<pvperc[1])
-					pvperc[0]+=delta*speed;
+		if(combatv.getTextinc()==3 || combatv.getTextinc()==5){
+			if(oldpv==0 && this.isVisible())
+				hideRight();
+			if(p.getPkm().get(2)!=oldpv)
+			{
+				if(p.getPkm().get(2)>oldpv){
+					increase=true;
+				}
 				else
-					pvperc[0]=pvperc[1];
+					increase=false;
+				pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
+
+				oldpv=p.getPkm().get(2);
 			}
-			else{
-			if(pvperc[0]>pvperc[1])
-				pvperc[0]-=delta*speed;				
-			else
-				pvperc[0]=pvperc[1];
+			if(pvperc[1]!=pvperc[0]){
+				if(increase){
+					if(pvperc[0]<pvperc[1])
+						pvperc[0]+=delta*speed;
+					else
+						pvperc[0]=pvperc[1];
+				}
+				else{
+					if(pvperc[0]>pvperc[1])
+						pvperc[0]-=delta*speed;				
+					else
+						pvperc[0]=pvperc[1];
+				}
+
+			}
 		}
-
-	}
 	}
 
 
 
-public void draw (Batch batch, float parentAlpha) {
-	shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
-	shapeRenderer.begin(ShapeType.Filled);
-	Gdx.gl.glEnable(GL20.GL_BLEND);
-	shapeRenderer.setColor(0f, 0f, 0f, 0.8f);
-	shapeRenderer.rect(getX(), getY(), this.getWidth()-20,20);
-	shapeRenderer.rect(getX()+20, getY()+getHeight()-35, this.getWidth()-20,20);
-	shapeRenderer.triangle(getX(), getY()+20, getX()+20, getY()+20, getX()+20, getY()+40);//left triangle
-	shapeRenderer.triangle(getX()+this.getWidth()-20,this.getY(), getX()+this.getWidth()-20, getY()+20, getX()+this.getWidth(), getY()+20);
-	shapeRenderer.setColor(1f, 1f, 1f, 0.6f);
-	shapeRenderer.rect(getX()+35,getY()+getHeight()-27,160,8);
-	shapeRenderer.setColor(0f, 0.95f, 0f, 1f);
-	shapeRenderer.rect(getX()+35,getY()+getHeight()-27,pvperc[0],8);
-	shapeRenderer.end();
-	Gdx.gl.glDisable(GL20.GL_BLEND);
-	b.begin();
-	f.setScale(0.7f);
-	f.setColor(1,1, 1, 1);
-	f.draw(b, p.getPkm().getNom()+"                 Lv"+p.getPkm().get(0), this.getX()+30, this.getY()+this.getHeight()+2);
-	f.setScale(0.5f);
-	f.draw(b,"HP",getX()+20,getY()+38);
-	f.draw(b,p.getPkm().get(2)+"/"+p.getPkm().getmax(2), this.getX()+140, this.getY()+25);
-	b.end();
-}
+	public void draw (Batch batch, float parentAlpha) {
+		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		shapeRenderer.setColor(0f, 0f, 0f, 0.8f);
+		shapeRenderer.rect(getX(), getY(), this.getWidth()-20,20);
+		shapeRenderer.rect(getX()+20, getY()+getHeight()-35, this.getWidth()-20,20);
+		shapeRenderer.triangle(getX(), getY()+20, getX()+20, getY()+20, getX()+20, getY()+40);//left triangle
+		shapeRenderer.triangle(getX()+this.getWidth()-20,this.getY(), getX()+this.getWidth()-20, getY()+20, getX()+this.getWidth(), getY()+20);
+		shapeRenderer.setColor(1f, 1f, 1f, 0.6f);
+		shapeRenderer.rect(getX()+35,getY()+getHeight()-27,160,8);
+		shapeRenderer.setColor(0f, 0.95f, 0f, 1f);
+		shapeRenderer.rect(getX()+35,getY()+getHeight()-27,pvperc[0],8);
+		shapeRenderer.end();
+		Gdx.gl.glDisable(GL20.GL_BLEND);
+		b.begin();
+		f.setScale(0.7f);
+		f.setColor(1,1, 1, 1);
+		f.draw(b, p.getPkm().getNom()+"                 Lv"+p.getPkm().get(0), this.getX()+30, this.getY()+this.getHeight()+2);
+		f.setScale(0.5f);
+		f.draw(b,"HP",getX()+20,getY()+38);
+		f.draw(b,oldpv+"/"+p.getPkm().getmax(2), this.getX()+140, this.getY()+25);
+		b.end();
+	}
 
 }

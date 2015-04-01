@@ -47,6 +47,9 @@ public class CombatV extends GameScreen implements InputProcessor{
 	String text;
 	String[] retval;
 	int textinc=1;
+
+
+
 	public CombatV(Combat c){
 
 		Gdx.input.setInputProcessor(this);
@@ -58,11 +61,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 			if(this.c.getPkmListe()[i].isIA())
 			{
 				ennemies.add(new PokemonSprite(PokemonSprite.e1,c.getPkmListe()[i]));
-				ennemiesHUD.add(new BattleHud(c.getPkmListe()[i]));
+				ennemiesHUD.add(new BattleHud(this,c.getPkmListe()[i]));
 			}
 			else{
 				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i]));
-				friendHUD.add(new BattleHud(c.getPkmListe()[i]));
+				friendHUD.add(new BattleHud(this,c.getPkmListe()[i]));
 			}
 		}
 	}
@@ -227,8 +230,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==5){
-				if(textinc<retval.length)
-					dbox.setMessage(retval[textinc++]);
+				if(textinc<retval.length){
+					dbox.setMessage(retval[textinc++]);}
 				else{
 					dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
@@ -348,5 +351,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	public int getTextinc() {
+		return textinc;
+	}
 }

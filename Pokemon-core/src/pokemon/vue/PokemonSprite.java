@@ -1,6 +1,7 @@
 package pokemon.vue;
 
 import pokemon.modele.PokemonCombat;
+import pokemon.modele.Statut;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -113,7 +114,12 @@ public class PokemonSprite extends Actor{
     		finished=true;
     		b.setColor(Color.WHITE);
     		son.play();    		
-    		}    	
+    		} 
+    	if(p!=null && p.getPkm().getStatut()!=Statut.Normal)
+    	{
+    		System.out.println("NEW STATUT "+p.getPkm().getNom()+" "+p.getPkm().getStatut().name());
+    	}
     }
+  
 }
 
