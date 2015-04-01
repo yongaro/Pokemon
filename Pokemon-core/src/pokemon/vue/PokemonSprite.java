@@ -59,10 +59,10 @@ public class PokemonSprite extends Actor{
     
     public void addSlideAction(){
     	if(p!=null && p.isIA())
-    		this.addAction(Actions.moveBy(400, 0, 2.0f));
+    		this.addAction(Actions.moveBy(400, 0, 1.6f));
     	if(pos.x>320)
-    		this.addAction(Actions.moveTo(pos.x-420, pos.y, 2.0f));
-    	this.addAction(Actions.scaleTo(1.5f, 1.5f,2.0f));
+    		this.addAction(Actions.moveTo(pos.x-420, pos.y, 1.6f));
+    	this.addAction(Actions.scaleTo(1.5f, 1.5f,1.6f));
     	b.setColor(0.2f, 0.2f, 0.2f,1); 
     }
 
@@ -74,7 +74,7 @@ public class PokemonSprite extends Actor{
     
     public void die(){
     	if(p.isIA())
-    		this.addAction(Actions.moveBy(0,100, 0.3f));
+    		this.addAction(Actions.moveBy(0,150, 0.3f));
     	else
     		this.addAction(Actions.moveBy(0,-150, 0.3f));
     	
@@ -113,7 +113,7 @@ public class PokemonSprite extends Actor{
     		{
     		finished=true;
     		b.setColor(Color.WHITE);
-    		son.play();    		
+    		son.play(0.1f);	
     		} 
     	if(p!=null && p.getPkm().getStatut()!=Statut.Normal)
     	{

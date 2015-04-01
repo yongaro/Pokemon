@@ -49,8 +49,8 @@ public class MyGdxGame extends Game {
 	    	Ptest[4]=new Pkm(Pokedex.Rattatac.get(),25); Ptest2[4]=new Pkm(Pokedex.Rattatac.get(),25);
 	    	Ptest[5]=new Pkm(Pokedex.Pikachu.get(),25); Ptest2[5]=new Pkm(Pokedex.Pikachu.get(),25);
 	    	//Ptest[0].infliger(56);
-	    	Ptest[1].infliger(38);
-	    	Ptest[2].infliger(28);
+	    	//Ptest[1].infliger(38);
+	    	//Ptest[2].infliger(28);
 	    	for(int i=0;i<6;i++){
 	    		Ptest[i].give(Medicament.baieTest); Ptest2[i].give(Medicament.baieTest);
 	    		if(i==0){
