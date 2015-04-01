@@ -93,7 +93,10 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	public int bestdmg(PokemonCombat cible,Combat context){
 		int maxdmg=0; int dmgtemp=0; int ind=0;
 		for(int i=0;i<pkm.cap.contenu.size();i++){
-			dmgtemp=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm, context,true);
+			if(pkm.cap.contenu.elementAt(i).cible instanceof Heal){ dmgtemp=0;}
+			else{
+				dmgtemp=pkm.cap.contenu.elementAt(i).cible.atkdamage(pkm, cible.pkm, context,true);
+			}
 			//Choix de l'attaque la plus forte
 			if(dmgtemp>maxdmg){ ind=i; maxdmg=dmgtemp; }
 			//En cas d'egalité de degats

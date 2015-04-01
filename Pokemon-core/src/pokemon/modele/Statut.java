@@ -59,7 +59,7 @@ public enum Statut {
 		}
 	    if(this==Statut.Endormi && flag==0){
 	    	if(nbtours==0){
-	    		System.out.println(cible.nom+" se réveille");
+	    		System.out.println(cible.nom+" se reveille");
 	    		return 1;
 	    	}
 	    	else{

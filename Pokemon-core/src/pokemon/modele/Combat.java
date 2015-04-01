@@ -277,7 +277,6 @@ public class Combat extends Thread {
 				catch(InterruptedException ie) { ie.printStackTrace(); }
 			}
 		}
-		System.out.println("sortie de sommeil");
 	}
 	
 	public synchronized PokemonCombat getPCourant(){ return pCourant;}

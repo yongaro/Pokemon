@@ -19,29 +19,30 @@ public class Heal extends Capacite{
     }
 
     public void script(Pkm user,Pkm cible,Combat context){
+    	context.ajoutBuffer(user.nom+" utilise "+this.nom);
 		int soin=(int)((double)(cible.stats[2][1]*power)/100.0);
 	
 		if(soin+cible.stats[2][0]>=cible.stats[2][1]){cible.stats[2][0]=cible.stats[2][1];}
 		else{cible.heal(soin);}
 		
 		if(code==1){
-		    System.out.println(cible.nom+"n'est plus "+cible.statut);
+		    System.out.println(cible.nom+" n'est plus "+cible.statut);
 		    //cible.statut=Statut.Normal;
-		    effet.applique(cible);
+		    //effet.applique(cible);
 		}
 		if(code==2){
 		    int i=0;
-		    System.out.println("Les malus de"+cible.nom+" disparaissent");
+		    System.out.println("Les malus de "+cible.nom+" disparaissent");
 		    for(i=3;i<10;i++){
 			if(cible.stats[i][0]<cible.stats[i][1]){cible.stats[i][0]=cible.stats[i][1];}
 		    }
 		}
 		if(code==3){
-		    System.out.println(cible.nom+"n'est plus "+cible.statut);
+		    System.out.println(cible.nom+" n'est plus "+cible.statut);
 		    //cible.statut=Statut.Normal;
-		    effet.applique(cible);
+		    //effet.applique(cible);
 		    int i=0;
-		    System.out.println("Les malus de"+cible.nom+" disparaissent");
+		    System.out.println("Les malus de "+cible.nom+" disparaissent");
 		    for(i=3;i<10;i++){
 			if(cible.stats[i][0]<cible.stats[i][1]){cible.stats[i][0]=cible.stats[i][1];}
 		    }
