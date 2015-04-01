@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-
 import pokemon.annotations.Tps;
 import pokemon.controle.MenuListener;
 import pokemon.modele.*;
@@ -94,7 +93,8 @@ public class MyGdxGame extends Game {
 	    	}
 	    	Pkm[] temp=Jtest2.getTeam();
 	    	temp[0]=Ptest2[2]; temp[2]=Ptest2[0];
-	    	
+	    	temp=Jtest.getTeam();
+	    	temp[1]=Ptest[0]; temp[0]=Ptest[1];
 	    	
 	    	
 	    	//ajout d'objets dans l'inventaire
