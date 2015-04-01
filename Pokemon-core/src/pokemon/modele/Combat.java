@@ -85,7 +85,7 @@ public class Combat extends Thread {
 			equipe1[i]=new PokemonCombat(j.team[i],false,j); equipe1[i].equipe=equipe1;
 		}
 		for(int i=0;i<d.getTeam().size();i++){
-			equipe2[i]=new PokemonCombat(d.getTeam().elementAt(i),false,d); equipe2[i].equipe=equipe2;
+			equipe2[i]=new PokemonCombat(d.getTeam().elementAt(i),true,d); equipe2[i].equipe=equipe2;
 		}
 		pkmListe[0]=equipe1[0];
 		pkmListe[1]=equipe2[0];
