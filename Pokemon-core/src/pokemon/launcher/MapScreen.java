@@ -106,7 +106,8 @@ public class MapScreen implements Screen{
 		Gdx.input.setInputProcessor(controller);
 		
 		//Musique
-		music.setVolume(0.5f);
+		music.setVolume(0.3f);
+		music.setLooping(true);
 		playMusic(0);
 	}
 	public void update(float delta)
