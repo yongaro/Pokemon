@@ -60,11 +60,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 				ennemies.add(new PokemonSprite(PokemonSprite.e1,c.getPkmListe()[i]));
 				ennemiesHUD.add(new BattleHud(10, 300,c.getPkmListe()[i]));
 			}
-			else
+			else{
 				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i]));
-
+				friendHUD.add(new BattleHud(10, 300,c.getPkmListe()[i]));
+			}
 		}
-
 	}
 
 
@@ -197,7 +197,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 					stage.getActors().insert(0, fr);
 					fr.popPokemon();					
 				}
-				stage.addActor(new BattleHud(420,105,c.getPkmListe()[0]));
+				for(BattleHud fr:friendHUD)
+				{
+					System.out.println("TAILLE FRIENDHUD"+friendHUD.size());
+					stage.addActor(fr);
+				}
 				state++;
 				break;
 			}
@@ -270,7 +274,6 @@ public class CombatV extends GameScreen implements InputProcessor{
 		return false;//
 	}
 
-
 	private String descGen(UniteStockage<Capacite> element) {
 		String str="Type: "+element.get().getElement().name();
 		str+="\n\n          PP: ";
@@ -279,6 +282,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 		return str;
 	}
+	
 	private void drawPanel(){
 		shapeRenderer.begin(ShapeType.Filled);
 		Gdx.gl.glEnable(GL20.GL_BLEND);

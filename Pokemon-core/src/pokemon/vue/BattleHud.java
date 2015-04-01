@@ -23,7 +23,8 @@ public class BattleHud extends Actor{
 	float[] pvperc;
 	int speed;
 	boolean increase;
-	public BattleHud(int x,int y,PokemonCombat pokemonCombat){
+	
+	public BattleHud(PokemonCombat pokemonCombat){
 		p=pokemonCombat;
 		this.setHeight(55);
 		this.setWidth(210);
