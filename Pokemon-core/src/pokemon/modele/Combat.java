@@ -167,10 +167,10 @@ public class Combat extends Thread {
 				//Inventaire
 				break;
 			case 2:
-				System.out.println("SWAP DE POKEMON A REMETTRE");
 				pokeswap(user);
 				//traitement capacite passive ici
 				isdone=1;
+				this.setBufferState(true);
 				break;
 			case 3:
 				System.out.println("FUITE");

@@ -88,7 +88,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			}
 		}
 		context.setBufferState(true);
-		context.setfreeze(true);
+		//context.setfreeze(true);
 	}
 	
 	//Choix de l'attaque la plus puissante
