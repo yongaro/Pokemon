@@ -203,7 +203,7 @@ public class MapScreen implements Screen{
 						music.stop();
 						Combat c = new Combat(j, e.getDresseur());
 						c.start();
-						game.setScreen(new CombatV(c));
+						game.setScreen(new CombatV(c,game));
 					}
 				}
 			}

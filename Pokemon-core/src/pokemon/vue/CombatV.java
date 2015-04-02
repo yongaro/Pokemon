@@ -5,6 +5,7 @@ package pokemon.vue;
 import java.util.Arrays;
 import java.util.Vector;
 
+import pokemon.controle.CombatMenuPokemon;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
 import pokemon.modele.Combat;
@@ -47,11 +48,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 	String text;
 	String[] retval;
 	int textinc=1;
+	CombatMenuPokemon mpokemon;
 
 
-
-	public CombatV(Combat c){
-
+	public CombatV(Combat c,MyGdxGame mygdxgame){
+		this.mygdxgame=mygdxgame;
 		Gdx.input.setInputProcessor(this);
 		dbox=new DialogBox(new Vector2(640,100),true);
 		dbox.setMessage("Un pokemon sauvage apparait");
@@ -216,7 +217,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==2){ //selection action
-			
+				if(selector==2)
+				{
+					mpokemon=new CombatMenuPokemon(mygdxgame);
+				}
 					state++;
 					flag=selector;
 					selector=0;

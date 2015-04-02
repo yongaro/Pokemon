@@ -38,7 +38,7 @@ public class MyGdxGame extends Game {
 		//this.setScreen(new MapScreen(this));
 		Combat test=new Combat(Jtest, Jtest2);
 		test.start();
-		this.setScreen(new CombatV(test));
+		this.setScreen(new CombatV(test,this));
 	}
 	//@Tps(nbhours=2)
 	 public static void initStatic(){
