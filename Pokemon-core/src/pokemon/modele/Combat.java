@@ -165,17 +165,18 @@ public class Combat extends Thread {
 				break;
 			case 1:
 				System.out.println("SWAP DE POKEMON A REMETTRE");
+				pokeswap(user);
+				//traitement capacite passive ici
+				isdone=1;
 				break;
 			case 2:
-				pokeswap(user);
-				isdone=1;
-				//traitement capacit� passive ici
+				//Utilisaion d'objet a remettre
 				break;
 			case 3:
 				System.out.println("FUITE");
 				break;
 			default :
-				System.out.println("ENCORE");
+				System.out.println("mauvaise input dans "+user.pkm.nom+" action");
 				break;
 			}
 		}
