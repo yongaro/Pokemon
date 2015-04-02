@@ -219,6 +219,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==2){ //selection action
+				if(selector==3) {					
+					System.exit(0);
+				}
+				
 				if(selector==2)
 				{
 					state=2;
@@ -252,13 +256,13 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 		}
 		case Keys.DOWN:
-		{	System.out.println("Gne");
+		{	
 		if(selector==0 || selector==2)
 			selector++;
 		break;
 		}
 		case Keys.UP:
-		{	System.out.println("Gne");
+		{	
 		if(selector!=0 && selector!=2)
 			selector--;
 		break;
