@@ -16,6 +16,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -50,6 +51,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	String[] retval;
 	int textinc=1;
 	CombatMenuPokemon mpokemon;
+	Music music;
 
 
 	public CombatV(Combat c,MyGdxGame mygdxgame){
@@ -81,7 +83,12 @@ public class CombatV extends GameScreen implements InputProcessor{
 		{
 			stage.addActor(eH);
 		}
-	
+		
+		//Demarrage de la musique
+		music = Gdx.audio.newMusic(Gdx.files.internal("musics/battle.mp3"));
+		music.setLooping(true);
+		music.setVolume(0.2f);
+		music.play();
 	}
 
 
