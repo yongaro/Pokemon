@@ -101,22 +101,18 @@ public class PokemonSprite extends Actor{
 
     }
     public void act(float delta){
-    
+
     	super.act(delta);
     	if(p!=null && p.getPkm().get(2)==0)
-    		{
+    	{
     		die();
     		p=null;
-    		}
+    	}
     	if( (getScaleX()==1.5) && !finished)
-    		{
+    	{
     		finished=true;
     		b.setColor(Color.WHITE);
     		son.play(0.1f);	
-    		} 
-    	if(p!=null && p.getPkm().getStatut()!=Statut.Normal)
-    	{
-    		System.out.println("NEW STATUT "+p.getPkm().getNom()+" "+p.getPkm().getStatut().name());
     	}
     }
     public void setP(PokemonCombat p) {

@@ -35,7 +35,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 	Vector<BattleHud> friendHUD=new Vector<BattleHud>();
 	PokemonSprite a=new PokemonSprite(PokemonSprite.a1,"trainerS.png");
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
-	Pkm[] pkms=MyGdxGame.Jtest.getTeam();
+	//Pkm[] pkms=MyGdxGame.Jtest.getTeam();
+	Pkm pkm=MyGdxGame.Jtest.getTeam()[0];
 	PokemonSprite p1;
 	DialogBox dbox;
 	float timer;
@@ -148,20 +149,20 @@ public class CombatV extends GameScreen implements InputProcessor{
 			stage.getBatch().begin();
 			offset=0;
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
-			for(int i=0;i<pkms[0].getCap().size();i++)//affichage des attaques
+			for(int i=0;i<pkm.getCap().size();i++)//affichage des attaques
 			{
 				//f.draw(stage.getBatch(),cap.get().getNom(),220,113-offset);
 				if(i<2)
-					f.draw(stage.getBatch(),pkms[0].getCap().at(i).getNom(),330,85-offset);
+					f.draw(stage.getBatch(),pkm.getCap().at(i).getNom(),330,85-offset);
 				if(i==2)
 					offset=0;
 				if(i>=2)
-					f.draw(stage.getBatch(),pkms[0].getCap().at(i).getNom(),490,85-offset);
+					f.draw(stage.getBatch(),pkm.getCap().at(i).getNom(),490,85-offset);
 				//f.draw(stage.getBatch(),cap.getQte()+"/"+cap.getQteMax(),385-f.getBounds(cap.getQte()+" / "+cap.getQteMax()).width,113-offset);
 				offset+=50;
 			}
 			stage.getBatch().end();
-			dbox.setMessage(descGen(pkms[0].getCap().elementAt(selector)));
+			dbox.setMessage(descGen(pkm.getCap().elementAt(selector)));
 			break;
 
 		}
@@ -198,7 +199,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		{
 			if(state==0 && stage.getActors().get(1).getActions().size==0){
 				a.hideTrainer();
-				dbox.setMessage("En avant "+pkms[0].getNom());
+				dbox.setMessage("En avant "+pkm.getNom());
 				for(PokemonSprite fr:friends){
 					stage.getActors().insert(0, fr);
 					fr.popPokemon();					
@@ -280,10 +281,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 			break;
 		}
 		case Keys.O:
-			pkms[0].heal(20);
+			pkm.heal(20);
 			break;
 		case Keys.P:
-			pkms[0].infliger(20);
+			pkm.infliger(20);
 			break;
 
 		}
@@ -377,6 +378,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 		}
+		c.setAct(2,i);
+		pkm=c.getEquipe1()[i].getPkm();
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
 	}
