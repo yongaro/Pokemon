@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
+import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.vue.menuInventaire;
 import pokemon.vue.menuPokematos;
@@ -22,15 +23,18 @@ public class MenuListener extends InputMultiplexer{
 	menuInventaire menuinventaire;
 	menuPokematos  menupokematos;
 	menuPokematosMap  menupokematosmap;
+	MapScreen screen;
 	
-	public MenuListener(MyGdxGame mygdxgame)
+	public MenuListener(MyGdxGame mygdxgame, MapScreen screen)
 	{
 		this.mygdxgame=mygdxgame;
+		this.screen = screen;
 		menupokemon=new menuPokemon(mygdxgame);
 		menuinventaire=new menuInventaire(mygdxgame,this);
 		menupokematos=new menuPokematos(mygdxgame);
 		menupokematosmap=new menuPokematosMap(mygdxgame);
 		mygdxgame.setScreen(menupokemon);
+		this.addProcessor(new ReturnToMapListener(mygdxgame, screen));
 		this.addProcessor(new PokemonMenuListenner(menupokemon,mygdxgame,this));
 		this.addProcessor(new InventaireMenuListener(mygdxgame, menupokemon, menuinventaire,this));
 		this.addProcessor(new PokematosMenuListener(menupokematos,mygdxgame,this));
@@ -82,6 +86,10 @@ public class MenuListener extends InputMultiplexer{
 	
 	public void setState(int i){
 		state=i;
+	}
+
+	public MapScreen getScreen() {
+		return screen;
 	}
 
 }

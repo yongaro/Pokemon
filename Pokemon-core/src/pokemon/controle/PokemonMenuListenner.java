@@ -152,11 +152,6 @@ public class PokemonMenuListenner implements InputProcessor{
 		}
 		
 		else{
-			if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)){
-				MapScreen newScreen = new MapScreen(myGdxGame);
-				//TODO manipulation musique
-				myGdxGame.setScreen(newScreen);
-			}
 		
 			return false;
 			}

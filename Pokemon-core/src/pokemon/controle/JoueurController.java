@@ -4,7 +4,6 @@ import java.util.Vector;
 
 import pokemon.annotations.Tps;
 import pokemon.launcher.MapScreen;
-import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
 import pokemon.vue.JoueurVue;
@@ -17,18 +16,16 @@ import com.badlogic.gdx.Input.Keys;
 
 @Tps(nbhours=2)
 public class JoueurController implements InputProcessor{
-	private MyGdxGame game;
 	private Vector<Direction> input=new Vector<Direction>();
 	private JoueurVue jv;
 	private Joueur j;
 	private MapScreen screen;
 	
 	//Constructeur
-	public JoueurController(MapScreen screen, JoueurVue jv, MyGdxGame game) {
+	public JoueurController(MapScreen screen, JoueurVue jv) {
 		this.jv = jv;
 		this.j = jv.getJoueur();
 		this.screen = screen;
-		this.game = game;
 	}
 	
 	//Pour Desktop
@@ -68,7 +65,7 @@ public class JoueurController implements InputProcessor{
 			if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
 				j.setSpeedX(0);
 				j.setSpeedY(0);
-				new MenuListener(game);
+				screen.popMenu();
 			}
 		}
 		if(Gdx.input.isKeyPressed(Keys.ENTER)) {

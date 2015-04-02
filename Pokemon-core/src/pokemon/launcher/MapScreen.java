@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import pokemon.annotations.Tps;
 import pokemon.controle.JoueurController;
+import pokemon.controle.MenuListener;
 import pokemon.modele.ChangeMapException;
 import pokemon.modele.Combat;
 import pokemon.modele.CombatException;
@@ -51,13 +52,21 @@ public class MapScreen implements Screen{
     private DialogBox box = null;
     
     //Attribut sonore
-    private Music music = Gdx.audio.newMusic(Gdx.files.internal(j.getCurrentMap().getMusique().getPath()));
+    private Music music;
 
-    //Constructeur
+    //Constructeurs
     public MapScreen(MyGdxGame game) {
 		this.game = game;
-		controller = new JoueurController(this, joueur, game);
+		this.controller = new JoueurController(this, joueur);
+		this.music = Gdx.audio.newMusic(Gdx.files.internal(j.getCurrentMap().getMusique().getPath()));
+		updateMusic();
 	}
+    public MapScreen(MyGdxGame game, Music music) {
+    	this.game = game;
+		this.controller = new JoueurController(this, joueur);
+		this.music = music;
+		updateMusic();
+    }
     
     @Override
 	public void render(float delta) {
@@ -104,11 +113,6 @@ public class MapScreen implements Screen{
 		
 		//Definition de l'input
 		Gdx.input.setInputProcessor(controller);
-		
-		//Musique
-		music.setVolume(0.3f);
-		music.setLooping(true);
-		playMusic(0);
 	}
 	public void update(float delta)
 	{
@@ -234,23 +238,21 @@ public class MapScreen implements Screen{
 		}
 	}
 	
+	public void popMenu() {
+		new MenuListener(game, this);
+	}
+	
+	public void updateMusic() {
+		music.setVolume(0.3f);
+		music.setLooping(true);
+		music.play();
+	}
+	
 	//Fonctions privees
 	private void updateNPCs() {
 		for(NPC npc : j.getCurrentMap().getNpcs()) {
 			NPCVue npcvue = new NPCVue(npc);
 			npcs.add(npcvue);
 		}
-	}
-	
-	//Fonctions de la musique
-	public float getMusicPosition() {
-		return music.getPosition();
-	}
-	public void playMusic(float pos) {
-		music.setPosition(pos);
-		music.play();
-	}
-	public void stopMusic() {
-		music.stop();
 	}
 }
