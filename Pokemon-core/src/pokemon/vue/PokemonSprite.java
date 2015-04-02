@@ -89,8 +89,6 @@ public class PokemonSprite extends Actor{
     
     public void draw (Batch batch, float parentAlpha) {
 
-
-
     	b.begin();
     	if(p!=null)
     	//System.out.println(p.getPkm().getNom()+"  "+getX());

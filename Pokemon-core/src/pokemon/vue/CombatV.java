@@ -53,7 +53,6 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 	public CombatV(Combat c,MyGdxGame mygdxgame){
 		this.mygdxgame=mygdxgame;
-		Gdx.input.setInputProcessor(this);
 		dbox=new DialogBox(new Vector2(640,100),true);
 		dbox.setMessage("Un pokemon sauvage apparait");
 		this.c=c;
@@ -68,6 +67,18 @@ public class CombatV extends GameScreen implements InputProcessor{
 				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i]));
 				friendHUD.add(new BattleHud(this,c.getPkmListe()[i]));
 			}
+		}
+		for(PokemonSprite e:ennemies)
+		{
+			stage.addActor(e);
+			e.addSlideAction();
+		}
+		stage.addActor(a);
+		a.addSlideAction();
+		stage.addActor(dbox);
+		for(BattleHud eH:ennemiesHUD)
+		{
+			stage.addActor(eH);
 		}
 	}
 
@@ -173,18 +184,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 		//stage.addActor(e1);
 		//stage.addActor(e2);
-		for(PokemonSprite e:ennemies)
-		{
-			stage.addActor(e);
-			e.addSlideAction();
-		}
-		stage.addActor(a);
-		a.addSlideAction();
-		stage.addActor(dbox);
-		for(BattleHud eH:ennemiesHUD)
-		{
-			stage.addActor(eH);
-		}
+		Gdx.input.setInputProcessor(this);
+
 
 	}///////
 
@@ -203,7 +204,6 @@ public class CombatV extends GameScreen implements InputProcessor{
 				}
 				for(BattleHud fr:friendHUD)
 				{
-					System.out.println("TAILLE FRIENDHUD"+friendHUD.size());
 					stage.addActor(fr);
 				}
 				state++;
@@ -219,9 +219,12 @@ public class CombatV extends GameScreen implements InputProcessor{
 			if(state==2){ //selection action
 				if(selector==2)
 				{
-					mpokemon=new CombatMenuPokemon(mygdxgame);
+					state=2;
+					mpokemon=new CombatMenuPokemon(mygdxgame,this);
 				}
+				else{
 					state++;
+				}
 					flag=selector;
 					selector=0;
 				break;
