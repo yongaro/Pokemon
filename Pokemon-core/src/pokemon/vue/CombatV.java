@@ -210,6 +210,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==1){
+				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state++;
