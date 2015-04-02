@@ -26,7 +26,8 @@ public class PokemonSprite extends Actor{
 	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
 	PokemonCombat p;
 	
-    private Vector2 pos;
+
+	private Vector2 pos;
     public PokemonSprite(Vector2 v,String nom){
     	super();	
     	if(nom!="")
@@ -118,6 +119,10 @@ public class PokemonSprite extends Actor{
     		System.out.println("NEW STATUT "+p.getPkm().getNom()+" "+p.getPkm().getStatut().name());
     	}
     }
+    public void setP(PokemonCombat p) {
+		this.p = p;
+		s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
+	}
   
 }
 

@@ -80,6 +80,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		{
 			stage.addActor(eH);
 		}
+	
 	}
 
 
@@ -361,5 +362,18 @@ public class CombatV extends GameScreen implements InputProcessor{
 	}
 	public int getTextinc() {
 		return textinc;
+	}
+	public void swapPokemon(Pkm p){
+		int i=0;
+		for(i=0;i<c.getEquipe1().length;i++)
+		{
+			if(p==c.getEquipe1()[i].getPkm())
+			{
+				System.out.println("Found"+i);
+				break;
+			}
+		}
+		friends.get(0).setP(c.getEquipe1()[i]);
+		friendHUD.get(0).setP(c.getEquipe1()[i]);
 	}
 }

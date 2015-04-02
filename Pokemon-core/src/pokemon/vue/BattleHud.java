@@ -91,6 +91,12 @@ public class BattleHud extends Actor{
 
 
 
+	public void setP(PokemonCombat p) {
+		this.p = p;
+		pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
+		pvperc[0]=pvperc[1];
+	}
+
 	public void draw (Batch batch, float parentAlpha) {
 		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
 		shapeRenderer.begin(ShapeType.Filled);

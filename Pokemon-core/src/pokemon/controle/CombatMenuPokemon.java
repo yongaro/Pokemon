@@ -67,8 +67,13 @@ public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECR
 			break;
 		case Keys.BACKSPACE:
 			myGdxGame.setScreen(combatv);
-		
-		
+			break;
+		case 
+			Keys.ENTER:
+			combatv.swapPokemon(joueur.getTeam()[pkselector]);
+			myGdxGame.setScreen(combatv);
+			break;
+			
 		}
 		return false;
 	}
