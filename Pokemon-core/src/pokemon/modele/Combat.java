@@ -98,6 +98,7 @@ public class Combat extends Thread {
 	
 	
 	public int combatsolo(){
+		this.setfreeze(true);
 		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
@@ -164,17 +165,18 @@ public class Combat extends Thread {
 				break;
 			case 1:
 				System.out.println("SWAP DE POKEMON A REMETTRE");
+				pokeswap(user);
+				//traitement capacite passive ici
+				isdone=1;
 				break;
 			case 2:
-				pokeswap(user);
-				isdone=1;
-				//traitement capacit� passive ici
+				//Utilisaion d'objet a remettre
 				break;
 			case 3:
 				System.out.println("FUITE");
 				break;
 			default :
-				System.out.println("ENCORE");
+				System.out.println("mauvaise input dans "+user.pkm.nom+" action");
 				break;
 			}
 		}
@@ -191,7 +193,7 @@ public class Combat extends Thread {
 	
 	
 	public void pokeswap(PokemonCombat user){
-		/*int i=0;*/ int act=0; int done=0; Pkm pkmRef; Stack<Pkm> stackRef; 
+		/*int i=0; int act=0;*/ int done=0;// Pkm pkmRef; Stack<Pkm> stackRef; 
 		if(!user.isIA){
 			while(done==0){
 				/*i=0;
@@ -201,11 +203,11 @@ public class Combat extends Thread {
 					i++;
 				}*/
 				user.waitPlswap();
-				act=sc.nextInt();
-				if(user.equipe[act].pkm.statut!=Statut.KO){
-					System.out.println(user.equipe[act].pkm.nom+" remplace "+user.pkm.nom);
+				//act=sc.nextInt();
+				if(user.equipe[user.swap].pkm.statut!=Statut.KO){
+					System.out.println(user.equipe[user.swap].pkm.nom+" remplace "+user.pkm.nom);
 					//pkmRef=user.pkm; stackRef=user.XpStack;
-					user.pkm=user.equipe[act].pkm; user.XpStack=user.equipe[act].XpStack;
+					user.pkm=user.equipe[user.swap].pkm; user.XpStack=user.equipe[user.swap].XpStack;
 					//user.equipe[act].pkm=pkmRef; user.equipe[act].XpStack=stackRef;
 					ajoutXpStack(user);
 					done=1;
