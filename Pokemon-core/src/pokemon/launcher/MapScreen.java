@@ -58,15 +58,8 @@ public class MapScreen implements Screen{
     public MapScreen(MyGdxGame game) {
 		this.game = game;
 		this.controller = new JoueurController(this, joueur);
-		this.music = Gdx.audio.newMusic(Gdx.files.internal(j.getCurrentMap().getMusique().getPath()));
 		updateMusic();
 	}
-    public MapScreen(MyGdxGame game, Music music) {
-    	this.game = game;
-		this.controller = new JoueurController(this, joueur);
-		this.music = music;
-		updateMusic();
-    }
     
     @Override
 	public void render(float delta) {
@@ -122,6 +115,7 @@ public class MapScreen implements Screen{
 		} catch (ChangeMapException e) {
 			npcs.clear();
 			updateNPCs();
+			updateMusic();
 		}
 		
 		//On met a jour la position des NPC
@@ -243,6 +237,10 @@ public class MapScreen implements Screen{
 	}
 	
 	public void updateMusic() {
+		if(music != null) {			
+			music.stop();
+		}
+		music = Gdx.audio.newMusic(Gdx.files.internal(j.getCurrentMap().getMusique().getPath()));
 		music.setVolume(0.3f);
 		music.setLooping(true);
 		music.play();
