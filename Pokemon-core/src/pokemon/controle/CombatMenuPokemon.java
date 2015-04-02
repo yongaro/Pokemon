@@ -2,12 +2,14 @@ package pokemon.controle;
 
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Joueur;
+import pokemon.vue.CombatV;
 import pokemon.vue.menuPokemon;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
-public class CombatMenuPokemon implements InputProcessor{
+public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECRAN POKEMON PENDANT LE COMBAT
 
 	menuPokemon menu;
 	MyGdxGame myGdxGame;
@@ -15,11 +17,11 @@ public class CombatMenuPokemon implements InputProcessor{
 	int state;
 	int pkselector;
 	int atkselector;
-
+	CombatV combatv;
 	
 	
 	
-	public CombatMenuPokemon( MyGdxGame myGdxGame) {
+	public CombatMenuPokemon(MyGdxGame myGdxGame, CombatV combatV) {
 		super();
 		menu=new menuPokemon(myGdxGame);
 		this.myGdxGame = myGdxGame;
@@ -27,6 +29,8 @@ public class CombatMenuPokemon implements InputProcessor{
 		pkselector=0;
 		atkselector=1;
 		myGdxGame.setScreen(menu);
+		combatv=combatV;
+		Gdx.input.setInputProcessor(this);
 	}
 
 	public boolean keyDown(int arg0) {
@@ -61,7 +65,8 @@ public class CombatMenuPokemon implements InputProcessor{
 				}
 			}
 			break;
-		
+		case Keys.BACKSPACE:
+			myGdxGame.setScreen(combatv);
 		
 		
 		}
