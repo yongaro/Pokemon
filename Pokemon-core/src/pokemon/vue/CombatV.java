@@ -85,7 +85,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		}
 		
 		//Demarrage de la musique
-		music = Gdx.audio.newMusic(Gdx.files.internal("musics/battle.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("musics/Legendary_Beasts.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.2f);
 		music.play();

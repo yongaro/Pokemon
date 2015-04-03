@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="6">
  <properties>
-  <property name="music" value="musics/music2.mp3"/>
+  <property name="music" value="musics/Cerulean_City.mp3"/>
  </properties>
  <tileset firstgid="1" name="pokemon_tileset_from_public_tiles_by_chaoticcherrycake-d5xdb0y" tilewidth="16" tileheight="16">
   <image source="pokemon_tileset_from_public_tiles_by_chaoticcherrycake-d5xdb0y.png" width="2240" height="2400"/>

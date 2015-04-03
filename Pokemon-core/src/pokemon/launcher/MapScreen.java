@@ -96,7 +96,7 @@ public class MapScreen implements Screen{
 		//Affichage de la TiledMap
 		renderer=new OrthogonalTiledMapRenderer(j.getCurrentMap().getTiledMap());
 		cam=new OrthographicCamera();
-		cam.zoom-=0.5;
+		cam.zoom-=0.32;
 		
 		//Affichage des NPC
 		updateNPCs();
