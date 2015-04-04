@@ -82,11 +82,12 @@ public class PokemonSprite extends Actor{
     }
     
     public void popPokemon(){
+    	this.setScale(1, 1);
     	this.setVisible(false);
     	if(!p.isIA())
     	this.addAction(Actions.delay(0.5f,Actions.parallel(Actions.visible(true),Actions.scaleTo(1.5f, 1.5f,0.5f))));
-    	
-    }
+    	}
+    
     
     public void draw (Batch batch, float parentAlpha) {
 
@@ -117,6 +118,8 @@ public class PokemonSprite extends Actor{
     }
     public void setP(PokemonCombat p) {
 		this.p = p;
+		finished=false;
+		this.popPokemon();
 		s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
 	}
   
