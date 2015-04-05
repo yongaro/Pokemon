@@ -21,6 +21,8 @@ public class Combat extends Thread {
 	protected  String buffer;
 	protected boolean bufferReady;
 	protected PokemonCombat pCourant; 
+	protected PokemonCombat cibleCourante;
+	protected Capacite capCur;
 	protected int actflag;
 	protected int act;
 	protected int ind;
@@ -105,6 +107,7 @@ public class Combat extends Thread {
 				this.resetAct();
 				this.setBufferState(false);
 				pCourant=pkmListe[i];
+				this.capCur=null; this.cibleCourante=null;
 				pkmListe[i].action(pkmListe[i].adv[0],this);
 			}
 			//Application des d�gats sur la dur�e
@@ -141,6 +144,8 @@ public class Combat extends Thread {
 					}
 				}
 				if(ch1==1 && ch2==1){
+					this.capCur=user.pkm.cap.elementAt(act).cible;
+					this.cibleCourante=cible;
 					user.pkm.cap.utiliser(act,user.pkm,cible.pkm,this);
 				}
 				//Consequences de l'action
