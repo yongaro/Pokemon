@@ -39,6 +39,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	//Pkm[] pkms=MyGdxGame.Jtest.getTeam();
 	Pkm pkm=MyGdxGame.Jtest.getTeam()[0];
 	boolean attackanimation;
+	int atknumber=0;
 	PokemonSprite p1;
 	DialogBox dbox;
 	float timer;
@@ -257,12 +258,24 @@ public class CombatV extends GameScreen implements InputProcessor{
 			}
 			if(state==5){
 				if(textinc<retval.length){
+					if(textinc==1){
+						System.out.println("LAUNCHING ANIMATIONS");
+					for(PokemonSprite ps:ennemies)
+					{
+						ps.hurt();
+						ps.attack();
+					}
+					for(PokemonSprite ps:friends)
+					{
+						ps.hurt();
+						ps.attack();
+					}}
 					dbox.setMessage(retval[textinc++]);}
 				else{
 					dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
 					retval=null;
-					System.out.print("UNLOCKING THREAD");
+					System.out.print("UNLOCKING THREAD ");
 					c.setfreeze(false);
 					state=2;}
 				break;

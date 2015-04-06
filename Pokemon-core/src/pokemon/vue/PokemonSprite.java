@@ -86,23 +86,26 @@ public class PokemonSprite extends Actor{
     	
     }
     public void attack(){
-    	System.out.println("CALLING ATTACK");
-    	if (p.isIA())
-    		this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
-    				),Actions.moveBy(50, 40,0.2f)));
-    	else
-    		this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
-    	}
+    	if(p==c.getPCourant()){
+    		System.out.println("CALLING ATTACK "+p.getNom());
+    		if (p.isIA())
+    			this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
+    					),Actions.moveBy(50, 40,0.2f)));
+    		else
+    			this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
+    	}}
 
     public void hurt(){
-    	System.out.println("CALLING HURT");
-    	if (p.isIA())
-    		this.addAction(Actions.sequence(Actions.moveBy(-10,0,0.5f
-    				),Actions.moveBy(20,0,0.1f),Actions.moveBy(-10,0,0.1f)));
-    	else
-    		this.addAction(Actions.sequence(Actions.moveBy(10, 0,0.2f),Actions.moveBy(-10, 0,0.1f),Actions.moveBy(10, 0,0.1f)));
-    }
-    
+    	if(p==c.getCibleCourante()){
+    		System.out.println("CALLING HURT "+p.getNom());
+
+    		if (p.isIA())
+    			this.addAction(Actions.sequence(Actions.moveBy(-20,0,0.2f
+    					),Actions.moveBy(40,0,0.1f),Actions.moveBy(-20,0,0.1f)));
+    		else
+    			this.addAction(Actions.sequence(Actions.moveBy(20, 0,0.2f),Actions.moveBy(-40, 0,0.1f),Actions.moveBy(20, 0,0.1f)));
+    	}}
+
     public void popPokemon(){
     	this.setScale(1, 1);
     	this.setVisible(false);
@@ -125,18 +128,6 @@ public class PokemonSprite extends Actor{
     }
     public void act(float delta){
     	super.act(delta);
-
-    	if(p!=null &&  combatv.getTextinc()==2 && combatv.isAttackanimation()){
-    		System.out.println("CIBLE COURRANTE "+c.getCibleCourante().getNom());
-    		System.out.println("Pokemon COURANT "+c.getPCourant().getNom());
-    		if(p==c.getPCourant())
-    			attack();
-    		if(p==c.getCibleCourante())
-    			hurt();
-    		combatv.setAttackanimation(false);
-    		}
-    	
-    	
     	if(p!=null && p.getPkm().get(2)==0)
     	{
     		die();
