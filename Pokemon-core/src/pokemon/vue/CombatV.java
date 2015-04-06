@@ -38,6 +38,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
 	//Pkm[] pkms=MyGdxGame.Jtest.getTeam();
 	Pkm pkm=MyGdxGame.Jtest.getTeam()[0];
+	boolean attackanimation;
 	PokemonSprite p1;
 	DialogBox dbox;
 	float timer;
@@ -63,11 +64,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 			System.out.println(c.getPkmListe()[i].isIA());
 			if(this.c.getPkmListe()[i].isIA())
 			{
-				ennemies.add(new PokemonSprite(PokemonSprite.e1,c.getPkmListe()[i]));
+				ennemies.add(new PokemonSprite(PokemonSprite.e1,c.getPkmListe()[i],c,this));
 				ennemiesHUD.add(new BattleHud(this,c.getPkmListe()[i]));
 			}
 			else{
-				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i]));
+				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i],c,this));
 				friendHUD.add(new BattleHud(this,c.getPkmListe()[i]));
 			}
 		}
@@ -89,6 +90,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 		music.setLooping(true);
 		music.setVolume(0.2f);
 		music.play();
+		attackanimation=true;
+		
 	}
 
 
@@ -119,7 +122,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 			dbox.setWidth(width);
 			dbox.setMessage(retval[0]);
 			textinc=1;
-			state=5;			
+			state=5;
+			attackanimation=true;
 		}
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
 		// Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -219,6 +223,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==1){
+				System.out.print("UNLOCKING THREAD");
 				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
@@ -244,9 +249,9 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==3){ //selection atq
-				
+				attackanimation=true;
 				c.setAct(flag, selector);
-				System.out.println("SETACT "+flag+","+selector);
+				System.out.println(" SETACT "+flag+","+selector);
 				selector=0;
 				break;
 			}
@@ -257,8 +262,15 @@ public class CombatV extends GameScreen implements InputProcessor{
 					dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
 					retval=null;
+					System.out.print("UNLOCKING THREAD");
 					c.setfreeze(false);
 					state=2;}
+				break;
+			}
+			if(state==6){
+				dbox.setWidth(width/2);
+				dbox.setMessage("Que faire ?");
+				state=2;
 				break;
 			}
 
@@ -353,6 +365,13 @@ public class CombatV extends GameScreen implements InputProcessor{
 	}
 
 
+	public boolean isAttackanimation() {
+		return attackanimation;
+	}
+	public void setAttackanimation(boolean attack) {
+		attackanimation=attack;
+	}
+
 	@Override
 	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
 		// TODO Auto-generated method stub
@@ -375,8 +394,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 	public int getTextinc() {
 		return textinc;
 	}
-	public void swapPokemon(Pkm p){
+	public void swapPokemon(Pkm p,int indice){
 		int i=0;
+		state=6;
+		dbox.setWidth(width);
+		dbox.setMessage("En avant "+p.getNom()+" !");
 		for(i=0;i<c.getEquipe1().length;i++)
 		{
 			if(p==c.getEquipe1()[i].getPkm())
@@ -385,9 +407,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 		}
-		c.setAct(2,i);
-		pkm=c.getEquipe1()[i].getPkm();
+		c.setAct(2,indice);
+		//c.setfreeze(true);
+		pkm=p;
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
+	
 	}
 }

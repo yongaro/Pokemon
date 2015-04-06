@@ -1,5 +1,6 @@
 package pokemon.vue;
 
+import pokemon.modele.Combat;
 import pokemon.modele.PokemonCombat;
 import pokemon.modele.Statut;
 
@@ -16,17 +17,19 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class PokemonSprite extends Actor{
+	
 	public static Vector2 e1=new Vector2(60,220);
 	public static Vector2 e2=new Vector2(-100,220);
 	public static Vector2 a1=new Vector2(440,60);
     public Texture s=new Texture(Gdx.files.internal("Sprites/6.png"));
     SpriteBatch b=new SpriteBatch();
-    boolean finished=false;
+    boolean finished,attackplayer=false;
     ShapeRenderer shapeRenderer=new ShapeRenderer();
 	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
 	PokemonCombat p;
+	Combat c;
+	CombatV combatv;
 	
-
 	private Vector2 pos;
     public PokemonSprite(Vector2 v,String nom){
     	super();	
@@ -40,8 +43,10 @@ public class PokemonSprite extends Actor{
     }
     ////
     
-    public PokemonSprite(Vector2 v, PokemonCombat pc){
+    public PokemonSprite(Vector2 v, PokemonCombat pc, Combat c,CombatV combatv){
     	super();
+    	this.c=c;
+    	this.combatv=combatv;
     	p=pc;
     	if(pc.isIA()){
     		s=new Texture(Gdx.files.internal("Sprites/"+pc.getPkm().getID()+".png"));
@@ -80,6 +85,23 @@ public class PokemonSprite extends Actor{
     		this.addAction(Actions.moveBy(0,-150, 0.3f));
     	
     }
+    public void attack(){
+    	System.out.println("CALLING ATTACK");
+    	if (p.isIA())
+    		this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
+    				),Actions.moveBy(50, 40,0.2f)));
+    	else
+    		this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
+    	}
+
+    public void hurt(){
+    	System.out.println("CALLING HURT");
+    	if (p.isIA())
+    		this.addAction(Actions.sequence(Actions.moveBy(-10,0,0.5f
+    				),Actions.moveBy(20,0,0.1f),Actions.moveBy(-10,0,0.1f)));
+    	else
+    		this.addAction(Actions.sequence(Actions.moveBy(10, 0,0.2f),Actions.moveBy(-10, 0,0.1f),Actions.moveBy(10, 0,0.1f)));
+    }
     
     public void popPokemon(){
     	this.setScale(1, 1);
@@ -102,8 +124,19 @@ public class PokemonSprite extends Actor{
 
     }
     public void act(float delta){
-
     	super.act(delta);
+
+    	if(p!=null &&  combatv.getTextinc()==2 && combatv.isAttackanimation()){
+    		System.out.println("CIBLE COURRANTE "+c.getCibleCourante().getNom());
+    		System.out.println("Pokemon COURANT "+c.getPCourant().getNom());
+    		if(p==c.getPCourant())
+    			attack();
+    		if(p==c.getCibleCourante())
+    			hurt();
+    		combatv.setAttackanimation(false);
+    		}
+    	
+    	
     	if(p!=null && p.getPkm().get(2)==0)
     	{
     		die();

@@ -38,6 +38,8 @@ public class Combat extends Thread {
 		actflag=-1; act=-1; ind=-1;
 		freeze=false;
 	}
+
+
 	public Combat(Joueur j1,Joueur j2){ this(); this.initSolo(j1,j2); } 
 	public Combat(Joueur j,Dresseur d){ this(); this.initSolo(j,d); }
 	
@@ -294,7 +296,9 @@ public class Combat extends Thread {
 	}
 	
 	public synchronized PokemonCombat getPCourant(){ return pCourant;}
-	
+	public synchronized PokemonCombat getCibleCourante() {
+		return cibleCourante;
+	}
 	
 	
 	
