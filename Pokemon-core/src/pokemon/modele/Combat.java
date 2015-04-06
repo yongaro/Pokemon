@@ -248,6 +248,11 @@ public class Combat extends Thread {
 	
 	
 	
+	public Capacite getCapCur() {
+		return capCur;
+	}
+
+
 	// Fonctions de manipulation des objets synchronis�s entre modele et vue
 	public synchronized void ajoutBuffer(String s){ 
 		this.buffer+=s+"\n";

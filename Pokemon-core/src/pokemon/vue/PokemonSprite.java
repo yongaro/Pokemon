@@ -3,6 +3,7 @@ package pokemon.vue;
 import pokemon.modele.Combat;
 import pokemon.modele.PokemonCombat;
 import pokemon.modele.Statut;
+import pokemon.modele.Type;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -31,7 +32,7 @@ public class PokemonSprite extends Actor{
     ShapeRenderer shapeRenderer=new ShapeRenderer();
 	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
 	Music sonatq = Gdx.audio.newMusic(Gdx.files.internal("Sound/normaldamage.WAV"));
-
+	Music soneatq;
 	PokemonCombat p;
 	Combat c;
 	CombatV combatv;
@@ -99,6 +100,21 @@ public class PokemonSprite extends Actor{
     					),Actions.moveBy(50, 40,0.2f)));
     		else
     			this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
+    		switch(c.getCapCur().getElement()){
+    		case Eau:
+    			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/127-Water02.ogg"));
+    			break;
+    		case Feu:
+    			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/117-Fire01.ogg"));break;
+    		case Glace:
+    			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/121-Ice02.ogg"));break;
+    		case Electrique:
+    			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/123-Thunder01.ogg"));break;
+    		default:
+    			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/090-Attack02.ogg"));break;
+    		}
+    		soneatq.play();
+    		
     	}}
 
     public void hurt(){
