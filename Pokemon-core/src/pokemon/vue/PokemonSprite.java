@@ -5,7 +5,9 @@ import pokemon.modele.PokemonCombat;
 import pokemon.modele.Statut;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -15,6 +17,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 public class PokemonSprite extends Actor{
 	
@@ -26,6 +30,8 @@ public class PokemonSprite extends Actor{
     boolean finished,attackplayer=false;
     ShapeRenderer shapeRenderer=new ShapeRenderer();
 	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
+	Music sonatq = Gdx.audio.newMusic(Gdx.files.internal("Sound/normaldamage.WAV"));
+
 	PokemonCombat p;
 	Combat c;
 	CombatV combatv;
@@ -39,7 +45,7 @@ public class PokemonSprite extends Actor{
    	   	this.setBounds(pos.x, pos.y, s.getWidth()*1.2f, s.getHeight()*1.2f);
    	   		
 	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
-
+	        
     }
     ////
     
@@ -100,10 +106,20 @@ public class PokemonSprite extends Actor{
     		System.out.println("CALLING HURT "+p.getNom());
 
     		if (p.isIA())
-    			this.addAction(Actions.sequence(Actions.moveBy(-20,0,0.2f
-    					),Actions.moveBy(40,0,0.1f),Actions.moveBy(-20,0,0.1f)));
+    			this.addAction(Actions.sequence(Actions.delay(0.6f),Actions.moveBy(-30,0,0.2f
+    					),Actions.moveBy(60,0,0.2f),Actions.moveBy(-30,0,0.2f)));
     		else
-    			this.addAction(Actions.sequence(Actions.moveBy(20, 0,0.2f),Actions.moveBy(-40, 0,0.1f),Actions.moveBy(20, 0,0.1f)));
+    			this.addAction(Actions.sequence(Actions.delay(0.6f),Actions.moveBy(30, 0,0.2f),Actions.moveBy(-60, 0,0.2f),Actions.moveBy(30, 0,0.2f)));
+    		Timer.schedule(new Task() {
+                
+                @Override
+                public void run() {
+              	sonatq.play();
+              	Timer.instance().clear();
+                }
+
+             },0.3f);
+    	
     	}}
 
     public void popPokemon(){
