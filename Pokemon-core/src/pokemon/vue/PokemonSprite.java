@@ -110,6 +110,8 @@ public class PokemonSprite extends Actor{
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/121-Ice02.ogg"));break;
     		case Electrique:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/123-Thunder01.ogg"));break;
+    		case Plante:
+    			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/102-Attack14.ogg"));break;
     		default:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/090-Attack02.ogg"));break;
     		}
@@ -121,11 +123,15 @@ public class PokemonSprite extends Actor{
     	if(p==c.getCibleCourante()){
     		System.out.println("CALLING HURT "+p.getNom());
 
-    		if (p.isIA())
+    		if (p.isIA()){
     			this.addAction(Actions.sequence(Actions.delay(0.6f),Actions.moveBy(-30,0,0.2f
     					),Actions.moveBy(60,0,0.2f),Actions.moveBy(-30,0,0.2f)));
+    			
+    		}
+    			
     		else
     			this.addAction(Actions.sequence(Actions.delay(0.6f),Actions.moveBy(30, 0,0.2f),Actions.moveBy(-60, 0,0.2f),Actions.moveBy(30, 0,0.2f)));
+    		this.addAction(Actions.sequence(Actions.visible(false),Actions.delay(0.2f),Actions.visible(true)));
     		Timer.schedule(new Task() {
                 
                 @Override
