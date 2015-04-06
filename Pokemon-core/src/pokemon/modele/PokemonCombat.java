@@ -71,6 +71,8 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			}
 			context.cibleCourante=cible;
 			context.capCur=pkm.cap.elementAt(ind).cible;
+			context.setfreeze(true);
+			
 			pkm.cap.utiliser(ind,pkm,cible.pkm,context);
 			if(pkm.stats[2][0]<=0){ XPreward(context); context.pokeswap(this); }
 			if(cible.pkm.stats[2][0]<=0){ cible.XPreward(context); context.pokeswap(cible); }
