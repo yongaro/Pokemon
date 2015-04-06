@@ -111,6 +111,7 @@ public class Combat extends Thread {
 				pCourant=pkmListe[i];
 				this.capCur=null; this.cibleCourante=null;
 				pkmListe[i].action(pkmListe[i].adv[0],this);
+				System.out.println("FIN DE TOUR \n"+pCourant.pkm.nom+" "+cibleCourante.pkm.nom+" "+capCur.nom);
 			}
 			//Application des d�gats sur la dur�e
 			for(PokemonCombat p:pkmListe){
@@ -299,7 +300,7 @@ public class Combat extends Thread {
 	public synchronized PokemonCombat getCibleCourante() {
 		return cibleCourante;
 	}
-	
+	public synchronized void setCible(PokemonCombat cible){ this.cibleCourante=cible; }
 	
 	
 }
