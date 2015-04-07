@@ -12,6 +12,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -36,7 +37,7 @@ public class PokemonSprite extends Actor{
 	PokemonCombat p;
 	Combat c;
 	CombatV combatv;
-	
+
 	private Vector2 pos;
     public PokemonSprite(Vector2 v,String nom){
     	super();	
@@ -46,7 +47,7 @@ public class PokemonSprite extends Actor{
    	   	this.setBounds(pos.x, pos.y, s.getWidth()*1.2f, s.getHeight()*1.2f);
    	   		
 	        b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
-	        
+ 
     }
     ////
     
@@ -66,6 +67,8 @@ public class PokemonSprite extends Actor{
        	   	this.setBounds(10, 60, s.getWidth()*1.2f, s.getHeight()*1.2f);
 
     	}
+
+	
     	pos=v;
     	b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
     }
@@ -95,11 +98,15 @@ public class PokemonSprite extends Actor{
     public void attack(){
     	if(p==c.getPCourant()){
     		System.out.println("CALLING ATTACK "+p.getNom());
-    		if (p.isIA())
+    		if (p.isIA()){
     			this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
     					),Actions.moveBy(50, 40,0.2f)));
-    		else
+    			
+    		}
+    		else{
     			this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
+    			combatv.playEffect();
+    		}
     		switch(c.getCapCur().getElement()){
     		case Eau:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/127-Water02.ogg"));
@@ -139,7 +146,7 @@ public class PokemonSprite extends Actor{
               	sonatq.play();
               	Timer.instance().clear();
                 }
-
+            
              },0.3f);
     	
     	}}
@@ -175,7 +182,7 @@ public class PokemonSprite extends Actor{
     	{
     		finished=true;
     		b.setColor(Color.WHITE);
-    		son.play(0.1f);	
+    		son.play(0.5f);	
     	}
     }
     public void setP(PokemonCombat p) {

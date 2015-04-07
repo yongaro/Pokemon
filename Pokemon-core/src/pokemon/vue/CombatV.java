@@ -20,6 +20,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -54,7 +55,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	int textinc=1;
 	CombatMenuPokemon mpokemon;
 	Music music;
-
+	ParticleEffect e;
 
 	public CombatV(Combat c,MyGdxGame mygdxgame){
 		this.mygdxgame=mygdxgame;
@@ -92,7 +93,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 		music.setVolume(0.2f);
 		music.play();
 		attackanimation=true;
-		
+	    e=new ParticleEffect();
+    	e=new ParticleEffect();
+		e.load(Gdx.files.internal("effect/fire.p"), Gdx.files.internal("effect"));
+		e.setPosition(170,150);
 	}
 
 
@@ -126,13 +130,17 @@ public class CombatV extends GameScreen implements InputProcessor{
 			state=5;
 			attackanimation=true;
 		}
+		
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
 		// Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
 		stage.getBatch().begin();
+		
 		stage.getBatch().draw(fond,0,0);
+		
+
 		stage.getBatch().end();
 
 		switch(state){
@@ -180,7 +188,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 		}
 		stage.act(arg0);
 		stage.draw();
+		stage.getBatch().begin();
+		e.draw(stage.getBatch(), arg0);
+		stage.getBatch().end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
+	//	System.out.println("PARTICLE PLAYING"+e.isComplete());
 
 	}
 	@Override
@@ -199,8 +211,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 		//stage.addActor(e1);
 		//stage.addActor(e2);
 		Gdx.input.setInputProcessor(this);
-
-
+	
+		
 	}///////
 
 
@@ -272,15 +284,23 @@ public class CombatV extends GameScreen implements InputProcessor{
 					}}
 					dbox.setMessage(retval[textinc++]);}
 				else{
-					dbox.setWidth(width/2);
-					dbox.setMessage("Que faire ?");
+					if(pkm.get(2)==0)
+					{
+						mpokemon=new CombatMenuPokemon(mygdxgame,this);
+					}
+					else{
 					retval=null;
 					System.out.print("UNLOCKING THREAD ");
+					if(c.getPCourant().getPkm()!=pkm)
+					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
+					dbox.setMessage("Que faire ?");}
 					c.setfreeze(false);
-					state=2;}
+					}
+				}
 				break;
 			}
 			if(state==6){
+				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state=2;
@@ -349,6 +369,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 			shapeRenderer.rect(470,100-(offset), 160, 50);
 		shapeRenderer.end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
+	}
+	
+	void playEffect(){
+		e.start();
+		e.scaleEffect(1.5f);
 	}
 	@Override
 	public boolean keyTyped(char arg0) {
