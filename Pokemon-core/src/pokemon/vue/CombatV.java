@@ -95,7 +95,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		attackanimation=true;
 	    e=new ParticleEffect();
     	e=new ParticleEffect();
-		e.load(Gdx.files.internal("effect/fire.p"), Gdx.files.internal("effect"));
+		e.load(Gdx.files.internal("effect/psy.p"), Gdx.files.internal("effect"));
 		e.setPosition(170,150);
 	}
 
@@ -373,7 +373,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	
 	void playEffect(){
 		e.start();
-		e.scaleEffect(1.5f);
+		e.scaleEffect(1.2f);
 	}
 	@Override
 	public boolean keyTyped(char arg0) {
