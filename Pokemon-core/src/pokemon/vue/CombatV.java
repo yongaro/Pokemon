@@ -489,7 +489,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 		}
-		//c.setAct(2,indice);
+		c.setAct(2,indice);
 		//c.setfreeze(true);
 		pkm=p;
 		
