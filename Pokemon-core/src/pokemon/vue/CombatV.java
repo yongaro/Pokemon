@@ -295,7 +295,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 					//retval=null;
 
 					for(int i=0;i<ennemies.size();i++){
-						System.out.println(ennemies.get(i).getP().getNom()+ "--SWAP--" + ennemies.get(i).getP().getSwap());
+						System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
 						if(ennemies.get(i).getP().getSwap()!=-1){
 							state=7; //swapping ennemies
 							dbox.setMessage("Le pokemon ennemi est KO");
@@ -310,9 +310,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
 					}
-				}
 				System.out.println("UNLOCKING THREAD ");
 				c.setfreeze(false);
+				}
+	
 
 
 				break;
@@ -495,7 +496,6 @@ public class CombatV extends GameScreen implements InputProcessor{
 		c.setAct(2,indice);
 		//c.setfreeze(true);
 		pkm=p;
-
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
 		friends.get(0).getP().setSwap(indice);
