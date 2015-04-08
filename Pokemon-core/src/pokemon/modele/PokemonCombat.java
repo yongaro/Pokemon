@@ -75,7 +75,8 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			}
 			context.cibleCourante=cible;
 			context.capCur=pkm.cap.elementAt(ind).cible;
-			context.setfreeze(true);
+			//System.out.println("FREEZE DE CHOIX DE CIBLE IA");
+			//context.setfreeze(true);
 			
 			pkm.cap.utiliser(ind,pkm,cible.pkm,context);
 			if(pkm.stats[2][0]<=0){ XPreward(context); context.pokeswap(this,true); }
@@ -95,6 +96,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 				}
 			}
 		}
+		System.out.println("FREEZE DE FIN DE TOUR");
 		context.setBufferState(true);
 		context.setfreeze(true);
 	}

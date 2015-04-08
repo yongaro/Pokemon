@@ -102,7 +102,7 @@ public class Combat extends Thread {
 	
 	
 	public int combatsolo(){
-		this.setfreeze(true);
+		System.out.println("FREEZE DE DEBUT DE COMBAT"); this.setfreeze(true); 
 		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
@@ -188,7 +188,7 @@ public class Combat extends Thread {
 				break;
 			}
 		}
-		//sc.close();
+		System.out.println("FIN D'ACTION DU JOUEUR");
 	}
 	
 	public void ajoutXpStack(PokemonCombat pkmc){
