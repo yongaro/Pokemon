@@ -37,6 +37,10 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	public PokemonCombat[] getAdv(){ return adv;}
 	public PokemonCombat[] getEquipe(){ return equipe; }
 
+	public int getSwap() {
+		return swap;
+	}
+
 	public int compareTo(PokemonCombat p) {
 		if(p.pkm.stats[7][0]==this.pkm.stats[7][0])
 				return 0;

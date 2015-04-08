@@ -154,7 +154,6 @@ public class PokemonSprite extends Actor{
     public void popPokemon(){
     	this.setScale(1, 1);
     	this.setVisible(false);
-    	if(!p.isIA())
     	this.addAction(Actions.delay(0.5f,Actions.parallel(Actions.visible(true),Actions.scaleTo(1.5f, 1.5f,0.5f))));
     	}
     
@@ -173,11 +172,11 @@ public class PokemonSprite extends Actor{
     }
     public void act(float delta){
     	super.act(delta);
-    	if(p!=null && p.getPkm().get(2)==0)
+    /*	if(p!=null && p.getPkm().get(2)==0)
     	{
     		die();
     		p=null;
-    	}
+    	}*/
     	if( (getScaleX()==1.5) && !finished)
     	{
     		finished=true;
@@ -189,7 +188,14 @@ public class PokemonSprite extends Actor{
 		this.p = p;
 		finished=false;
 		this.popPokemon();
-		s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
+		if(p.isIA())
+			s=new Texture(Gdx.files.internal("Sprites/"+p.getPkm().getID()+".png"));
+		else
+			s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
+	}
+
+	public PokemonCombat getP() {
+		return p;
 	}
   
 }

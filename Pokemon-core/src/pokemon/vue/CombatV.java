@@ -10,6 +10,7 @@ import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
 import pokemon.modele.Combat;
 import pokemon.modele.Pkm;
+import pokemon.modele.PokemonCombat;
 import pokemon.modele.UniteStockage;
 
 import com.badlogic.gdx.Gdx;
@@ -56,7 +57,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 	CombatMenuPokemon mpokemon;
 	Music music;
 	ParticleEffect e;
-
+	ParticleEffect boom;
+	int swap;
 	public CombatV(Combat c,MyGdxGame mygdxgame){
 		this.mygdxgame=mygdxgame;
 		dbox=new DialogBox(new Vector2(640,100),true);
@@ -86,17 +88,19 @@ public class CombatV extends GameScreen implements InputProcessor{
 		{
 			stage.addActor(eH);
 		}
-		
+
 		//Demarrage de la musique
 		music = Gdx.audio.newMusic(Gdx.files.internal("musics/Legendary_Beasts.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.2f);
 		music.play();
 		attackanimation=true;
-	    e=new ParticleEffect();
-    	e=new ParticleEffect();
-		e.load(Gdx.files.internal("effect/psy.p"), Gdx.files.internal("effect"));
+		e=new ParticleEffect();
+		boom=new ParticleEffect();
+		e.load(Gdx.files.internal("effect/TenebreSpecialLeft"), Gdx.files.internal("effect"));
 		e.setPosition(170,150);
+		boom.load(Gdx.files.internal("effect/psyexplosion.p"), Gdx.files.internal("effect"));
+		boom.setPosition(500,270);
 	}
 
 
@@ -130,16 +134,16 @@ public class CombatV extends GameScreen implements InputProcessor{
 			state=5;
 			attackanimation=true;
 		}
-		
+
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
 		// Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		shapeRenderer.setProjectionMatrix(this.getStage().getViewport().getCamera().combined);
 		stage.getBatch().begin();
-		
+
 		stage.getBatch().draw(fond,0,0);
-		
+
 
 		stage.getBatch().end();
 
@@ -190,9 +194,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 		stage.draw();
 		stage.getBatch().begin();
 		e.draw(stage.getBatch(), arg0);
+		boom.draw(stage.getBatch(), arg0);
 		stage.getBatch().end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
-	//	System.out.println("PARTICLE PLAYING"+e.isComplete());
+		//	System.out.println("PARTICLE PLAYING"+e.isComplete());
 
 	}
 	@Override
@@ -211,8 +216,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 		//stage.addActor(e1);
 		//stage.addActor(e2);
 		Gdx.input.setInputProcessor(this);
-	
-		
+
+
 	}///////
 
 
@@ -248,7 +253,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				if(selector==3) {					
 					System.exit(0);
 				}
-				
+
 				if(selector==2)
 				{
 					state=2;
@@ -257,8 +262,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 				else{
 					state++;
 				}
-					flag=selector;
-					selector=0;
+				flag=selector;
+				selector=0;
 				break;
 			}
 			if(state==3){ //selection atq
@@ -272,33 +277,41 @@ public class CombatV extends GameScreen implements InputProcessor{
 				if(textinc<retval.length){
 					if(textinc==1){
 						System.out.println("LAUNCHING ANIMATIONS");
-					for(PokemonSprite ps:ennemies)
-					{
-						ps.hurt();
-						ps.attack();
-					}
-					for(PokemonSprite ps:friends)
-					{
-						ps.hurt();
-						ps.attack();
-					}}
+						for(PokemonSprite ps:ennemies)
+						{
+							ps.hurt();
+							ps.attack();
+						}
+						for(PokemonSprite ps:friends)
+						{
+							ps.hurt();
+							ps.attack();
+						}}
 					dbox.setMessage(retval[textinc++]);}
 				else{
-					if(pkm.get(2)==0)
-					{
-						mpokemon=new CombatMenuPokemon(mygdxgame,this);
+					//retval=null;
+
+					for(int i=0;i<ennemies.size();i++){
+						System.out.println(ennemies.get(i).getP().getNom()+ "SWAP" + ennemies.get(i).getP().getSwap());
+						if(ennemies.get(i).getP().getSwap()!=-1){
+							state=7; //swapping ennemies
+							dbox.setMessage("Le pokemon ennemi est KO");
+							swap=ennemies.get(i).getP().getSwap();
+							//ennemies.get(i).setP(c.getEquipe2()[swap]);
+							ennemiesHUD.get(i).hideRight();
+						}
+						i++;
 					}
-					else{
-					retval=null;
 					System.out.print("UNLOCKING THREAD ");
 					if(c.getPCourant().getPkm()!=pkm)
 					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");}
 					c.setfreeze(false);
-					}
 				}
+
 				break;
 			}
+
 			if(state==6){
 				c.setfreeze(false);
 				dbox.setWidth(width/2);
@@ -306,19 +319,30 @@ public class CombatV extends GameScreen implements InputProcessor{
 				state=2;
 				break;
 			}
-
+			if(state==7){
+				ennemies.get(0).setP(c.getEquipe2()[swap]);
+				ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
+				ennemies.get(0).getP().setSwap(-1);
+				c.setfreeze(false);
+				dbox.setWidth(width/2);
+				dbox.setMessage("Que faire ?");
+				state=2;
+				break;
+			}
 		}
+
+
 		case Keys.DOWN:
 		{	
-		if(selector==0 || selector==2)
-			selector++;
-		break;
+			if(selector==0 || selector==2)
+				selector++;
+			break;
 		}
 		case Keys.UP:
 		{	
-		if(selector!=0 && selector!=2)
-			selector--;
-		break;
+			if(selector!=0 && selector!=2)
+				selector--;
+			break;
 		}
 		case Keys.LEFT:
 		{	
@@ -351,7 +375,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 		return str;
 	}
-	
+
 	private void drawPanel(){
 		shapeRenderer.begin(ShapeType.Filled);
 		Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -370,10 +394,12 @@ public class CombatV extends GameScreen implements InputProcessor{
 		shapeRenderer.end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 	}
-	
+
 	void playEffect(){
 		e.start();
 		e.scaleEffect(1.2f);
+		boom.start();
+		boom.scaleEffect(1.2f);
 	}
 	@Override
 	public boolean keyTyped(char arg0) {
@@ -450,6 +476,6 @@ public class CombatV extends GameScreen implements InputProcessor{
 		pkm=p;
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
-	
+
 	}
 }

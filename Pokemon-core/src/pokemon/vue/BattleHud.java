@@ -53,15 +53,13 @@ public class BattleHud extends Actor{
 	}
 
 	public void hideRight(){
-		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(210, 0, 0.5f),Actions.visible(false)));
+		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(210, 0, 0.5f),Actions.visible(false),Actions.moveBy(-210, 0)));
 
 	}
 
 	public void act(float delta){
 		super.act(delta);
 		if(combatv.getTextinc()==3 || combatv.getTextinc()==5){
-			if(oldpv==0 && this.isVisible())
-				hideRight();
 			if(p.getPkm().get(2)!=oldpv)
 			{
 				if(p.getPkm().get(2)>oldpv){
@@ -97,6 +95,7 @@ public class BattleHud extends Actor{
 		this.p = p;
 		pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
 		pvperc[0]=pvperc[1];
+		this.setVisible(true);
 	}
 
 	public void draw (Batch batch, float parentAlpha) {
