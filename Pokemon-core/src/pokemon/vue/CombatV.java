@@ -273,8 +273,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 				selector=0;
 				break;
 			}
-			if(state==5){
-				if(textinc<retval.length){
+			if(state==5){//lecture du buffer
+				if(textinc<retval.length){//si qqchose a lire
 					if(textinc==1){
 						System.out.println("LAUNCHING ANIMATIONS");
 						for(PokemonSprite ps:ennemies)
@@ -287,10 +287,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 							ps.hurt();
 							ps.attack();
 						}
-						}
-					if(!healthbarLocked())
-					dbox.setMessage(retval[textinc++]);
 					}
+					if(!healthbarLocked())
+						dbox.setMessage(retval[textinc++]);
+				}
 				else{
 					//retval=null;
 
@@ -308,9 +308,11 @@ public class CombatV extends GameScreen implements InputProcessor{
 					System.out.print("UNLOCKING THREAD ");
 					if(c.getPCourant().getPkm()!=pkm)
 					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
-					dbox.setMessage("Que faire ?");}
-					c.setfreeze(false);
+					dbox.setMessage("Que faire ?");
+					}
 				}
+				c.setfreeze(false);
+
 
 				break;
 			}
@@ -461,21 +463,21 @@ public class CombatV extends GameScreen implements InputProcessor{
 	public int getTextinc() {
 		return textinc;
 	}
-	
+
 	public boolean healthbarLocked(){
 		for(int i=0;i<friendHUD.size();i++){
 			if(friendHUD.get(i).isLocked())
 				return true;
-	}
+		}
 		for(int i=0;i<ennemiesHUD.size();i++){
 			if(friendHUD.get(i).isLocked())
 				return true;
-	}
+		}
 		return false;
-		
-		
+
+
 	}
-	
+
 	public void swapPokemon(Pkm p,int indice){
 		int i=0;
 		state=6;
@@ -492,7 +494,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		c.setAct(2,indice);
 		//c.setfreeze(true);
 		pkm=p;
-		
+
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
 		friends.get(0).getP().setSwap(indice);
