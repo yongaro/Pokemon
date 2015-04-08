@@ -55,7 +55,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			context.action(this,cible);
 		}
 		else{
-			context.ajoutBuffer("Tour de l'IA");
+			//context.ajoutBuffer("Tour de l'IA");
 			int ind=0;
 			//IA de meilleur choix
 			

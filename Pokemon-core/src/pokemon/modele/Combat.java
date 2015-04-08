@@ -230,15 +230,15 @@ public class Combat extends Thread {
 			for(int i=0;i<user.equipe.length;i++){
 				if(user.equipe[i].pkm.statut!=Statut.KO){
 					System.out.println(user.prop+" envoie "+user.equipe[i].pkm.nom+" au combat");
+					user.setSwap(i);
+					user.waitIAswap();
 					//pkmRef=user.pkm; stackRef=user.XpStack;
 					user.pkm=user.equipe[i].pkm; user.XpStack=user.equipe[i].XpStack;
 					//p.pkm=pkmRef; p.XpStack=stackRef;
 					ajoutXpStack(user);
-					user.setSwap(i);
 					break;
 				}
 			}
-			user.waitIAswap();
 		}
 	}
 	public Terrain getTerrain(){ return terrain; }
