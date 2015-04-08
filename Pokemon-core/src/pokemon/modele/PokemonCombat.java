@@ -78,8 +78,8 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			context.setfreeze(true);
 			
 			pkm.cap.utiliser(ind,pkm,cible.pkm,context);
-			if(pkm.stats[2][0]<=0){ XPreward(context); context.pokeswap(this); }
-			if(cible.pkm.stats[2][0]<=0){ cible.XPreward(context); context.pokeswap(cible); }
+			if(pkm.stats[2][0]<=0){ XPreward(context); context.pokeswap(this,true); }
+			if(cible.pkm.stats[2][0]<=0){ cible.XPreward(context); context.pokeswap(cible,true); }
 			if(pkm.stats[2][0]<=(int)(pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 				if(pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 					Medicament m=(Medicament)pkm.objTenu;

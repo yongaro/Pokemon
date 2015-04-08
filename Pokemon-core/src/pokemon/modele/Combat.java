@@ -111,7 +111,7 @@ public class Combat extends Thread {
 				pCourant=pkmListe[i];
 				this.capCur=null; this.cibleCourante=null;
 				pkmListe[i].action(pkmListe[i].adv[0],this);
-				System.out.println("FIN DE TOUR \n"+pCourant.pkm.nom+" "+cibleCourante.pkm.nom+" "+capCur.nom);
+				//System.out.println("FIN DE TOUR \n"+pCourant.pkm.nom+" "+cibleCourante.pkm.nom+" "+capCur.nom);
 			}
 			//Application des d�gats sur la dur�e
 			for(PokemonCombat p:pkmListe){
@@ -120,7 +120,7 @@ public class Combat extends Thread {
 					for(Statut s: p.pkm.supTemp){
 						s.StatEffect(p.pkm,1);
 					}
-					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p); }
+					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
 				}
 			}
 		}
@@ -152,8 +152,8 @@ public class Combat extends Thread {
 					user.pkm.cap.utiliser(act,user.pkm,cible.pkm,this);
 				}
 				//Consequences de l'action
-				if(user.pkm.stats[2][0]<=0){ user.XPreward(this); pokeswap(user); }
-				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(this); pokeswap(cible); }
+				if(user.pkm.stats[2][0]<=0){ user.XPreward(this); pokeswap(user,true); }
+				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(this); pokeswap(cible,true); }
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 					if(user.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)user.pkm.objTenu;
@@ -175,7 +175,7 @@ public class Combat extends Thread {
 				//Inventaire
 				break;
 			case 2:
-				pokeswap(user);
+				pokeswap(user,false);
 				//traitement capacite passive ici
 				isdone=1;
 				this.setBufferState(true);
@@ -200,29 +200,23 @@ public class Combat extends Thread {
 	}
 	
 	
-	public void pokeswap(PokemonCombat user){
-		/*int i=0; int act=0;*/ int done=0;// Pkm pkmRef; Stack<Pkm> stackRef; 
+	public void pokeswap(PokemonCombat user,boolean ko){
+		/*int i=0; int act=0;*/ int done=0; int select=0;// Pkm pkmRef; Stack<Pkm> stackRef; 
 		if(!user.isIA){
 			while(done==0){
-				/*i=0;
-				System.out.println("Qui voulez vous envoyer ?");
-				for(PokemonCombat p: user.equipe){
-					System.out.println(i+" "+p.pkm.nom+" LV."+p.pkm.stats[0][0]+" "+p.pkm.stats[0][1]+"% "+p.pkm.stats[2][0]+"/"+p.pkm.stats[2][1]+" "+p.pkm.statut);
-					i++;
-				}*/
-				//user.waitPlswap();
-				//act=sc.nextInt();
-				if(user.equipe[act].pkm.statut!=Statut.KO){
-					System.out.println(user.equipe[act].pkm.nom+" remplace "+user.pkm.nom);
+				if(ko){ user.waitPlswap(); select=user.swap;}
+				else{ select=this.act; }
+				
+				if(user.equipe[select].pkm.statut!=Statut.KO){
+					System.out.println(user.equipe[select].pkm.nom+" remplace "+user.pkm.nom);
 					//pkmRef=user.pkm; stackRef=user.XpStack;
-					user.pkm=user.equipe[act].pkm; user.XpStack=user.equipe[act].XpStack;
+					user.pkm=user.equipe[select].pkm; user.XpStack=user.equipe[select].XpStack;
 					//user.equipe[act].pkm=pkmRef; user.equipe[act].XpStack=stackRef;
 					ajoutXpStack(user);
 					done=1;
 				}
 				else{
 					System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
-					//i=0;
 				}
 			}
 		}
