@@ -241,7 +241,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==1){
-				System.out.print("UNLOCKING THREAD");
+				System.out.println("UNLOCKING THREAD");
 				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
@@ -305,12 +305,13 @@ public class CombatV extends GameScreen implements InputProcessor{
 						}
 						i++;
 					}
-					System.out.print("UNLOCKING THREAD ");
+					
 					if(c.getPCourant().getPkm()!=pkm)
 					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
 					}
 				}
+				System.out.println("UNLOCKING THREAD ");
 				c.setfreeze(false);
 
 
