@@ -488,15 +488,17 @@ public class CombatV extends GameScreen implements InputProcessor{
 		{
 			if(p==c.getEquipe1()[i].getPkm())
 			{
-				System.out.println("Found"+i);
+				System.out.println("Found"+c.getEquipe1()[i].getNom());
 				break;
 			}
 		}
-		c.setAct(2,indice);
 		//c.setfreeze(true);
 		pkm=p;
+	//	friends.get(0).getP().setSwap(indice);
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
-		friends.get(0).getP().setSwap(indice);
+		System.out.println(c.getEquipe1()[i].getPkm());
+		c.setAct(2,indice);
+
 	}
 }
