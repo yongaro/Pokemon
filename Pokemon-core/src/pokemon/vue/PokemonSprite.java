@@ -144,7 +144,7 @@ public class PokemonSprite extends Actor{
                 @Override
                 public void run() {
               	sonatq.play();
-              	Timer.instance().clear();
+              //	Timer.instance().clear();
                 }
             
              },0.3f);

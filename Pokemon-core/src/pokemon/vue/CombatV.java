@@ -286,13 +286,16 @@ public class CombatV extends GameScreen implements InputProcessor{
 						{
 							ps.hurt();
 							ps.attack();
-						}}
-					dbox.setMessage(retval[textinc++]);}
+						}
+						}
+					if(!healthbarLocked())
+					dbox.setMessage(retval[textinc++]);
+					}
 				else{
 					//retval=null;
 
 					for(int i=0;i<ennemies.size();i++){
-						System.out.println(ennemies.get(i).getP().getNom()+ "SWAP" + ennemies.get(i).getP().getSwap());
+						System.out.println(ennemies.get(i).getP().getNom()+ "--SWAP--" + ennemies.get(i).getP().getSwap());
 						if(ennemies.get(i).getP().getSwap()!=-1){
 							state=7; //swapping ennemies
 							dbox.setMessage("Le pokemon ennemi est KO");
@@ -312,7 +315,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 
-			if(state==6){
+			if(state==6){ //pokemon changé par le joueur
 				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
@@ -458,6 +461,21 @@ public class CombatV extends GameScreen implements InputProcessor{
 	public int getTextinc() {
 		return textinc;
 	}
+	
+	public boolean healthbarLocked(){
+		for(int i=0;i<friendHUD.size();i++){
+			if(friendHUD.get(i).isLocked())
+				return true;
+	}
+		for(int i=0;i<ennemiesHUD.size();i++){
+			if(friendHUD.get(i).isLocked())
+				return true;
+	}
+		return false;
+		
+		
+	}
+	
 	public void swapPokemon(Pkm p,int indice){
 		int i=0;
 		state=6;
@@ -471,11 +489,12 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 		}
-		c.setAct(2,indice);
+		//c.setAct(2,indice);
 		//c.setfreeze(true);
 		pkm=p;
+		
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
-
+		friends.get(0).getP().setSwap(indice);
 	}
 }
