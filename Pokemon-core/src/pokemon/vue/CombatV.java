@@ -97,10 +97,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 		attackanimation=true;
 		e=new ParticleEffect();
 		boom=new ParticleEffect();
-		e.load(Gdx.files.internal("effect/TenebreSpecialLeft"), Gdx.files.internal("effect"));
-		e.setPosition(170,150);
-		boom.load(Gdx.files.internal("effect/psyexplosion.p"), Gdx.files.internal("effect"));
-		boom.setPosition(500,270);
+		//e.load(Gdx.files.internal("effect/TenebreSpecialLeft"), Gdx.files.internal("effect"));
+		//e.setPosition(170,150);
+	//	boom.load(Gdx.files.internal("effect/psyexplosion.p"), Gdx.files.internal("effect"));
+		//boom.setPosition(500,270);
 	}
 
 
@@ -417,9 +417,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 	void playEffect(){
 		e.start();
-		e.scaleEffect(1.2f);
+		//e.scaleEffect(1.2f);
 		boom.start();
-		boom.scaleEffect(1.2f);
+	
+		//boom.scaleEffect(1.2f);
 	}
 	@Override
 	public boolean keyTyped(char arg0) {

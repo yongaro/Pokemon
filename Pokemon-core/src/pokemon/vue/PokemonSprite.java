@@ -112,8 +112,9 @@ public class PokemonSprite extends Actor{
     				System.out.println(c.getCapCur().getElement().name());
     				ParticleEffects.valueOf(c.getCapCur().getElement().name()).JoueurEffect(combatv);
     			}
-    			combatv.playEffect();
+    			
     		}
+    		combatv.playEffect();
     		switch(c.getCapCur().getElement()){
     		case Eau:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/127-Water02.ogg"));
