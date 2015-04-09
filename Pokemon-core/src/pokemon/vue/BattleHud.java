@@ -65,8 +65,8 @@ public class BattleHud extends Actor{
 			if(p.getPkm().get(2)!=oldpv)
 			{
 
-				locked=true;
-				System.out.println("LOCKED");
+				locked=false;
+				//System.out.println("LOCKED");
 				if(p.getPkm().get(2)>oldpv){
 					increase=true;
 				}

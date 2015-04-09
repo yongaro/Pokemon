@@ -329,7 +329,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			}
 
 			if(state==7){ //pokemon change par le joueur
-				//c.setfreeze(false);
+				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state=2;
@@ -508,7 +508,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			
 			//	friends.get(0).getP().setSwap(indice);
 		
-			System.out.println(c.getEquipe1()[i].getPkm());
+			//System.out.println(c.getEquipe1()[i].getPkm());
 			c.setAct(2,indice);
 		}
 		else{
