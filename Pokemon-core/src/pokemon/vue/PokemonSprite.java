@@ -101,10 +101,11 @@ public class PokemonSprite extends Actor{
     		if (p.isIA()){
     			this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
     					),Actions.moveBy(50, 40,0.2f)));
-    			
+    			ParticleEffects.valueOf(c.getCapCur().getElement().name()).AdvEffect(combatv);
     		}
     		else{
     			this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
+    			ParticleEffects.valueOf(c.getCapCur().getElement().name()).JoueurEffect(combatv);
     			combatv.playEffect();
     		}
     		switch(c.getCapCur().getElement()){

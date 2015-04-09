@@ -24,10 +24,15 @@ public enum ParticleEffects {
 		specialRight.scaleEffect(1.2f);
 	}
 	
-	public void AdvSpec(CombatV cbv){
+	public void AdvEffect(CombatV cbv){
 		this.hit.setPosition(170, 150);
 		cbv.e=this.specialRight;
 		cbv.boom=this.hit;
 	}
 	
+	public void JoueurEffect(CombatV cbv){
+		this.hit.setPosition(500,270);
+		cbv.e=this.specialLeft;
+		cbv.boom=this.hit;
+	}
 }
