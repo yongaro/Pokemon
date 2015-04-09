@@ -13,10 +13,21 @@ public enum ParticleEffects {
 	
 	ParticleEffects(){
 		hit= new ParticleEffect(); hit.load(Gdx.files.internal("effect/"+this.name()+"hit"), Gdx.files.internal("effect"));
+		hit.scaleEffect(1.2f);
+		
 		specialLeft = new ParticleEffect(); specialLeft.load(Gdx.files.internal("effect/"+this.name()+"SpecialLeft"), Gdx.files.internal("effect"));
-		specialLeft.setPosition(170,150);
-//		specialRight = new ParticleEffect(); specialRight.load(Gdx.files.internal("effect/"+this.name()+"SpecialRight"), Gdx.files.internal("effect"));
+		specialLeft.setPosition(170,150); 
+		specialLeft.scaleEffect(1.2f);
+		
+		specialRight = new ParticleEffect(); specialRight.load(Gdx.files.internal("effect/"+this.name()+"SpecialRight"), Gdx.files.internal("effect"));
+		specialRight.setPosition(500,270);
+		specialRight.scaleEffect(1.2f);
 	}
 	
+	public void AdvSpec(CombatV cbv){
+		this.hit.setPosition(170, 150);
+		cbv.e=this.specialRight;
+		cbv.boom=this.hit;
+	}
 	
 }
