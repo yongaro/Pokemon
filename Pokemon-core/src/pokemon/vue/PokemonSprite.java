@@ -97,7 +97,7 @@ public class PokemonSprite extends Actor{
     }
     public void attack(){
     	if(p.getPkm()==c.getPCourant().getPkm()){
-    		System.out.println("CALLING ATTACK "+p.getNom());
+    		//System.out.println("CALLING ATTACK "+p.getNom());
     		if (p.isIA()){
     			this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
     					),Actions.moveBy(50, 40,0.2f)));
@@ -124,14 +124,13 @@ public class PokemonSprite extends Actor{
     		}
     		soneatq.play();
     		
-    	}    	else{
-    		System.out.println(p+" n est pas le pkm courant c'est: "+c.getPCourant());
+    	}    
     		
-    	}}
+    	}
 
     public void hurt(){
     	if(p.getPkm()==c.getCibleCourante().getPkm()){
-    		System.out.println("CALLING HURT "+p.getNom());
+    		//System.out.println("CALLING HURT "+p.getNom());
 
     		if (p.isIA()){
     			this.addAction(Actions.sequence(Actions.delay(0.6f),Actions.moveBy(-30,0,0.2f
@@ -153,10 +152,7 @@ public class PokemonSprite extends Actor{
              },0.3f);
     	
     	}
-    	else{
-    		System.out.println(p+" n est pas la cible courrante c'est : "+c.getCibleCourante());
-    		
-    	}
+
     	}
 
     public void popPokemon(){
