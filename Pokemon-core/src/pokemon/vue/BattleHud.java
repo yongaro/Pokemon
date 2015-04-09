@@ -109,6 +109,7 @@ public class BattleHud extends Actor{
 		pvperc[0]=pvperc[1];
 		oldpv=p.getPkm().get(2);
 		this.setVisible(true);
+		
 	}
 
 	public void draw (Batch batch, float parentAlpha) {

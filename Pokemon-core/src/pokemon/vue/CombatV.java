@@ -336,9 +336,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==8){
+				
+				ennemies.get(0).getP().setSwap(-1);
 				ennemies.get(0).setP(c.getEquipe2()[swap]);
 				ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
-				ennemies.get(0).getP().setSwap(-1);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state=2;
