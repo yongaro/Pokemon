@@ -273,21 +273,29 @@ public class CombatV extends GameScreen implements InputProcessor{
 				selector=0;
 				break;
 			}
-			if(state==5){//lecture du buffer
-				if(textinc<retval.length){//si qqchose a lire
-					if(textinc==1){
-						System.out.println("LAUNCHING ANIMATIONS");
-						for(PokemonSprite ps:ennemies)
-						{
-							ps.hurt();
-							ps.attack();
-						}
-						for(PokemonSprite ps:friends)
-						{
-							ps.hurt();
-							ps.attack();
-						}
+			if(state==5)//lecture du buffer
+			{//si qqchose a lire
+				if(textinc==1){
+					System.out.println("LAUNCHING ANIMATIONS");
+					for(PokemonSprite ps:ennemies)
+					{
+						ps.hurt();
+						ps.attack();
 					}
+					for(PokemonSprite ps:friends)
+					{
+						ps.hurt();
+						ps.attack();
+					}
+				}
+				state++;
+				break;
+			}
+
+			if(state==6){
+				if(textinc<retval.length)
+				{
+					if(!healthbarLocked())
 						dbox.setMessage(retval[textinc++]);
 				}
 				else{
@@ -304,21 +312,18 @@ public class CombatV extends GameScreen implements InputProcessor{
 						}
 						i++;
 					}
-					
+
 					if(c.getPCourant().getPkm()!=pkm)
 					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
 					}
-				System.out.println("UNLOCKING THREAD ");
-				c.setfreeze(false);
+					System.out.println("UNLOCKING THREAD ");
+					c.setfreeze(false);
 				}
-	
-
-
 				break;
 			}
 
-			if(state==7){ //pokemon changé par le joueur
+			if(state==7){ //pokemon change par le joueur
 				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
@@ -329,10 +334,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 				ennemies.get(0).setP(c.getEquipe2()[swap]);
 				ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
 				ennemies.get(0).getP().setSwap(-1);
-				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state=2;
+				c.setfreeze(false);
 				break;
 			}
 		}
@@ -494,7 +499,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		}
 		//c.setfreeze(true);
 		pkm=p;
-	//	friends.get(0).getP().setSwap(indice);
+		//	friends.get(0).getP().setSwap(indice);
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
 		System.out.println(c.getEquipe1()[i].getPkm());
