@@ -312,6 +312,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 						}
 						i++;
 					}
+					if(pkm.get(2)==0)
+						mpokemon=new CombatMenuPokemon(mygdxgame,this);
 
 					if(c.getPCourant().getPkm()!=pkm)
 					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
@@ -497,13 +499,24 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 		}
-		//c.setfreeze(true);
-		pkm=p;
-		//	friends.get(0).getP().setSwap(indice);
-		friends.get(0).setP(c.getEquipe1()[i]);
-		friendHUD.get(0).setP(c.getEquipe1()[i]);
-		System.out.println(c.getEquipe1()[i].getPkm());
-		c.setAct(2,indice);
-
+		if(p.get(2)!=0){
+			//c.setfreeze(true);
+			pkm=p;
+			//	friends.get(0).getP().setSwap(indice);
+			friends.get(0).setP(c.getEquipe1()[i]);
+			friendHUD.get(0).setP(c.getEquipe1()[i]);
+			System.out.println(c.getEquipe1()[i].getPkm());
+			c.setAct(2,indice);
+		}
+		else{
+			int j=0;
+			for(j=0;j<c.getPkmListe().length;j++)
+			{
+				if(pkm==c.getPkmListe()[j].getPkm()){
+					System.out.println("set act "+c.getPkmListe()[j].getNom()+" a "+indice);
+					c.getPkmListe()[j].setSwap(indice);
+				}
+			}
+		}
 	}
 }
