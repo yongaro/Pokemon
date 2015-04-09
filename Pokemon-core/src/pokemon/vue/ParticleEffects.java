@@ -18,11 +18,11 @@ public enum ParticleEffects {
 		
 		specialLeft = new ParticleEffect(); specialLeft.load(Gdx.files.internal("effect/"+this.name()+"SpecialLeft"), Gdx.files.internal("effect"));
 		specialLeft.setPosition(170,150); 
-		specialLeft.scaleEffect(1.2f);
+		specialLeft.scaleEffect(0.9f);
 		
 		specialRight = new ParticleEffect(); specialRight.load(Gdx.files.internal("effect/"+this.name()+"SpecialRight"), Gdx.files.internal("effect"));
 		specialRight.setPosition(500,270);
-		specialRight.scaleEffect(1.2f);
+		specialRight.scaleEffect(0.9f);
 	}
 	
 	public void AdvEffect(CombatV cbv){
