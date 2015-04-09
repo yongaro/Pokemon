@@ -128,8 +128,8 @@ timeline3: 1.0
 attached: false
 continuous: false
 aligned: false
-additive: true
+additive: false
 behind: false
 premultipliedAlpha: false
 - Image Path -
-particle.png
+/C:/Users/User/git/Pokemon/Pokemon-core/particle.png

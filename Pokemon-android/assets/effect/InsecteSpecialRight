@@ -6,12 +6,12 @@ lowMin: 1000.0
 lowMax: 1000.0
 - Count - 
 min: 300
-max: 600
+max: 1200
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 300.0
-highMax: 300.0
+highMin: 1500.0
+highMax: 1500.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -62,8 +62,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 32.0
-highMax: 32.0
+highMin: 5.0
+highMax: 5.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -132,4 +132,4 @@ additive: true
 behind: false
 premultipliedAlpha: false
 - Image Path -
-/auto_home/yongaro/git/Pokemon/Pokemon-core/particle.png
+particle.png

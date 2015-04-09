@@ -62,8 +62,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 32.0
-highMax: 32.0
+highMin: 25.0
+highMax: 25.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -71,10 +71,10 @@ timelineCount: 1
 timeline0: 0.0
 - Velocity - 
 active: true
-lowMin: 0.0
-lowMax: 0.0
-highMin: 500.0
-highMax: 1400.0
+lowMin: 500.0
+lowMax: 500.0
+highMin: 100.0
+highMax: 200.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -82,10 +82,10 @@ timelineCount: 1
 timeline0: 0.0
 - Angle - 
 active: true
-lowMin: 195.0
-lowMax: 220.0
-highMin: 195.0
-highMax: 220.0
+lowMin: 30.0
+lowMax: 150.0
+highMin: 30.0
+highMax: 150.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
@@ -132,4 +132,4 @@ additive: false
 behind: false
 premultipliedAlpha: false
 - Image Path -
-particle.png
+/C:/Users/User/git/Pokemon/Pokemon-core/particle.png
