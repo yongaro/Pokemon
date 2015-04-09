@@ -108,7 +108,7 @@ public class BattleHud extends Actor{
 		pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
 		pvperc[0]=pvperc[1];
 		oldpv=p.getPkm().get(2);
-		this.setVisible(true);
+		this.addAction(Actions.visible(true));
 		
 	}
 

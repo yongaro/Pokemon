@@ -336,7 +336,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==8){
-				
+
 				ennemies.get(0).getP().setSwap(-1);
 				ennemies.get(0).setP(c.getEquipe2()[swap]);
 				ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
@@ -381,7 +381,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			break;
 
 		}
-	
+
 		return false;//
 	}
 
@@ -503,12 +503,12 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 		}
-		
+
 		if(pkm.get(2)!=0){
 			//c.setfreeze(true);
-			
+
 			//	friends.get(0).getP().setSwap(indice);
-		
+
 			//System.out.println(c.getEquipe1()[i].getPkm());
 			c.setAct(2,indice);
 		}
