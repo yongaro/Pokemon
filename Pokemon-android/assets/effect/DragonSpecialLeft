@@ -103,9 +103,9 @@ active: false
 active: false
 - Tint - 
 colorsCount: 3
-colors0: 0.16470589
-colors1: 0.078431375
-colors2: 0.0
+colors0: 0.08235294
+colors1: 0.0
+colors2: 0.7176471
 timelineCount: 1
 timeline0: 0.0
 - Transparency - 
@@ -117,18 +117,18 @@ relative: false
 scalingCount: 4
 scaling0: 0.0
 scaling1: 1.0
-scaling2: 1.0
+scaling2: 0.75
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0
 timeline1: 0.2
-timeline2: 0.7808219
+timeline2: 0.8
 timeline3: 1.0
 - Options - 
 attached: false
 continuous: false
 aligned: false
-additive: false
+additive: true
 behind: false
 premultipliedAlpha: false
 - Image Path -
@@ -240,9 +240,9 @@ active: false
 active: false
 - Tint - 
 colorsCount: 3
-colors0: 0.38039216
-colors1: 0.18039216
-colors2: 0.0
+colors0: 0.21176471
+colors1: 0.27058825
+colors2: 0.7176471
 timelineCount: 1
 timeline0: 0.0
 - Transparency - 
@@ -253,13 +253,13 @@ highMax: 1.0
 relative: false
 scalingCount: 4
 scaling0: 0.0
-scaling1: 0.24561404
-scaling2: 0.22807017
+scaling1: 1.0
+scaling2: 0.75
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0
-timeline1: 0.21232876
-timeline2: 0.79452056
+timeline1: 0.2
+timeline2: 0.8
 timeline3: 1.0
 - Options - 
 attached: false

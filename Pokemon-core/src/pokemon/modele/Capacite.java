@@ -65,6 +65,7 @@ public abstract class Capacite implements Qmax,Infos {
 		}
 		return isPremier;
 	}
+	
 	protected int atkdamage(Pkm user,Pkm cible,Combat context,boolean quiet){
 		double STAB=1;double weakness=1.0; Random random=new Random(); double climatmod;
 		//recherche de l'affinite de l'utilisateur avec l'element de l'attaque

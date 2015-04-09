@@ -33,8 +33,7 @@ public class Combat extends Thread {
 	
 	public Combat(){
 		terrain=Terrain.Plaine; climat=Climat.Normal;
-		buffer="";
-		bufferReady=false;
+		buffer=""; bufferReady=false;
 		actflag=-1; act=-1; ind=-1;
 		freeze=false;
 	}
@@ -152,8 +151,9 @@ public class Combat extends Thread {
 					user.pkm.cap.utiliser(act,user.pkm,cible.pkm,this);
 				}
 				//Consequences de l'action
-				if(user.pkm.stats[2][0]<=0){ user.XPreward(this); pokeswap(user,true); }
-				if(cible.pkm.stats[2][0]<=0){ cible.XPreward(this); pokeswap(cible,true); }
+				
+				this.chercherKO();
+				
 				if(user.pkm.stats[2][0]<=(int)(user.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
 					if(user.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
 						Medicament m=(Medicament)user.pkm.objTenu;
@@ -199,6 +199,12 @@ public class Combat extends Thread {
 		}
 	}
 	
+	
+	public void chercherKO(){
+		for(PokemonCombat p: pkmListe){
+			if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
+		}
+	}
 	
 	public void pokeswap(PokemonCombat user,boolean ko){
 		/*int i=0; int act=0;*/ int done=0; int select=0;// Pkm pkmRef; Stack<Pkm> stackRef; 
