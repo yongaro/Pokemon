@@ -241,7 +241,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 			if(state==1){
-				System.out.println("UNLOCKING THREAD");
+				System.out.println("UNLOCKING THREAD STATE 1");
 				c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
@@ -293,6 +293,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			}
 
 			if(state==6){
+
 				if(textinc<retval.length)
 				{
 					if(!healthbarLocked())
@@ -302,7 +303,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 					//retval=null;
 
 					for(int i=0;i<ennemies.size();i++){
-						System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
+						//System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
 						if(ennemies.get(i).getP().getSwap()!=-1){
 							state=8; //swapping ennemies
 							dbox.setMessage("Le pokemon ennemi est KO");
@@ -312,21 +313,23 @@ public class CombatV extends GameScreen implements InputProcessor{
 						}
 						i++;
 					}
-					if(pkm.get(2)==0)
+					if(pkm.get(2)==0){
 						mpokemon=new CombatMenuPokemon(mygdxgame,this);
+						break;
+					}
 
 					if(c.getPCourant().getPkm()!=pkm)
 					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
 					dbox.setMessage("Que faire ?");
 					}
-					System.out.println("UNLOCKING THREAD ");
+					System.out.println("UNLOCKING THREAD STATE6");
 					c.setfreeze(false);
 				}
 				break;
 			}
 
 			if(state==7){ //pokemon change par le joueur
-				c.setfreeze(false);
+				//c.setfreeze(false);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state=2;
@@ -377,6 +380,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			break;
 
 		}
+	
 		return false;//
 	}
 
@@ -478,20 +482,19 @@ public class CombatV extends GameScreen implements InputProcessor{
 				return true;
 		}
 		for(int i=0;i<ennemiesHUD.size();i++){
-			if(friendHUD.get(i).isLocked())
+			if(ennemiesHUD.get(i).isLocked())
 				return true;
 		}
 		return false;
-
-
 	}
+
 
 	public void swapPokemon(Pkm p,int indice){
 		int i=0;
 		state=7;
 		dbox.setWidth(width);
 		dbox.setMessage("En avant "+p.getNom()+" !");
-		for(i=0;i<c.getEquipe1().length;i++)
+		for(i=0;i<c.getEquipe1().length;i++) //recherche du pokemon dnas l'equipe
 		{
 			if(p==c.getEquipe1()[i].getPkm())
 			{
@@ -499,24 +502,28 @@ public class CombatV extends GameScreen implements InputProcessor{
 				break;
 			}
 		}
-		if(p.get(2)!=0){
+		
+		if(pkm.get(2)!=0){
 			//c.setfreeze(true);
-			pkm=p;
+			
 			//	friends.get(0).getP().setSwap(indice);
-			friends.get(0).setP(c.getEquipe1()[i]);
-			friendHUD.get(0).setP(c.getEquipe1()[i]);
+		
 			System.out.println(c.getEquipe1()[i].getPkm());
 			c.setAct(2,indice);
 		}
 		else{
 			int j=0;
-			for(j=0;j<c.getPkmListe().length;j++)
+			System.out.println("DEAD SWAP");
+			for(j=0;j<c.getPkmListe().length;j++) //recherche du pokemon a changer dans la liste des pokemons
 			{
-				if(pkm==c.getPkmListe()[j].getPkm()){
+				if(pkm==c.getPkmListe()[j].getPkm()){ //quand j'ai trouve
 					System.out.println("set act "+c.getPkmListe()[j].getNom()+" a "+indice);
 					c.getPkmListe()[j].setSwap(indice);
 				}
 			}
 		}
+		pkm=p;
+		friends.get(0).setP(c.getEquipe1()[i]);
+		friendHUD.get(0).setP(c.getEquipe1()[i]);
 	}
 }

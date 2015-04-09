@@ -24,9 +24,9 @@ public class BattleHud extends Actor{
 	int oldpv;
 	float[] pvperc;
 	int speed;
-	boolean increase,locked;
+	boolean increase,locked,refresh;
 	CombatV combatv;
-	
+
 	public BattleHud(CombatV vuecombat,PokemonCombat pokemonCombat){
 		p=pokemonCombat;
 		combatv=vuecombat;	
@@ -51,6 +51,7 @@ public class BattleHud extends Actor{
 		speed=50;
 		increase=false;
 		locked=false;
+		refresh=false;
 	}
 
 	public void hideRight(){
@@ -63,32 +64,37 @@ public class BattleHud extends Actor{
 		if(combatv.getTextinc()==2){
 			if(p.getPkm().get(2)!=oldpv)
 			{
+
 				locked=true;
 				System.out.println("LOCKED");
 				if(p.getPkm().get(2)>oldpv){
 					increase=true;
 				}
-				else
+				else{
 					increase=false;
+				}
 				pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
-
 				oldpv=p.getPkm().get(2);
 			}
 			if(pvperc[1]!=pvperc[0]){
+				System.out.println(pvperc[0]+"/"+pvperc[1]);
 				if(increase){
 					if(pvperc[0]<pvperc[1])
 						pvperc[0]+=delta*speed;
 					else
-						{pvperc[0]=pvperc[1];
+					{
+						pvperc[0]=pvperc[1];
 						locked=false;
 						System.out.println("UNLOCKED");
-						}
+					}
 				}
 				else{
 					if(pvperc[0]>pvperc[1])
 						pvperc[0]-=delta*speed;				
 					else
-						{pvperc[0]=pvperc[1];locked=false;System.out.println("UNLOCKED");}
+					{pvperc[0]=pvperc[1];
+					locked=false;
+					System.out.println("UNLOCKED");}
 				}
 
 			}
@@ -128,11 +134,13 @@ public class BattleHud extends Actor{
 		f.draw(b,"HP",getX()+20,getY()+38);
 		f.draw(b,oldpv+"/"+p.getPkm().getmax(2), this.getX()+140, this.getY()+25);
 		b.end();
-		
+
 	}
 	public boolean isLocked(){
 		return locked;
 	}
-	
+
+
+
 
 }
