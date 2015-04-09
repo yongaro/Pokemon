@@ -304,6 +304,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 					for(int i=0;i<ennemies.size();i++){
 						System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
+						System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
+						System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
 						if(ennemies.get(i).getP().getSwap()!=-1){
 							state=8; //swapping ennemies
 							dbox.setMessage("Le pokemon ennemi est KO");

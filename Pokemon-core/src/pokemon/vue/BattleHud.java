@@ -55,7 +55,7 @@ public class BattleHud extends Actor{
 	}
 
 	public void hideRight(){
-		this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(210, 0, 0.2f),Actions.visible(false)));
+		//this.addAction(Actions.sequence(Actions.delay(0.5f),Actions.moveBy(210, 0, 0.2f),Actions.visible(false)));
 
 	}
 
@@ -109,7 +109,7 @@ public class BattleHud extends Actor{
 		pvperc[0]=pvperc[1];
 		oldpv=p.getPkm().get(2);
 
-		addAction(Actions.parallel(Actions.moveBy(-210, 0),Actions.visible(true)));
+		//addAction(Actions.parallel(Actions.moveBy(-210, 0),Actions.visible(true)));
 		System.out.println("HUD NOW VISIBLE"+this.isVisible());
 	}
 
