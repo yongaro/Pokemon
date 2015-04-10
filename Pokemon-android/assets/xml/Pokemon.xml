@@ -52,7 +52,7 @@
 	<Reptincel
 		ID="5" nom="Reptincel"
 		description="Il se sert de sa queue pour faire tomber ses adversaires. Une fois qu’ils sont au sol, il les lacère de ses griffes acérées."
-		PV="58" ATT="64" DEF="58" ATTSP="80" DEFSP="65" VIT="80" type1="Feu" type2="" XP="142">
+		PV="58" ATT="64" DEF="58" ATTSP="80" DEFSP="65" VIT="80" type1="Feu" type2="" XP="142" attacks="31">
 		<CapacitePassive>
 			<Brasier nom="Brasier"></Brasier>
 		</CapacitePassive>

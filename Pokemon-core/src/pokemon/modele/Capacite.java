@@ -46,11 +46,15 @@ public abstract class Capacite implements Qmax,Infos {
 			i++;
 			while(!isPremier(i)){
 				i++;}
-
+			//System.out.println(i);
+			if(i==1223){
+				fini=true;
+			}
 		}
 		ok=res.contains(this.ID);
 		return ok;
 	}
+	public int getId(){return ID;}
 	public boolean isPremier(int n) {
 		boolean isPremier = true;
 		if (n < 0) {

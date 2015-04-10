@@ -48,7 +48,10 @@ public class MyGdxGame extends Game {
 	    	Ptest[3]=new Pkm(Pokedex.Roucoups.get(),25); Ptest2[3]=new Pkm(Pokedex.Roucoups.get(),25);
 	    	Ptest[4]=new Pkm(Pokedex.Rattatac.get(),25); Ptest2[4]=new Pkm(Pokedex.Rattatac.get(),25);
 	    	Ptest[5]=new Pkm(Pokedex.Pikachu.get(),25); Ptest2[5]=new Pkm(Pokedex.Pikachu.get(),25);
-	    	//System.out.println(bddCapacite.Blizzard.get().peutApprendre(Ptest[0]));
+	    	Ptest[0].setAttacks(12045);
+	    	System.out.println("Attribut Attacks de Reptincel : "+Ptest[0].getAttacks());
+	    	System.out.println("ID de l'attaque Charge : "+bddCapacite.Charge.get().getID());
+	    	System.out.println(Ptest[0].getNom()+" peut il apprendre Charge ? " +  bddCapacite.Charge.get().peutApprendre(Ptest[0]));
 	    	//Ptest[0].infliger(56);
 	    	//Ptest[1].infliger(38);
 	    	Ptest2[2].infliger(58);

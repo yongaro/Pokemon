@@ -148,6 +148,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 		return -1;
 	}
 	
+	
 	public Nature getNat(){ return personnalite;}
 	
 	
@@ -261,6 +262,8 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public String getNom(){return nom;}
 	public String getDesc(){return "";}
 	public String getInfos(){return "";}
+	public long getAttacks(){return attacks;}
+	public void setAttacks(long l){attacks=l;}
 	
 	public Stockage<Capacite> getCap(){
 		return cap;

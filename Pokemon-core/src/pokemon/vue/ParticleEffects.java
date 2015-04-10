@@ -26,14 +26,14 @@ public enum ParticleEffects {
 	}
 	
 	public void AdvEffect(CombatV cbv){
-		if(this==Roche || this==Sol){hit.scaleEffect(1.2f);}
+		
 		this.hit.setPosition(170, 150);
 		cbv.e=this.specialRight;
 		cbv.boom=this.hit;
 	}
 	
 	public void JoueurEffect(CombatV cbv){
-		if(this==Roche || this==Sol){hit.scaleEffect(1.2f);}
+		
 		this.hit.setPosition(500,270);
 		cbv.e=this.specialLeft;
 		cbv.boom=this.hit;
