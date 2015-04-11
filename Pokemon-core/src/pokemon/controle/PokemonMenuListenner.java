@@ -40,17 +40,9 @@ public class PokemonMenuListenner implements InputProcessor{
 	}
 	@Override
 	public boolean keyDown(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char arg0) {
 		
 		if(this.myGdxGame.getScreen()==menu){
-			switch(myInput.detectInput()){
-			
-			case DOWN:
+			if (arg0 == myInput.DOWN.getID()) {
 				if(state==1 || state==3){
 					if(pkselector+1<joueur.teamSize()){
 						this.pkselector++;
@@ -63,9 +55,7 @@ public class PokemonMenuListenner implements InputProcessor{
 						menu.update(state,pkselector,atkselector);
 					}
 				}
-				break;
-			
-			case UP:
+			} else if (arg0 == myInput.UP.getID()) {
 				if(state==1 || state==3){
 					if(pkselector!=0){
 						this.pkselector--;
@@ -78,8 +68,7 @@ public class PokemonMenuListenner implements InputProcessor{
 						menu.update(state,pkselector,atkselector);
 					}
 				}
-				break;
-			case A:
+			} else if (arg0 == myInput.A.getID()) {
 				if(state==1)
 					if(menuListener.state==2)
 						{
@@ -90,14 +79,12 @@ public class PokemonMenuListenner implements InputProcessor{
 						}
 					else
 						this.state++;
-				break;
-			case B:
+			} else if (arg0 == myInput.B.getID()) {
 				if(state==2){
 					this.state--;
 					atkselector=1;
 				}
-				break;
-			case SELECT:
+			} else if (arg0 == myInput.SELECT.getID()) {
 				switch(state)
 				{
 				case 1:
@@ -129,24 +116,18 @@ public class PokemonMenuListenner implements InputProcessor{
 					menu.update(state,pkselector,atkselector);
 					break;//
 				}
-				break;
-			case RIGHT:
-			
+			} else if (arg0 == myInput.RIGHT.getID()) {
 				if(state==1){		
 						menuListener.switchto(menuInventaire.class);
 						//menuListener.switchtoInventory();
 				}
-				break;
-			case START:
+			} else if (arg0 == myInput.START.getID()) {
 				if(state==2)
 				{
 					System.out.print("OK");
 					menuListener.switchto(menuInventaire.class);
 					menuListener.setState(1);
 				}
-				break;
-			
-			
 			}
 			return true;
 		}
@@ -155,6 +136,12 @@ public class PokemonMenuListenner implements InputProcessor{
 		
 			return false;
 			}
+	}
+	
+	@Override
+	public boolean keyTyped(char arg0) {
+		
+		return true;
 			
 	}
 
