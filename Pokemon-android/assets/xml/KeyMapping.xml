@@ -1,0 +1,10 @@
+<keys>
+	<A button="A"></A>
+	<B button="B"></B>
+	<LEFT button="Left"></LEFT>
+	<RIGHT button="Right"></RIGHT>
+	<UP button="Up"></UP>
+	<DOWN button="Down"></RIGHT>
+	<START button="Enter"></START>
+	<SELECT button="Space"></SELECT>
+</keys>

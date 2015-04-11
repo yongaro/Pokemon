@@ -1,15 +1,35 @@
 package pokemon.controle;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
 
 public enum myInput {
-	LEFT(Keys.DPAD_LEFT),RIGHT(Keys.DPAD_RIGHT),UP(Keys.DPAD_UP),DOWN(Keys.DPAD_DOWN),START(Keys.SPACE),SELECT(Keys.ENTER),A(Keys.ENTER),B(Keys.BACKSPACE),NOT_HANDLED(Keys
-			.A);
+	LEFT,RIGHT,UP,DOWN,START,SELECT,A,B;
 
 	int id;
 
+	myInput() throws UnknownKeyException{
+		XmlReader reader = new XmlReader();
+		try {
+			Element root = reader.parse(Gdx.files.internal("xml/KeyMapping.xml"));
+			Element b=root.getChildByName(this.name());
+			this.id=Keys.valueOf(b.getAttribute("button"));
+			if(this.id==-1)
+				throw new UnknownKeyException("Wrong keycode for : "+this.name());
+			System.out.println(this.name()+" : "+this.id);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	myInput(int id){
+		System.out.println(this.name());
 		this.id=id;
 	}
 
@@ -33,7 +53,7 @@ public enum myInput {
 		if(Gdx.input.isKeyJustPressed(Keys.BACKSPACE) )
 			return myInput.B;
 
-		return myInput.NOT_HANDLED;
+		return A;
 	}
 
 	public int getID() {
