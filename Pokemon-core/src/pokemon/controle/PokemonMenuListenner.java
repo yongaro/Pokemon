@@ -28,7 +28,7 @@ public class PokemonMenuListenner implements InputProcessor{
 	int pkselector;
 	int atkselector;
 	int change;
-	
+
 	PokemonMenuListenner(menuPokemon menu,MyGdxGame myGdxGame, MenuListener menuListener)
 	{
 		this.menu=menu;
@@ -40,50 +40,17 @@ public class PokemonMenuListenner implements InputProcessor{
 	}
 	@Override
 	public boolean keyDown(int arg0) {
-		
+
 		if(this.myGdxGame.getScreen()==menu){
 			if (arg0 == myInput.DOWN.getID()) {
-				if(state==1 || state==3){
-					if(pkselector+1<joueur.teamSize()){
-						this.pkselector++;
-						menu.update(state,pkselector,atkselector);
-					}
-				}
-				if(state==2 || state==4){
-					if(atkselector<4){
-						this.atkselector++;
-						menu.update(state,pkselector,atkselector);
-					}
-				}
+				handleDown();
 			} else if (arg0 == myInput.UP.getID()) {
-				if(state==1 || state==3){
-					if(pkselector!=0){
-						this.pkselector--;
-						menu.update(state,pkselector,atkselector);
-					}
-				}
-				if(state==2 || state==4){
-					if(atkselector!=1){
-						this.atkselector--;
-						menu.update(state,pkselector,atkselector);
-					}
-				}
+				handleUP();
 			} else if (arg0 == myInput.A.getID()) {
-				if(state==1)
-					if(menuListener.state==2)
-						{
-						//joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).script(joueur.getTeam()[pkselector]);
-						System.out.println("Je donne"+joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).getNom());
-						joueur.getPoche(menuListener.slotInventaire[0]).utiliser(menuListener.slotInventaire[1], null,joueur.getTeam()[pkselector] ,null);
-						menuListener.state=0;
-						}
-					else
-						this.state++;
+				handleA();
 			} else if (arg0 == myInput.B.getID()) {
-				if(state==2){
-					this.state--;
-					atkselector=1;
-				}
+				handleB();
+
 			} else if (arg0 == myInput.SELECT.getID()) {
 				switch(state)
 				{
@@ -117,10 +84,8 @@ public class PokemonMenuListenner implements InputProcessor{
 					break;//
 				}
 			} else if (arg0 == myInput.RIGHT.getID()) {
-				if(state==1){		
-						menuListener.switchto(menuInventaire.class);
-						//menuListener.switchtoInventory();
-				}
+				handleRight();
+
 			} else if (arg0 == myInput.START.getID()) {
 				if(state==2)
 				{
@@ -131,47 +96,48 @@ public class PokemonMenuListenner implements InputProcessor{
 			}
 			return true;
 		}
-		
+
 		else{
-		
+
 			return false;
-			}
-	}
-	
-	@Override
-	public boolean keyTyped(char arg0) {
-		
-		return true;
-			
+		}
 	}
 
-	@Override
-	public boolean keyUp(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+@Override
+public boolean keyTyped(char arg0) {
 
-	@Override
-	public boolean scrolled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	return true;
 
-	@Override
-	public boolean touchDown(int x, int y, int pointer, int button) {			
-			int i=280;
+}
+
+@Override
+public boolean keyUp(int arg0) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public boolean mouseMoved(int arg0, int arg1) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public boolean scrolled(int arg0) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public boolean touchDown(int x, int y, int pointer, int button) {			
+	/*int i=280;
 			int count=1;
 			Vector2 v=new Vector2(x,y);
 			menu.getStage().screenToStageCoordinates(v);
 			System.out.println(v.x+" "+v.y);
 			if(v.x>15 && v.x<200 && v.y>10 && v.y<275){
-				
+
 				while(i>v.y)
 				{
 					i-=45;
@@ -182,22 +148,105 @@ public class PokemonMenuListenner implements InputProcessor{
 				pkselector=count-1;
 				menu.update(state,pkselector,atkselector);
 			}
-			
-			return true;
-		
+
+			return true;*/
+	menu.setTouched(true);
+	return true;
+}
+
+@Override
+public boolean touchDragged(int arg0, int arg1, int arg2) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+	menu.setTouched(false);
+	Vector2 v=new Vector2(screenX,screenY);
+	menu.getStage().screenToStageCoordinates(v);
+	System.out.println(v.toString());
+
+	if(v.x>35 && v.x<65 && v.y>10 && v.y<40)
+		handleDown();
+	if(v.x>35 && v.x<65 && v.y>65 && v.y<90)
+		handleUP();
+	if(v.x>10 && v.x<35 && v.y>35 && v.y<70)
+		{handleLeft();System.out.print("LEFT");}
+	if(v.x>60 && v.x<90 && v.y>30 && v.y<70)
+		handleRight();
+	if(v.x>460 && v.x<540 && v.y>10 && v.y<80)
+		handleB();
+	if(v.x>550 && v.x<630 && v.y>10 && v.y<80)
+		handleA();
+	return true;
+}
+
+public void handleLeft(){
+
+}
+
+public void handleRight(){
+	if(state==1){		
+		menuListener.switchto(menuInventaire.class);
+		//menuListener.switchtoInventory();
 	}
 
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		return false;
+}
+
+public void handleUP(){
+	if(state==1 || state==3){
+		if(pkselector!=0){
+			this.pkselector--;
+			menu.update(state,pkselector,atkselector);
+		}
+	}
+	if(state==2 || state==4){
+		if(atkselector!=1){
+			this.atkselector--;
+			menu.update(state,pkselector,atkselector);
+		}
+	}		
+}
+
+public void handleDown(){
+
+	if(state==1 || state==3){
+		if(pkselector+1<joueur.teamSize()){
+			this.pkselector++;
+			menu.update(state,pkselector,atkselector);
+		}
+	}
+	if(state==2 || state==4){
+		if(atkselector<4){
+			this.atkselector++;
+			menu.update(state,pkselector,atkselector);
+		}
 	}
 
-	@Override
-	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
+}
+
+public void handleA(){
+	if(state==1)
+		if(menuListener.state==2)
+		{
+			//joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).script(joueur.getTeam()[pkselector]);
+			System.out.println("Je donne"+joueur.getPoche(menuListener.slotInventaire[0]).at(menuListener.slotInventaire[0]).getNom());
+			joueur.getPoche(menuListener.slotInventaire[0]).utiliser(menuListener.slotInventaire[1], null,joueur.getTeam()[pkselector] ,null);
+			menuListener.state=0;
+		}
+		else
+			this.state++;
+}
+
+public void handleB(){
+	if(state==2){
+		this.state--;
+		atkselector=1;
 	}
+}
+
+
 
 }
 
