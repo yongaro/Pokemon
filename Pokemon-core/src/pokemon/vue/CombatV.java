@@ -195,7 +195,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 		stage.getBatch().begin();
 		e.draw(stage.getBatch(), arg0);
 		boom.draw(stage.getBatch(), arg0);
-		stage.getBatch().end();
+		
+		stage.getBatch().end();		
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 		//	System.out.println("PARTICLE PLAYING"+e.isComplete());
 
@@ -302,10 +303,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 				else{
 					//retval=null;
 
-					for(int i=0;i<ennemies.size();i++){
-						System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
-						System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
-						System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
+					for(int i=0;i<c.getPkmListe().length;i++){//acteurs des ennemis
+						//System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
+						//System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
+					//	System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
 						if(ennemies.get(i).getP().getSwap()!=-1){
 							state=8; //swapping ennemies
 							dbox.setMessage("Le pokemon ennemi est KO");

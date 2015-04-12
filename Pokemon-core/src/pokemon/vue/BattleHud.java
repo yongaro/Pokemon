@@ -104,7 +104,7 @@ public class BattleHud extends Actor{
 
 
 	public void setP(PokemonCombat p) {
-		this.p = p;
+		this.p.setPokemon(p.getPkm());
 		pvperc[1]=(160*p.getPkm().get(2))/p.getPkm().getmax(2);
 		pvperc[0]=pvperc[1];
 		oldpv=p.getPkm().get(2);

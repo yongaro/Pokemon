@@ -209,7 +209,7 @@ public class menuPokemon  extends GameScreen {
 		}
 		stage.getBatch().draw(texture,(320-10)*0.7f,(410-25)*0.6f,(int)(texture.getWidth())*0.95f,(int)(texture.getHeight()*0.95f));
 		stage.getBatch().end();
-
+		super.drawUI(delta);
 		// System.out.println(pkselector);
 		//Gdx.graphics.setContinuousRendering(false); //coupe la boucle de render inutile dans les menus
 	}

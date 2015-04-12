@@ -197,7 +197,7 @@ public class PokemonSprite extends Actor{
     	}
     }
     public void setP(PokemonCombat p) {
-		this.p = p;
+		this.p.setPokemon(p.getPkm());
 		System.out.print("SWAPPED "+p);
 		finished=false;
 		this.popPokemon();
