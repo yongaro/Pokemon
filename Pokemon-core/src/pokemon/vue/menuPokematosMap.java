@@ -48,7 +48,7 @@ public menuPokematosMap(MyGdxGame myGdxGame) {
 	}
 
 	@Override
-	public void render(float arg0) {
+	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         shapeRenderer.setProjectionMatrix(stage.getViewport().getCamera().combined);
@@ -94,8 +94,10 @@ public menuPokematosMap(MyGdxGame myGdxGame) {
 		f.setColor(0.58f, 0.59f, 0.57f, 1);	
 		stage.getBatch().draw(map,340-map.getWidth()/2,165-map.getHeight()/2,map.getWidth(),map.getHeight());
 		stage.getBatch().end();
-		stage.act(arg0);
+		stage.act(delta);
 		stage.draw();
+		super.drawUI(delta);
+
 	}
 
 	@Override

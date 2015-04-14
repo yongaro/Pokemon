@@ -168,6 +168,8 @@ public class menuPokematos extends  GameScreen{
 		
 		stage.draw();
 		stage.act(delta);
+		super.drawUI(delta);
+
 		}
 		
 

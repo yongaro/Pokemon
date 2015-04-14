@@ -44,12 +44,12 @@ public abstract class GameScreen implements Screen{
 			shapeRenderer.ellipse(460,10, 80, 80);
 			shapeRenderer.end();
 			if(touched==false)
-					elapsedTime+=delta*120;
+					elapsedTime+=delta*150;
 		}
 
 	}
+	
 	public void setTouched(boolean touched) {
-		System.out.println("TOUCHED");
 		this.touched=touched;
 		if(touched){
 			elapsedTime=0;

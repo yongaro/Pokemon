@@ -62,7 +62,7 @@ public class menuInventaire  extends GameScreen{
 	}
 
 	@Override
-	public void render(float arg0) {
+	public void render(float delta) {
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -162,6 +162,7 @@ public class menuInventaire  extends GameScreen{
         
         stage.getBatch().draw(texture,200,220,(int)(texture.getWidth())*1.2f,(int)(texture.getHeight())*1.2f);
 		stage.getBatch().end();
+		super.drawUI(delta);
 
 	}
 

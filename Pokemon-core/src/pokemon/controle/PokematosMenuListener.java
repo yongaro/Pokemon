@@ -14,9 +14,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class PokematosMenuListener implements   InputProcessor{
+public class PokematosMenuListener extends GameInput{
 	menuPokematos menu;
 	MyGdxGame myGdxGame;
 	MenuListener menuListener;
@@ -25,7 +26,7 @@ public class PokematosMenuListener implements   InputProcessor{
 	int pkselector=1,optselector=1;
 	int page=0;
 	Vector<String> nom=new Vector<String>();
-	
+
 	PokematosMenuListener(menuPokematos menu,MyGdxGame myGdxGame, MenuListener menuListener)
 	{
 		this.menu=menu;
@@ -40,71 +41,7 @@ public class PokematosMenuListener implements   InputProcessor{
 	public boolean keyDown(int arg0) {
 
 		if(menu==myGdxGame.getScreen()){
-			switch(arg0){
-			case Keys.ENTER:
-				if(state==3 && optselector==1){
-					s = Gdx.audio.newSound(Gdx.files.internal("Sound/"+(page+pkselector)+".ogg"));
-					s.play();
-				}
-				if(state==3 && optselector==2){
-					state=4;
-					menu.drawMap();
-					
-				}
-				if(state==2)
-				{
-					state=3;
-				}
-				if(state==1)
-					state=2;
-				break;
-			case Keys.DOWN:
-				if(state==2){
-					if(pkselector<6 && page+pkselector<nom.size())
-						pkselector++;
-					else
-						if(pkselector==6 && page+7<nom.size()){
-							page+=6;pkselector=1;}
-					}
-					if(state==3){
-						if(optselector==1)
-							optselector++;
-					}
-					if(state==1)
-						menuListener.switchto(menuPokematosMap.class);
-				
-				break;
-			case Keys.UP:
-				if(state==2){
-					if(pkselector==1 && page>0){
-						page-=6;pkselector=6;}
-					else
-						if(pkselector>1)
-							pkselector--;
-				}	
-				if(state==3){
-					if(optselector==2)
-						optselector--;
-					break;
-
-				}
-			case Keys.BACKSPACE:
-				if(state==3)
-					state--;
-				if(state==4){
-					for(Actor a:menu.getStage().getActors())
-						a.remove();
-					state--;
-						;}
-			case Keys.DPAD_LEFT:
-				if(state==1){
-					System.out.println("SWITCHING");
-					menuListener.switchto(menuInventaire.class);
-					
-				}
-				break;
-					
-			}
+			super.keyDown(arg0);
 			menu.update(state,pkselector,page,optselector);
 			return true;
 		}
@@ -115,51 +52,12 @@ public class PokematosMenuListener implements   InputProcessor{
 	public boolean keyTyped(char arg0) {
 		return false;
 
-	/*	if(menu==myGdxGame.getScreen()){
-			/*if(Gdx.input.isKeyJustPressed(Keys.DPAD_DOWN)){
-				if(state==1)
-				{tab++;
-				}
-				if(state==2){
-					menu.acteur.move=Move.down;
-					System.out.print("set");
-				}
-			}
-			if(Gdx.input.isKeyJustPressed(Keys.DPAD_UP)){
-				if(state==1)
-					tab--;
-				if(state==2){
-					menu.acteur.move=Move.up;
-					//System.out.print("set");
-				}
-			}
-			if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
-				if(tab==1){
-					state++;System.out.print("State="+state);}
-				Gdx.graphics.setContinuousRendering(true);
-				System.out.print("set");;System.out.print("State="+state+" Tab="+tab);
-			}
-			if(Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)){
-				if(state==2){
-					menu.acteur.move=Move.right;
-					//System.out.print("set");
-				}
-			}
-			if(Gdx.input.isKeyPressed(Keys.DPAD_LEFT)){
-				if(state==2){
-					menu.acteur.move=Move.left;
-					//System.out.print("set");
-				}
-			}
-			menu.update(state,tab);
-			return true;
-		}
-		return false;*/
+		
 	}
 
 	@Override
 	public boolean keyUp(int arg0) {
-	/*	if(myGdxGame.getScreen()==menu)
+		/*	if(myGdxGame.getScreen()==menu)
 		{
 			//menu.acteur.move=Move.wait;
 			switch(arg0)
@@ -208,8 +106,13 @@ public class PokematosMenuListener implements   InputProcessor{
 
 	@Override
 	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
+		if(menu==myGdxGame.getScreen()){
+			menu.setTouched(true);
+			return true;
+			}
+		else
+			return false;
+
 	}
 
 	@Override
@@ -219,9 +122,114 @@ public class PokematosMenuListener implements   InputProcessor{
 	}
 
 	@Override
-	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if(menu==myGdxGame.getScreen()){
+			menu.setTouched(false);
+			Vector2 v=new Vector2(screenX,screenY);
+			menu.getStage().screenToStageCoordinates(v);
+			super.touchUp(v);
+			menu.update(state,pkselector,page,optselector);
+			return true;
+}
+		else
+			return false;
+	}
+
+	
+
+	@Override
+	void handleA() {
 		// TODO Auto-generated method stub
-		return false;
+		if(state==3 && optselector==1){
+			s = Gdx.audio.newSound(Gdx.files.internal("Sound/"+(page+pkselector)+".ogg"));
+			s.play();
+		}
+		if(state==3 && optselector==2){
+			state=4;
+			menu.drawMap();
+
+		}
+		if(state==2)
+		{
+			state=3;
+		}
+		if(state==1)
+			state=2;
+	}
+
+	@Override
+	void handleB() {
+		// TODO Auto-generated method stub
+		if(state==3)
+			state--;
+		if(state==4){
+			for(Actor a:menu.getStage().getActors())
+				a.remove();
+			state--;
+		}
+	}
+
+	@Override
+	void handleLeft() {
+		// TODO Auto-generated method stub
+		if(state==1){
+			System.out.println("SWITCHING");
+			menuListener.switchto(menuInventaire.class);
+
+		}
+	}
+
+	@Override
+	void handleRight() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	void handleUp() {
+		// TODO Auto-generated method stub
+		if(state==2){
+			if(pkselector==1 && page>0){
+				page-=6;pkselector=6;}
+			else
+				if(pkselector>1)
+					pkselector--;
+		}	
+		if(state==3){
+			if(optselector==2)
+				optselector--;
+		}
+	}
+
+	@Override
+	void handleDown() {
+		// TODO Auto-generated method stub
+		if(state==2){
+			if(pkselector<6 && page+pkselector<nom.size())
+				pkselector++;
+			else
+				if(pkselector==6 && page+7<nom.size()){
+					page+=6;pkselector=1;}
+		}
+		if(state==3){
+			if(optselector==1)
+				optselector++;
+		}
+		if(state==1)
+			menuListener.switchto(menuPokematosMap.class);
+
+	}
+
+	@Override
+	void handleSelect() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	void handleStart() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
