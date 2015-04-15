@@ -16,35 +16,35 @@
 			power="9999" type="3" pre="30" CC="7" element="Sol" maxPP="8" effet="Normal">
 		</Abime>
 		<Acidarmure
-			ID="3" effetProc="10" class="AtkCs"
+			ID="3" effetProc="10" class="AtkCS"
 			nom="Aciarmure"
 			description="Le lanceur modifie sa structure moleculaire pour se liquefier et augmenter fortement sa Defense. "
 			power="0" type="3" pre="100" CC="0" element="Poison" maxPP="64" effet="Normal"
 			Tstats="34" ChangeProc="100" fof="1">
 		</Acidarmure>
 		<Acide
-			ID="5" effetProc="10" class="AtkCs"
+			ID="5" effetProc="10" class="AtkCS"
 			nom="Acide"
 			description="Le lanceur attaque l'ennemi avec un jet d'acide corrosif. Peut aussi baisser la Def. Spe de l'ennemi. "
 			power="40" type="5" pre="100" CC="7" element="Poison" maxPP="48" effet="Normal"
 			Tstats="06" ChangeProc="10" fof="0">
 		</Acide>
 		<Affutage
-			ID="7" effetProc="10" class="AtkCs"
+			ID="7" effetProc="10" class="AtkCS"
 			nom="Affutage"
 			description="Le lanceur reduit son nombre de polygones pour accentuer ses angles et augmenter son Attaque. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
 			Tstats="13" ChangeProc="100" fof="1">
 		</Affutage>
 		<Amnesie
-			ID="11" effetProc="10" class="AtkCs"
+			ID="11" effetProc="10" class="AtkCS"
 			nom="Amnesie"
 			description="Le lanceur fait le vide dans son esprit pour oubier ses soucis. Augmente fortement sa Def. Spe."
 			power="0" type="3" pre="100" CC="0" element="Psy" maxPP="32" effet="Normal"
 			Tstats="36" ChangeProc="100" fof="1">
 		</Amnesie>
 		<Armure
-			ID="13" effetProc="10" class="AtkCs"
+			ID="13" effetProc="10" class="AtkCS"
 			nom="Armure"
 			description="Contracte les muscles pour augmenter la Defense du lanceur d'un niveau. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
@@ -115,14 +115,14 @@
 			Tstats="08" ChangeProc="100" fof="0">
 		</Brume>-->
 		<!--<BueeNoire
-			ID="59" effetProc="10" class="AtkCs"
+			ID="59" effetProc="10" class="AtkCS"
 			nom="Buee Noire"
 			description="Le lanceur disperse un nuage d'encre ou de fumee. Reduit la precision de l'ennemi. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="32" effet="Normal"
 			Tstats="08" ChangeProc="100" fof="0">
 		</BueeNoire>-->
 		<BullesDo
-			ID="61" effetProc="10" class="AtkCs"
+			ID="61" effetProc="10" class="AtkCS"
 			nom="Bulles d'O"
 			description="Des bulles sont envoyees avec puissance sur l'ennemi. Peut aussi baisser sa Vitesse. "
 			power="65" type="5" pre="100" CC="7" element="Eau" maxPP="32" effet="Normal"
@@ -171,7 +171,7 @@
 			power="18" type="3" pre="80" CC="7" element="Normal" maxPP="24" effet="Normal">
 		</ComboGriffe>
 		<Constriction
-			ID="101" effetProc="10" class="AtkCs"
+			ID="101" effetProc="10" class="AtkCS"
 			nom="Constriction"
 			description="De longs tentacules ou lianes attaquent l'ennemi. Peut aussi baisser sa Vitesse. "
 			power="10" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal"
@@ -208,7 +208,7 @@
 			power="80" type="3" pre="90" CC="7" element="Normal" maxPP="15" effet="Peur">
 		</CrocFatal-->
 		<Croissance
-			ID="127" effetProc="10" class="AtkCs"
+			ID="127" effetProc="10" class="AtkCS"
 			nom="Croissance"
 			description="Le lanceur se developpe. Augmente l'Atq. Spe "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="64" effet="Normal"
@@ -264,21 +264,21 @@
 			power="40" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
 		</EcrasFace>
 		<Ecume
-			ID="173" effetProc="30" class="AtkCs"
+			ID="173" effetProc="30" class="AtkCS"
 			nom="Ecume"
 			description="De nombreuses bulles sont lancee à l'ennemi, peut baisser sa vitesse."
 			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
 			Tstats="07" ChangeProc="10" fof="0">
 		</Ecume>
 		<!--EmpalKorne
-			ID="179" effetProc="30" class="AtkCs"
+			ID="179" effetProc="30" class="AtkCS"
 			nom="Ecume"
 			description="De nombreuses bulles sont lancee à l'ennemi, peut baisser sa vitesse."
 			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
 			Tstats="07" ChangeProc="10" fof="0">
 		</EmpalKorne-->
 		<!--Entrave
-			ID="179" effetProc="30" class="AtkCs"
+			ID="179" effetProc="30" class="AtkCS"
 			nom="Ecume"
 			description="De nombreuses bulles sont lancee à l'ennemi, peut baisser sa vitesse."
 			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
@@ -358,7 +358,7 @@
 			power="55" type="3" pre="100" CC="7" element="Normal" maxPP="48" effet="Normal">
 		</Guillotine> OHKO ATK-->
 		<DanseLames	
-			ID="241" effetProc="10" class="AtkCs"
+			ID="241" effetProc="10" class="AtkCS"
 			nom="Danse-Lames"
 			description="Une danse frenetique qui augmente l'esprit combatif. Elle augmente fortement l'Attaque de l'utilisateur. "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
@@ -462,7 +462,7 @@
 			power="120" type="3" pre="100" CC="7" element="Normal" maxPP="24" effet="Normal">
 		</Damocles>
 		<MimiQueue	
-			ID="349" effetProc="30" class="AtkCs"
+			ID="349" effetProc="30" class="AtkCS"
 			nom="Mimi-Queue"
 			description="Le lanceur remue son adorable queue pour tromper la vigilance de l'ennemi et baisser sa Défense."
 			power="0" type="3" pre="100" CC="7" element="Normal" maxPP="48" effet="Normal"
@@ -487,7 +487,7 @@
 			power="25" type="3" pre="95" CC="7" element="Insecte" maxPP="32" effet="Normal">
 		</DardNuee>
 		<GrozYeux	
-			ID="373" effetProc="30" class="AtkCs"
+			ID="373" effetProc="30" class="AtkCS"
 			nom="Groz'Yeux"
 			description="Le lanceur fait les gros yeux à l'ennemi pour l'intimider et baisser sa Défense."
 			power="0" type="3" pre="100" CC="7" element="Normal" maxPP="48" effet="Normal"

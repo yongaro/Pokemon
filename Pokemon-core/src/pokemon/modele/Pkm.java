@@ -163,76 +163,76 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 
 	public void setIAbh(int iabh){ IAbh=iabh; }
 	
-	public void buff(String code){
+	public void buff(String code,Combat context){
 		for(char c:code.toCharArray()){
 		if(c=='3'){
-			System.out.println("l'attaque de "+this.nom+" augmente");
+			context.ajoutBuffer("l'attaque de "+this.nom+" augmente");
 			this.stats[3][0]=(this.stats[3][0]+(int)(this.stats[3][0]*0.15));
 		}
 		if(c=='4'){
-			System.out.println("la defense de "+this.nom+" augmente");
+			context.ajoutBuffer("la defense de "+this.nom+" augmente");
 			this.stats[4][0]=(this.stats[4][0]+(int)(this.stats[4][0]*0.15));
 		}
 		if(c=='5'){
-			System.out.println("l'attaque speciale de "+this.nom+" augmente");
+			context.ajoutBuffer("l'attaque speciale de "+this.nom+" augmente");
 			this.stats[5][0]=(this.stats[5][0]+(int)(this.stats[5][0]*0.15));
 		}
 		if(c=='6'){
-			System.out.println("la defense speciale de "+this.nom+" augmente");
+			context.ajoutBuffer("la defense speciale de "+this.nom+" augmente");
 			this.stats[6][0]=(this.stats[6][0]+(int)(this.stats[6][0]*0.15));
 		}
 		if(c=='7'){
-			System.out.println("la vitesse de "+this.nom+" augmente");
+			context.ajoutBuffer("la vitesse de "+this.nom+" augmente");
 			this.stats[7][0]=(this.stats[7][0]+(int)(this.stats[7][0]*0.15));
 		}
 		if(c=='8'){
-			System.out.println("la precision de "+this.nom+" augmente");
+			context.ajoutBuffer("la precision de "+this.nom+" augmente");
 			this.stats[8][0]=(this.stats[8][0]+(int)(this.stats[8][0]*0.15));
 		}
 		if(c=='9'){
 			if(this.stats[9][0]<=90){
-			System.out.println("l'esquive de "+this.nom+" augmente");
+				context.ajoutBuffer("l'esquive de "+this.nom+" augmente");
 			this.stats[9][0]+=10;
 			}
 			else{
-				System.out.println("l'esquive de "+this.nom+" ne peut plus augmenter");
+				context.ajoutBuffer("l'esquive de "+this.nom+" ne peut plus augmenter");
 			}
 		}
 		}
 	}
 
-	public void debuff(String code){
+	public void debuff(String code,Combat context){
 		for(char c:code.toCharArray()){
 		if(c=='3'){
-			System.out.println("l'attaque de "+this.nom+" diminue");
+			context.ajoutBuffer("l'attaque de "+this.nom+" diminue");
 			this.stats[3][0]=(this.stats[3][0]-(int)(this.stats[3][0]*0.15));
 		}
 		if(c=='4'){
-			System.out.println("la defense de "+this.nom+" diminue");
+			context.ajoutBuffer("la defense de "+this.nom+" diminue");
 			this.stats[4][0]=(this.stats[4][0]-(int)(this.stats[4][0]*0.15));
 		}
 		if(c=='5'){
-			System.out.println("l'attaque speciale de "+this.nom+" diminue");
+			context.ajoutBuffer("l'attaque speciale de "+this.nom+" diminue");
 			this.stats[5][0]=(this.stats[5][0]-(int)(this.stats[5][0]*0.15));
 		}
 		if(c=='6'){
-			System.out.println("la defense speciale de "+this.nom+" diminue");
+			context.ajoutBuffer("la defense speciale de "+this.nom+" diminue");
 			this.stats[6][0]=(this.stats[6][0]-(int)(this.stats[6][0]*0.15));
 		}
 		if(c=='7'){
-			System.out.println("la vitesse de "+this.nom+" diminue");
+			context.ajoutBuffer("la vitesse de "+this.nom+" diminue");
 			this.stats[7][0]=(this.stats[7][0]-(int)(this.stats[7][0]*0.15));
 		}
 		if(c=='8'){
-			System.out.println("la precision de "+this.nom+" diminue");
+			context.ajoutBuffer("la precision de "+this.nom+" diminue");
 			this.stats[8][0]=(this.stats[8][0]-(int)(this.stats[8][0]*0.15));
 		}
 		if(c=='9'){
 			if(this.stats[9][0]>=5){
-			System.out.println("l'esquive de "+this.nom+" diminue");
+				context.ajoutBuffer("l'esquive de "+this.nom+" diminue");
 			 this.stats[9][0]-=5; }
 			else{
-				System.out.println("l'esquive de "+this.nom+" ne peut plus diminuer");
+				context.ajoutBuffer("l'esquive de "+this.nom+" ne peut plus diminuer");
 			}
 		}
 		}

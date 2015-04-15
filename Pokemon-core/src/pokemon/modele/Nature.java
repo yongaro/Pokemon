@@ -4,7 +4,7 @@ import java.util.Random;
 
 public enum Nature {
 	Assure,Brave,Calme,Discret,Doux,Foufou,Gentil,Jovial,Lache,Malin,
-	Malpoli,Mauvais,Modeste,Naif,Pthisse,Prudent,Relax,Rigide,Solo,
+	Malpoli,Mauvais,Modeste,Naif,Presse,Prudent,Relax,Rigide,Solo,
 	Timide;
 	
 	public static Nature getRandom(Pkm cible){
@@ -100,7 +100,7 @@ public enum Nature {
 			cible.stats[7][0]+=(int)cible.stats[7][0]*0.1;
 			cible.stats[7][1]+=(int)cible.stats[7][1]*0.1;
 		}
-		if(this==Nature.Pthisse){//def- vit+
+		if(this==Nature.Presse){//def- vit+
 			cible.stats[4][0]-=(int)cible.stats[4][0]*0.1;
 			cible.stats[4][1]-=(int)cible.stats[4][1]*0.1;
 			cible.stats[7][0]+=(int)cible.stats[7][0]*0.1;
