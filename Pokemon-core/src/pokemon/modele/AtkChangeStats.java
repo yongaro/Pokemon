@@ -31,8 +31,8 @@ public class AtkChangeStats extends Atk {
 		if(touche==1 && esquive==0){
 			if(power>0){cible.infliger(this.atkdamage(user,cible,context,false));}
 			if(random.nextInt(100)<=ChangeProc){
-				if(fof==1){user.buff(Tstats);}
-				if(fof==0){cible.debuff(Tstats);}
+				if(fof==1){user.buff(Tstats,context);}
+				if(fof==0){cible.debuff(Tstats,context);}
 			}
 			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
 		

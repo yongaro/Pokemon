@@ -17,7 +17,7 @@
 	<CorpsSain ID=" " nom="Corps Sain"  description="Empeche les stats de diminuer"  flag="5"  > </CorpsSain>
 	<Crachin ID=" " nom="Crachin"  description="Il pleut tant que le pokemon est en jeu"  flag="11"  > </Crachin>
 	<Cran ID=" " nom="Cran"  description="Augmente l'attaque de 50% si le statut du pkm change"  flag="9"  > </Cran>
-	<Cuvette ID=" " nom="Cuvette"  description="S'il pleut  description= regenre 1/16 des pv a chaque fin de tour"  flag="7"  > </Cuvette>
+	<Cuvette ID=" " nom="Cuvette"  description="S'il pleut regenere 1/16 des pv a chaque fin de tour"  flag="7"  > </Cuvette>
 	<Deguisement ID=" " nom="Deguisement"  description="Change le type du pkm en celui de la derniere attaque subie"  flag="3"  > </Deguisement>
 	<EcailleSpeciale ID=" " nom="Ecaille Speciale"  description="Augmente DEF de 50% si le pkm change de statut"  flag="3"  > </EcailleSpeciale>
 	<Echauffement ID=" " nom="Echauffement"  description="Immunise contre la paralysie"  flag="3"  > </Echauffement>

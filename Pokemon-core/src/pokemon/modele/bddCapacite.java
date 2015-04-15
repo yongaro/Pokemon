@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.XmlReader.*;
 
 @Tps(nbhours=5)
 public enum bddCapacite {
-	Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,Eclair,Griffe,JetPierres,MegaSangsue,
+	Abime,Acidarmure,Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,Eclair,Griffe,JetPierres,MegaSangsue,
 	PoingDeFeu,PoingEclair,PoingGlace,RafalePsy,Repos,Seisme,Surf,Tonnerre,JetDeSable;
 
 	
@@ -35,6 +35,7 @@ public enum bddCapacite {
 			}
 			//La capacite courante est une AtkChangeStats		
 			if(e.get("class").compareTo("AtkCS")==0){
+				System.out.println(this.name());
 				this.cap=new AtkChangeStats(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
 						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"),e.get("Tstats"),
 						e.getInt("ChangeProc"),e.getInt("fof"));
