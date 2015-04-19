@@ -531,4 +531,5 @@ public class CombatV extends GameScreen implements InputProcessor{
 		friends.get(0).setP(c.getEquipe1()[i]);
 		friendHUD.get(0).setP(c.getEquipe1()[i]);
 	}
+
 }

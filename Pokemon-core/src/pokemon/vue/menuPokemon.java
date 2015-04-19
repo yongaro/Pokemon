@@ -50,6 +50,7 @@ public class menuPokemon  extends GameScreen {
 	int atkselector=1;
 	int offset=0;
 	int posx=0;
+	String types="";
 
 	int[] healthbars;
 
@@ -153,12 +154,7 @@ public class menuPokemon  extends GameScreen {
 			f.draw(stage.getBatch(),"XP "+joueur.getTeam()[pkselector].getmax(0)+"%",(210+405)-f.getBounds("XP "+joueur.getTeam()[pkselector].getmax(0)+"%").width, 285);
 			f.setScale(0.8f);
 			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getStatut().name(),310, 257);
-			String types="";
-			for(Type t:joueur.getTeam()[pkselector].getType())
-			{
-				if(t!=null)
-				types+=" "+t.name();
-			}
+
 			f.draw(stage.getBatch(),types,(210+405)-f.getBounds(types).width, 257);
 			f.setScale(0.6f);
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
@@ -172,7 +168,8 @@ public class menuPokemon  extends GameScreen {
 
 			f.drawWrapped(stage.getBatch(),joueur.getTeam()[pkselector].getCapP().getDesc(),365,185,260);
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
-				   
+			if( joueur.getTeam()[pkselector].getObjTenu()!=null)
+			f.draw(stage.getBatch(), joueur.getTeam()[pkselector].getObjTenu().getNom(), 220, 150);
 			f.draw(stage.getBatch(),joueur.getTeam()[pkselector].getCap().at(atkselector-1).getNom(),400,115);
 			f.draw(stage.getBatch(),""+joueur.getTeam()[pkselector].getCap().at(atkselector-1).getPower(),(210+405)-f.getBounds(""+joueur.getTeam()[pkselector].getCap().at(atkselector-1).getPower()).width,115);
 			offset=0;	   
@@ -188,7 +185,7 @@ public class menuPokemon  extends GameScreen {
 			for(int i=0;i<joueur.teamSize();i++) //liste des pokemons
 			{
 				f.draw(stage.getBatch(),joueur.getTeam()[i].getNom(),35,268-offset);
-				if(healthbars[i]<(joueur.getTeam()[i].get(2)*140)/joueur.getTeam()[i].getmax(2))
+				if(healthbars[i]+delta*100f<(joueur.getTeam()[i].get(2)*140)/joueur.getTeam()[i].getmax(2))
 					healthbars[i]+=delta*100f;
 				offset+=45;
 			}
@@ -224,6 +221,12 @@ public class menuPokemon  extends GameScreen {
 			texture = new Texture(Gdx.files.internal("Sprites/"+joueur.getTeam()[pkselector].getID()+".png")); /*pick random pkm*/
 		else
 			texture = new Texture(Gdx.files.internal("Sprites/0.png"));
+		types="";
+		for(Type t:joueur.getTeam()[pkselector].getType())
+		{
+			if(t!=null)
+			types+=" "+t.name();
+		}
 	}
 
 

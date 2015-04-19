@@ -27,21 +27,28 @@ public class PokematosMapMenuListener implements InputProcessor{
 		this.menuListener=menuListener;
 
 	}
-	
+
 	public boolean keyDown(int arg0) {
 		if(myGdxGame.getScreen()==menu)
 		{
 			System.out.println("Input detected");
-		switch(arg0){
-		case Keys.DOWN:
-			if(minimap.getCities().get(actualcity).hasNeighbourAt("South"))
-				actualcity=minimap.getCities().indexOf(minimap.getCities().get(actualcity).getNeighbour("South"));
-		menu.update(actualcity);
-		case Keys.ENTER:
-			joueur.setCurrentMap(new Map("maps/test.tmx"));
-			myGdxGame.setScreen(new MapScreen(myGdxGame));
+			switch(arg0){
+			
+			case Keys.DOWN:
+				if(minimap.getCities().get(actualcity).hasNeighbourAt("South"))
+					actualcity=minimap.getCities().indexOf(minimap.getCities().get(actualcity).getNeighbour("South"));
+				break;
+			case Keys.UP:
+				if(minimap.getCities().get(actualcity).hasNeighbourAt("North"))
+					actualcity=minimap.getCities().indexOf(minimap.getCities().get(actualcity).getNeighbour("North"));
+				break;
+			case Keys.ENTER:
+				joueur.setCurrentMap(new Map("maps/test.tmx"));
+				myGdxGame.setScreen(new MapScreen(myGdxGame));
+				break;
+			}		
+			menu.update(actualcity);
 			return true;
-		}
 		}
 		return false;
 	}

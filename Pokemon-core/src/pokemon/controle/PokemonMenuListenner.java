@@ -207,6 +207,7 @@ public class PokemonMenuListenner extends GameInput{
 			System.out.print("OK");
 			menuListener.switchto(menuInventaire.class);
 			menuListener.setState(1);
+			menuListener.slotPokemon=pkselector;
 		}
 	}
 

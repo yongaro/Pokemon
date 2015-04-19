@@ -15,6 +15,7 @@ public enum Pokedex {
 	protected Pkm pkm;
 	
 	protected String description;
+
 	//liste des capacites apprises et evolutions lors de la progression
 	protected Event[] events;
 	//Base de la recompense d'experience donnee a l'adversaire en cas de défaite du pokemon
@@ -23,7 +24,14 @@ public enum Pokedex {
 	protected CapacitePassive[] capP;
 	XmlReader reader = new XmlReader();
 
-	
+		public String getDescription() {
+		return description;
+	}
+		
+	public CapacitePassive[] getCapP() {
+			return capP;
+		}
+
 	Pokedex(){
 		Element pk; Element subtemp;
 		try{

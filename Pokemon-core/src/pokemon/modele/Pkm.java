@@ -263,6 +263,10 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 	public String getDesc(){return "";}
 	public String getInfos(){return "";}
 	public long getAttacks(){return attacks;}
+	public Objet getObjTenu() {
+		return objTenu;
+	}
+
 	public void setAttacks(long l){attacks=l;}
 	
 	public Stockage<Capacite> getCap(){

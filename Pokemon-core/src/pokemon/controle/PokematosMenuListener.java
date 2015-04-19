@@ -3,6 +3,7 @@ package pokemon.controle;
 import java.util.Vector;
 
 import pokemon.launcher.MyGdxGame;
+import pokemon.modele.Pokedex;
 import pokemon.vue.menuInventaire;
 import pokemon.vue.menuPokematos;
 import pokemon.vue.menuPokematosMap;
@@ -160,7 +161,7 @@ public class PokematosMenuListener extends GameInput{
 	@Override
 	void handleB() {
 		// TODO Auto-generated method stub
-		if(state==3)
+		if(state<=3 && state>1)
 			state--;
 		if(state==4){
 			for(Actor a:menu.getStage().getActors())
@@ -204,11 +205,12 @@ public class PokematosMenuListener extends GameInput{
 	@Override
 	void handleDown() {
 		// TODO Auto-generated method stub
+		System.out.println("Pokedex lenght: "+ Pokedex.values().length);
 		if(state==2){
-			if(pkselector<6 && page+pkselector<nom.size())
+			if(pkselector<6 && page+pkselector<Pokedex.values().length)
 				pkselector++;
 			else
-				if(pkselector==6 && page+7<nom.size()){
+				if(pkselector==6 && page+7<Pokedex.values().length){
 					page+=6;pkselector=1;}
 		}
 		if(state==3){

@@ -3,6 +3,10 @@ package pokemon.vue;
 import java.util.Vector;
 
 import pokemon.launcher.MyGdxGame;
+import pokemon.modele.Pokedex;
+import pokemon.modele.Type;
+
+import android.graphics.Paint.Cap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -29,6 +33,7 @@ public class menuPokematos extends  GameScreen{
 	int offset;
 	Texture spritepokemon,map;
 	Vector<String> nom=new Vector<String>();
+	String types;
 
 	public menuPokematos(MyGdxGame myGdxGame) {
 		
@@ -40,6 +45,7 @@ public class menuPokematos extends  GameScreen{
 		this.state = 1;
 		for(int i=0;i<20;i++)
 			nom.add("Pokemon "+i);
+		types="";
 	}
 
 	
@@ -91,14 +97,12 @@ public class menuPokematos extends  GameScreen{
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
 		shapeRenderer.rect(45,280, 185, 41);
 
-		/*Drawing right bottom menu*/
+		/*Drawing left bottom menu*/
 		shapeRenderer.setColor(1, 1, 1, 1);
 		shapeRenderer.rect(240,10, 175, 110);
-		//shapeRenderer.setColor(1, 1, 1, 1);
-		//shapeRenderer.rect(415,10, 240, 110);
-		/*object banner*/
-		//shapeRenderer.rect(240,125, 150,60); 
+		/*Drawing right bottom menu*/
 		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
+		shapeRenderer.rect(415,10, 210, 110);
 		/*capacity definition banner*/
 		//shapeRenderer.rect(400,125, 265, 60);
 		/*capacity banner*/
@@ -143,24 +147,37 @@ public class menuPokematos extends  GameScreen{
 		f.setColor(0.58f, 0.59f, 0.57f, 1);	
 		f.setScale(0.9f);
 		offset=0;
-		for(int i=page;i<Math.min(page+6,nom.size());i++) //liste des pokemons
+		for(int i=page;i<Math.min(page+6,Pokedex.values().length);i++) //liste des pokemons
 		{
-			f.draw(stage.getBatch(),nom.get(i),65,268-offset);
+			f.draw(stage.getBatch(),Pokedex.values()[i].get().getNom(),65,268-offset);
 			offset+=46;
 		}
-		f.setScale(1.2f);
+	
 		f.draw(stage.getBatch(),"Cri",260,110);
 		f.draw(stage.getBatch(),"Location",260,55);
 		//offset+=27.5;
 		f.setColor(1, 1, 1, 1);
 
 		f.setScale(1.2f);
-		f.draw(stage.getBatch(),nom.get(pkselector-1),340, 315);
+		f.draw(stage.getBatch(),Pokedex.values()[page+pkselector-1].get().getNom(),340, 315);
+		f.setScale(0.6f);
+		f.setColor(0.58f, 0.59f, 0.57f, 1);
+		f.draw(stage.getBatch(),"Att: "+Pokedex.values()[page+pkselector-1].get().get(3)+" / AttSpe: "+Pokedex.values()[page+pkselector-1].get().get(5),250,235);
+		f.draw(stage.getBatch(),"Def: "+Pokedex.values()[page+pkselector-1].get().get(4)+" / DefSpe: "+Pokedex.values()[page+pkselector-1].get().get(6),250,220);
+		f.draw(stage.getBatch(),"Vitesse: "+Pokedex.values()[page+pkselector-1].get().get(7),(210+405)-f.getBounds("Vitesse: "+Pokedex.values()[page+pkselector-1].get().get(7)).width,235);
 		f.setScale(0.9f);
+		f.setColor(1, 1, 1, 1);
+		f.draw(stage.getBatch(),types,(210+405)-f.getBounds(types).width, 257);
 
-		f.drawWrapped(stage.getBatch(), "Ses ailes peuvent le faire voler � plus de 1400 m d'altitude. Ce Pokemon crache du feu a des temperatures tres �levees. ",245, 200, 380);
 
-		
+		f.drawWrapped(stage.getBatch(), Pokedex.values()[page+pkselector-1].getDescription(),245, 200, 380);
+		f.draw(stage.getBatch(),"Capacites passives",420,120);
+		f.setScale(0.7f);
+		offset=0;
+		for(int i=0;i<Pokedex.values()[page+pkselector-1].getCapP().length;i++){
+			f.draw(stage.getBatch(),Pokedex.values()[page+pkselector-1].getCapP()[i].getNom(),430,95-offset);
+			offset+=20;
+		}
 		stage.getBatch().draw(spritepokemon,247,(410-25)*0.6f,(int)(spritepokemon.getWidth())*0.95f,(int)(spritepokemon.getHeight()*0.95f));
 		if(state==4)
 		stage.getBatch().draw(map,340-map.getWidth()/2,165-map.getHeight()/2,map.getWidth(),map.getHeight());
@@ -192,7 +209,7 @@ public class menuPokematos extends  GameScreen{
 
 	public void show() {
 		
-		spritepokemon=new Texture(Gdx.files.internal("Sprites/"+pkselector+".png"));
+		update(state, pkselector, page, optselector);
 	
 	}
 		
@@ -209,6 +226,12 @@ public class menuPokematos extends  GameScreen{
 		System.out.println(state+" "+pkselector+" "+page);
 		spritepokemon=new Texture(Gdx.files.internal("Sprites/"+(pkselector+page)+".png"));
 		Gdx.graphics.requestRendering();
+		types="";
+		for(Type t:Pokedex.values()[page+pkselector-1].get().getType())
+		{
+			if(t!=null)
+			types+=" "+t.name();
+		}
 		
 	}
 

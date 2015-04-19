@@ -111,7 +111,8 @@ public class InventaireMenuListener extends GameInput{
 	void handleA() {
 		// TODO Auto-generated method stub
 		if(state==2 && this.menuListener.state==1){
-			System.out.println("Je donne"+objets.get(objselector[0]+displayedAtk+7*objselector[1]));
+			System.out.println("Je donne"+joueur.getPoche(pktselector-1).at(objselector[0]+displayedAtk+7*objselector[1]).getNom()+" a "+ joueur.getTeam()[menuListener.slotPokemon].getNom());
+			joueur.getTeam()[menuListener.slotPokemon].give(joueur.getPoche(pktselector-1).at(objselector[0]+displayedAtk+7*objselector[1]));
 		}
 		if(state==3){
 			menuListener.slotInventaire[0]=pktselector-1;
