@@ -227,4 +227,7 @@ public class NPC {
 			dialogs.add(new Dialog());
 		}
 	}
+	public Vector2 getDimensions() {
+		return new Vector2(16, 16);
+	}
 }

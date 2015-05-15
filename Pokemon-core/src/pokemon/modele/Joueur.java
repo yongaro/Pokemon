@@ -280,6 +280,10 @@ public class Joueur implements CombatInfos {
 	public void setOrientation(Direction orientation) {
 		this.orientation = orientation;
 	}
+	public Vector2 getDimensions()
+	{
+		return new Vector2(spriteWidth, spriteHeight);
+	}
 	
 	public Pkm teamAt(int ind){ return team[ind]; }
 	public Pkm[] Team(){ return team; }

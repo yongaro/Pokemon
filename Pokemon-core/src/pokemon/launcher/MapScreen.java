@@ -21,9 +21,13 @@ import pokemon.vue.NPCVue;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -53,6 +57,9 @@ public class MapScreen implements Screen{
     
     //Attribut sonore
     private Music music;
+    
+    //Test
+    private Rectangle interactRegion;
 
     //Constructeurs
     public MapScreen(MyGdxGame game) {
@@ -127,8 +134,12 @@ public class MapScreen implements Screen{
 		if(talkingNPC != null && box == null) {
 			updateCutscene(j);
 		}
+		
+		//On vérifie si le joueur est aggro par un PNJ
+		detectBattle();
 	}
 	
+
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
@@ -155,22 +166,25 @@ public class MapScreen implements Screen{
 		if(talkingNPC == null) {
 			//... on recupere le NPC cible.
 			talkingNPC = j.getCurrentMap().getNPC(j);
-			switch(j.getOrientation()) {
-			case East:
-				talkingNPC.setOrientation(Direction.West);
-				break;
-			case North:
-				talkingNPC.setOrientation(Direction.South);
-				break;
-			case South:
-				talkingNPC.setOrientation(Direction.North);
-				break;
-			case West:
-				talkingNPC.setOrientation(Direction.East);
-				break;
-			default:
-				break;
-			
+			if(talkingNPC != null)
+			{				
+				switch(j.getOrientation()) {
+				case East:
+					talkingNPC.setOrientation(Direction.West);
+					break;
+				case North:
+					talkingNPC.setOrientation(Direction.South);
+					break;
+				case South:
+					talkingNPC.setOrientation(Direction.North);
+					break;
+				case West:
+					talkingNPC.setOrientation(Direction.East);
+					break;
+				default:
+					break;
+					
+				}
 			}
 		}
 		if(talkingNPC != null && talkingNPC.getMoveDistance() <= 0) {
@@ -252,5 +266,68 @@ public class MapScreen implements Screen{
 			NPCVue npcvue = new NPCVue(npc);
 			npcs.add(npcvue);
 		}
+	}
+	
+	private void detectBattle() {
+		//Pour chaque NPC de la map, on cherche si le joueur est dans la portée
+		for(NPC npc : j.getCurrentMap().getNpcs()) {
+			Direction dir = npc.getOrientation();
+			Vector2 pos = npc.getPos();
+			Vector2 dim = npc.getDimensions();
+			
+			//On construit la zone d'intéraction du personnage
+			interactRegion = getInteractRegion(pos, dim, dir);	
+			
+			//On vérifie si le joueur est dans cette zone
+			Rectangle playerHitbox = new Rectangle(j.getPos().x, j.getPos().y-16, j.getDimensions().x, j.getDimensions().y - 5);
+			if(interactRegion.overlaps(playerHitbox))
+			{
+				System.out.println("NPC : " + pos);
+				System.out.println("Region : " + interactRegion);
+				
+				//On déclenche la cinématique de combat
+				
+			}
+		}
+	}
+	
+	private Rectangle getInteractRegion(Vector2 pos, Vector2 dim, Direction dir){
+		float dist = 50; // valeur a modifier
+		float thickness = 6;
+		Rectangle interactRegion = new Rectangle();
+		switch(dir)
+		{
+		case East:
+			interactRegion.x = pos.x + dim.y;
+			interactRegion.y = pos.y + (dim.y / 2) - (thickness / 2);
+			interactRegion.width = dist;
+			interactRegion.height = thickness;
+			break;
+		case North:
+			interactRegion.x = pos.x + (dim.x / 2) - (thickness / 2);
+			interactRegion.y = pos.y + dim.x;
+			interactRegion.width = thickness;
+			interactRegion.height = dist;
+			break;
+		case South:
+			interactRegion.x = pos.x + (dim.x / 2) - (thickness / 2);
+			interactRegion.y = pos.y - dist;
+			interactRegion.width = thickness;
+			interactRegion.height = dist;
+			break;
+		case West:
+			interactRegion.x = pos.x - dist;
+			interactRegion.y = pos.y + (dim.x / 2) - (thickness / 2);
+			interactRegion.width = dist;
+			interactRegion.height = thickness;
+			break;
+		default:
+			interactRegion.x = pos.x + (dim.x / 2) - (thickness / 2);
+			interactRegion.y = pos.y - dist;
+			interactRegion.width = thickness;
+			interactRegion.height = dist;
+			break;
+		}
+		return interactRegion;
 	}
 }

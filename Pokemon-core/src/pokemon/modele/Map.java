@@ -67,7 +67,8 @@ public class Map {
 				float y = Float.parseFloat(o.getProperties().get("y").toString());
 				if(o.getProperties().containsKey("name")) {
 					if(o.getProperties().containsKey("trainer")) {
-						npc = new Dresseur(o.getProperties().get("name").toString(), new Vector2(x, y));
+						boolean isAggressive = o.getProperties().containsKey("aggressive");
+						npc = new Dresseur(o.getProperties().get("name").toString(), new Vector2(x, y), isAggressive);
 					}
 					else {						
 						npc = new NPC(o.getProperties().get("name").toString(), new Vector2(x, y));
@@ -197,7 +198,7 @@ public class Map {
 		
 		//Pour chaque NPC de la map...
 		for(NPC npc : npcs) {
-			//... on v�rifie si un NPC se trouve au point cible ...
+			//... on verifie si un NPC se trouve au point cible ...
 			Rectangle npcHitbox = new Rectangle(npc.getPos().x, npc.getPos().y+16, 16, 16);
 			if(npcHitbox.contains(target)) {
 				//... et on renvoie le NPC en question.

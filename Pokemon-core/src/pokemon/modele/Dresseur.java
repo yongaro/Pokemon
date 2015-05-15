@@ -13,23 +13,29 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 
 @Tps(nbhours=3)
 public class Dresseur extends NPC implements CombatInfos {
+	private boolean aggressive;
 	private Vector<Pkm> team;
 	
 	//Constructeurs
 	public Dresseur() {
 		super();
+		setAggressive(false);
 	}
 	public Dresseur(String path) {
 		super(path);
+		setAggressive(false);
 	}
 	public Dresseur(Vector2 pos) {
 		super(pos);
+		setAggressive(false);
 	}
-	public Dresseur(String path, Vector2 pos) {
+	public Dresseur(String path, Vector2 pos, boolean isAggressive) {
 		super(path, pos);
+		setAggressive(isAggressive);
 	}
-	public Dresseur(String path, Vector2 pos, int status) {
+	public Dresseur(String path, Vector2 pos, int status, boolean isAggressive) {
 		super(path, pos, status);
+		setAggressive(isAggressive);
 	}
 	
 	//Fonctionnalitees principales
@@ -109,4 +115,11 @@ public class Dresseur extends NPC implements CombatInfos {
 	
 	public Pkm teamAt(int ind){ return this.team.elementAt(ind); }
 	public Pkm[] Team(){ return (Pkm[])team.toArray(); }
+	
+	public boolean isAggressive() {
+		return aggressive;
+	}
+	public void setAggressive(boolean aggressive) {
+		this.aggressive = aggressive;
+	}
 }

@@ -209,6 +209,7 @@
   </object>
   <object id="5" gid="2805" x="302.5" y="415" width="16" height="16">
    <properties>
+    <property name="agressive" value=""/>
     <property name="name" value="dresseurTest"/>
     <property name="trainer" value=""/>
    </properties>
