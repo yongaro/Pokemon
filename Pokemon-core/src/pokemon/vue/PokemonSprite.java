@@ -34,9 +34,7 @@ public class PokemonSprite extends Actor{
 	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
 	Music sonatq = Gdx.audio.newMusic(Gdx.files.internal("Sound/normaldamage.WAV"));
 	Music soneatq;
-	PokemonCombat p;
-	Combat c;
-	CombatV combatv;
+	BattleGroup myGroup;
 
 	private Vector2 pos;
     public PokemonSprite(Vector2 v,String nom){
@@ -50,20 +48,21 @@ public class PokemonSprite extends Actor{
  
     }
     ////
-    
-    public PokemonSprite(Vector2 v, PokemonCombat pc, Combat c,CombatV combatv){
+    public void setGroup(BattleGroup g)
+    {
+    	myGroup=g;
+    }
+    public PokemonSprite(Vector2 v, BattleGroup group){
     	super();
-    	this.c=c;
-    	this.combatv=combatv;
-    	p=pc;
-    	if(pc.isIA()){
-    		s=new Texture(Gdx.files.internal("Sprites/"+pc.getPkm().getID()+".png"));
+    	myGroup=group;
+    	if(myGroup.getpCombat().isIA()){
+    		s=new Texture(Gdx.files.internal("Sprites/"+myGroup.getpCombat().getPkm().getID()+".png"));
     		this.setBounds(60, 220, s.getWidth()*1.2f, s.getHeight()*1.2f);
     	}
     		
     	else{
  
-    		s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
+    		s=new Texture(Gdx.files.internal("Sprites/back/"+myGroup.getpCombat().getPkm().getID()+".png"));
        	   	this.setBounds(10, 60, s.getWidth()*1.2f, s.getHeight()*1.2f);
 
     	}
@@ -74,7 +73,7 @@ public class PokemonSprite extends Actor{
     }
     
     public void addSlideAction(){
-    	if(p!=null && p.isIA())
+    	if(myGroup.getpCombat()!=null && myGroup.getpCombat().isIA())
     		this.addAction(Actions.moveBy(400, 0, 1.6f));
     	if(pos.x>320)
     		this.addAction(Actions.moveTo(pos.x-420, pos.y, 1.6f));
@@ -89,33 +88,34 @@ public class PokemonSprite extends Actor{
    	}
     
     public void die(){
-    	if(p.isIA())
-    		this.addAction(Actions.moveBy(0,150, 0.3f));
+    	if(myGroup.getpCombat().isIA())
+    		this.addAction(Actions.sequence(Actions.moveBy(150,0, 0.3f),Actions.visible(false),Actions.moveBy(-150, 0,0.3f)));
     	else
-    		this.addAction(Actions.moveBy(0,-150, 0.3f));
+    		this.addAction(Actions.sequence(Actions.moveBy(-150,0, 0.3f),Actions.visible(false),Actions.moveBy(150, 0,0.3f)));
+
     	
     }
     public void attack(){
-    	if(p.getPkm()==c.getPCourant().getPkm()){
+    	if(myGroup.getpCombat().getPkm()==myGroup.getCombat().getPCourant().getPkm()){
     		//System.out.println("CALLING ATTACK "+p.getNom());
-    		if (p.isIA()){
+    		if (myGroup.getpCombat().isIA()){
     			this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
     					),Actions.moveBy(50, 40,0.2f)));
-    			if(c.getCapCur()!=null){
-    				System.out.println(c.getCapCur().getElement().name());
-    				ParticleEffects.valueOf(c.getCapCur().getElement().name()).AdvEffect(combatv);
+    			if(myGroup.getCombat().getCapCur()!=null){
+    				System.out.println(myGroup.getCombat().getCapCur().getElement().name());
+    				ParticleEffects.valueOf(myGroup.getCombat().getCapCur().getElement().name()).AdvEffect(myGroup.getCombatV());
     			}
     		}
     		else{
     			this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
-    			if(c.getCapCur()!=null){
-    				System.out.println(c.getCapCur().getElement().name());
-    				ParticleEffects.valueOf(c.getCapCur().getElement().name()).JoueurEffect(combatv);
+    			if(myGroup.getCombat().getCapCur()!=null){
+    				System.out.println(myGroup.getCombat().getCapCur().getElement().name());
+    				ParticleEffects.valueOf(myGroup.getCombat().getCapCur().getElement().name()).JoueurEffect(myGroup.getCombatV());
     			}
     			
     		}
-    		combatv.playEffect();
-    		switch(c.getCapCur().getElement()){
+    		myGroup.getCombatV().playEffect();
+    		switch(myGroup.getCombat().getCapCur().getElement()){
     		case Eau:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/127-Water02.ogg"));
     			break;
@@ -137,10 +137,10 @@ public class PokemonSprite extends Actor{
     	}
 
     public void hurt(){
-    	if(p.getPkm()==c.getCibleCourante().getPkm()){
+    	if(myGroup.getpCombat().getPkm()==myGroup.getCombat().getCibleCourante().getPkm()){
     		//System.out.println("CALLING HURT "+p.getNom());
 
-    		if (p.isIA()){
+    		if (myGroup.getpCombat().isIA()){
     			this.addAction(Actions.sequence(Actions.delay(0.6f),Actions.moveBy(-30,0,0.2f
     					),Actions.moveBy(60,0,0.2f),Actions.moveBy(-30,0,0.2f)));
     			
@@ -173,7 +173,7 @@ public class PokemonSprite extends Actor{
     public void draw (Batch batch, float parentAlpha) {
 
     	b.begin();
-    	if(p!=null)
+    	if(myGroup.getpCombat()!=null)
     	//System.out.println(p.getPkm().getNom()+"  "+getX());
     	if( (this.getX()<=461 && this.getX()>=459) || this.getX()==pos.x-420)
     		b.setColor(Color.WHITE);
@@ -196,20 +196,18 @@ public class PokemonSprite extends Actor{
     		son.play(0.5f);	
     	}
     }
-    public void setP(PokemonCombat p) {
-		this.p.setPokemon(p.getPkm());
-		System.out.print("SWAPPED "+p);
+    public void setP() {
+		//this.p.setPokemon(p.getPkm());
+		//System.out.print("SWAPPED "+p);
 		finished=false;
 		this.popPokemon();
-		if(p.isIA())
-			s=new Texture(Gdx.files.internal("Sprites/"+p.getPkm().getID()+".png"));
+		if(myGroup.getpCombat().isIA())
+			s=new Texture(Gdx.files.internal("Sprites/"+myGroup.getpCombat().getPkm().getID()+".png"));
 		else
-			s=new Texture(Gdx.files.internal("Sprites/back/"+p.getPkm().getID()+".png"));
+			s=new Texture(Gdx.files.internal("Sprites/back/"+myGroup.getpCombat().getPkm().getID()+".png"));
 	}
 
-	public PokemonCombat getP() {
-		return p;
-	}
+
   
 }
 

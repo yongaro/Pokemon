@@ -32,11 +32,9 @@ public class CombatV extends GameScreen implements InputProcessor{
 	MyGdxGame mygdxgame;
 	PokemonSprite e1;//=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
 	//PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
-	Vector<PokemonSprite> ennemies=new Vector<PokemonSprite>();
-	Vector<BattleHud> ennemiesHUD=new Vector<BattleHud>();
-	Vector<PokemonSprite> friends=new Vector<PokemonSprite>();
-	Vector<BattleHud> friendHUD=new Vector<BattleHud>();
-	PokemonSprite a=new PokemonSprite(PokemonSprite.a1,"trainerS.png");
+	Vector<BattleGroup> ennemies=new Vector<BattleGroup>();
+	Vector<BattleGroup> friends=new Vector<BattleGroup>();
+	BattleGroup a=new BattleGroup(new PokemonSprite(PokemonSprite.a1,"trainerS.png"));
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
 	//Pkm[] pkms=MyGdxGame.Jtest.getTeam();
 	Pkm pkm=MyGdxGame.Jtest.getTeam()[0];
@@ -68,32 +66,31 @@ public class CombatV extends GameScreen implements InputProcessor{
 			System.out.println(c.getPkmListe()[i].isIA());
 			if(this.c.getPkmListe()[i].isIA())
 			{
-				ennemies.add(new PokemonSprite(PokemonSprite.e1,c.getPkmListe()[i],c,this));
-				ennemiesHUD.add(new BattleHud(this,c.getPkmListe()[i]));
+				ennemies.add(new BattleGroup(PokemonSprite.e1,c,this,c.getPkmListe()[i]));
 			}
 			else{
-				friends.add(new PokemonSprite(PokemonSprite.a1,c.getPkmListe()[i],c,this));
-				friendHUD.add(new BattleHud(this,c.getPkmListe()[i]));
+				friends.add(new BattleGroup(PokemonSprite.a1,c,this,c.getPkmListe()[i]));
 			}
 		}
-		for(PokemonSprite e:ennemies)
-		{
-			stage.addActor(e);
-			e.addSlideAction();
-		}
 		stage.addActor(a);
-		a.addSlideAction();
+		for(BattleGroup g:ennemies)
+		{
+			stage.addActor(g);
+			g.getpSprite().addSlideAction();
+			//stage.addActor(g.getHud());
+		}
+		a.getpSprite().addSlideAction();
 		stage.addActor(dbox);
-		for(BattleHud eH:ennemiesHUD)
+		/*for(BattleHud eH:ennemiesHUD)
 		{
 			stage.addActor(eH);
-		}
+		}*/
 
 		//Demarrage de la musique
-		music = Gdx.audio.newMusic(Gdx.files.internal("musics/Legendary_Beasts.mp3"));
-		music.setLooping(true);
-		music.setVolume(0.2f);
-		music.play();
+	//	music = Gdx.audio.newMusic(Gdx.files.internal("musics/Legendary_Beasts.mp3"));
+		//music.setLooping(true);
+		//music.setVolume(0.2f);
+		//music.play();
 		attackanimation=true;
 		e=new ParticleEffect();
 		boom=new ParticleEffect();
@@ -199,7 +196,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		stage.getBatch().end();		
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 		//	System.out.println("PARTICLE PLAYING"+e.isComplete());
-
+		
 	}
 	@Override
 	public void resize(int arg0, int arg1) {
@@ -225,19 +222,20 @@ public class CombatV extends GameScreen implements InputProcessor{
 	@Override
 	public boolean keyDown(int arg0) {
 		switch(arg0){
+		
 		case Keys.ENTER:
 		{
-			if(state==0 && stage.getActors().get(1).getActions().size==0){
-				a.hideTrainer();
+			if(state==0 && a.getpSprite().getActions().size==0){
+				a.getpSprite().hideTrainer();
 				dbox.setMessage("En avant "+pkm.getNom());
-				for(PokemonSprite fr:friends){
-					stage.getActors().insert(0, fr);
-					fr.popPokemon();					
+				for(BattleGroup g:friends){
+					stage.getActors().insert(0, g);
+					g.getpSprite().popPokemon();					
 				}
-				for(BattleHud fr:friendHUD)
+			/*	for(BattleHud fr:friendHUD)
 				{
 					stage.addActor(fr);
-				}
+				}*/
 				state++;
 				break;
 			}
@@ -261,6 +259,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 					mpokemon=new CombatMenuPokemon(mygdxgame,this);
 				}
 				else{
+					textinc=0;
 					state++;
 				}
 				flag=selector;
@@ -278,15 +277,15 @@ public class CombatV extends GameScreen implements InputProcessor{
 			{//si qqchose a lire
 				if(textinc==1){
 					System.out.println("LAUNCHING ANIMATIONS");
-					for(PokemonSprite ps:ennemies)
+					for(BattleGroup g:ennemies)
 					{
-						ps.hurt();
-						ps.attack();
+						g.getpSprite().hurt();
+						g.getpSprite().attack();
 					}
-					for(PokemonSprite ps:friends)
+					for(BattleGroup g:friends)
 					{
-						ps.hurt();
-						ps.attack();
+						g.getpSprite().hurt();
+						g.getpSprite().attack();
 					}
 				}
 				state++;
@@ -302,17 +301,19 @@ public class CombatV extends GameScreen implements InputProcessor{
 				}
 				else{
 					//retval=null;
-
+					textinc=1;
 					for(int i=0;i<c.getPkmListe().length;i++){//acteurs des ennemis
 						//System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
 						//System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
 					//	System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
-						if(ennemies.get(i).getP().getSwap()!=-1){
+						if(ennemies.get(i).getpCombat().getSwap()!=-1){
 							state=8; //swapping ennemies
 							dbox.setMessage("Le pokemon ennemi est KO");
-							swap=ennemies.get(i).getP().getSwap();
+							ennemies.get(i).getpSprite().die();
+							ennemies.get(i).getHud().hide();
+							swap=ennemies.get(i).getpCombat().getSwap();
 							//ennemies.get(i).setP(c.getEquipe2()[swap]);
-							ennemiesHUD.get(i).hideRight();
+							//ennemies.get(i).getHud().hideRight();
 						}
 						i++;
 					}
@@ -340,9 +341,9 @@ public class CombatV extends GameScreen implements InputProcessor{
 			}
 			if(state==8){
 
-				ennemies.get(0).getP().setSwap(-1);
-				ennemies.get(0).setP(c.getEquipe2()[swap]);
-				ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
+				ennemies.get(0).getpCombat().setSwap(-1);
+				ennemies.get(0).setpCombat(c.getEquipe2()[swap]);
+				//ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
 				dbox.setWidth(width/2);
 				dbox.setMessage("Que faire ?");
 				state=2;
@@ -384,6 +385,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 			break;
 
 		}
+		System.out.println("TEXT INC :"+this.getTextinc());
+
 
 		return false;//
 	}
@@ -482,12 +485,12 @@ public class CombatV extends GameScreen implements InputProcessor{
 	}
 
 	public boolean healthbarLocked(){
-		for(int i=0;i<friendHUD.size();i++){
-			if(friendHUD.get(i).isLocked())
+		for(int i=0;i<friends.size();i++){
+			if(friends.get(i).isLocked())
 				return true;
 		}
-		for(int i=0;i<ennemiesHUD.size();i++){
-			if(ennemiesHUD.get(i).isLocked())
+		for(int i=0;i<ennemies.size();i++){
+			if(ennemies.get(i).isLocked())
 				return true;
 		}
 		return false;
@@ -528,8 +531,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 			}
 		}
 		pkm=p;
-		friends.get(0).setP(c.getEquipe1()[i]);
-		friendHUD.get(0).setP(c.getEquipe1()[i]);
+		friends.get(0).setpCombat(c.getEquipe1()[i]);
+		//friendHUD.get(0).setP(c.getEquipe1()[i]);
 	}
 
 }
