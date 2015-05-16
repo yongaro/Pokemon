@@ -2,11 +2,14 @@ package pokemon.vue;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public abstract class GameScreen implements Screen{
 	public static final int width=640;//Gdx.graphics.getWidth();
@@ -37,12 +40,16 @@ public abstract class GameScreen implements Screen{
 	
 	public void drawUI(float delta){
 		if(elapsedTime!=-1 && elapsedTime<300){
+			shapeRenderer.setProjectionMatrix(stage.getViewport().getCamera().combined);
+			shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 0.7f);
 			shapeRenderer.begin(ShapeType.Filled);
+			Gdx.gl.glEnable(GL20.GL_BLEND);
 			shapeRenderer.rect(35, 10, 30, 80);
 			shapeRenderer.rect(10, 35, 80, 30);
 			shapeRenderer.ellipse(550, 10, 80, 80);
 			shapeRenderer.ellipse(460,10, 80, 80);
 			shapeRenderer.end();
+			Gdx.gl.glDisable(GL20.GL_BLEND);
 			if(touched==false)
 					elapsedTime+=delta*150;
 		}
@@ -54,8 +61,6 @@ public abstract class GameScreen implements Screen{
 		if(touched){
 			elapsedTime=0;
 		}
-		
-
 	}
 
 }

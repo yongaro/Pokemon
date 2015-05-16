@@ -8,7 +8,7 @@ public abstract class GameInput implements InputProcessor{
 
 	GameInput() {
 	}
-	
+	Vector2 v=new Vector2();
 	abstract void handleA();
 	abstract void handleB();
 	abstract void handleLeft();
@@ -47,7 +47,7 @@ public abstract class GameInput implements InputProcessor{
 		if(v.x>35 && v.x<65 && v.y>65 && v.y<90)
 			handleUp();
 		if(v.x>10 && v.x<35 && v.y>35 && v.y<70)
-			{handleLeft();System.out.print("LEFT");}
+			handleLeft();
 		if(v.x>60 && v.x<90 && v.y>30 && v.y<70)
 			handleRight();
 		if(v.x>460 && v.x<540 && v.y>10 && v.y<80)

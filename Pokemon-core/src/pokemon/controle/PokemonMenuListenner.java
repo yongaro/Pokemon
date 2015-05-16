@@ -95,8 +95,9 @@ public class PokemonMenuListenner extends GameInput{
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if(menu==myGdxGame.getScreen()){
 			menu.setTouched(false);
-			Vector2 v=new Vector2(screenX,screenY);
+			v.set(screenX, screenY);
 			menu.getStage().screenToStageCoordinates(v);
+			System.out.println(v);
 			return super.touchUp(v);}
 		else
 			return false;
