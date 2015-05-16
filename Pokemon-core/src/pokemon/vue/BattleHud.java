@@ -118,7 +118,7 @@ public class BattleHud extends Actor{
 		else
 			addAction(Actions.parallel(Actions.moveBy(-210, 0,0.2f),Actions.visible(true)));
 
-		System.out.println("HUD NOW VISIBLE"+this.isVisible());
+		//System.out.println("HUD NOW VISIBLE"+this.isVisible());
 	}
 
 	public void draw (Batch batch, float parentAlpha) {

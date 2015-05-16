@@ -34,6 +34,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	//PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
 	Vector<BattleGroup> ennemies=new Vector<BattleGroup>();
 	Vector<BattleGroup> friends=new Vector<BattleGroup>();
+	PokeballGroup ballGroup=new PokeballGroup();
 	BattleGroup a=new BattleGroup(new PokemonSprite(PokemonSprite.a1,"trainerS.png"));
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
 	//Pkm[] pkms=MyGdxGame.Jtest.getTeam();
@@ -73,6 +74,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 			}
 		}
 		stage.addActor(a);
+		stage.addActor(ballGroup);
 		for(BattleGroup g:ennemies)
 		{
 			stage.addActor(g);
@@ -260,6 +262,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 						});
 					}
 				});
+				ballGroup.remove();
 				a.getpSprite().hideTrainer();
 				dbox.setMessage("En avant "+pkm.getNom());
 				for(BattleGroup g:friends){
