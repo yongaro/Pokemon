@@ -87,8 +87,18 @@ public class CombatV extends GameScreen implements InputProcessor{
 		}*/
 
 		//Demarrage de la musique
-		music = Gdx.audio.newMusic(Gdx.files.internal("musics/battleintro.ogg"));
-		music.setLooping(true);
+		music = Gdx.audio.newMusic(Gdx.files.internal("musics/battlestart.ogg"));
+		music.setOnCompletionListener(new Music.OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(Music arg0) {
+				music.stop();
+				music = Gdx.audio.newMusic(Gdx.files.internal("musics/battleintro.ogg"));
+				music.setVolume(0.2f);
+				music.play();
+				music.setLooping(true);
+			}
+		});
 		music.setVolume(0.2f);
 		music.play();
 		attackanimation=true;
