@@ -90,9 +90,8 @@ public class JoueurController extends GameInput{
 		screen.setTouched(false);
 		//v.set(x,y);
 		//screen.getStage().screenToStageCoordinates(v);
-		System.out.println("TouchUp: "+v);
-		if(v.x>35 && v.x<65 && v.y>10 && v.y<40){System.out.println("TouchSOUTH");
-			input.remove(Direction.South);}
+		if(v.x>35 && v.x<65 && v.y>10 && v.y<40)
+			input.remove(Direction.South);
 		if(v.x>35 && v.x<65 && v.y>65 && v.y<90)
 			input.remove(Direction.North);
 		if(v.x>10 && v.x<35 && v.y>35 && v.y<70)
@@ -116,7 +115,6 @@ public class JoueurController extends GameInput{
 		screen.setTouched(true);
 		v.set(x, y);
 		screen.getStage().screenToStageCoordinates(v);
-		System.out.println("TouchDown: "+v);
 		super.touchUp(v);
 		return false;
 	}

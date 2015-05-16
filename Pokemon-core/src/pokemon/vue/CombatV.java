@@ -87,10 +87,10 @@ public class CombatV extends GameScreen implements InputProcessor{
 		}*/
 
 		//Demarrage de la musique
-	//	music = Gdx.audio.newMusic(Gdx.files.internal("musics/Legendary_Beasts.mp3"));
-		//music.setLooping(true);
-		//music.setVolume(0.2f);
-		//music.play();
+		music = Gdx.audio.newMusic(Gdx.files.internal("musics/battleintro.ogg"));
+		music.setLooping(true);
+		music.setVolume(0.2f);
+		music.play();
 		attackanimation=true;
 		e=new ParticleEffect();
 		boom=new ParticleEffect();
@@ -226,6 +226,30 @@ public class CombatV extends GameScreen implements InputProcessor{
 		case Keys.ENTER:
 		{
 			if(state==0 && a.getpSprite().getActions().size==0){
+				music.setLooping(false);
+				music.setOnCompletionListener(new Music.OnCompletionListener() {
+					
+					@Override
+					public void onCompletion(Music m) {
+						m.stop();
+						m=Gdx.audio.newMusic(Gdx.files.internal("musics/battlemain.ogg"));
+						m.setVolume(0.2f);
+						music=m;
+						music.play();
+						music.setOnCompletionListener(new Music.OnCompletionListener() {
+							
+							@Override
+							public void onCompletion(Music m) {
+								System.out.println("ENTERRING MAIN LOOP");
+								music.stop();
+								music=Gdx.audio.newMusic(Gdx.files.internal("musics/battlemainloop.ogg"));
+								music.setVolume(0.2f);
+								music.setLooping(true);
+								music.play();
+							}
+						});
+					}
+				});
 				a.getpSprite().hideTrainer();
 				dbox.setMessage("En avant "+pkm.getNom());
 				for(BattleGroup g:friends){
@@ -423,7 +447,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		e.start();
 		//e.scaleEffect(1.2f);
 		boom.start();
-	
+		
 		//boom.scaleEffect(1.2f);
 	}
 	@Override
