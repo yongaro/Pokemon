@@ -64,7 +64,7 @@ public class BattleHud extends Actor{
 		if(myGroup.getCombatV().getTextinc()==2 && myGroup.getpCombat().getPkm().get(2)!=oldpv){		
 				locked=true; //verouillage
 		}
-		if(locked){
+		if(locked && myGroup.getpCombat().getPkm().get(2)!=oldpv){
 				//System.out.println("LOCKED");
 				if(myGroup.getpCombat().getPkm().get(2)>oldpv){ //Monter ou descendre les pdvs ?
 					increase=true;
@@ -108,16 +108,17 @@ public class BattleHud extends Actor{
 
 
 
-	public void setP() {
+	public void setP(boolean alive) {
 		pvperc[1]=(160*myGroup.getpCombat().getPkm().get(2))/myGroup.getpCombat().getPkm().getmax(2);
 		pvperc[0]=pvperc[1];
 		oldpv=myGroup.getpCombat().getPkm().get(2);
 		locked=false;
+		if(!alive){
 		if(myGroup.pCombat.isIA())
-		addAction(Actions.parallel(Actions.moveBy(210, 0,0.2f),Actions.visible(true)));
+			addAction(Actions.parallel(Actions.moveBy(210, 0,0.2f),Actions.visible(true)));
 		else
 			addAction(Actions.parallel(Actions.moveBy(-210, 0,0.2f),Actions.visible(true)));
-
+		}
 		//System.out.println("HUD NOW VISIBLE"+this.isVisible());
 	}
 
