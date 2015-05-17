@@ -40,6 +40,7 @@ public class BattleGroup extends Group{
 	}
 
 	public void setpCombat(PokemonCombat pCombat) {
+		boolean alive=(this.pCombat.getPkm().get(2)>0);
 		this.pCombat.setPokemon(pCombat.getPkm());
 		pSprite.setP();
 		hud.setP();
