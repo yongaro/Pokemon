@@ -24,7 +24,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class menuInventaire  extends GameScreen{
 
 	MyGdxGame myGdxGame;
-	MenuListener menuListener;
 	Joueur joueur= MyGdxGame.Jtest;
 	private Texture texture = new Texture(Gdx.files.internal("Dresseur.png"));
     int pktselector=1;
@@ -40,9 +39,7 @@ public class menuInventaire  extends GameScreen{
     	//this.previous=previous;
     	this.myGdxGame=myGdxGame;
     	//stage = new Stage(viewport);
-    	this.menuListener=menuListener;
     	//listener=new InventaireMenuListener(myGdxGame,previous,this);
-    	objets=InventaireMenuListener.objets;
     }
 	public void dispose() {
 		// TODO Auto-generated method stub

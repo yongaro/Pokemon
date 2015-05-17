@@ -15,6 +15,7 @@ import pokemon.modele.NPC;
 import pokemon.modele.NoMoreInstructionException;
 import pokemon.vue.CombatV;
 import pokemon.vue.DialogBox;
+import pokemon.vue.GameScreen;
 import pokemon.vue.JoueurVue;
 import pokemon.vue.NPCVue;
 
@@ -32,7 +33,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 @Tps(nbhours=10)
-public class MapScreen implements Screen{
+public class MapScreen extends GameScreen{
 	
 	private MyGdxGame game;
 	
@@ -90,6 +91,7 @@ public class MapScreen implements Screen{
 
 		renderer.getBatch().end();
 		stage.draw();
+		super.drawUI(delta);
 	}
 	@Override
 	public void resize(int arg0, int arg1) {

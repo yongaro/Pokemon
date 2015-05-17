@@ -100,8 +100,9 @@ public class InventaireMenuListener extends GameInput{
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if(inventaire==mygdxgame.getScreen()){
 			inventaire.setTouched(false);
-			Vector2 v=new Vector2(screenX,screenY);
+			v.set(screenX,screenY);
 			inventaire.getStage().screenToStageCoordinates(v);
+			System.out.println(v);
 			return super.touchUp(v);}
 		else
 			return false;
@@ -122,6 +123,8 @@ public class InventaireMenuListener extends GameInput{
 		}
 		if(state<3)
 			state++;
+		inventaire.update(state, pktselector, objselector[0], objselector[1], actionselector, displayedAtk);
+
 	}
 
 	@Override
@@ -129,6 +132,7 @@ public class InventaireMenuListener extends GameInput{
 		if(state!=1)
 		{
 			state--;
+			objselector[0]=objselector[1]=0;
 		}
 		
 	}
@@ -140,8 +144,11 @@ public class InventaireMenuListener extends GameInput{
 
 			System.out.println("Switch a partir de l'inventaire");
 			menuListener.switchto(menuPokemon.class);}
-		if(state==2 && objselector[1]==1)
+		if(state==2 && objselector[1]==1){
 			objselector[1]--;
+			inventaire.update(state, pktselector, objselector[0], objselector[1], actionselector, displayedAtk);
+		}
+
 	}
 
 	@Override
@@ -151,6 +158,8 @@ public class InventaireMenuListener extends GameInput{
 		{
 			objselector[1]++;
 			System.out.println(objets.get(objselector[0]+displayedAtk+7*objselector[1]));
+			inventaire.update(state, pktselector, objselector[0], objselector[1], actionselector, displayedAtk);
+
 
 		}
 		if(state==1){
@@ -180,6 +189,7 @@ public class InventaireMenuListener extends GameInput{
 		if(state==3)
 			if(actionselector!=1)
 				actionselector--;
+		inventaire.update(state, pktselector, objselector[0], objselector[1], actionselector, displayedAtk);
 	}
 
 	@Override
@@ -219,6 +229,8 @@ public class InventaireMenuListener extends GameInput{
 			if(actionselector<2)
 				actionselector++;
 		}
+		inventaire.update(state, pktselector, objselector[0], objselector[1], actionselector, displayedAtk);
+
 	}
 
 	@Override
