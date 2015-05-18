@@ -23,4 +23,16 @@ public class InstructionStatus extends Instruction{
 		}
 		return null;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getNewStatus() {
+		return newStatus;
+	}
+	public void setNewStatus(int newStatus) {
+		this.newStatus = newStatus;
+	}
 }

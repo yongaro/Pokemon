@@ -3,16 +3,15 @@ package pokemon.launcher;
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
+import pokemon.controle.Cinematique;
 import pokemon.controle.JoueurController;
 import pokemon.controle.MenuListener;
 import pokemon.modele.ChangeMapException;
 import pokemon.modele.Combat;
-import pokemon.modele.CombatException;
 import pokemon.modele.Direction;
+import pokemon.modele.Dresseur;
 import pokemon.modele.Joueur;
-import pokemon.modele.MovementException;
 import pokemon.modele.NPC;
-import pokemon.modele.NoMoreInstructionException;
 import pokemon.vue.CombatV;
 import pokemon.vue.DialogBox;
 import pokemon.vue.GameScreen;
@@ -20,12 +19,9 @@ import pokemon.vue.JoueurVue;
 import pokemon.vue.NPCVue;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -52,15 +48,12 @@ public class MapScreen extends GameScreen{
 	private OrthographicCamera cam;
 
     //Attributs cinematiques
-	private NPC talkingNPC;
+	private Cinematique cinematique = null;
 	private Stage stage;
     private DialogBox box = null;
     
     //Attribut sonore
     private Music music;
-    
-    //Test
-    private Rectangle interactRegion;
 
     //Constructeurs
     public MapScreen(MyGdxGame game) {
@@ -114,7 +107,12 @@ public class MapScreen extends GameScreen{
 		stage = new Stage(new FitViewport(width,height,cam));
 		
 		//Definition de l'input
-		Gdx.input.setInputProcessor(controller);
+		if(cinematique == null) {
+			Gdx.input.setInputProcessor(controller);
+		}
+		else {
+			Gdx.input.setInputProcessor(cinematique.getController());
+		}
 	}
 	public void update(float delta)
 	{
@@ -133,8 +131,13 @@ public class MapScreen extends GameScreen{
 		}
 		
 		//On met a jour la cinematique en cas de mouvement de personnage.
-		if(talkingNPC != null && box == null) {
-			updateCutscene(j);
+		if(cinematique != null) {
+			//On update la cinematique...
+			if(!cinematique.update()) {
+				//... et si elle est finie, on l'enlève.
+				cinematique = null;
+				Gdx.input.setInputProcessor(controller);
+			}
 		}
 		
 		//On vérifie si le joueur est aggro par un PNJ
@@ -164,87 +167,109 @@ public class MapScreen extends GameScreen{
 	
 	//Autres fonctions
 	public void updateCutscene(Joueur j) {
-		//Si aucune cinematique est en train d'etre jouee ...
-		if(talkingNPC == null) {
-			//... on recupere le NPC cible.
-			talkingNPC = j.getCurrentMap().getNPC(j);
-			if(talkingNPC != null)
-			{				
-				switch(j.getOrientation()) {
-				case East:
-					talkingNPC.setOrientation(Direction.West);
-					break;
-				case North:
-					talkingNPC.setOrientation(Direction.South);
-					break;
-				case South:
-					talkingNPC.setOrientation(Direction.North);
-					break;
-				case West:
-					talkingNPC.setOrientation(Direction.East);
-					break;
-				default:
-					break;
-					
-				}
+//		//Si aucune cinematique est en train d'etre jouee ...
+//		if(talkingNPC == null) {
+//			//... on recupere le NPC cible.
+//			talkingNPC = j.getCurrentMap().getNPC(j);
+//			if(talkingNPC != null)
+//			{				
+//				switch(j.getOrientation()) {
+//				case East:
+//					talkingNPC.setOrientation(Direction.West);
+//					break;
+//				case North:
+//					talkingNPC.setOrientation(Direction.South);
+//					break;
+//				case South:
+//					talkingNPC.setOrientation(Direction.North);
+//					break;
+//				case West:
+//					talkingNPC.setOrientation(Direction.East);
+//					break;
+//				default:
+//					break;
+//					
+//				}
+//			}
+//		}
+//		if(talkingNPC != null && talkingNPC.getMoveDistance() <= 0) {
+//			String textToDisplay = null;
+//			boolean isCutsceneEnded = false;
+//			//Tant qu'on a pas de texte ...
+//			while(textToDisplay == null) {
+//				try {
+//					//... on exectue le dialogue du NPC.
+//					textToDisplay = j.interact(talkingNPC, MyGdxGame.npcList);
+//				} catch (NoMoreInstructionException e) {
+//					//Si le dialogue est fini, on quitte la boucle.
+//					isCutsceneEnded = true;
+//					break;
+//				} catch (MovementException e) {
+//					//Si un personnage doit bouger, on detruit la boite de dialogue (si il y en a une).
+//					if(box != null) {
+//						stage.clear();
+//						box.remove();
+//						box = null;
+//					}
+//					//Enfin, on sort de la boucle.
+//					break;
+//				} catch (CombatException e) {
+//					//Si le dresseur a une equipe...
+//					if(e.getDresseur()!= null) {
+//						//... on lance un combat
+//						music.stop();
+//						Combat c = new Combat(j, e.getDresseur());
+//						c.start();
+//						game.setScreen(new CombatV(c,game));
+//					}
+//				}
+//			}
+//			//Si on a un texte a afficher ...
+//			if(textToDisplay != null) {
+//				//... alors si il n'y a pas de boite ...
+//				if(box == null) {
+//					//... alors on cree une nouvelle boite, et on met le joueur en mode cinematique.
+//					j.setMove(false);
+//					box = new DialogBox(textToDisplay);
+//					stage.addActor(box);
+//				}
+//				//... sinon ...
+//				else {
+//					//... on met a jour la boite existante.
+//					box.setMessage(textToDisplay);
+//				}
+//			}
+//			//... sinon, si aucun texte n'est a afficher ...
+//			else if(box != null && isCutsceneEnded) {
+//				//... on detruit la boite.
+//				j.setMove(true);
+//				stage.clear();
+//				box.remove();
+//				box = null;
+//				talkingNPC = null;
+//			}
+//		}
+		NPC talkingNPC = j.getCurrentMap().getNPC(j);
+		if(talkingNPC != null) {
+			//On change l'orientation du NPC
+			switch(j.getOrientation()) {
+			case East:
+				talkingNPC.setOrientation(Direction.West);
+				break;
+			case North:
+				talkingNPC.setOrientation(Direction.South);
+				break;
+			case South:
+				talkingNPC.setOrientation(Direction.North);
+				break;
+			case West:
+				talkingNPC.setOrientation(Direction.East);
+				break;
+			default:
+				break;			
 			}
-		}
-		if(talkingNPC != null && talkingNPC.getMoveDistance() <= 0) {
-			String textToDisplay = null;
-			boolean isCutsceneEnded = false;
-			//Tant qu'on a pas de texte ...
-			while(textToDisplay == null) {
-				try {
-					//... on exectue le dialogue du NPC.
-					textToDisplay = j.interact(talkingNPC, MyGdxGame.npcList);
-				} catch (NoMoreInstructionException e) {
-					//Si le dialogue est fini, on quitte la boucle.
-					isCutsceneEnded = true;
-					break;
-				} catch (MovementException e) {
-					//Si un personnage doit bouger, on detruit la boite de dialogue (si il y en a une).
-					if(box != null) {
-						stage.clear();
-						box.remove();
-						box = null;
-					}
-					//Enfin, on sort de la boucle.
-					break;
-				} catch (CombatException e) {
-					//Si le dresseur a une equipe...
-					if(e.getDresseur()!= null) {
-						//... on lance un combat
-						music.stop();
-						Combat c = new Combat(j, e.getDresseur());
-						c.start();
-						game.setScreen(new CombatV(c,game));
-					}
-				}
-			}
-			//Si on a un texte a afficher ...
-			if(textToDisplay != null) {
-				//... alors si il n'y a pas de boite ...
-				if(box == null) {
-					//... alors on cree une nouvelle boite, et on met le joueur en mode cinematique.
-					j.setMove(false);
-					box = new DialogBox(textToDisplay);
-					stage.addActor(box);
-				}
-				//... sinon ...
-				else {
-					//... on met a jour la boite existante.
-					box.setMessage(textToDisplay);
-				}
-			}
-			//... sinon, si aucun texte n'est a afficher ...
-			else if(box != null && isCutsceneEnded) {
-				//... on detruit la boite.
-				j.setMove(true);
-				stage.clear();
-				box.remove();
-				box = null;
-				talkingNPC = null;
-			}
+			cinematique = new Cinematique(this, talkingNPC);
+			Gdx.input.setInputProcessor(cinematique.getController());
 		}
 	}
 	
@@ -260,6 +285,40 @@ public class MapScreen extends GameScreen{
 		music.setVolume(0.3f);
 		music.setLooping(true);
 		music.play();
+	}
+	
+	public void addBox(String text) {
+		//Si il n'y a pas déja de boite de dialogue...
+		if(box == null) {
+			//... on en crée une avec le texte fourni
+			box = new DialogBox(text);
+			stage.addActor(box);
+		}
+		else {
+			box.setMessage(text);
+		}
+	}
+	
+	public void removeBox() {
+		//Si une boite de dialogue existe ...
+		if(box != null) {			
+			//... on l'enlève
+			System.out.println("Remove()");
+			stage.clear();
+			box.remove();
+			box = null;
+		}
+	}
+	
+	public void startBattle(Dresseur dress) {
+		music.stop();
+		Combat c = new Combat(j, dress);
+		c.start();
+		game.setScreen(new CombatV(c,game));
+	}
+	
+	public NPC getNPCById(int i) {
+		return j.getCurrentMap().getNPCById(i);
 	}
 	
 	//Fonctions privees
@@ -278,14 +337,14 @@ public class MapScreen extends GameScreen{
 			Vector2 dim = npc.getDimensions();
 			
 			//On construit la zone d'intéraction du personnage
-			interactRegion = getInteractRegion(pos, dim, dir);	
+			Rectangle interactRegion = getInteractRegion(pos, dim, dir);	
 			
 			//On vérifie si le joueur est dans cette zone
 			Rectangle playerHitbox = new Rectangle(j.getPos().x, j.getPos().y-16, j.getDimensions().x, j.getDimensions().y - 5);
 			if(interactRegion.overlaps(playerHitbox))
 			{
-				System.out.println("NPC : " + pos);
-				System.out.println("Region : " + interactRegion);
+//				System.out.println("NPC : " + pos);
+//				System.out.println("Region : " + interactRegion);
 				
 				//On déclenche la cinématique de combat
 				
@@ -332,4 +391,5 @@ public class MapScreen extends GameScreen{
 		}
 		return interactRegion;
 	}
+
 }

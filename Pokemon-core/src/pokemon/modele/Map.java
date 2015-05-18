@@ -235,4 +235,12 @@ public class Map {
 	public Vector<NPC> getNpcs() {
 		return npcs;
 	}
+	public NPC getNPCById(int i) {
+		for(NPC npc : npcs) {
+			if(npc.getId() == i) {
+				return npc;
+			}
+		}
+		return null;
+	}
 }

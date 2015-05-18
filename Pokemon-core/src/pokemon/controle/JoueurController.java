@@ -131,7 +131,6 @@ public class JoueurController extends GameInput{
 
 	@Override
 	void handleA() {
-
 		screen.updateCutscene(j);
 	}
 

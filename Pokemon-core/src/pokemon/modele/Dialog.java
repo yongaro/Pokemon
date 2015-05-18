@@ -34,8 +34,22 @@ public class Dialog {
 	}
 	
 	//Accesseurs
-	public int getCurrent() {
+	public Instruction getCurrent() throws NoMoreInstructionException {
+		if(currentInstruction < getCount()) {			
+			return instructions.get(currentInstruction);
+		}
+		else {
+			throw new NoMoreInstructionException();
+		}
+	}
+	public int getCurrentIndex() {
 		return currentInstruction;
+	}
+	public void next() {
+		currentInstruction++;
+	}
+	public void reset() {
+		currentInstruction = 0;
 	}
 	public int getCount() {
 		return instructions.size();

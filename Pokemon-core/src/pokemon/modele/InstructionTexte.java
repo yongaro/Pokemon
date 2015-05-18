@@ -17,5 +17,11 @@ public class InstructionTexte extends Instruction{
 		System.out.println("TEXTE");
 		return text;
 	}
-
+	
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
 }

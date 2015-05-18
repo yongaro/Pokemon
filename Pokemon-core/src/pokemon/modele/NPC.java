@@ -82,13 +82,28 @@ public class NPC {
 
 	//Fonctionnalitees principales
 	public String executeDialog(Joueur j, NPCList npcList) throws NoMoreInstructionException, CombatException {
-		try {
-			return dialogs.get(status).execute(npcList, j);
-		} catch (NoMoreInstructionException e) {
-			updateStatus();
-			throw e;
-		}
+//		try {
+//			return dialogs.get(status).execute(npcList, j);
+//		} catch (NoMoreInstructionException e) {
+//			updateStatus();
+//			throw e;
+//		}
+		return null;
 	}
+	
+	public void next() {
+		dialogs.get(status).next();
+	}
+	
+	public void reset() {
+		dialogs.get(status).reset();
+		updateStatus();
+	}
+	
+	public Instruction getCurrentInstruction() throws NoMoreInstructionException {
+		return dialogs.get(status).getCurrent();
+	}
+	
 	public void setNewStatus(int s) {
 		newStatus = s;
 	}

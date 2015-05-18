@@ -66,6 +66,10 @@ public class Dresseur extends NPC implements CombatInfos {
 		return team;
 	}
 	
+	public boolean asTeam() {
+		return !team.isEmpty();
+	}
+	
 	@Override
 	public String executeDialog(Joueur j, NPCList npcList) throws NoMoreInstructionException, CombatException {
 		try {
