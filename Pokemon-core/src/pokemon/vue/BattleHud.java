@@ -61,9 +61,9 @@ public class BattleHud extends Actor{
 
 	public void act(float delta){
 		super.act(delta);
-		if(myGroup.getCombatV().getTextinc()==2 && myGroup.getpCombat().getPkm().get(2)!=oldpv){		
+		/*if(myGroup.getCombatV().getTextinc()==2 && myGroup.getpCombat().getPkm().get(2)!=oldpv){		
 				locked=true; //verouillage
-		}
+		}*/
 		if(locked && myGroup.getpCombat().getPkm().get(2)!=oldpv){
 				//System.out.println("LOCKED");
 				if(myGroup.getpCombat().getPkm().get(2)>oldpv){ //Monter ou descendre les pdvs ?
@@ -148,6 +148,12 @@ public class BattleHud extends Actor{
 	}
 	public boolean isLocked(){
 		return locked;
+	}
+	
+	public void animate(){
+		if(myGroup.getpCombat().getPkm().get(2)!=oldpv){		
+			locked=true; //verouillage
+}
 	}
 
 

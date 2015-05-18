@@ -18,9 +18,9 @@ public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECR
 	int pkselector;
 	int atkselector;
 	CombatV combatv;
-	
-	
-	
+
+
+
 	public CombatMenuPokemon(MyGdxGame myGdxGame, CombatV combatV) {
 		super();
 		menu=new menuPokemon(myGdxGame);
@@ -50,7 +50,7 @@ public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECR
 				}
 			}
 			break;
-		
+
 		case Keys.UP:
 			if(state==1 || state==3){
 				if(pkselector!=0){
@@ -69,11 +69,13 @@ public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECR
 			myGdxGame.setScreen(combatv);
 			break;
 		case 
-			Keys.ENTER:
-			combatv.swapPokemon(joueur.getTeam()[pkselector],pkselector);
-			myGdxGame.setScreen(combatv);
+		Keys.ENTER:
+			if(joueur.getTeam()[pkselector].get(2)>0){
+				combatv.swapPokemon(joueur.getTeam()[pkselector],pkselector);
+				myGdxGame.setScreen(combatv);
+			}
 			break;
-			
+
 		}
 		return false;
 	}
@@ -119,6 +121,6 @@ public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECR
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 
 }

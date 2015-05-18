@@ -5,6 +5,7 @@ package pokemon.vue;
 import java.util.Arrays;
 import java.util.Vector;
 
+import pokemon.controle.CombatListener;
 import pokemon.controle.CombatMenuPokemon;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
@@ -28,9 +29,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class CombatV extends GameScreen implements InputProcessor{
+public class CombatV extends GameScreen{
 	MyGdxGame mygdxgame;
-	PokemonSprite e1;//=new PokemonSprite(PokemonSprite.e1,"Sprites/10.png");
 	//PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
 	Vector<BattleGroup> ennemies=new Vector<BattleGroup>();
 	Vector<BattleGroup> friends=new Vector<BattleGroup>();
@@ -41,7 +41,6 @@ public class CombatV extends GameScreen implements InputProcessor{
 	Pkm pkm=MyGdxGame.Jtest.getTeam()[0];
 	boolean attackanimation;
 	int atknumber=0;
-	PokemonSprite p1;
 	DialogBox dbox;
 	float timer;
 	int state=0;
@@ -58,6 +57,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 	ParticleEffect e;
 	ParticleEffect boom;
 	int swap;
+	CombatListener listener;
 	public CombatV(Combat c,MyGdxGame mygdxgame){
 		this.mygdxgame=mygdxgame;
 		dbox=new DialogBox(new Vector2(640,100),true);
@@ -89,20 +89,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		}*/
 
 		//Demarrage de la musique
-		music = Gdx.audio.newMusic(Gdx.files.internal("musics/battlestart.ogg"));
-		music.setOnCompletionListener(new Music.OnCompletionListener() {
-			
-			@Override
-			public void onCompletion(Music arg0) {
-				music.stop();
-				music = Gdx.audio.newMusic(Gdx.files.internal("musics/battleintro.ogg"));
-				music.setVolume(0.2f);
-				music.play();
-				music.setLooping(true);
-			}
-		});
-		music.setVolume(0.2f);
-		music.play();
+		BattleSoundManager.begin();
 		attackanimation=true;
 		e=new ParticleEffect();
 		boom=new ParticleEffect();
@@ -110,6 +97,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 		//e.setPosition(170,150);
 	//	boom.load(Gdx.files.internal("effect/psyexplosion.p"), Gdx.files.internal("effect"));
 		//boom.setPosition(500,270);
+		listener=new CombatListener(mygdxgame, this, c);
 	}
 
 
@@ -131,15 +119,15 @@ public class CombatV extends GameScreen implements InputProcessor{
 	@Override
 	public void render(float arg0) {
 		if(!c.bufferIsEmpty() && state>1){
-			text=c.readBuffer();
+			listener.getBuffer(c.readBuffer());
 			c.resetBuffer();
-			retval=text.split("\n");
-			System.out.println("---"+text+"---");
-			System.out.println("RETVAL"+Arrays.toString(retval));
-			System.out.println("RETVALEND");
-			dbox.setWidth(width);
-			dbox.setMessage(retval[0]);
-			textinc=1;
+			//retval=text.split("\n");
+			//System.out.println("---"+text+"---");
+			//System.out.println("RETVAL"+Arrays.toString(retval));
+			//System.out.println("RETVALEND");
+			//dbox.setWidth(width);
+		//	dbox.setMessage(retval[0]);
+			//textinc=1;
 			state=5;
 			attackanimation=true;
 		}
@@ -225,55 +213,20 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 		//stage.addActor(e1);
 		//stage.addActor(e2);
-		Gdx.input.setInputProcessor(this);
+		Gdx.input.setInputProcessor(listener);
 
 
 	}///////
 
-
+/*
 	@Override
 	public boolean keyDown(int arg0) {
 		switch(arg0){
 		
 		case Keys.ENTER:
 		{
-			if(state==0 && a.getpSprite().getActions().size==0){
-				music.setLooping(false);
-				music.setOnCompletionListener(new Music.OnCompletionListener() {
-					
-					@Override
-					public void onCompletion(Music m) {
-						m.stop();
-						m=Gdx.audio.newMusic(Gdx.files.internal("musics/battlemain.ogg"));
-						m.setVolume(0.2f);
-						music=m;
-						music.play();
-						music.setOnCompletionListener(new Music.OnCompletionListener() {
-							
-							@Override
-							public void onCompletion(Music m) {
-								System.out.println("ENTERRING MAIN LOOP");
-								music.stop();
-								music=Gdx.audio.newMusic(Gdx.files.internal("musics/battlemainloop.ogg"));
-								music.setVolume(0.2f);
-								music.setLooping(true);
-								music.play();
-							}
-						});
-					}
-				});
-				ballGroup.remove();
-				a.getpSprite().hideTrainer();
-				dbox.setMessage("En avant "+pkm.getNom());
-				for(BattleGroup g:friends){
-					stage.getActors().insert(0, g);
-					g.getpSprite().popPokemon();					
-				}
-			/*	for(BattleHud fr:friendHUD)
-				{
-					stage.addActor(fr);
-				}*/
-				state++;
+			if(state==0){
+				battleBegin();
 				break;
 			}
 			if(state==1){
@@ -314,16 +267,8 @@ public class CombatV extends GameScreen implements InputProcessor{
 			{//si qqchose a lire
 				if(textinc==1){
 					System.out.println("LAUNCHING ANIMATIONS");
-					for(BattleGroup g:ennemies)
-					{
-						g.getpSprite().hurt();
-						g.getpSprite().attack();
-					}
-					for(BattleGroup g:friends)
-					{
-						g.getpSprite().hurt();
-						g.getpSprite().attack();
-					}
+					playAttackAnimations();
+
 				}
 				state++;
 				break;
@@ -339,21 +284,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				else{
 					//retval=null;
 					textinc=1;
-					for(int i=0;i<c.getPkmListe().length;i++){//acteurs des ennemis
-						//System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
-						//System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
-					//	System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
-						if(ennemies.get(i).getpCombat().getSwap()!=-1){
-							state=8; //swapping ennemies
-							dbox.setMessage("Le pokemon ennemi est KO");
-							ennemies.get(i).getpSprite().die();
-							ennemies.get(i).getHud().hide();
-							swap=ennemies.get(i).getpCombat().getSwap();
-							//ennemies.get(i).setP(c.getEquipe2()[swap]);
-							//ennemies.get(i).getHud().hideRight();
-						}
-						i++;
-					}
+					hideDeadIA();
 					if(pkm.get(2)==0){
 						mpokemon=new CombatMenuPokemon(mygdxgame,this);
 						break;
@@ -376,7 +307,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 				state=2;
 				break;
 			}
-			if(state==8){
+			if(state==8){ //swapIA
 
 				ennemies.get(0).getpCombat().setSwap(-1);
 				ennemies.get(0).setpCombat(c.getEquipe2()[swap]);
@@ -427,7 +358,7 @@ public class CombatV extends GameScreen implements InputProcessor{
 
 		return false;//
 	}
-
+*/
 	private String descGen(UniteStockage<Capacite> element) {
 		String str="Type: "+element.get().getElement().name();
 		str+="\n\n          PP: ";
@@ -463,7 +394,14 @@ public class CombatV extends GameScreen implements InputProcessor{
 		
 		//boom.scaleEffect(1.2f);
 	}
-	@Override
+	
+	public void animateHealthBars(){
+		for(int i=0;i<ennemies.size();i++)
+			ennemies.get(i).getHud().animate();
+		for(int i=0;i<friends.size();i++)
+			friends.get(i).getHud().animate();
+	}
+	/*@Override
 	public boolean keyTyped(char arg0) {
 		// TODO Auto-generated method stub
 		return false;
@@ -516,10 +454,50 @@ public class CombatV extends GameScreen implements InputProcessor{
 	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 	public int getTextinc() {
 		return textinc;
 	}
+
+	public int getState() {
+		return state;
+	}
+
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+
+	public int getSelector() {
+		return selector;
+	}
+
+
+	public void setSelector(int selector) {
+		this.selector = selector;
+	}
+
+
+	public DialogBox getDbox() {
+		return dbox;
+	}
+
+
+	public void setDbox(DialogBox dbox) {
+		this.dbox = dbox;
+	}
+
+
+	public Pkm getPkm() {
+		return pkm;
+	}
+
+
+	public void setPkm(Pkm pkm) {
+		this.pkm = pkm;
+	}
+
 
 	public boolean healthbarLocked(){
 		for(int i=0;i<friends.size();i++){
@@ -533,11 +511,66 @@ public class CombatV extends GameScreen implements InputProcessor{
 		return false;
 	}
 
+	public void battleBegin(){
+		if(a.getpSprite().getActions().size==0){
+			BattleSoundManager.next();
+			ballGroup.remove();
+			a.getpSprite().hideTrainer();
+			dbox.setMessage("En avant "+pkm.getNom());
+			for(BattleGroup g:friends){
+				stage.getActors().insert(0, g);
+				g.getpSprite().popPokemon();					
+			}
+			state++;
+		}
+	}
+	
+	public void hideDeadIA(){
+		for(int i=0;i<c.getPkmListe().length;i++){//acteurs des ennemis
+			//System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
+			//System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
+		//	System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
+			if(ennemies.get(i).getpCombat().getSwap()!=-1){
+				state=8; //swapping ennemies
+				dbox.setMessage("Le pokemon ennemi est KO");
+				ennemies.get(i).getpSprite().die();
+				ennemies.get(i).getHud().hide();
+				swap=ennemies.get(i).getpCombat().getSwap();
+				//ennemies.get(i).setP(c.getEquipe2()[swap]);
+				//ennemies.get(i).getHud().hideRight();
+			}
+			i++;
+		}
+	}
+	public void swapIA()
+	{
+	ennemies.get(0).getpCombat().setSwap(-1);
+	ennemies.get(0).setpCombat(c.getEquipe2()[swap]);
+	//ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
+	dbox.setWidth(width/2);
+	dbox.setMessage("Que faire ?");
+	state=2;
+	c.setfreeze(false);
+	}
 
+	public void playAttackAnimations(){
+		for(BattleGroup g:ennemies)
+		{
+			g.getpSprite().hurt();
+			g.getpSprite().attack();
+		}
+		for(BattleGroup g:friends)
+		{
+			g.getpSprite().hurt();
+			g.getpSprite().attack();
+		}
+	}
+	
 	public void swapPokemon(Pkm p,int indice){
 		int i=0;
 		state=7;
 		dbox.setWidth(width);
+		System.out.println(p.getNom()+"va remplacer"+pkm.getNom());
 		dbox.setMessage("En avant "+p.getNom()+" !");
 		for(i=0;i<c.getEquipe1().length;i++) //recherche du pokemon dnas l'equipe
 		{
