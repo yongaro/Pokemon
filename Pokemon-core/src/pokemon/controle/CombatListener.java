@@ -2,13 +2,10 @@ package pokemon.controle;
 
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Combat;
-import pokemon.vue.BattleGroup;
 import pokemon.vue.CombatV;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.audio.Music;
 
 public class CombatListener implements InputProcessor{
 
@@ -24,6 +21,10 @@ public class CombatListener implements InputProcessor{
 		this.combatV=combatV;
 		this.c=c;
 		this.myGdxGame=myGdxGame;
+		Gdx.input.setInputProcessor(this);
+		System.out.println("ME IS INPUT");
+		System.out.println(Gdx.input.getInputProcessor());
+
 	}
 
 
@@ -37,6 +38,7 @@ public class CombatListener implements InputProcessor{
 	
 	@Override
 	public boolean keyDown(int arg0) {
+		System.out.println("prout");
 		if(combatV.healthbarLocked())
 			return false;
 		switch(arg0){

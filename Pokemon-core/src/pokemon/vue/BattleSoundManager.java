@@ -25,7 +25,7 @@ public class BattleSoundManager {
 		});
 	}
 
-	public static void next(){
+	public static boolean next(){
 		if(intro.isPlaying()){
 			intro.setLooping(false);
 			intro.setOnCompletionListener(new Music.OnCompletionListener() {
@@ -48,7 +48,11 @@ public class BattleSoundManager {
 					});
 				}
 			});
+			return true;
 		}
+		else
+			return false;
+
 	}
 	public static void end(){
 		if(mainloop.isPlaying()){
