@@ -136,7 +136,9 @@ public class MapScreen extends GameScreen{
 			if(!cinematique.update()) {
 				//... et si elle est finie, on l'enlève.
 				cinematique = null;
-				Gdx.input.setInputProcessor(controller);
+				if(game.getScreen()==this){
+					Gdx.input.setInputProcessor(controller);
+				}
 			}
 		}
 		
