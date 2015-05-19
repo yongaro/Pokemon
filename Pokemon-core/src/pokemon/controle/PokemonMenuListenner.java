@@ -29,6 +29,13 @@ public class PokemonMenuListenner extends GameInput{
 	int atkselector;
 	int change;
 
+	public PokemonMenuListenner(menuPokemon menu,MyGdxGame myGdxGame) {
+		state=1;
+		pkselector=0;
+		atkselector=1;
+		
+	}
+	
 	PokemonMenuListenner(menuPokemon menu,MyGdxGame myGdxGame, MenuListener menuListener)
 	{
 		this.menu=menu;
@@ -49,32 +56,6 @@ public class PokemonMenuListenner extends GameInput{
 		}
 	}
 
-
-	@Override
-	public boolean keyTyped(char arg0) {
-
-		return true;
-
-	}
-
-	@Override
-	public boolean keyUp(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {			
 		if(menu==myGdxGame.getScreen()){
@@ -85,11 +66,7 @@ public class PokemonMenuListenner extends GameInput{
 			return false;
 	}
 
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
