@@ -2,7 +2,7 @@
 <PNJ id="2">
 	<dialogue>
 		<text>Le Brocoli a ete introduit en France par Catherine de Medicis.</text>
-		<battle/>
+		<battle with="2"/>
 	</dialogue>
 	
 	<equipe>

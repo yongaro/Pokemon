@@ -305,7 +305,6 @@ public class MapScreen extends GameScreen{
 		//Si une boite de dialogue existe ...
 		if(box != null) {			
 			//... on l'enlève
-			System.out.println("Remove()");
 			stage.clear();
 			box.remove();
 			box = null;

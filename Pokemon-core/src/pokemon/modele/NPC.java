@@ -81,27 +81,12 @@ public class NPC {
 	}
 
 	//Fonctionnalitees principales
-	public String executeDialog(Joueur j, NPCList npcList) throws NoMoreInstructionException, CombatException {
-//		try {
-//			return dialogs.get(status).execute(npcList, j);
-//		} catch (NoMoreInstructionException e) {
-//			updateStatus();
-//			throw e;
-//		}
-		return null;
-	}
-	
 	public void next() {
 		dialogs.get(status).next();
 	}
 	
-	public void reset() {
-		dialogs.get(status).reset();
-		updateStatus();
-	}
-	
-	public Instruction getCurrentInstruction() throws NoMoreInstructionException {
-		return dialogs.get(status).getCurrent();
+	public Dialog getCurrentDialog(){
+		return dialogs.get(status);
 	}
 	
 	public void setNewStatus(int s) {
@@ -137,7 +122,7 @@ public class NPC {
 		}
 	}
 	//Fonction privee
-	protected void updateStatus() {
+	public void updateStatus() {
 		status = newStatus;
 	}
 	
@@ -225,7 +210,8 @@ public class NPC {
 					newDialog.addInstruction(newInst);
 				}
 				else if(instruction.getName().compareTo("battle") == 0) {
-					InstructionCombat newInst = new InstructionCombat();
+					int id = instruction.getInt("with");
+					InstructionCombat newInst = new InstructionCombat(id);
 					newDialog.addInstruction(newInst);
 				}
 			}
