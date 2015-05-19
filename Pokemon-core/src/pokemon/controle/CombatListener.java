@@ -165,6 +165,10 @@ public class CombatListener implements InputProcessor{
 			if(combatV.getSelector()<2)
 				combatV.setSelector(combatV.getSelector()+2);			break;
 		}
+		case Keys.W:
+		{
+			combatV.weather();
+		}
 
 
 		}

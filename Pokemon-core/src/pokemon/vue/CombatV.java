@@ -20,6 +20,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -31,13 +32,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class CombatV extends GameScreen{
 	MyGdxGame mygdxgame;
-	//PokemonSprite e2=new PokemonSprite(PokemonSprite.e2,"Sprites/99.png");
 	Vector<BattleGroup> ennemies=new Vector<BattleGroup>();
 	Vector<BattleGroup> friends=new Vector<BattleGroup>();
 	PokeballGroup ballGroup=new PokeballGroup();
 	BattleGroup a=new BattleGroup(new PokemonSprite(PokemonSprite.a1,"trainerS.png"));
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
-	//Pkm[] pkms=MyGdxGame.Jtest.getTeam();
 	Pkm pkm=MyGdxGame.Jtest.getTeam()[0];
 	boolean attackanimation;
 	int atknumber=0;
@@ -49,16 +48,16 @@ public class CombatV extends GameScreen{
 	int flag;
 	Combat c;
 	String[] actions = {"Attaque","Objets","Pkm","Fuite"};
-	String text;
-	String[] retval;
-	int textinc=1;
 	CombatMenuPokemon mpokemon;
 	Music music;
 	ParticleEffect e;
 	ParticleEffect boom;
 	int swap;
 	CombatListener listener;
+	WeatherEffect weather=new WeatherEffect(Gdx.files.internal("effect/RainEffect"),Gdx.files.internal("Sound/rain.ogg"));
+	
 	public CombatV(Combat c,MyGdxGame mygdxgame){
+		this.getStage().clear();
 		this.mygdxgame=mygdxgame;
 		dbox=new DialogBox(new Vector2(640,100),true);
 		dbox.setMessage("Un pokemon sauvage apparait");
@@ -93,10 +92,6 @@ public class CombatV extends GameScreen{
 		attackanimation=true;
 		e=new ParticleEffect();
 		boom=new ParticleEffect();
-		//e.load(Gdx.files.internal("effect/TenebreSpecialLeft"), Gdx.files.internal("effect"));
-		//e.setPosition(170,150);
-	//	boom.load(Gdx.files.internal("effect/psyexplosion.p"), Gdx.files.internal("effect"));
-		//boom.setPosition(500,270);
 		listener=new CombatListener(mygdxgame, this, c);
 	}
 
@@ -131,7 +126,6 @@ public class CombatV extends GameScreen{
 			state=5;
 			attackanimation=true;
 		}
-
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
 		// Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
@@ -140,7 +134,6 @@ public class CombatV extends GameScreen{
 		stage.getBatch().begin();
 
 		stage.getBatch().draw(fond,0,0);
-
 
 		stage.getBatch().end();
 
@@ -189,10 +182,12 @@ public class CombatV extends GameScreen{
 		}
 		stage.act(arg0);
 		stage.draw();
+		
 		stage.getBatch().begin();
+
 		e.draw(stage.getBatch(), arg0);
 		boom.draw(stage.getBatch(), arg0);
-		
+		weather.draw(stage.getBatch(), arg0);
 		stage.getBatch().end();		
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 		//	System.out.println("PARTICLE PLAYING"+e.isComplete());
@@ -211,12 +206,10 @@ public class CombatV extends GameScreen{
 	@Override
 	public void show() {
 
-		//stage.addActor(e1);
-		//stage.addActor(e2);
 		Gdx.input.setInputProcessor(listener);
+		System.out.println(Gdx.input.getInputProcessor());
 
-
-	}///////
+	}
 
 /*
 	@Override
@@ -395,69 +388,18 @@ public class CombatV extends GameScreen{
 		//boom.scaleEffect(1.2f);
 	}
 	
+	public void weather(){
+		weather.start();
+	}
+	
 	public void animateHealthBars(){
 		for(int i=0;i<ennemies.size();i++)
 			ennemies.get(i).getHud().animate();
 		for(int i=0;i<friends.size();i++)
 			friends.get(i).getHud().animate();
 	}
-	/*@Override
-	public boolean keyTyped(char arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 
-	@Override
-	public boolean keyUp(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean scrolled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	public boolean isAttackanimation() {
-		return attackanimation;
-	}
-	public void setAttackanimation(boolean attack) {
-		attackanimation=attack;
-	}
-
-	@Override
-	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
-	public int getTextinc() {
-		return textinc;
-	}
 
 	public int getState() {
 		return state;
@@ -512,8 +454,7 @@ public class CombatV extends GameScreen{
 	}
 
 	public void battleBegin(){
-		if(a.getpSprite().getActions().size==0){
-			BattleSoundManager.next();
+		if(a.getpSprite().getActions().size==0 && BattleSoundManager.next()){
 			ballGroup.remove();
 			a.getpSprite().hideTrainer();
 			dbox.setMessage("En avant "+pkm.getNom());
