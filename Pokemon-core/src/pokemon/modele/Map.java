@@ -162,11 +162,6 @@ public class Map {
 //		}
 //		throw new NoNPCException();
 //	}
-	
-	//Fait interagir le joueur j avec le NPC npc
-	public String interact(Joueur j, NPC npc, NPCList list) throws NoMoreInstructionException, CombatException {
-		return npc.executeDialog(j, list);
-	}
 	//Renvoie le NPC devant le joueur. Si il y en a pas, renvoie null.
 	public NPC getNPC(Joueur j) {
 		//On determine le point cible

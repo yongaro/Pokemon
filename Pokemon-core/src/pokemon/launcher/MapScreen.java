@@ -136,7 +136,9 @@ public class MapScreen extends GameScreen{
 			if(!cinematique.update()) {
 				//... et si elle est finie, on l'enlève.
 				cinematique = null;
-				Gdx.input.setInputProcessor(controller);
+				if(game.getScreen()==this){
+					Gdx.input.setInputProcessor(controller);
+				}
 			}
 		}
 		
@@ -303,7 +305,6 @@ public class MapScreen extends GameScreen{
 		//Si une boite de dialogue existe ...
 		if(box != null) {			
 			//... on l'enlève
-			System.out.println("Remove()");
 			stage.clear();
 			box.remove();
 			box = null;
