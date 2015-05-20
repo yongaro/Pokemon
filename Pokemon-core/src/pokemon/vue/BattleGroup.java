@@ -70,8 +70,8 @@ public class BattleGroup extends Group{
 	public boolean isLocked(){
 		if(super.getStage()==null)
 			return false;
-			else{
-		System.out.println(" ISLOCKED :"+(hud.isLocked())+" || "+(pSprite.getActions().size!=0) +"  nbact:"+pSprite.getActions().size);
+		else{
+		//System.out.println(" ISLOCKED :"+(hud.isLocked())+" || "+(pSprite.getActions().size!=0) +"  nbact:"+pSprite.getActions().size);
 		return hud.isLocked() || pSprite.getActions().size!=0 || hud.getActions().size!=0;
 			}
 			}

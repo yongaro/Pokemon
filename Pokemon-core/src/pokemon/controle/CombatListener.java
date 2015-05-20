@@ -38,8 +38,12 @@ public class CombatListener implements InputProcessor{
 	
 	@Override
 	public boolean keyDown(int arg0) {
-		if(combatV.healthbarLocked())
-			return false;
+		if(c.getPCourant()!=null)
+		//System.out.println(c.getPCourant().getNom());
+		if(combatV.healthbarLocked()){
+			
+		
+			return false;}
 		switch(arg0){
 		
 		case Keys.ENTER:

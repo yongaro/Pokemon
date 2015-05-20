@@ -12,7 +12,7 @@ public enum ParticleEffects {
 	ParticleEffect specialRight;
 	
 	ParticleEffects(){
-		System.out.println(this.name());
+	//	System.out.println(this.name());
 		hit= new ParticleEffect(); hit.load(Gdx.files.internal("effect/"+this.name()+"Hit"), Gdx.files.internal("effect"));
 		
 		
