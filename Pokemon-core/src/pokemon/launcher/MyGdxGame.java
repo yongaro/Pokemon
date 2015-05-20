@@ -65,7 +65,7 @@ public class MyGdxGame extends Game {
 	    	//Ptest[1].infliger(38);
 	    	Ptest2[2].infliger(58);
 	    	for(int i=0;i<6;i++){
-	    		Ptest[i].give(Medicament.baieTest); Ptest2[i].give(Medicament.baieTest);
+	    		//Ptest[i].give(Medicament.baieTest); Ptest2[i].give(Medicament.baieTest);
 	    		if(i==0){
 	    			Ptest[i].add(bddCapacite.PoingEclair.get()); Ptest2[i].add(bddCapacite.PoingEclair.get());
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
@@ -77,6 +77,7 @@ public class MyGdxGame extends Game {
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.Seisme.get()); Ptest2[i].add(bddCapacite.Seisme.get());
 	    			Ptest[i].add(bddCapacite.MegaSangsue.get()); Ptest2[i].add(bddCapacite.MegaSangsue.get());
+	    			Ptest[i].setStatut(Statut.Empoisonne); Ptest2[i].setStatut(Statut.Empoisonne);
 	    		}
 	    		if(i==2){
 	    			Ptest[i].add(bddCapacite.Surf.get()); Ptest2[i].add(bddCapacite.Surf.get());

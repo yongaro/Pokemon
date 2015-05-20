@@ -51,19 +51,22 @@ public enum Statut {
 	}
 	
 	//renvoie 1 si le pokemon peut attaquer 0 sinon | flag 0 -> avant action 1 -> apres action
-	public int StatEffect(Pkm cible,int flag){
+	public int StatEffect(Pkm cible,int flag,Combat context){
 	    if(this==Statut.Brule && flag==1){
 			System.out.println("La brulure inflige des degats");
 			cible.infliger((int)cible.stats[2][1]/16);
+			context.ajoutBuffer("La brulure inflige des degats");
 				return 1;
 		}
 	    if(this==Statut.Endormi && flag==0){
 	    	if(nbtours==0){
 	    		System.out.println(cible.nom+" se reveille");
+	    		context.ajoutBuffer(cible.nom+" se reveille");
 	    		return 1;
 	    	}
 	    	else{
 	    		System.out.println(cible.nom+" dort profondement");
+	    		context.ajoutBuffer(cible.nom+" dort profondemment");
 	    		nbtours--;
 	    		return 0;
 	    	}
@@ -73,22 +76,26 @@ public enum Statut {
 	    	Random rand=new Random();
 	    	if(rand.nextInt()<=10){
 	    		System.out.println(cible.nom+" n'est plus gele");
+	    		context.ajoutBuffer(cible.nom+" n'est plus gele");
 	    		cible.statut=Statut.Normal;
 	    		return 1;
 	    	}
 	    	System.out.println(cible.nom+" est gele");
+	    	context.ajoutBuffer(cible.nom+" est gele");
 	    	return 0;
 	    }
 	    if(this==Statut.Paralyse && flag==0){
 	    	Random rand=new Random();
 	    	if(rand.nextInt()<33){
 	    		System.out.println(cible.nom+" est paralyse");
+	    		context.ajoutBuffer(cible.nom+" est paralyse");
 	    		return 0;
 	    	}
 	    	return 1;
 	    }
 	    if(this==Statut.Empoisonne && flag==1){
 	    	System.out.println("Le poison inflige des degats");
+	    	context.ajoutBuffer("Le poison inflige des degats");
 	    	cible.infliger((int)cible.stats[2][1]/16);
 	    	return 1;
 	    }
@@ -97,12 +104,15 @@ public enum Statut {
 	    	if(nbtours==0){
 	    		cible.supTemp.remove(this);
 	    		System.out.println(cible.nom+" sort de sa confusion");
+	    		context.ajoutBuffer(cible.nom+" sort de sa confusion");
 	    		return 1;
 	    	}
 	    	else{
 		    	if(rand.nextInt()<=50){
 			    	System.out.println(cible.nom+" est Confus");
+			    	context.ajoutBuffer(cible.nom+" est Confus");
 			    	System.out.println(cible.nom+" se blesse dans sa follie");
+			    	context.ajoutBuffer(cible.nom+" se blesse dans sa follie");
 			    	//infliger les degats d'une attaque a 40 de dégats sans type
 		    	}
 		    	nbtours--;
@@ -111,9 +121,11 @@ public enum Statut {
 	    if(this==Statut.Peur && flag==0){
 	    	cible.supTemp.remove(this);
 	    	System.out.println(cible.nom+" a peur");
+	    	context.ajoutBuffer(cible.nom+" a peur");
 	    	return 0;
 	    }
 	    if(this==Statut.Maudit && flag==1){
+	    	context.ajoutBuffer(cible.nom+" est maudit");
 	    	cible.infliger((int)(cible.stats[2][1]/4));
 	    	return 1;
 	    }

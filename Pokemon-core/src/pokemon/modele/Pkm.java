@@ -310,5 +310,6 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
 				"\n VIT:"+stats[7][1]+" "+personnalite);
 	}
 	
+	public void setStatut(Statut st){ this.statut=st; }
 	
 }

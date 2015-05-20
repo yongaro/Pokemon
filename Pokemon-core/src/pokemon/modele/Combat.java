@@ -115,9 +115,9 @@ public class Combat extends Thread {
 			//Application des d�gats sur la dur�e
 			for(PokemonCombat p:pkmListe){
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){ 
-					p.pkm.statut.StatEffect(p.pkm,1);
+					p.pkm.statut.StatEffect(p.pkm,1,this);
 					for(Statut s: p.pkm.supTemp){
-						s.StatEffect(p.pkm,1);
+						s.StatEffect(p.pkm,1,this);
 					}
 					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
 				}
@@ -139,9 +139,9 @@ public class Combat extends Thread {
 				//while((act=sc.nextInt())<user.cap.max){System.out.println(act); }
 				//act=sc.nextInt();
 				//Application des statuts pouvant empecher l'action
-				ch1=user.pkm.statut.StatEffect(user.pkm,0);
+				ch1=user.pkm.statut.StatEffect(user.pkm,0,this);
 				for(Statut s: user.pkm.supTemp){
-					if(s.StatEffect(user.pkm,0)==0){
+					if(s.StatEffect(user.pkm,0,this)==0){
 						ch2=0;
 					}
 				}
