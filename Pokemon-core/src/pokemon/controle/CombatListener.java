@@ -126,7 +126,7 @@ public class CombatListener implements InputProcessor{
 						break;
 					}
 
-					if(c.getPCourant().getPkm()!=combatV.getPkm())
+					if(c.getPCourant().getPkm()==combatV.getPkm())
 					{
 						combatV.setState(2);
 						combatV.getDbox().setWidth(width/2);
