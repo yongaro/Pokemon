@@ -6,8 +6,39 @@ public enum Statut {
 	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur,Picots,Requiem,Stuck;
 	
 	protected int nbtours;
+	protected Capacite dummy;
+	protected int dmg;
 	
-	
+	private Statut(){
+		if(this.name().compareTo("Brule")==0){
+			this.dummy=new Atk(Type.Feu);
+		}
+		else if(this.name().compareTo("Confus")==0){
+			this.dummy=new Atk(Type.Psy);
+		}
+		else if(this.name().compareTo("Empoisonne")==0){
+			this.dummy=new Atk(Type.Poison);
+		}
+		else if(this.name().compareTo("Endormi")==0){
+			this.dummy=new Atk(Type.Vol);
+		}
+		else if(this.name().compareTo("Gele")==0){
+			this.dummy=new Atk(Type.Glace);
+		}
+		else if(this.name().compareTo("Maudit")==0 || this.name().compareTo("Requiem")==0){
+			this.dummy=new Atk(Type.Spectre);
+		}
+		else if(this.name().compareTo("Paralyse")==0 || this.name().compareTo("Stuck")==0){
+			this.dummy=new Atk(Type.Electrique);
+		}
+		else if(this.name().compareTo("Peur")==0){
+			this.dummy=new Atk(Type.Tenebre);
+		}
+		else{
+			this.dummy=new Atk(Type.Normal);
+		}
+		nbtours=0; dmg=0;
+	}
 	
 	public void applique(Pkm cible){
 		if(this==Brule || this==Empoisonne || this==Endormi || this==Gele || this==Paralyse){
@@ -53,9 +84,11 @@ public enum Statut {
 	//renvoie 1 si le pokemon peut attaquer 0 sinon | flag 0 -> avant action 1 -> apres action
 	public int StatEffect(Pkm cible,int flag,Combat context){
 	    if(this==Statut.Brule && flag==1){
-			System.out.println("La brulure inflige des degats");
-			cible.infliger((int)cible.stats[2][1]/16);
-			context.ajoutBuffer("La brulure inflige des degats");
+	    	dmg=(int)cible.stats[2][1]/16;
+			System.out.println("La brulure inflige des degats: "+dmg);
+			cible.infliger(dmg);
+			context.ajoutBuffer("La brulure inflige des degats.");
+			context.ajoutBuffer(dmg+" pv");
 				return 1;
 		}
 	    if(this==Statut.Endormi && flag==0){
@@ -94,8 +127,10 @@ public enum Statut {
 	    	return 1;
 	    }
 	    if(this==Statut.Empoisonne && flag==1){
-	    	System.out.println("Le poison inflige des degats");
-	    	context.ajoutBuffer("Le poison inflige des degats");
+	    	dmg=(int)cible.stats[2][1]/16;
+	    	System.out.println("Le poison inflige des degats: "+dmg);
+	    	context.ajoutBuffer("Le poison inflige des degats.");
+	    	context.ajoutBuffer(dmg+" pv");
 	    	cible.infliger((int)cible.stats[2][1]/16);
 	    	return 1;
 	    }
@@ -126,6 +161,7 @@ public enum Statut {
 	    }
 	    if(this==Statut.Maudit && flag==1){
 	    	context.ajoutBuffer(cible.nom+" est maudit");
+	    	context.ajoutBuffer(dmg+" pv");
 	    	cible.infliger((int)(cible.stats[2][1]/4));
 	    	return 1;
 	    }

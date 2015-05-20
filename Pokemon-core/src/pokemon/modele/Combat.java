@@ -17,7 +17,7 @@ public class Combat extends Thread {
 	protected PokemonCombat[] equipe2;
 	protected PokemonCombat[] pkmListe;
 
-	protected Scanner sc = new Scanner(System.in); //BERK
+	protected boolean endOfTurn;
 	protected  String buffer;
 	protected boolean bufferReady;
 	protected PokemonCombat pCourant; 
@@ -36,6 +36,7 @@ public class Combat extends Thread {
 		buffer=""; bufferReady=false;
 		actflag=-1; act=-1; ind=-1;
 		freeze=false;
+		endOfTurn=false;
 	}
 
 
@@ -113,15 +114,25 @@ public class Combat extends Thread {
 				//System.out.println("FIN DE TOUR \n"+pCourant.pkm.nom+" "+cibleCourante.pkm.nom+" "+capCur.nom);
 			}
 			//Application des d�gats sur la dur�e
+			endOfTurn=true;
 			for(PokemonCombat p:pkmListe){
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){ 
+					this.pCourant=p;
+					this.capCur=p.pkm.statut.dummy;
+					this.cibleCourante=p;
 					p.pkm.statut.StatEffect(p.pkm,1,this);
+					this.setfreeze(true);
 					for(Statut s: p.pkm.supTemp){
+						this.pCourant=p;
+						this.capCur=s.dummy;
+						this.cibleCourante=p;
 						s.StatEffect(p.pkm,1,this);
+						this.setfreeze(true);
 					}
 					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
 				}
 			}
+			endOfTurn=false;
 		}
 		return this.gagnant();
 	}

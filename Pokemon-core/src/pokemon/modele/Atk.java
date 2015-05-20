@@ -10,6 +10,7 @@ public class Atk extends Capacite {
 	public Atk(){
 		super(); this.effet=Statut.Normal;
 	}
+	public Atk(Type elt){super(elt); this.type=3;} 
 	public Atk(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet, int efprc){
 		super(pw,pre,cc,nom,d,el,type,pp); this.effet=effet; effetProc=efprc;
 	}

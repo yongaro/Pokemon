@@ -25,9 +25,8 @@ public abstract class Capacite implements Qmax,Infos {
 	//nombre d'utilisations de la capacite directement apres apprentissage
 	protected int maxPP;
 	//blblbl
-	public  Capacite(){
-		 description="TODO";
-	}
+	public  Capacite(){}
+	public Capacite(Type elt){element=elt;}
 	public Capacite(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp){
 		power=pw; this.type=type; this.pre=pre; this.CC=cc;this.nom=nom; description=d; element=el; maxPP=pp;
 	}
@@ -36,10 +35,10 @@ public abstract class Capacite implements Qmax,Infos {
 		boolean fini = false;
 		long atks = user.attacks;
 		int i=2;
-		Vector res = new Vector();
+		
 		while (!fini){
 			if (atks % i ==0){
-				res.addElement(i);
+				if(this.ID==i){ return true; }
 				atks=atks/i;}
 			if (atks==1){
 				fini=true;}
@@ -51,7 +50,6 @@ public abstract class Capacite implements Qmax,Infos {
 				fini=true;
 			}
 		}
-		ok=res.contains(this.ID);
 		return ok;
 	}
 	public int getId(){return ID;}
