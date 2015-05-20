@@ -23,8 +23,8 @@ public class JoueurVue {
 	private Animation southwalk=new Animation(1f/5f,atlassouth.getRegions());
 	private Animation northwalk=new Animation(1f/5f,atlasnorth.getRegions());
 	private Animation a;
-	float animationtime;
-	boolean move=false;
+	private float animationtime;
+	private boolean move=false;
 	private Joueur j;
 	
 	//Constructeurs

@@ -12,6 +12,7 @@ import pokemon.modele.InstructionStatus;
 import pokemon.modele.InstructionTexte;
 import pokemon.modele.NPC;
 import pokemon.modele.NoMoreInstructionException;
+import pokemon.vue.NPCVue;
 
 public class Cinematique {
 	
@@ -22,7 +23,6 @@ public class Cinematique {
 	//Attributs internes
 	private CinematiqueController controller;
 	private Vector<NPC> changingStatus;
-	@SuppressWarnings("unused")
 	private Vector<DeplacementNPC> isMoving;
 	private Instruction currentInstruction;
 	
@@ -89,7 +89,33 @@ public class Cinematique {
 			}
 		}
 		else if (currentInstruction instanceof InstructionMouvement) {
-			return skip();
+			screen.removeBox();
+			InstructionMouvement ins = (InstructionMouvement) currentInstruction;
+			
+			boolean block = true;
+			//Si l'appel est bloquant, alors :
+			if(block) {
+				//On ajoute un déplacement de NPC si on ne l'a pas déja fait :
+				if(isMoving.isEmpty()) {					
+					NPCVue npc = screen.getNPCVueById(ins.getId());
+					if(npc == null) {
+						return skip();
+					}
+					isMoving.addElement(new DeplacementNPC(npc, ins.getDir(), ins.getDist()));
+				}
+				//On met à jour la position du (ou des) NPC :
+				for(DeplacementNPC depl : isMoving) {
+					depl.update();
+					//Si le NPC a fini de se deplacer, on l'enleve du tableau, et on passe a l'instruction suivante
+					if(depl.isDoneMoving()) {
+						isMoving.removeElement(depl);
+						System.out.println("TUTUT");
+						return skip();
+					}
+				}
+			}
+			
+			return true;
 		}
 		else {
 			return skip();

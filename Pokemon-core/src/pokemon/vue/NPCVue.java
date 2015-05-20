@@ -1,5 +1,6 @@
 package pokemon.vue;
 
+import pokemon.modele.Direction;
 import pokemon.modele.NPC;
 
 import com.badlogic.gdx.Gdx;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 /* La classe NPCVue permet de stocker et afficher l'apparence d'un NPC */
 
@@ -86,22 +88,61 @@ public class NPCVue {
 		default:
 			break;
 		}
-		if(npc.getMoveDistance() > 0) {
+//		if(npc.getMoveDistance() > 0) {
+//			animationTime += deltatime;
+//			move = true;
+//		}
+//		else {
+//			if(a.getKeyFrameIndex(animationTime)<2 && move) //on va jusqua la derniere frame
+//				animationTime+=deltatime;
+//			else {
+//				move=false;
+//				animationTime=0;
+//			}	
+//		}
+		if(move) {
 			animationTime += deltatime;
-			move = true;
 		}
 		else {
-			if(a.getKeyFrameIndex(animationTime)<2 && move) //on va jusqua la derniere frame
-				animationTime+=deltatime;
-			else {
-				move=false;
-				animationTime=0;
-			}	
+			animationTime=0;
 		}
 		batch.draw(a.getKeyFrame(animationTime, true), npc.getPos().x, npc.getPos().y+16);
 	}
+
+	public int getNPCId() {
+		return npc.getId();
+	}
+	public boolean isDoneMoving() {
+		return npc.isDoneMoving();
+	}
 	
-	public void updatePosition() {
-		//TODO
+	public void move(Direction moveDirection, int moveDistance, float speed) {
+		npc.setOrientation(moveDirection);
+		if(moveDistance > 0) {			
+			Vector2 targetPosition = new Vector2(npc.getPos());
+			
+			switch(moveDirection) {
+			case East:
+				targetPosition.x += Gdx.graphics.getDeltaTime()*speed;
+				break;
+			case North:
+				targetPosition.y += Gdx.graphics.getDeltaTime()*speed;
+				break;
+			case South:
+				targetPosition.y -= Gdx.graphics.getDeltaTime()*speed;
+				break;
+			case West:
+				targetPosition.x -= Gdx.graphics.getDeltaTime()*speed;
+				break;
+			default:
+				break;
+			}
+			npc.setPos(targetPosition);
+			npc.setOrientation(moveDirection);
+			move = true;
+		}
+		else {
+			move = false;
+		}
 	}
 }

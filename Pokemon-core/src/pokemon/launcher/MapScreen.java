@@ -321,6 +321,16 @@ public class MapScreen extends GameScreen{
 	public NPC getNPCById(int i) {
 		return j.getCurrentMap().getNPCById(i);
 	}
+
+	public NPCVue getNPCVueById(int id) {
+		for(NPCVue npcv : npcs) {
+			if(npcv.getNPCId() == id) {
+				return npcv;
+			}
+		}
+		return null;
+	}
+
 	
 	//Fonctions privees
 	private void updateNPCs() {
@@ -392,5 +402,4 @@ public class MapScreen extends GameScreen{
 		}
 		return interactRegion;
 	}
-
 }

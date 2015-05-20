@@ -93,33 +93,33 @@ public class NPC {
 		newStatus = s;
 	}
 	public void updatePosition() {
-		if(moveDistance > 0) {
-			float speed = 60;
-			Vector2 targetPosition = new Vector2(getPos());
-			
-			switch(moveDirection) {
-			case East:
-				targetPosition.x += Gdx.graphics.getDeltaTime()*speed;
-				break;
-			case North:
-				targetPosition.y += Gdx.graphics.getDeltaTime()*speed;
-				break;
-			case South:
-				targetPosition.y -= Gdx.graphics.getDeltaTime()*speed;
-				break;
-			case West:
-				targetPosition.x -= Gdx.graphics.getDeltaTime()*speed;
-				break;
-			default:
-				break;
-			}
-			moveDistance -= Gdx.graphics.getDeltaTime()*speed;
-			setPos(targetPosition);
-			setOrientation(moveDirection);
-		}
-		else {
-			setMoveDirection(Direction.Standing);
-		}
+//		if(moveDistance > 0) {
+//			float speed = 60;
+//			Vector2 targetPosition = new Vector2(getPos());
+//			
+//			switch(moveDirection) {
+//			case East:
+//				targetPosition.x += Gdx.graphics.getDeltaTime()*speed;
+//				break;
+//			case North:
+//				targetPosition.y += Gdx.graphics.getDeltaTime()*speed;
+//				break;
+//			case South:
+//				targetPosition.y -= Gdx.graphics.getDeltaTime()*speed;
+//				break;
+//			case West:
+//				targetPosition.x -= Gdx.graphics.getDeltaTime()*speed;
+//				break;
+//			default:
+//				break;
+//			}
+//			moveDistance -= Gdx.graphics.getDeltaTime()*speed;
+//			setPos(targetPosition);
+//			setOrientation(moveDirection);
+//		}
+//		else {
+//			setMoveDirection(Direction.Standing);
+//		}
 	}
 	//Fonction privee
 	public void updateStatus() {
@@ -230,5 +230,8 @@ public class NPC {
 	}
 	public Vector2 getDimensions() {
 		return new Vector2(16, 16);
+	}
+	public boolean isDoneMoving() {
+		return moveDistance > 0;
 	}
 }

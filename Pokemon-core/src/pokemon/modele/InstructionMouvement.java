@@ -32,4 +32,13 @@ public class InstructionMouvement extends Instruction{
 		}
 		return null;
 	}
+	public int getId() {
+		return id;
+	}
+	public Direction getDir() {
+		return dir;
+	}
+	public int getDist() {
+		return dist;
+	}
 }
