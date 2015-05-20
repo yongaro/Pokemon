@@ -41,7 +41,7 @@ public class CombatV extends GameScreen{
 	ParticleEffect boom;
 	int swap;
 	CombatListener listener;
-	WeatherEffect weather=Weather.Dust.get();
+	WeatherEffect weather=Weather.Rain.get();
 	public float cout=-1;
 	public CombatV(Combat c,MyGdxGame mygdxgame){
 		this.getStage().clear();

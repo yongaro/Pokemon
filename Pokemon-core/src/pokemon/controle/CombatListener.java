@@ -17,6 +17,7 @@ public class CombatListener implements InputProcessor{
 	MyGdxGame myGdxGame;
 	int flag;
 	int textinc;
+	
 	public CombatListener(MyGdxGame myGdxGame,CombatV combatV,Combat c) {
 		this.combatV=combatV;
 		this.c=c;
@@ -24,8 +25,6 @@ public class CombatListener implements InputProcessor{
 		Gdx.input.setInputProcessor(this);
 
 	}
-
-
 
 	public void getBuffer(String s){
 		retval=s.split("\n");
@@ -43,7 +42,7 @@ public class CombatListener implements InputProcessor{
 		case Keys.ENTER:
 		{
 			if(combatV.getState()==0){
-				combatV.battleBegin();
+				combatV.battleBegin();//set state to 1
 				break;
 			}
 			if(combatV.getState()==1){
@@ -57,14 +56,14 @@ public class CombatListener implements InputProcessor{
 				break;
 			}
 			if(combatV.getState()==2){ //selection action
-				if(combatV.getSelector()==3) {					
+				if(combatV.getSelector()==3) {
 					System.exit(0);
 				}
 
 				if(combatV.getSelector()==2)
 				{
 					//state=2;
-					combatV.setState(2);
+					//combatV.setState(2);
 					mpokemon=new CombatMenuPokemon(myGdxGame,combatV);
 				}
 				else{
@@ -165,12 +164,10 @@ public class CombatListener implements InputProcessor{
 		case Keys.W:
 		{
 			combatV.weather();
-			//combatV.cout=0;
 		}
 
 
 		}
-		System.out.println("TEXT INC :"+this.getTextinc());
 
 
 		return false;//
