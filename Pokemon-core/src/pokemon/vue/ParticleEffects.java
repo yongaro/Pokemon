@@ -38,4 +38,16 @@ public enum ParticleEffects {
 		cbv.e=this.specialLeft;
 		cbv.boom=this.hit;
 	}
+	public void AdvSelf(CombatV cbv){
+		this.hit.setPosition(500,270);
+		cbv.boom=this.hit;
+
+	}
+	
+	public void JoueurSelf(CombatV cbv){
+		this.hit.setPosition(170, 150);
+		cbv.boom=this.hit;
+
+	}
+	
 }

@@ -101,7 +101,7 @@ public class CombatV extends GameScreen{
 		//else{
 			//System.out.println("pcur iz null");
 		//}
-		System.out.println("STATE: "+state+"TEXT INC: "+listener.getTextinc());
+	//	System.out.println("STATE: "+state+"TEXT INC: "+listener.getTextinc());
 		if(!c.bufferIsEmpty() && state>1){
 			listener.getBuffer(c.readBuffer());
 			c.resetBuffer();
