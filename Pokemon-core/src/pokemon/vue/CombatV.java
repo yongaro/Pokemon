@@ -96,6 +96,12 @@ public class CombatV extends GameScreen{
 	}
 	@Override
 	public void render(float arg0) {
+		//if(c.getPCourant()!=null && c.getCibleCourante()!=null)
+	//	System.out.println("PCOURRANT: "+c.getPCourant().getNom()+ "PCIBLE"+c.getCibleCourante().getNom());
+		//else{
+			//System.out.println("pcur iz null");
+		//}
+		System.out.println("STATE: "+state+"TEXT INC: "+listener.getTextinc());
 		if(!c.bufferIsEmpty() && state>1){
 			listener.getBuffer(c.readBuffer());
 			c.resetBuffer();
@@ -223,8 +229,7 @@ public class CombatV extends GameScreen{
 	void playEffect(){
 		e.start();
 		//e.scaleEffect(1.2f);
-		boom.start();
-		
+		boom.start();		
 		//boom.scaleEffect(1.2f);
 	}
 	
@@ -306,12 +311,15 @@ public class CombatV extends GameScreen{
 		}
 	}
 	
-	public void hideDeadIA(){
+	public boolean hideDeadIA(){ //retourne vrai si ia dead
+		boolean ret=false;
 		for(int i=0;i<c.getPkmListe().length;i++){//acteurs des ennemis
 			//System.out.println(ennemies.get(i).getP().getNom()+ "=/SWAP/=" + ennemies.get(i).getP().getSwap());
 			//System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
 		//	System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
 			if(ennemies.get(i).getpCombat().getSwap()!=-1){
+				System.out.println("DEAD IA FOUND");
+				ret=true;
 				state=8; //swapping ennemies
 				dbox.setMessage("Le pokemon ennemi est KO");
 				ennemies.get(i).getpSprite().die();
@@ -322,6 +330,7 @@ public class CombatV extends GameScreen{
 			}
 			i++;
 		}
+		return ret;
 	}
 	public void swapIA()
 	{

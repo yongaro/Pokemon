@@ -1,5 +1,7 @@
 package pokemon.controle;
 
+import java.util.Arrays;
+
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Combat;
 import pokemon.vue.CombatV;
@@ -28,6 +30,7 @@ public class CombatListener implements InputProcessor{
 
 	public void getBuffer(String s){
 		retval=s.split("\n");
+		System.out.println("RETVAL"+Arrays.toString(retval));
 		combatV.getDbox().setWidth(width);
 		combatV.getDbox().setMessage(retval[0]);
 		textinc=1;
@@ -109,7 +112,11 @@ public class CombatListener implements InputProcessor{
 				else{
 					//retval=null;
 					textinc=1;
-					combatV.hideDeadIA();
+					if(combatV.hideDeadIA())
+					{
+						return true;
+					}
+					
 					if(combatV.getPkm().get(2)==0){
 						mpokemon=new CombatMenuPokemon(myGdxGame,combatV);
 						break;

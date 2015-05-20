@@ -97,6 +97,7 @@ public class PokemonSprite extends Actor{
     }
     public void attack(){
     	if(myGroup.getpCombat().getPkm()==myGroup.getCombat().getPCourant().getPkm()){
+
     		//System.out.println("CALLING ATTACK "+p.getNom());
     		if (myGroup.getpCombat().isIA()){
     			this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
@@ -108,13 +109,14 @@ public class PokemonSprite extends Actor{
     		}
     		else{
     			this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
-    			if(myGroup.getCombat().getCapCur()!=null){
+    			if(myGroup.getCombat().getCapCur()!=null ){
     				System.out.println(myGroup.getCombat().getCapCur().getElement().name());
     				ParticleEffects.valueOf(myGroup.getCombat().getCapCur().getElement().name()).JoueurEffect(myGroup.getCombatV());
     			}
     			
     		}
-    		myGroup.getCombatV().playEffect();
+    		if(myGroup.getCombat().getCapCur().getType()!=3)
+    			myGroup.getCombatV().playEffect();
     		switch(myGroup.getCombat().getCapCur().getElement()){
     		case Eau:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/127-Water02.ogg"));
@@ -158,7 +160,9 @@ public class PokemonSprite extends Actor{
                 }
             
              },0.3f);
-    	
+
+
+
     	}
 
     	}

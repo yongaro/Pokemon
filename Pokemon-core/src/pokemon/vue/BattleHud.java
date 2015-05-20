@@ -98,7 +98,7 @@ public class BattleHud extends Actor{
 					//System.out.println("UNLOCKED");
 					}
 				}
-				oldpv=(int) ((pvperc[0]*myGroup.getpCombat().getPkm().getmax(2))/160.0);
+				oldpv=(int) Math.round(((pvperc[0]*myGroup.getpCombat().getPkm().getmax(2))/160.0));
 			}
 			if(locked && pvperc[1]==pvperc[0])
 				locked=false;
