@@ -1,34 +1,21 @@
 package pokemon.vue;
 
-
-
-import java.util.Arrays;
 import java.util.Vector;
-
 import pokemon.controle.CombatListener;
 import pokemon.controle.CombatMenuPokemon;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
 import pokemon.modele.Combat;
 import pokemon.modele.Pkm;
-import pokemon.modele.PokemonCombat;
 import pokemon.modele.UniteStockage;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+
 
 public class CombatV extends GameScreen{
 	MyGdxGame mygdxgame;
@@ -54,8 +41,8 @@ public class CombatV extends GameScreen{
 	ParticleEffect boom;
 	int swap;
 	CombatListener listener;
-	WeatherEffect weather=new WeatherEffect(Gdx.files.internal("effect/RainEffect"),Gdx.files.internal("Sound/rain.ogg"));
-	
+	WeatherEffect weather=Weather.Dust.get();
+	public float cout=-1;
 	public CombatV(Combat c,MyGdxGame mygdxgame){
 		this.getStage().clear();
 		this.mygdxgame=mygdxgame;
@@ -78,14 +65,10 @@ public class CombatV extends GameScreen{
 		{
 			stage.addActor(g);
 			g.getpSprite().addSlideAction();
-			//stage.addActor(g.getHud());
 		}
 		a.getpSprite().addSlideAction();
 		stage.addActor(dbox);
-		/*for(BattleHud eH:ennemiesHUD)
-		{
-			stage.addActor(eH);
-		}*/
+
 
 		//Demarrage de la musique
 		BattleSoundManager.begin();
@@ -153,7 +136,6 @@ public class CombatV extends GameScreen{
 					offset=0;
 				if(i>=2)
 					f.draw(stage.getBatch(),actions[i],490,85-offset);
-				//f.draw(stage.getBatch(),cap.getQte()+"/"+cap.getQteMax(),385-f.getBounds(cap.getQte()+" / "+cap.getQteMax()).width,113-offset);
 				offset+=50;
 			}
 			stage.getBatch().end();
@@ -172,7 +154,6 @@ public class CombatV extends GameScreen{
 					offset=0;
 				if(i>=2)
 					f.draw(stage.getBatch(),pkm.getCap().at(i).getNom(),490,85-offset);
-				//f.draw(stage.getBatch(),cap.getQte()+"/"+cap.getQteMax(),385-f.getBounds(cap.getQte()+" / "+cap.getQteMax()).width,113-offset);
 				offset+=50;
 			}
 			stage.getBatch().end();
@@ -190,7 +171,6 @@ public class CombatV extends GameScreen{
 		weather.draw(stage.getBatch(), arg0);
 		stage.getBatch().end();		
 		Gdx.gl.glDisable(GL20.GL_BLEND);
-		//	System.out.println("PARTICLE PLAYING"+e.isComplete());
 		
 	}
 	@Override
@@ -211,147 +191,7 @@ public class CombatV extends GameScreen{
 
 	}
 
-/*
-	@Override
-	public boolean keyDown(int arg0) {
-		switch(arg0){
-		
-		case Keys.ENTER:
-		{
-			if(state==0){
-				battleBegin();
-				break;
-			}
-			if(state==1){
-				System.out.println("UNLOCKING THREAD STATE 1");
-				c.setfreeze(false);
-				dbox.setWidth(width/2);
-				dbox.setMessage("Que faire ?");
-				state++;
-				selector=0;
-				break;
-			}
-			if(state==2){ //selection action
-				if(selector==3) {					
-					System.exit(0);
-				}
-
-				if(selector==2)
-				{
-					state=2;
-					mpokemon=new CombatMenuPokemon(mygdxgame,this);
-				}
-				else{
-					textinc=0;
-					state++;
-				}
-				flag=selector;
-				selector=0;
-				break;
-			}
-			if(state==3){ //selection atq
-				attackanimation=true;
-				c.setAct(flag, selector);
-				System.out.println(" SETACT "+flag+","+selector);
-				selector=0;
-				break;
-			}
-			if(state==5)//lecture du buffer
-			{//si qqchose a lire
-				if(textinc==1){
-					System.out.println("LAUNCHING ANIMATIONS");
-					playAttackAnimations();
-
-				}
-				state++;
-				break;
-			}
-
-			if(state==6){
-
-				if(textinc<retval.length)
-				{
-					if(!healthbarLocked())
-						dbox.setMessage(retval[textinc++]);
-				}
-				else{
-					//retval=null;
-					textinc=1;
-					hideDeadIA();
-					if(pkm.get(2)==0){
-						mpokemon=new CombatMenuPokemon(mygdxgame,this);
-						break;
-					}
-
-					if(c.getPCourant().getPkm()!=pkm)
-					{System.out.println("GNE");state=2;dbox.setWidth(width/2);
-					dbox.setMessage("Que faire ?");
-					}
-					System.out.println("UNLOCKING THREAD STATE6");
-					c.setfreeze(false);
-				}
-				break;
-			}
-
-			if(state==7){ //pokemon change par le joueur
-				c.setfreeze(false);
-				dbox.setWidth(width/2);
-				dbox.setMessage("Que faire ?");
-				state=2;
-				break;
-			}
-			if(state==8){ //swapIA
-
-				ennemies.get(0).getpCombat().setSwap(-1);
-				ennemies.get(0).setpCombat(c.getEquipe2()[swap]);
-				//ennemiesHUD.get(0).setP(c.getEquipe2()[swap]);
-				dbox.setWidth(width/2);
-				dbox.setMessage("Que faire ?");
-				state=2;
-				c.setfreeze(false);
-				break;
-			}
-		}
-
-
-		case Keys.DOWN:
-		{	
-			if(selector==0 || selector==2)
-				selector++;
-			break;
-		}
-		case Keys.UP:
-		{	
-			if(selector!=0 && selector!=2)
-				selector--;
-			break;
-		}
-		case Keys.LEFT:
-		{	
-			if(selector>1)
-				selector-=2;
-			break;
-		}
-		case Keys.RIGHT:
-		{	
-			if(selector<2)
-				selector+=2;
-			break;
-		}
-		case Keys.O:
-			pkm.heal(20);
-			break;
-		case Keys.P:
-			pkm.infliger(20);
-			break;
-
-		}
-		System.out.println("TEXT INC :"+this.getTextinc());
-
-
-		return false;//
-	}
-*/
+	
 	private String descGen(UniteStockage<Capacite> element) {
 		String str="Type: "+element.get().getElement().name();
 		str+="\n\n          PP: ";

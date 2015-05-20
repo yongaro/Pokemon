@@ -22,8 +22,6 @@ public class CombatListener implements InputProcessor{
 		this.c=c;
 		this.myGdxGame=myGdxGame;
 		Gdx.input.setInputProcessor(this);
-		System.out.println("ME IS INPUT");
-		System.out.println(Gdx.input.getInputProcessor());
 
 	}
 
@@ -38,7 +36,6 @@ public class CombatListener implements InputProcessor{
 	
 	@Override
 	public boolean keyDown(int arg0) {
-		System.out.println("prout");
 		if(combatV.healthbarLocked())
 			return false;
 		switch(arg0){
@@ -168,6 +165,7 @@ public class CombatListener implements InputProcessor{
 		case Keys.W:
 		{
 			combatV.weather();
+			//combatV.cout=0;
 		}
 
 
