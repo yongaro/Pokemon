@@ -117,6 +117,9 @@ public class PokemonSprite extends Actor{
     		}
     		if(myGroup.getCombat().getCapCur().getType()!=3)
     			myGroup.getCombatV().playEffect();
+    		else{
+    			myGroup.getCombatV().playBoom();
+    		}
     		switch(myGroup.getCombat().getCapCur().getElement()){
     		case Eau:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/127-Water02.ogg"));
@@ -161,7 +164,7 @@ public class PokemonSprite extends Actor{
             
              },0.3f);
 
-
+    		
 
     	}
 

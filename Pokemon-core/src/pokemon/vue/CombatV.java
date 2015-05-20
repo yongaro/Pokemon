@@ -233,6 +233,10 @@ public class CombatV extends GameScreen{
 		//boom.scaleEffect(1.2f);
 	}
 	
+	void playBoom(){
+		boom.start();
+	}
+	
 	public void weather(){
 		weather.start();
 	}
@@ -346,13 +350,13 @@ public class CombatV extends GameScreen{
 	public void playAttackAnimations(){
 		for(BattleGroup g:ennemies)
 		{
-			g.getpSprite().hurt();
 			g.getpSprite().attack();
+			g.getpSprite().hurt();
 		}
 		for(BattleGroup g:friends)
 		{
-			g.getpSprite().hurt();
 			g.getpSprite().attack();
+			g.getpSprite().hurt();
 		}
 	}
 	
