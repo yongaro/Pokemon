@@ -232,6 +232,12 @@
 			description="Le lanceur mord l'ennemi à l'aide de ses incisives aiguisees. Peut aussi apeurer l'ennemi. "
 			power="50" type="3" pre="100" CC="7" element="Poison" maxPP="15" effet="Empoisonne">
 		</Cyclone-->
+		<DansePluie
+		    ID="667" class="AtkMeteo"
+			nom="Danse Pluie" Climat="Pluie"
+			description="Invoque de fortes pluies et ameliore les capacites de type Eau."
+			type="5" pre="100" element="Eau" maxPP="5">
+		</DansePluie>
 		<Eboulement
 			ID="149" effetProc="30" class="Atk"
 			nom="Eboulement"
@@ -291,6 +297,12 @@
 			power="40" type="5" pre="100" CC="7" element="Eau" maxPP="48" effet="Normal"
 			Tstats="07" ChangeProc="10" fof="0">
 		</Explosion><!--ATKRECUL ???-->
+		<Grele
+		    ID="670" class="AtkMeteo"
+			nom="Grele" Climat="Grele"
+			description="Invoque une tempête de grele. Ne blesse pas les Pokemon de type Glace."
+			type="5" pre="100" element="Glace" maxPP="5">
+		</Grele>
 		<PoingKarate	
 			ID="181" effetProc="0" class="Atk"
 			nom="Poing Karate"
@@ -561,10 +573,22 @@
 			description="Une enorme vague s'abat sur le champ de bataille. Permet aussi de voyager sur l'eau. "
 			power="90" type="5" pre="100" CC="7" element="Eau" maxPP="24" effet="Normal">
 		</Surf>
+		<TempeteDeSable
+		    ID="669" class="AtkMeteo"
+			nom="Tempete de Sable" Climat="TempeteSable"
+			description="Une tempete de sable qui blesse tous les Pokemons sauf les types Roche, Sol et Acier."
+			type="5" pre="100" element="Sol" maxPP="5">
+		</TempeteDeSable>
 		<Tonnerre 
 			ID="2" effetProc="10" class="Atk"
 			nom="Tonnerre"
 			description="Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser."
 			power="100" type="5" pre="100" CC="7" element="Electrique" maxPP="35" effet="Paralyse" >
 		</Tonnerre>
+		<Zenith
+		    ID="668" class="AtkMeteo"
+			nom="Zenith" Climat="Zenith"
+			description="Fait briller le soleil et ameliore les capacites de type Feu."
+			type="5" pre="100" element="Feu" maxPP="5">
+		</Zenith>
 </Capacite>

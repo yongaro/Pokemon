@@ -19,7 +19,7 @@ public enum Climat {
 	
 	protected void effet(Pkm cible){
 		if(this==Grele && !cible.type.contains(Type.Glace)){cible.infliger((int)cible.stats[2][1]/16);}
-		if(this==TempeteSable && (!cible.type.contains(Type.Acier) && !cible.type.contains(Type.Roche) )){
+		if(this==TempeteSable && (!cible.type.contains(Type.Acier) && !cible.type.contains(Type.Roche) && !cible.type.contains(Type.Sol) )){
 			cible.infliger((int)cible.stats[2][1]/16);
 		}
 	}

@@ -13,8 +13,8 @@ import com.badlogic.gdx.utils.XmlReader.*;
 
 @Tps(nbhours=5)
 public enum bddCapacite {
-	Abime,Acidarmure,Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,Eclair,Griffe,JetPierres,MegaSangsue,
-	PoingDeFeu,PoingEclair,PoingGlace,RafalePsy,Repos,Seisme,Surf,Tonnerre,JetDeSable;
+	Abime,Acidarmure,Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,DansePluie,Eclair,Grele,Griffe,JetPierres,MegaSangsue,
+	PoingDeFeu,PoingEclair,PoingGlace,RafalePsy,Repos,Seisme,Surf,TempeteDeSable,Tonnerre,JetDeSable,Zenith;
 
 	
 	protected  XmlReader reader = new XmlReader();
@@ -57,6 +57,10 @@ public enum bddCapacite {
 			if(e.get("class").compareTo("AtkRecul")==0){
 				this.cap=new AtkRecul(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
 						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"),e.getInt("recul"));
+			}
+			if(e.get("class").compareTo("AtkMeteo")==0){
+				this.cap=new AtkMeteo(e.get("nom"),e.get("description"),e.getInt("pre"),e.getInt("type"),
+						Type.valueOf(e.get("element")),e.getInt("maxPP"),Climat.valueOf(e.get("Climat")));
 			}
 			cap.ID=e.getInt("ID");
 		}

@@ -43,7 +43,7 @@ public class MyGdxGame extends Game {
 	public void create () {
 		MyGdxGame.initStatic();
 		//Jtest.Sauvegarder();
-		Jtest.Charger();
+		//Jtest.Charger();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
 		MapScreen mapS=new MapScreen(this);
 		MenuListener menu=new MenuListener(this,mapS);
@@ -78,7 +78,7 @@ public class MyGdxGame extends Game {
 	    			Ptest[i].add(bddCapacite.PoingEclair.get()); Ptest2[i].add(bddCapacite.PoingEclair.get());
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.PoingDeFeu.get()); Ptest2[i].add(bddCapacite.PoingDeFeu.get());
-	    			Ptest[i].add(bddCapacite.Repos.get()); Ptest2[i].add(bddCapacite.Repos.get());
+	    			Ptest[i].add(bddCapacite.Zenith.get()); Ptest2[i].add(bddCapacite.Zenith.get());
 	    		}
 	    		if(i==1){
 	    			Ptest[i].add(bddCapacite.Charge.get()); Ptest2[i].add(bddCapacite.Charge.get());
@@ -91,32 +91,32 @@ public class MyGdxGame extends Game {
 	    			Ptest[i].add(bddCapacite.Surf.get()); Ptest2[i].add(bddCapacite.Surf.get());
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.PoingGlace.get()); Ptest2[i].add(bddCapacite.PoingGlace.get());
-	    			Ptest[i].add(bddCapacite.Repos.get()); Ptest2[i].add(bddCapacite.Repos.get());
+	    			Ptest[i].add(bddCapacite.DansePluie.get()); Ptest2[i].add(bddCapacite.DansePluie.get());
 	    		}
 	    		if(i==3){
 	    			Ptest[i].add(bddCapacite.CruAile.get()); Ptest2[i].add(bddCapacite.CruAile.get());
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.JetPierres.get()); Ptest2[i].add(bddCapacite.JetPierres.get());
-	    			Ptest[i].add(bddCapacite.Repos.get()); Ptest2[i].add(bddCapacite.Repos.get());
+	    			Ptest[i].add(bddCapacite.TempeteDeSable.get()); Ptest2[i].add(bddCapacite.TempeteDeSable.get());
 	    		}
 	    		if(i==4){
 	    			Ptest[i].add(bddCapacite.CrocDeMort.get()); Ptest2[i].add(bddCapacite.CrocDeMort.get());
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.CrochetVenin.get()); Ptest2[i].add(bddCapacite.CrochetVenin.get());
-	    			Ptest[i].add(bddCapacite.Repos.get()); Ptest2[i].add(bddCapacite.Repos.get());
+	    			Ptest[i].add(bddCapacite.TempeteDeSable.get()); Ptest2[i].add(bddCapacite.TempeteDeSable.get());
 	    		}
 	    		if(i==5){
 	    			Ptest[i].add(bddCapacite.Tonnerre.get()); Ptest2[i].add(bddCapacite.Tonnerre.get());
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.PoingGlace.get()); Ptest2[i].add(bddCapacite.PoingGlace.get());
-	    			Ptest[i].add(bddCapacite.Repos.get()); Ptest2[i].add(bddCapacite.Repos.get());
+	    			Ptest[i].add(bddCapacite.DansePluie.get()); Ptest2[i].add(bddCapacite.DansePluie.get());
 	    		}
 	    		Jtest.add(Ptest[i]); Jtest2.add(Ptest2[i]);
 	    	}
 	    	Pkm[] temp=Jtest2.getTeam();
 	    	temp[0]=Ptest2[2]; temp[2]=Ptest2[0];
-	    	temp=Jtest.getTeam();
-	    	temp[1]=Ptest[0]; temp[0]=Ptest[1];
+	    	//temp=Jtest.getTeam();
+	    	//temp[1]=Ptest[0]; temp[0]=Ptest[1];
 	    	
 	    	
 	    	//ajout d'objets dans l'inventaire
