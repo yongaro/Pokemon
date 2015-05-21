@@ -17,6 +17,7 @@ public class Combat extends Thread {
 	protected PokemonCombat[] equipe2;
 	protected PokemonCombat[] pkmListe;
 
+	protected boolean meteo;
 	protected boolean endOfTurn;
 	protected  String buffer;
 	protected boolean bufferReady;
@@ -36,6 +37,7 @@ public class Combat extends Thread {
 		buffer=""; bufferReady=false;
 		actflag=-1; act=-1; ind=-1;
 		freeze=false;
+		meteo=false;
 		endOfTurn=false;
 	}
 
@@ -114,7 +116,15 @@ public class Combat extends Thread {
 				pkmListe[i].action(pkmListe[i].adv[0],this);
 				//System.out.println("FIN DE TOUR \n"+pCourant.pkm.nom+" "+cibleCourante.pkm.nom+" "+capCur.nom);
 			}
-			//Application des d�gats sur la dur�e
+			//Application des effets de meteo
+			meteo=true;
+			System.out.println(this.climat.text());
+			for(PokemonCombat p:pkmListe){
+				this.climat.effet(p.pkm);
+			}
+			meteo=false;
+			this.setfreeze(true);
+			//Application des degats sur la duree
 			endOfTurn=true;
 			for(PokemonCombat p:pkmListe){
 				System.out.println("Application des statuts sur "+p.pkm.nom);
