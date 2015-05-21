@@ -12,20 +12,24 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
-public class Pokeball extends Actor{
+public class Pokeball extends SpriteActor{
 
-	Sprite s=new Sprite(new Texture(Gdx.files.internal("Sprites/ballIcon.png")));
 	//TextureRegion g=new T
 	boolean alive;
 	RotateByAction b=new RotateByAction();
 	int i;
+	
 	Pokeball(boolean alive,int i){
+		super();
+		setSprite(Gdx.files.internal("Sprites/ballIcon.png"));
 		this.alive=alive;
 		this.setBounds(650+20*i,150,15,15);
 		this.i=i;
 		this.addAction(Actions.sequence(Actions.delay((float) (0.2+i*0.2f)),Actions.parallel(Actions.moveBy(-160, 0,0.5f))));
 		
 	}
+	
+	
 	
 
 
