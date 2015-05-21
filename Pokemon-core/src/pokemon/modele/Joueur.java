@@ -92,29 +92,22 @@ public class Joueur implements CombatInfos, Serializable {
 	}
 	
 	public void Charger(){
+		System.out.println("Chargement de sauvegarde");
 		Joueur temp = null;
 		try{
 		FileInputStream fin = new FileInputStream("PkmSauvegarde");
 		ObjectInputStream ois = new ObjectInputStream(fin);
 		temp = (Joueur) ois.readObject();
-		System.out.println("loading money: "+temp.argent);
 		this.argent=temp.argent;
-		System.out.println("loading badges: "+temp.badges);
 		this.badges=temp.badges;
-		System.out.println("loading boites: "+temp.boites);
 		this.boites=temp.boites;
-		System.out.println("loading ID: "+temp.ID);
 		this.ID=temp.ID;
-		System.out.println("loading inventaire: ");//+temp.inventaire);
 		this.inventaire=temp.inventaire;
-		System.out.println("loading nom: "+temp.nom);
 		this.nom=temp.nom;
-		System.out.println("loading team: ");
 		for(Pkm p: temp.team){ 
-			System.out.println(p.nom+" "+p.personnalite);
 			for(UniteStockage<Capacite> uc:p.cap){
 				uc.cible=bddCapacite.getByID(uc.cibleID);
-				System.out.println("-- "+uc.cibleID+" "+uc.getNom()+" "+uc.getQte()+"/"+uc.getQteMax());
+				//System.out.println("-- "+uc.cibleID+" "+uc.getNom()+" "+uc.getQte()+"/"+uc.getQteMax());
 			}
 		}
 		this.team=temp.team;
