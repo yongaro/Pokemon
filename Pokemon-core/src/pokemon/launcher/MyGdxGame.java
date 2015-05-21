@@ -1,6 +1,10 @@
 package pokemon.launcher;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import javax.swing.JOptionPane;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -37,8 +41,9 @@ public class MyGdxGame extends Game {
  
 	@Override
 	public void create () {
-		MyGdxGame.initStatic();
-		
+		//MyGdxGame.initStatic();
+		//Jtest.Sauvegarder();
+		Jtest=Charger();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
 		MapScreen mapS=new MapScreen(this);
 		MenuListener menu=new MenuListener(this,mapS);
@@ -49,6 +54,26 @@ public class MyGdxGame extends Game {
 		//test.start();
 		//this.setScreen(new CombatV(test,this));
 	}
+	
+	public Joueur Charger(){
+		Joueur temp = null;
+		try{
+		FileInputStream fin = new FileInputStream("P4Sauvegarde");
+		ObjectInputStream ois = new ObjectInputStream(fin);
+		temp = (Joueur) ois.readObject();
+		
+		}
+		catch(IOException ex){
+			System.out.println(ex.toString());
+			JOptionPane.showMessageDialog(null, "Echec du chargement", "Chargement de Partie",JOptionPane.ERROR_MESSAGE);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return temp;
+
+	}
+	
 	//@Tps(nbhours=2)
 	 public static void initStatic(){
 	    	Ptest[0]=new Pkm(Pokedex.Reptincel.get(),25); Ptest2[0]=new Pkm(Pokedex.Reptincel.get(),25);

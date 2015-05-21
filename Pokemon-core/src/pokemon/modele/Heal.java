@@ -1,13 +1,19 @@
 package pokemon.modele;
 
+import java.io.Serializable;
+
 import pokemon.annotations.Tps;
 
 //import java.util.Vector;
 //import java.util.Random;
 
 @Tps(nbhours=1)
-public class Heal extends Capacite{
-    //Indique si la capacite soigne les statuts et les debuff de stats
+public class Heal extends Capacite implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 757956095803212283L;
+	//Indique si la capacite soigne les statuts et les debuff de stats
     //1 si soigne les problemes de statut 2 si soigne les stats 3 les deux
     protected int code;
     protected Statut effet;

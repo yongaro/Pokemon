@@ -91,20 +91,7 @@ public class Joueur implements CombatInfos, Serializable {
 		System.out.println("Sauvegarde terminee");
 	}
 	
-	public void Charger(){
-		try{
-		FileInputStream fin = new FileInputStream("P4Sauvegarde");
-		ObjectInputStream ois = new ObjectInputStream(fin);
-		Joueur temp = (Joueur) ois.readObject();
-		}
-		catch(IOException ex){
-			System.out.println(ex.toString());
-			JOptionPane.showMessageDialog(null, "Echec du chargement", "Chargement de Partie",JOptionPane.ERROR_MESSAGE);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	
 	//Fonction privees
 	private boolean changeMap() {
@@ -138,6 +125,7 @@ public class Joueur implements CombatInfos, Serializable {
 		return currentMap;
 	}
 	public void setCurrentMap(Map currentMap) {
+		//Sauvegarder();
 		this.currentMap = currentMap;
 	}
 	public Pkm[] getTeam(){ return team; }
@@ -190,7 +178,8 @@ public class Joueur implements CombatInfos, Serializable {
 	}
 	
 	//Methodes de mouvement
-	public void move(Direction orientation) {		
+	public void move(Direction orientation) {	
+		
 		this.moveDirection = orientation;
 		switch(this.moveDirection){
 		case South:
