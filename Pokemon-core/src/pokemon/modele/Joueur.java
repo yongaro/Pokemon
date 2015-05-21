@@ -1,7 +1,14 @@
 package pokemon.modele;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
 
 import pokemon.annotations.Tps;
 
@@ -68,6 +75,35 @@ public class Joueur implements CombatInfos, Serializable {
 		moveDirection = Direction.South;
 		orientation = Direction.South;
 		currentMap = null;
+	}
+	
+	public void Sauvegarder(){
+		try{
+		FileOutputStream fout = new FileOutputStream("P4Sauvegarde");
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeObject(this);
+		oos.close();
+		}
+		catch(IOException ex){
+			System.out.println(ex.toString());
+			JOptionPane.showMessageDialog(null, "Echec de la sauvegarde", "Sauvegarde",JOptionPane.ERROR_MESSAGE);
+		}
+		System.out.println("Sauvegarde terminee");
+	}
+	
+	public void Charger(){
+		try{
+		FileInputStream fin = new FileInputStream("P4Sauvegarde");
+		ObjectInputStream ois = new ObjectInputStream(fin);
+		Joueur temp = (Joueur) ois.readObject();
+		}
+		catch(IOException ex){
+			System.out.println(ex.toString());
+			JOptionPane.showMessageDialog(null, "Echec du chargement", "Chargement de Partie",JOptionPane.ERROR_MESSAGE);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//Fonction privees
