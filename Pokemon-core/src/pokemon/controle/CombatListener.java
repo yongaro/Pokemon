@@ -35,6 +35,12 @@ public class CombatListener implements InputProcessor{
 		combatV.getDbox().setWidth(width);
 		combatV.getDbox().setMessage(retval[0]);
 		textinc=1;
+		if(c.isMeteo()){
+			System.out.println("CAY LA METEO");
+			combatV.setState(10);
+		}
+		else
+			combatV.setState(5);
 	}
 	
 	@Override
@@ -96,7 +102,6 @@ public class CombatListener implements InputProcessor{
 				if(textinc==1){
 					System.out.println("LAUNCHING ANIMATIONS");
 					if(c.getCapCur() instanceof AtkMeteo){
-						System.out.println("CAY LA METEO");
     					combatV.weather();
     					}
 					else
@@ -147,8 +152,7 @@ public class CombatListener implements InputProcessor{
 
 			if(combatV.getState()==7){ //pokemon change par le joueur
 				c.setfreeze(false);
-				combatV.getDbox().setWidth(width/2);
-				combatV.getDbox().setMessage("Que faire ?");
+				
 				combatV.setState(2);
 				break;
 			}
@@ -159,10 +163,14 @@ public class CombatListener implements InputProcessor{
 			if(combatV.getState()==10){
 				combatV.weather();
 				combatV.setState(11);
+				combatV.animateHealthBars();
 				break;
 			}
 			if(combatV.getState()==11){
-				
+				c.setfreeze(false);
+				combatV.getDbox().setWidth(width/2);
+				combatV.getDbox().setMessage("Que faire ?");
+				combatV.setState(2);
 			}
 		}
 		case Keys.DOWN:

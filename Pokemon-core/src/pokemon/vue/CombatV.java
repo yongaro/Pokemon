@@ -113,11 +113,8 @@ public class CombatV extends GameScreen{
 			//dbox.setWidth(width);
 		//	dbox.setMessage(retval[0]);
 			//textinc=1;
-			if(c.isMeteo()){
-				System.out.println("Meteo");
-				state=10;}
-			else
-				state=5;
+			
+
 			attackanimation=true;
 		}
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
