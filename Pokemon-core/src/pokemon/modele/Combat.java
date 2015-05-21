@@ -106,6 +106,7 @@ public class Combat extends Thread {
 		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
+				System.out.println("Tour de "+pkmListe[i].pkm.nom);
 				this.resetAct();
 				this.setBufferState(false);
 				pCourant=pkmListe[i];
@@ -116,7 +117,9 @@ public class Combat extends Thread {
 			//Application des d�gats sur la dur�e
 			endOfTurn=true;
 			for(PokemonCombat p:pkmListe){
-				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){ 
+				System.out.println("Application des statuts sur "+p.pkm.nom);
+				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){
+					System.out.println(p.pkm.statut);
 					this.pCourant=p;
 					this.capCur=p.pkm.statut.dummy;
 					this.cibleCourante=p;

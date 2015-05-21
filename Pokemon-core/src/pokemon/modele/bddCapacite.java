@@ -35,7 +35,7 @@ public enum bddCapacite {
 			}
 			//La capacite courante est une AtkChangeStats		
 			if(e.get("class").compareTo("AtkCS")==0){
-				System.out.println(this.name());
+				
 				this.cap=new AtkChangeStats(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
 						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"),e.get("Tstats"),
 						e.getInt("ChangeProc"),e.getInt("fof"));
@@ -44,7 +44,6 @@ public enum bddCapacite {
 			if(e.get("class").compareTo("AtkRep")==0){
 				this.cap=new AtkRepet(e.getInt("power"),e.getInt("pre"),e.getInt("CC"),e.get("nom"),e.get("description"),
 						Type.valueOf(e.get("element")),e.getInt("type"),e.getInt("maxPP"),Statut.valueOf(e.get("effet")),e.getInt("effetProc"));
-				System.out.println(cap);
 			}
 			//La capacite courante est un Heal
 			if(e.get("class").compareTo("Heal")==0){

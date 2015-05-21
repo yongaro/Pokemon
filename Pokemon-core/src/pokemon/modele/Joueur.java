@@ -37,7 +37,7 @@ public class Joueur implements CombatInfos, Serializable {
 	//Attributs de l'equipe de Pokemon
 	protected Pkm[] team;
 	protected int teamsize;
-	protected Vector<Vector<Pkm>> boites;
+	protected Vector<Pkm> boites;
 	
 	//Attributs concernant la position du joueur
 	protected int spriteWidth = 14;
@@ -52,7 +52,7 @@ public class Joueur implements CombatInfos, Serializable {
 	public Joueur(){
 		ID=0; nom="TODO"; argent=2000; badges=new int[8];
 		team=new Pkm[6]; teamsize=0;
-		boites=new Vector<Vector<Pkm>>();
+		boites=new Vector<Pkm>();
 		inventaire=new Vector<Stockage<Objet>>();
 		for(int i=0;i<5;i++){ inventaire.add(i,new Stockage<Objet>(30));}
 		
@@ -66,7 +66,7 @@ public class Joueur implements CombatInfos, Serializable {
 	public Joueur(int id,String nom){
 		ID=id; this.nom=nom; argent=2000; badges=new int[8];
 		team=new Pkm[6]; teamsize=0;
-		boites=new Vector<Vector<Pkm>>();
+		boites=new Vector<Pkm>();
 		inventaire=new Vector<Stockage<Objet>>();
 		for(int i=0;i<5;i++){ inventaire.add(new Stockage<Objet>(30));}
 		
@@ -79,7 +79,7 @@ public class Joueur implements CombatInfos, Serializable {
 	
 	public void Sauvegarder(){
 		try{
-		FileOutputStream fout = new FileOutputStream("P4Sauvegarde");
+		FileOutputStream fout = new FileOutputStream("PkmSauvegarde");
 		ObjectOutputStream oos = new ObjectOutputStream(fout);
 		oos.writeObject(this);
 		oos.close();
@@ -91,6 +91,44 @@ public class Joueur implements CombatInfos, Serializable {
 		System.out.println("Sauvegarde terminee");
 	}
 	
+	public void Charger(){
+		Joueur temp = null;
+		try{
+		FileInputStream fin = new FileInputStream("PkmSauvegarde");
+		ObjectInputStream ois = new ObjectInputStream(fin);
+		temp = (Joueur) ois.readObject();
+		System.out.println("loading money: "+temp.argent);
+		this.argent=temp.argent;
+		System.out.println("loading badges: "+temp.badges);
+		this.badges=temp.badges;
+		System.out.println("loading boites: "+temp.boites);
+		this.boites=temp.boites;
+		System.out.println("loading ID: "+temp.ID);
+		this.ID=temp.ID;
+		System.out.println("loading inventaire: ");//+temp.inventaire);
+		this.inventaire=temp.inventaire;
+		System.out.println("loading nom: "+temp.nom);
+		this.nom=temp.nom;
+		System.out.println("loading team: ");
+		for(Pkm p: temp.team){ 
+			System.out.println(p.nom+" "+p.personnalite);
+			for(UniteStockage<Capacite> uc:p.cap){
+				System.out.println("-- "+uc.getNom()+" "+uc.getQte()+"/"+uc.getQteMax());
+			}
+		}
+		this.team=temp.team;
+		System.out.println("loading teamsize: "+temp.teamsize);
+		this.teamsize=temp.teamsize;
+		System.out.println("DONE");
+		}
+		catch(IOException ex){
+			System.out.println(ex.toString());
+			JOptionPane.showMessageDialog(null, "Echec du chargement", "Chargement de Partie",JOptionPane.ERROR_MESSAGE);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
 	
 	
 	//Fonction privees
