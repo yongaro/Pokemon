@@ -61,6 +61,7 @@ public class UniteStockage<A extends Qmax & Infos> implements Serializable/*impl
 				 if(cible instanceof AtkRecul){ ((AtkRecul)cible).script(user,pcible,context);}
 				 if(cible instanceof AtkRepet){ ((AtkRepet)cible).script(user,pcible,context);}
 				 if(cible instanceof Heal){ ((Heal)cible).script(user,pcible,context);}
+				 if(cible instanceof AtkMeteo){ ((AtkMeteo)cible).script(user,pcible,context); }
 				 quantite--;
 			 }
 		 }
