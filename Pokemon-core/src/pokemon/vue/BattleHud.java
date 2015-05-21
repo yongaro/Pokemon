@@ -77,7 +77,7 @@ public class BattleHud extends Actor{
 				oldpv=myGroup.getpCombat().getPkm().get(2);	
 				//System.out.println(pvperc[0]+"/"+pvperc[1]);
 
-			}
+		}
 			if(pvperc[1]!=pvperc[0]){
 				if(increase){
 					if(pvperc[0]<pvperc[1]) //pourcentage non max non atteint augmentation du pourcentage

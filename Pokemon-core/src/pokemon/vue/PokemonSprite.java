@@ -1,5 +1,6 @@
 package pokemon.vue;
 
+import pokemon.modele.AtkMeteo;
 import pokemon.modele.Combat;
 import pokemon.modele.PokemonCombat;
 import pokemon.modele.Statut;

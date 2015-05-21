@@ -3,6 +3,7 @@ package pokemon.controle;
 import java.util.Arrays;
 
 import pokemon.launcher.MyGdxGame;
+import pokemon.modele.AtkMeteo;
 import pokemon.modele.Combat;
 import pokemon.vue.CombatV;
 import com.badlogic.gdx.Gdx;
@@ -94,6 +95,11 @@ public class CombatListener implements InputProcessor{
 			{//si qqchose a lire
 				if(textinc==1){
 					System.out.println("LAUNCHING ANIMATIONS");
+					if(c.getCapCur() instanceof AtkMeteo){
+						System.out.println("CAY LA METEO");
+    					combatV.weather();
+    					}
+					else
 					combatV.playAttackAnimations();
 
 				}
@@ -149,6 +155,14 @@ public class CombatListener implements InputProcessor{
 			if(combatV.getState()==8){ //swapIA
 				combatV.swapIA();
 				break;
+			}
+			if(combatV.getState()==10){
+				combatV.weather();
+				combatV.setState(11);
+				break;
+			}
+			if(combatV.getState()==11){
+				
 			}
 		}
 		case Keys.DOWN:

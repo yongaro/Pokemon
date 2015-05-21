@@ -41,7 +41,8 @@ public class CombatV extends GameScreen{
 	ParticleEffect boom;
 	int swap;
 	CombatListener listener;
-	WeatherEffect weather=Weather.Rain.get();
+	WeatherEffect weather;
+	
 	public float cout=-1;
 	public CombatV(Combat c,MyGdxGame mygdxgame){
 		this.getStage().clear();
@@ -112,7 +113,11 @@ public class CombatV extends GameScreen{
 			//dbox.setWidth(width);
 		//	dbox.setMessage(retval[0]);
 			//textinc=1;
-			state=5;
+			if(c.isMeteo()){
+				System.out.println("Meteo");
+				state=10;}
+			else
+				state=5;
 			attackanimation=true;
 		}
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0.0f);
@@ -174,6 +179,7 @@ public class CombatV extends GameScreen{
 
 		e.draw(stage.getBatch(), arg0);
 		boom.draw(stage.getBatch(), arg0);
+		if(weather!=null)
 		weather.draw(stage.getBatch(), arg0);
 		stage.getBatch().end();		
 		Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -238,6 +244,7 @@ public class CombatV extends GameScreen{
 	}
 	
 	public void weather(){
+		weather=Weather.valueOf(c.getClimat().name()).get();
 		weather.start();
 	}
 	

@@ -18,6 +18,7 @@ public class Combat extends Thread {
 	protected PokemonCombat[] pkmListe;
 
 	protected boolean meteo;
+
 	protected boolean endOfTurn;
 	protected  String buffer;
 	protected boolean bufferReady;
@@ -151,6 +152,10 @@ public class Combat extends Thread {
 		return this.gagnant();
 	}
 	
+	
+	public boolean isMeteo() {
+		return meteo;
+	}
 	
 	public void action(PokemonCombat user,PokemonCombat cible){
 		int isdone=0; int i=0; int ch1=0; int ch2=1;
