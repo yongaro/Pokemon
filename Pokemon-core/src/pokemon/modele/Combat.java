@@ -18,7 +18,6 @@ public class Combat extends Thread {
 	protected PokemonCombat[] pkmListe;
 
 	protected boolean meteo;
-
 	protected boolean endOfTurn;
 	protected  String buffer;
 	protected boolean bufferReady;
@@ -120,6 +119,7 @@ public class Combat extends Thread {
 			//Application des effets de meteo
 			meteo=true;
 			System.out.println(this.climat.text());
+			this.ajoutBuffer(climat.text());
 			for(PokemonCombat p:pkmListe){
 				this.climat.effet(p.pkm);
 			}
@@ -229,10 +229,6 @@ public class Combat extends Thread {
 		for(PokemonCombat p: pkmListe){
 			if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
 		}
-	}
-	
-	public boolean isMeteo() {
-		return meteo;
 	}
 	
 	public void pokeswap(PokemonCombat user,boolean ko){
