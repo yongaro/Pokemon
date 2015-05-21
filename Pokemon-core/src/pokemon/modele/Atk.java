@@ -1,9 +1,14 @@
 package pokemon.modele;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.*;
 import java.util.Random;
 
-public class Atk extends Capacite {
+public class Atk extends Capacite implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5046958113917347481L;
 	protected Statut effet;
 	protected int effetProc;
 	

@@ -1,8 +1,13 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class AtkRecul extends Atk {
+public class AtkRecul extends Atk implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5386815794226362608L;
 	protected int recul;
 	
 	public AtkRecul(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc,int recul){

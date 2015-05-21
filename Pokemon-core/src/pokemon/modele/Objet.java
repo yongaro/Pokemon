@@ -1,6 +1,12 @@
 package pokemon.modele;
 
-public class Objet implements Qmax,Infos {
+import java.io.Serializable;
+
+public class Objet implements Qmax,Infos, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6811087298280325661L;
 	protected int ID;
 	protected String nom;
 	protected String description;

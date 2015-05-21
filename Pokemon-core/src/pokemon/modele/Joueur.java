@@ -1,5 +1,6 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
@@ -14,7 +15,11 @@ import com.badlogic.gdx.math.Vector2;
  * Contient aussi la base de donnees afin de stocker les pokemons */
 
 @Tps(nbhours=5)
-public class Joueur implements CombatInfos {
+public class Joueur implements CombatInfos, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1207455231877983503L;
 	//Attributs du dresseur
 	protected int ID;
 	protected String nom;

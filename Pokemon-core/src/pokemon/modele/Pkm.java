@@ -1,11 +1,16 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 import java.util.*;
 
 import pokemon.annotations.Tps;
 
 @Tps(nbhours=8)
-public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos{
+public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5140456584364108614L;
 	protected int ID;
 	protected String nom;
 	//0-niveau | 1-XP | 2-PV | 3-ATT | 4-DEF | 5-ATTSP | 6-DEFSP | 7-VIT | 8-Precision (100) | 9-Esquive (5% de base)

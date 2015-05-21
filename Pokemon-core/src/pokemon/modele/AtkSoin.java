@@ -1,8 +1,15 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class AtkSoin extends Atk {
+public class AtkSoin extends Atk implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 775806770653419287L;
+
 
 	public AtkSoin(){
 		super(); this.effet=Statut.Normal;

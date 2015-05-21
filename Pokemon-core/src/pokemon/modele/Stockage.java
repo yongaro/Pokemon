@@ -1,6 +1,7 @@
 package pokemon.modele;
 
 import java.util.Vector;
+import java.io.Serializable;
 import java.lang.Iterable;
 import java.util.Iterator;
 
@@ -8,7 +9,11 @@ import pokemon.annotations.Tps;
 
 
 @Tps(nbhours=6)
-public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<A>> {
+public class Stockage<A extends Qmax & Infos> implements Iterable<UniteStockage<A>>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1210071907132652080L;
 	protected Vector<UniteStockage<A>> contenu;
 	protected int max;
 	

@@ -1,9 +1,15 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 
 
 
-public class UniteStockage<A extends Qmax & Infos> /*implements Comparable*/ {
+
+public class UniteStockage<A extends Qmax & Infos> implements Serializable/*implements Comparable*/ {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2546193016290097841L;
 	protected A cible;
 	protected int quantite;//ou PP
 	protected int quantitemax;

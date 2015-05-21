@@ -1,10 +1,15 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 import java.util.Random;
 
 
-public class AtkChangeStats extends Atk {
+public class AtkChangeStats extends Atk implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2836585856246905964L;
 	protected String Tstats;
 	protected int ChangeProc;
 	protected int fof;

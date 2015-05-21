@@ -1,6 +1,12 @@
 package pokemon.modele;
 
-public class AtkMeteo extends Capacite {
+import java.io.Serializable;
+
+public class AtkMeteo extends Capacite implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2986588452219474010L;
 	protected Climat meteo;
 	
 	@Override

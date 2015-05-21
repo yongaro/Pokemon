@@ -1,6 +1,14 @@
 package pokemon.modele;
 
-public class ObjetRare extends Objet {
+import java.io.Serializable;
+
+public class ObjetRare extends Objet implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -487748501040989678L;
+
+
 	protected int cible;
 	
 	

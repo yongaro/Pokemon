@@ -1,10 +1,15 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 import java.util.Random;
 
 
-public class AtkRepet extends Atk {
+public class AtkRepet extends Atk implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5895469708465243343L;
 	public AtkRepet(){super();}
 	public AtkRepet(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet,int efprc){
 		super(pw,pre,cc,nom,d,el,type,pp,effet,efprc);
