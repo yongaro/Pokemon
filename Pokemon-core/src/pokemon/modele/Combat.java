@@ -124,8 +124,9 @@ public class Combat extends Thread {
 			for(PokemonCombat p:pkmListe){
 				this.climat.effet(p.pkm);
 			}
-			meteo=false;
 			this.setfreeze(true);
+			meteo=false;
+			//this.setfreeze(true);
 			//Application des degats sur la duree
 			endOfTurn=true;
 			for(PokemonCombat p:pkmListe){
