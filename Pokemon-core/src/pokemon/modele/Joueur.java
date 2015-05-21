@@ -113,7 +113,8 @@ public class Joueur implements CombatInfos, Serializable {
 		for(Pkm p: temp.team){ 
 			System.out.println(p.nom+" "+p.personnalite);
 			for(UniteStockage<Capacite> uc:p.cap){
-				System.out.println("-- "+uc.getNom()+" "+uc.getQte()+"/"+uc.getQteMax());
+				uc.cible=bddCapacite.getByID(uc.cibleID);
+				System.out.println("-- "+uc.cibleID+" "+uc.getNom()+" "+uc.getQte()+"/"+uc.getQteMax());
 			}
 		}
 		this.team=temp.team;

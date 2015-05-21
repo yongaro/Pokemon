@@ -64,4 +64,15 @@ public enum bddCapacite {
 	}
 	public Capacite get(){ return cap; }
 	
+	public static Capacite getByID(int ID){
+			 for(bddCapacite bdc: bddCapacite.values()){
+				 if(bdc.cap.ID==ID){
+					 return bdc.cap; 
+				 }
+			 }
+			 return null;
+	}
+		 
+	 
+	
 }

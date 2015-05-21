@@ -10,6 +10,7 @@ public class UniteStockage<A extends Qmax & Infos> implements Serializable/*impl
 	 * 
 	 */
 	private static final long serialVersionUID = -2546193016290097841L;
+	protected int cibleID;
 	protected A cible;
 	protected int quantite;//ou PP
 	protected int quantitemax;
@@ -19,9 +20,10 @@ public class UniteStockage<A extends Qmax & Infos> implements Serializable/*impl
 	public UniteStockage(A a){
 		if(a instanceof Capacite){ cible=a; quantitemax=a.qmax(); quantite=a.qmax(); }
 		else{cible=a; quantitemax=a.qmax(); quantite=1; }
+		cibleID=a.getID();
 	}
-	public UniteStockage(A a,int i){cible=a; quantite=i;}
-	public UniteStockage(UniteStockage<A> u){cible=u.cible; quantite=u.quantite; quantitemax=u.quantitemax;}
+	public UniteStockage(A a,int i){cible=a; quantite=i; cibleID=a.getID();}
+	public UniteStockage(UniteStockage<A> u){cible=u.cible; quantite=u.quantite; quantitemax=u.quantitemax; cibleID=u.cibleID;}
 	
 	public String toString(){return cible.toString();}
 	public boolean equals(UniteStockage<A> u){
@@ -63,4 +65,6 @@ public class UniteStockage<A extends Qmax & Infos> implements Serializable/*impl
 			 }
 		 }
 	 }
+	 
+	
 }
