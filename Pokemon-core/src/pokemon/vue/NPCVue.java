@@ -37,6 +37,7 @@ public class NPCVue {
 			r.flip(true, false);
 		}
 		npc = new NPC();
+		
 	}
 	public NPCVue(NPC npc) {
 		initAnimation("npcs/npc");
@@ -88,18 +89,7 @@ public class NPCVue {
 		default:
 			break;
 		}
-//		if(npc.getMoveDistance() > 0) {
-//			animationTime += deltatime;
-//			move = true;
-//		}
-//		else {
-//			if(a.getKeyFrameIndex(animationTime)<2 && move) //on va jusqua la derniere frame
-//				animationTime+=deltatime;
-//			else {
-//				move=false;
-//				animationTime=0;
-//			}	
-//		}
+
 		if(move) {
 			animationTime += deltatime;
 		}
@@ -116,7 +106,7 @@ public class NPCVue {
 		return npc.isDoneMoving();
 	}
 	
-	public void move(Direction moveDirection, int moveDistance, float speed) {
+	public void move(Direction moveDirection, float moveDistance, float speed) {
 		npc.setOrientation(moveDirection);
 		if(moveDistance > 0) {			
 			Vector2 targetPosition = new Vector2(npc.getPos());
@@ -144,5 +134,18 @@ public class NPCVue {
 		else {
 			move = false;
 		}
+	}
+	public Direction getOrientation() {
+		return npc.getOrientation();
+	}
+	public Vector2 getPos() {
+		return npc.getPos();
+	}
+	public Vector2 getDimensions() {
+		return npc.getDimensions();
+	}
+	
+	public NPC getNPC() {
+		return npc;
 	}
 }

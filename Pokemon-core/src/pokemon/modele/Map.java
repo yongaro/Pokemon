@@ -73,6 +73,26 @@ public class Map {
 					else {						
 						npc = new NPC(o.getProperties().get("name").toString(), new Vector2(x, y));
 					}
+					if(o.getProperties().containsKey("orientation")) {
+						Direction dir;
+						String prop = o.getProperties().get("orientation", String.class);
+						if(prop.equalsIgnoreCase("north")) {
+							dir = Direction.North;
+						}
+						else if(prop.equalsIgnoreCase("east")) {
+							dir = Direction.East;
+						}
+						else if(prop.equalsIgnoreCase("south")) {
+							dir = Direction.South;
+						}
+						else if(prop.equalsIgnoreCase("west")) {
+							dir = Direction.West;
+						}
+						else {
+							dir = Direction.South;
+						}
+						npc.setOrientation(dir);
+					}
 					npcs.addElement(npc);
 					npcList.addNPC(npc);
 				}

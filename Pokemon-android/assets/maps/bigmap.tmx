@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="6">
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="7">
  <properties>
   <property name="music" value="musics/Cerulean_City.mp3"/>
  </properties>
@@ -211,6 +211,14 @@
    <properties>
     <property name="agressive" value=""/>
     <property name="name" value="dresseurTest"/>
+    <property name="trainer" value=""/>
+   </properties>
+  </object>
+  <object id="6" gid="2805" x="448" y="227">
+   <properties>
+    <property name="agressive" value=""/>
+    <property name="name" value="dresseurTest2"/>
+    <property name="orientation" value="West"/>
     <property name="trainer" value=""/>
    </properties>
   </object>

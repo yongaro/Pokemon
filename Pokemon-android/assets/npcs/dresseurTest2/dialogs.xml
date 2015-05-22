@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<PNJ id="3">
+	<dialogue>
+		<text>Avant d'etre pape, Jean-Paul II etait acteur.</text>
+		<battle with="3"/>
+	</dialogue>
+	
+	<equipe>
+		<pokemon id="8" niveau="10">
+			<capacite nom="Tonnerre"/>
+			<capacite nom="JetDeSable"/>
+			<capacite nom="PoingGlace"/>
+			<capacite nom="Repos"/>
+		</pokemon>
+	</equipe>
+</PNJ>

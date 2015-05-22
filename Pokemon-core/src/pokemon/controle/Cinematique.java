@@ -16,7 +16,7 @@ import pokemon.vue.NPCVue;
 
 public class Cinematique {
 	
-	//Attributs étrangers
+	//Attributs ï¿½trangers
 	private MapScreen screen;
 	private Dialog dialog;
 	
@@ -45,23 +45,23 @@ public class Cinematique {
 	}
 	
 	
-	//Renvoie vrai si la cinématique continu, faux si elle est finie.
+	//Renvoie vrai si la cinematique continu, faux si elle est finie.
 	public boolean update() {
-		//Si la cinématique n'a pas d'instruction, on la fini.
+		//Si la cinematique n'a pas d'instruction, on la fini.
 		if(currentInstruction == null) {
 			return false;
 		}
 		
-		//Si l'instruction courrante est un texte à afficher...
+		//Si l'instruction courrante est un texte a afficher...
 		if(currentInstruction instanceof InstructionTexte) {
 			InstructionTexte ins = (InstructionTexte) currentInstruction;
 			
-			//... alors on affiche le texte à l'écran
+			//... alors on affiche le texte a l'ecran
 			screen.addBox(ins.getText());
 			
-			//Si le joueur a appuyé sur Enter...
+			//Si le joueur a appuye sur Enter...
 			if(controller.isSkipped()) {
-				//... on reset le controller, et on passe à l'instruction suivante
+				//... on reset le controller, et on passe a l'instruction suivante
 				return skip();
 			}
 		}
@@ -74,13 +74,13 @@ public class Cinematique {
 			return skip();
 		}
 		else if(currentInstruction instanceof InstructionCombat) {
-			//On vérifie si la cible du combat est un dresseur
+			//On verifie si la cible du combat est un dresseur
 			InstructionCombat ins = (InstructionCombat) currentInstruction;
 			NPC npc = screen.getNPCById(ins.getId());
 			
 			if(npc instanceof Dresseur) {
 				Dresseur dress = (Dresseur) npc;
-				//Si le dresseur a une équipe...
+				//Si le dresseur a une equipe...
 				if(dress.asTeam()) {
 					//... on lance un combat
 					screen.startBattle(dress);
@@ -95,7 +95,7 @@ public class Cinematique {
 			boolean block = true;
 			//Si l'appel est bloquant, alors :
 			if(block) {
-				//On ajoute un déplacement de NPC si on ne l'a pas déja fait :
+				//On ajoute un deplacement de NPC si on ne l'a pas dï¿½ja fait :
 				if(isMoving.isEmpty()) {					
 					NPCVue npc = screen.getNPCVueById(ins.getId());
 					if(npc == null) {
@@ -103,7 +103,7 @@ public class Cinematique {
 					}
 					isMoving.addElement(new DeplacementNPC(npc, ins.getDir(), ins.getDist()));
 				}
-				//On met à jour la position du (ou des) NPC :
+				//On met ï¿½ jour la position du (ou des) NPC :
 				for(DeplacementNPC depl : isMoving) {
 					depl.update();
 					//Si le NPC a fini de se deplacer, on l'enleve du tableau, et on passe a l'instruction suivante
@@ -130,12 +130,12 @@ public class Cinematique {
 		try {
 			currentInstruction = getCurrentInstruction();
 		} catch (NoMoreInstructionException e) {
-			//Si il n'y a plus d'instructions, alors on finit la cinématique en ...
-			//... remettant le dialogue à zero, ...
+			//Si il n'y a plus d'instructions, alors on finit la cinematique en ...
+			//... remettant le dialogue a zero, ...
 			dialog.reset();
-			//... en enlevant une éventuelle boite de dialogue, ...
+			//... en enlevant une eventuelle boite de dialogue, ...
 			screen.removeBox();
-			//... en mettant à jour les status des personnages.
+			//... en mettant a jour les status des personnages.
 			for(NPC npc : changingStatus) {
 				npc.updateStatus();
 			}
