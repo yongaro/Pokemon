@@ -68,7 +68,7 @@ public class DialogBox extends Actor {
 		shapeRenderer.setProjectionMatrix(sBatch.getProjectionMatrix());
 		
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 1);
+		shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.1f);
 	    shapeRenderer.rect(10, 0, width-20, height);
 	    shapeRenderer.end();
 		
