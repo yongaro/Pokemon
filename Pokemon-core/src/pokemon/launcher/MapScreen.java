@@ -323,8 +323,9 @@ public class MapScreen extends GameScreen{
 				System.out.println(moveDistance);
 				//On commence le deplacement du personnage
 				movingNPC = new DeplacementNPC(npc, dir, moveDistance);
-				//On arrete le joueur
+				//On arrete le joueur (BRUTAL)
 				j.stop();
+				Gdx.input.setInputProcessor(null);
 			}
 		}
 	}
