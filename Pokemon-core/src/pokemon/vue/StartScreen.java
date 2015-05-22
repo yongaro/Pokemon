@@ -53,7 +53,8 @@ public class StartScreen extends GameScreen implements InputProcessor{
 		if(Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.VOLUME_UP)){
 			MyGdxGame.Jtest.setCurrentMap(new Map("maps/bigmap.tmx", MyGdxGame.npcList));
 			MapScreen mapS=new MapScreen(game);
-			MenuListener menu=new MenuListener(game,mapS);
+		//	MenuListener menu=new MenuListener(game,mapS);
+			game.setScreen(mapS);
 		}
 
 	}
