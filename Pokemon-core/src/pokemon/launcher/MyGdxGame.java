@@ -21,6 +21,7 @@ import pokemon.annotations.Tps;
 import pokemon.controle.MenuListener;
 import pokemon.modele.*;
 import pokemon.vue.CombatV;
+import pokemon.vue.StartScreen;
 
 
 @Tps(nbhours=2)
@@ -45,9 +46,9 @@ public class MyGdxGame extends Game {
 		//Jtest.Sauvegarder();
 		//Jtest.Charger();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
-		MapScreen mapS=new MapScreen(this);
-		MenuListener menu=new MenuListener(this,mapS);
-		
+		//MapScreen mapS=new MapScreen(this);
+		//MenuListener menu=new MenuListener(this,mapS);
+		this.setScreen(new StartScreen(this));
 		//TestMap2 test = new TestMap2();
 		//this.setScreen(mapS);
 		//Combat test=new Combat(Jtest, Jtest2);
