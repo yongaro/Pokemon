@@ -2,9 +2,11 @@ package pokemon.controle;
 
 import java.util.Arrays;
 
+import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.AtkMeteo;
 import pokemon.modele.Combat;
+import pokemon.vue.BattleSoundManager;
 import pokemon.vue.CombatV;
 
 import com.badlogic.gdx.Gdx;
@@ -21,11 +23,13 @@ public class CombatListener extends GameInput{
 	MyGdxGame myGdxGame;
 	int flag;
 	int textinc;
+	MapScreen ms;
 	
-	public CombatListener(MyGdxGame myGdxGame,CombatV combatV,Combat c) {
+	public CombatListener(MyGdxGame myGdxGame,CombatV combatV,Combat c,MapScreen ms) {
 		this.combatV=combatV;
 		this.c=c;
 		this.myGdxGame=myGdxGame;
+		this.ms=ms;
 		Gdx.input.setInputProcessor(this);
 
 	}
@@ -36,6 +40,10 @@ public class CombatListener extends GameInput{
 		combatV.getDbox().setWidth(width);
 		combatV.getDbox().setMessage(retval[0]);
 		textinc=1;
+		if(c.getFini()!=0){
+			BattleSoundManager.end();
+			myGdxGame.setScreen(ms);
+		}
 		if(c.isMeteo()){
 			System.out.println("CAY LA METEO");
 			combatV.setState(10);
@@ -163,8 +171,9 @@ public class CombatListener extends GameInput{
 				}
 			}
 			else{
-				//retval=null;
+				System.out.println("ICI");
 				textinc=1;
+
 				if(combatV.hideDeadIA())
 				{
 					return;
@@ -181,7 +190,8 @@ public class CombatListener extends GameInput{
 				
 				combatV.getDbox().setMessage("Que faire ?");
 				}
-				System.out.println("UNLOCKING THREAD STATE6");
+				//System.out.println("UNLOCKING THREAD STATE6");
+
 				c.setfreeze(false);
 			}
 			return;

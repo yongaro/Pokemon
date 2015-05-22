@@ -117,6 +117,7 @@ public class MapScreen extends GameScreen{
 			Gdx.input.setInputProcessor(cinematique.getController());
 			System.out.println("POIL");
 		}
+		controller.unfreeze();
 	}
 	public void update(float delta)
 	{
@@ -239,7 +240,7 @@ public class MapScreen extends GameScreen{
 		music.stop();
 		Combat c = new Combat(j, dress);
 		c.start();
-		game.setScreen(new CombatV(c,game));
+		game.setScreen(new CombatV(c,game,this));
 	}
 	
 	public NPC getNPCById(int i) {

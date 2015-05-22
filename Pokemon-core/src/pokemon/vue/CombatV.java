@@ -1,13 +1,16 @@
 package pokemon.vue;
 
 import java.util.Vector;
+
 import pokemon.controle.CombatListener;
 import pokemon.controle.CombatMenuPokemon;
+import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Capacite;
 import pokemon.modele.Combat;
 import pokemon.modele.Pkm;
 import pokemon.modele.UniteStockage;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -44,7 +47,7 @@ public class CombatV extends GameScreen{
 	WeatherEffect weather;
 	
 	public float cout=-1;
-	public CombatV(Combat c,MyGdxGame mygdxgame){
+	public CombatV(Combat c,MyGdxGame mygdxgame,MapScreen ms){
 		this.getStage().clear();
 		this.mygdxgame=mygdxgame;
 		dbox=new DialogBox(new Vector2(640,100),true);
@@ -76,7 +79,7 @@ public class CombatV extends GameScreen{
 		attackanimation=true;
 		e=new ParticleEffect();
 		boom=new ParticleEffect();
-		listener=new CombatListener(mygdxgame, this, c);
+		listener=new CombatListener(mygdxgame, this, c,ms);
 		
 		Gdx.input.setInputProcessor(listener);
 	}

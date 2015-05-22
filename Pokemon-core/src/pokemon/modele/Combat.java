@@ -154,7 +154,10 @@ public class Combat extends Thread {
 			}
 			endOfTurn=false;
 		}
-		System.out.println("CAY FINI FAUT SWAP DECRAN KILL IT DAMNIT");
+		
+		fini=this.gagnant();
+		System.out.println("CAY FINI FAUT SWAP DECRAN KILL IT DAMNIT "+fini);
+		this.ajoutBuffer("PUTE");
 		return this.gagnant();
 	}
 	

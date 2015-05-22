@@ -133,7 +133,9 @@ public class JoueurController extends GameInput{
 	public void freeze(){
 		freeze=true;
 	}
-	
+	public void unfreeze(){
+		freeze=false;
+	}
 	@Override
 	void handleA() {
 		screen.updateCutscene(j);
@@ -148,7 +150,7 @@ public class JoueurController extends GameInput{
 	@Override
 	void handleLeft() {
 		// TODO Auto-generated method stub
-		if(input.size()<2 && !input.contains(Direction.West)) {
+		if(input.size()<2 && !input.contains(Direction.West) && !freeze) {
 			input.add(0, Direction.West);
 			j.move(input.firstElement());
 		}
@@ -157,7 +159,7 @@ public class JoueurController extends GameInput{
 	@Override
 	void handleRight() {
 		// TODO Auto-generated method stub
-		if(input.size()<2 && !input.contains(Direction.East)) {
+		if(input.size()<2 && !input.contains(Direction.East) && !freeze) {
 			input.add(0, Direction.East);
 			j.move(input.firstElement());
 		}
@@ -166,7 +168,7 @@ public class JoueurController extends GameInput{
 	@Override
 	void handleUp() {
 		// TODO Auto-generated method stub
-		if(input.size()<2) {
+		if(input.size()<2 && !freeze && !freeze) {
 			input.add(0, Direction.North);
 			j.move(input.firstElement());				
 		}
@@ -175,7 +177,7 @@ public class JoueurController extends GameInput{
 	@Override
 	void handleDown() {
 		// TODO Auto-generated method stub
-		if(input.size()<2 && !input.contains(Direction.South)) {
+		if(input.size()<2 && !input.contains(Direction.South) && !freeze) {
 			input.add(0, Direction.South);
 			j.move(input.firstElement());
 		}

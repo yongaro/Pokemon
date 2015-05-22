@@ -58,6 +58,8 @@ public class BattleSoundManager {
 		if(mainloop.isPlaying()){
 			mainloop.stop();	
 		}
+		if(main.isPlaying())
+			main.stop();
 	}
 
 }
