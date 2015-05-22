@@ -115,6 +115,7 @@ public class MapScreen extends GameScreen{
 		}
 		else {
 			Gdx.input.setInputProcessor(cinematique.getController());
+			System.out.println("POIL");
 		}
 	}
 	public void update(float delta)
@@ -172,27 +173,29 @@ public class MapScreen extends GameScreen{
 	
 	//Autres fonctions
 	public void updateCutscene(Joueur j) {
-		NPC talkingNPC = j.getCurrentMap().getNPC(j);
-		if(talkingNPC != null) {
-			//On change l'orientation du NPC
-			switch(j.getOrientation()) {
-			case East:
-				talkingNPC.setOrientation(Direction.West);
-				break;
-			case North:
-				talkingNPC.setOrientation(Direction.South);
-				break;
-			case South:
-				talkingNPC.setOrientation(Direction.North);
-				break;
-			case West:
-				talkingNPC.setOrientation(Direction.East);
-				break;
-			default:
-				break;			
+		if(cinematique == null && game.getScreen() == this) {			
+			NPC talkingNPC = j.getCurrentMap().getNPC(j);
+			if(talkingNPC != null) {
+				//On change l'orientation du NPC
+				switch(j.getOrientation()) {
+				case East:
+					talkingNPC.setOrientation(Direction.West);
+					break;
+				case North:
+					talkingNPC.setOrientation(Direction.South);
+					break;
+				case South:
+					talkingNPC.setOrientation(Direction.North);
+					break;
+				case West:
+					talkingNPC.setOrientation(Direction.East);
+					break;
+				default:
+					break;			
+				}
+				cinematique = new Cinematique(this, talkingNPC);
+				Gdx.input.setInputProcessor(cinematique.getController());
 			}
-			cinematique = new Cinematique(this, talkingNPC);
-			Gdx.input.setInputProcessor(cinematique.getController());
 		}
 	}
 	
@@ -274,7 +277,9 @@ public class MapScreen extends GameScreen{
 				//On arrete l'animation du personnage, et on force l'interaction.
 				movingNPC.npc.move(movingNPC.moveDirection, 0, 0);
 				cinematique = new Cinematique(this, movingNPC.getNPC().getNPC());
-				Gdx.input.setInputProcessor(cinematique.getController());
+				if(game.getScreen() == this) {					
+					Gdx.input.setInputProcessor(cinematique.getController());
+				}
 			}
 		}
 	}
@@ -318,8 +323,9 @@ public class MapScreen extends GameScreen{
 				System.out.println(moveDistance);
 				//On commence le deplacement du personnage
 				movingNPC = new DeplacementNPC(npc, dir, moveDistance);
-				//On arrete le joueur
+				//On arrete le joueur (BRUTAL)
 				j.stop();
+				Gdx.input.setInputProcessor(null);
 			}
 		}
 	}
