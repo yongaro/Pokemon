@@ -47,8 +47,9 @@ public class CombatListener extends GameInput{
 	@Override
 	public boolean keyDown(int arg0) {
 		//if(c.getPCourant()!=null)
-		//System.out.println(c.getPCourant().getNom());
-		if(combatV.healthbarLocked()){
+		System.out.println("Called");
+		
+		if(!combatV.healthbarLocked()){
 			if(this.myGdxGame.getScreen()==combatV){
 				return super.keyDown(arg0);
 			}
@@ -93,6 +94,7 @@ public class CombatListener extends GameInput{
 		// TODO Auto-generated method stub
 		if(combatV.getState()==0){
 			combatV.battleBegin();//set state to 1
+			return;
 		}
 		if(combatV.getState()==1){
 			System.out.println("UNLOCKING THREAD STATE 1");
@@ -102,6 +104,8 @@ public class CombatListener extends GameInput{
 			//state++;
 			combatV.setState(combatV.getState()+1);
 			combatV.setSelector(0);
+			return;
+
 		}
 		if(combatV.getState()==2){ //selection action
 			if(combatV.getSelector()==3) {
@@ -120,7 +124,9 @@ public class CombatListener extends GameInput{
 				combatV.setState(combatV.getState()+1);
 			}
 			flag=combatV.getSelector();
-			combatV.setSelector(0);				
+			combatV.setSelector(0);	
+			return;
+
 		}
 		if(combatV.getState()==3){ //selection atq
 		//	attackanimation=true;
@@ -142,6 +148,8 @@ public class CombatListener extends GameInput{
 			}
 			//state++;
 			combatV.setState(combatV.getState()+1);
+			return;
+
 		}
 
 		if(combatV.getState()==6){
@@ -176,26 +184,36 @@ public class CombatListener extends GameInput{
 				System.out.println("UNLOCKING THREAD STATE6");
 				c.setfreeze(false);
 			}
+			return;
+
 		}
 
 		if(combatV.getState()==7){ //pokemon change par le joueur
 			c.setfreeze(false);
 			
 			combatV.setState(2);
+			return;
+
 		}
 		if(combatV.getState()==8){ //swapIA
 			combatV.swapIA();
+			return;
+
 		}
 		if(combatV.getState()==10){
 			combatV.weather();
 			combatV.setState(11);
 			combatV.animateHealthBars();
+			return;
+
 		}
 		if(combatV.getState()==11){
 			c.setfreeze(false);
 			combatV.getDbox().setWidth(width/2);
 			combatV.getDbox().setMessage("Que faire ?");
 			combatV.setState(2);
+			return;
+
 		}
 	}
 

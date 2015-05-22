@@ -31,7 +31,7 @@ public class Cinematique {
 	{
 		this.screen = screen;
 		this.dialog = npc.getCurrentDialog();
-		controller = new CinematiqueController(game);
+		controller = new CinematiqueController(screen);
 		isMoving = new Vector<DeplacementNPC>();
 		changingStatus = new Vector<NPC>();
 		try {

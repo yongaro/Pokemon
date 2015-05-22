@@ -1,6 +1,8 @@
 package pokemon.controle;
 
+import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
+import pokemon.vue.GameScreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -8,11 +10,11 @@ import com.badlogic.gdx.Input.Keys;
 
 public class CinematiqueController extends GameInput {
 	private boolean isSkipped;
-	private MyGdxGame game;
+	private MapScreen screen;
 	
-	public CinematiqueController(MyGdxGame game) {
+	public CinematiqueController(MapScreen screen) {
 		setSkipped(false);
-		this.game = game;
+		this.screen= screen;
 	}
 	
 	
@@ -27,8 +29,9 @@ public class CinematiqueController extends GameInput {
 
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {			
-			.setTouched(true);
-			return true;
+			screen.setTouched(true);
+			return super.touchUp(v);
+
 
 	}
 
@@ -36,15 +39,14 @@ public class CinematiqueController extends GameInput {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if(menu==myGdxGame.getScreen()){
-			menu.setTouched(false);
+			screen.setTouched(false);
 			v.set(screenX, screenY);
-			menu.getStage().screenToStageCoordinates(v);
+			screen.getStage().screenToStageCoordinates(v);
 			System.out.println(v);
-			return super.touchUp(v);}
-		else
 			return false;
 	}
+
+	
 
 
 	@Override

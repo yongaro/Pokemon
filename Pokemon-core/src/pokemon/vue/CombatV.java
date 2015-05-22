@@ -106,6 +106,7 @@ public class CombatV extends GameScreen{
 		//}
 	//	System.out.println("STATE: "+state+"TEXT INC: "+listener.getTextinc());
 //		System.out.println(Gdx.input.getInputProcessor());
+		
 		if(!c.bufferIsEmpty() && state>1){
 			listener.getBuffer(c.readBuffer());
 			c.resetBuffer();

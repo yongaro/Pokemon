@@ -22,7 +22,7 @@ public class JoueurController extends GameInput{
 	private JoueurVue jv;
 	private Joueur j;
 	private MapScreen screen;
-	
+	boolean freeze;
 	//Constructeur
 	public JoueurController(MapScreen screen, JoueurVue jv) {
 		this.jv = jv;
@@ -115,6 +115,7 @@ public class JoueurController extends GameInput{
 		screen.setTouched(true);
 		v.set(x, y);
 		screen.getStage().screenToStageCoordinates(v);
+		if(!freeze)
 		super.touchUp(v);
 		return false;
 	}
@@ -129,6 +130,10 @@ public class JoueurController extends GameInput{
 		return false;
 	}
 
+	public void freeze(){
+		freeze=true;
+	}
+	
 	@Override
 	void handleA() {
 		screen.updateCutscene(j);

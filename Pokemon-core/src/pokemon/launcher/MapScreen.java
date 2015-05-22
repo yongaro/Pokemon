@@ -327,6 +327,8 @@ public class MapScreen extends GameScreen{
 					//On arrete le joueur (BRUTAL)
 					j.stop();
 //				Gdx.input.setInputProcessor(null);
+					controller.freeze();
+
 				}
 			}
 		}
