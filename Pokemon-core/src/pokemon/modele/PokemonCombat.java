@@ -51,55 +51,58 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	} 
 	
 	public void action(PokemonCombat cible,Combat context){
-		if(!isIA){
-			context.action(this,cible);
-		}
-		else{
-			//context.ajoutBuffer("Tour de l'IA");
-			int ind=0;
-			//IA de meilleur choix
-			
-			switch(pkm.IAbh){
-			case 1:
-				ind=bestdmg(cible,context);
-				break;
-			case 2:
-				ind=this.bestdot(cible, context);
-				break;
-			case 3:
-				ind=this.bestControl(cible, context);
-				break;
-			default:
-				ind=bestdmg(cible,context);
-				break;
+		if(this.pkm.statut!=Statut.KO){
+			if(!isIA){
+				context.action(this,cible);
 			}
-			context.cibleCourante=cible;
-			context.capCur=pkm.cap.elementAt(ind).cible;
-			//System.out.println("FREEZE DE CHOIX DE CIBLE IA");
-			//context.setfreeze(true);
-			
-			pkm.cap.utiliser(ind,pkm,cible.pkm,context);
-			
-			context.chercherKO();
-			
-			if(pkm.stats[2][0]<=(int)(pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
-				if(pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
-					Medicament m=(Medicament)pkm.objTenu;
-					context.ajoutBuffer(pkm.nom+" utilise sa baie");
-					if(m.baie){ m.script(pkm,context); pkm.objTenu=null; }
+			else{
+				//context.ajoutBuffer("Tour de l'IA");
+				int ind=0;
+				//IA de meilleur choix
+				
+				switch(pkm.IAbh){
+				case 1:
+					ind=bestdmg(cible,context);
+					break;
+				case 2:
+					ind=this.bestdot(cible, context);
+					break;
+				case 3:
+					ind=this.bestControl(cible, context);
+					break;
+				default:
+					ind=bestdmg(cible,context);
+					break;
+				}
+				context.cibleCourante=cible;
+				context.capCur=pkm.cap.elementAt(ind).cible;
+				//System.out.println("FREEZE DE CHOIX DE CIBLE IA");
+				//context.setfreeze(true);
+				
+				pkm.cap.utiliser(ind,pkm,cible.pkm,context);
+				
+				context.chercherKO();
+				
+				if(pkm.stats[2][0]<=(int)(pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
+					if(pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
+						Medicament m=(Medicament)pkm.objTenu;
+						context.ajoutBuffer(pkm.nom+" utilise sa baie");
+						if(m.baie){ m.script(pkm,context); pkm.objTenu=null; }
+					}
+				}
+				if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
+					if(cible.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
+						Medicament m=(Medicament)cible.pkm.objTenu;
+						context.ajoutBuffer(cible.pkm.nom+" utilise sa baie");
+						if(m.baie){ m.script(cible.pkm,context); cible.pkm.objTenu=null; }
+					}
 				}
 			}
-			if(cible.pkm.stats[2][0]<=(int)(cible.pkm.stats[2][1]/2) && cible.pkm.statut!=Statut.KO){
-				if(cible.pkm.objTenu instanceof Medicament && cible.pkm.objTenu!=null){
-					Medicament m=(Medicament)cible.pkm.objTenu;
-					context.ajoutBuffer(cible.pkm.nom+" utilise sa baie");
-					if(m.baie){ m.script(cible.pkm,context); cible.pkm.objTenu=null; }
-				}
-			}
+			System.out.println("FREEZE DE FIN DE TOUR");
+			context.setBufferState(true);
+			context.setfreeze(true);
 		}
-		System.out.println("FREEZE DE FIN DE TOUR");
-		context.setBufferState(true);
-		context.setfreeze(true);
+		
 	}
 	
 	//Choix de l'attaque la plus puissante

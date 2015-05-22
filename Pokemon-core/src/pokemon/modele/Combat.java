@@ -29,6 +29,7 @@ public class Combat extends Thread {
 	protected int act;
 	protected int ind;
 	protected boolean freeze;
+	protected int fini;
 	
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
@@ -40,6 +41,7 @@ public class Combat extends Thread {
 		freeze=false;
 		meteo=false;
 		endOfTurn=false;
+		fini=0;
 	}
 
 
@@ -117,15 +119,17 @@ public class Combat extends Thread {
 				pkmListe[i].action(pkmListe[i].adv[0],this);
 				//System.out.println("FIN DE TOUR \n"+pCourant.pkm.nom+" "+cibleCourante.pkm.nom+" "+capCur.nom);
 			}
-			//Application des effets de meteo
-			meteo=true;
-			System.out.println(this.climat.text());
-			this.ajoutBuffer(climat.text());
-			for(PokemonCombat p:pkmListe){
-				this.climat.effet(p.pkm);
+			if(this.climat != Climat.Normal){
+				//Application des effets de meteo
+				meteo=true;
+				System.out.println(this.climat.text());
+				this.ajoutBuffer(climat.text());
+				for(PokemonCombat p:pkmListe){
+					this.climat.effet(p.pkm);
+				}
+				this.setfreeze(true);
+				meteo=false;
 			}
-			this.setfreeze(true);
-			meteo=false;
 			//this.setfreeze(true);
 			//Application des degats sur la duree
 			endOfTurn=true;
@@ -150,6 +154,7 @@ public class Combat extends Thread {
 			}
 			endOfTurn=false;
 		}
+		System.out.println("CAY FINI FAUT SWAP DECRAN KILL IT DAMNIT");
 		return this.gagnant();
 	}
 	
@@ -338,6 +343,7 @@ public class Combat extends Thread {
 	}
 	public synchronized void setCible(PokemonCombat cible){ this.cibleCourante=cible; }
 	public synchronized boolean getendOfTurn(){ return endOfTurn;}
+	public synchronized int getFini(){ return fini; }
 	
 	
 }
