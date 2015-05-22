@@ -287,7 +287,7 @@ public class MapScreen extends GameScreen{
 	private void detectBattle() {
 		//Pour chaque NPC de la map, on cherche si le joueur est dans la portee
 		for(NPCVue npc : npcs) {
-			if(npc.isAggressive()) {
+			if(npc.getNPC() instanceof Dresseur) {
 				Direction dir = npc.getOrientation();
 				Vector2 pos = npc.getPos();
 				Vector2 dim = npc.getDimensions();

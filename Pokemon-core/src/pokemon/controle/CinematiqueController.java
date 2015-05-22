@@ -1,12 +1,6 @@
 package pokemon.controle;
 
 import pokemon.launcher.MapScreen;
-import pokemon.launcher.MyGdxGame;
-import pokemon.vue.GameScreen;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 
 public class CinematiqueController extends GameInput {
 	private boolean isSkipped;

@@ -104,7 +104,7 @@ public class Cinematique {
 					}
 					isMoving.addElement(new DeplacementNPC(npc, ins.getDir(), ins.getDist()));
 				}
-				//On met � jour la position du (ou des) NPC :
+				//On met a jour la position du (ou des) NPC :
 				for(DeplacementNPC depl : isMoving) {
 					depl.update();
 					//Si le NPC a fini de se deplacer, on l'enleve du tableau, et on passe a l'instruction suivante
