@@ -41,7 +41,7 @@ public abstract class GameScreen implements Screen{
 	public void drawUI(float delta){
 		if(elapsedTime!=-1 && elapsedTime<300){
 			shapeRenderer.setProjectionMatrix(stage.getViewport().getCamera().combined);
-			shapeRenderer.setColor(0.58f, 0.59f, 0.57f, 0.7f);
+			shapeRenderer.setColor(0.2f, 0.2f, 0.2f, 0.7f);
 			shapeRenderer.begin(ShapeType.Filled);
 			Gdx.gl.glEnable(GL20.GL_BLEND);
 			shapeRenderer.rect(35, 10, 30, 80);

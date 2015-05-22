@@ -4,54 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 
-public class CinematiqueController implements InputProcessor {
+public class CinematiqueController extends GameInput {
 	private boolean isSkipped;
 	
 	public CinematiqueController() {
 		setSkipped(false);
 	}
 	
-	@Override
-	public boolean keyDown(int arg0) {
-		return false;
-	}
-
-	public boolean keyTyped(char arg0) {
-		if(Gdx.input.isKeyJustPressed(Keys.ENTER)){
-			setSkipped(true);
-		}
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int arg0) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int arg0) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
-		return false;
-	}
+	
 
 	public boolean isSkipped() {
 		return isSkipped;
@@ -59,6 +19,90 @@ public class CinematiqueController implements InputProcessor {
 
 	public void setSkipped(boolean isSkipped) {
 		this.isSkipped = isSkipped;
+	}
+
+	@Override
+	public boolean touchDown(int x, int y, int pointer, int button) {			
+			.setTouched(true);
+			return true;
+
+	}
+
+
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if(menu==myGdxGame.getScreen()){
+			menu.setTouched(false);
+			v.set(screenX, screenY);
+			menu.getStage().screenToStageCoordinates(v);
+			System.out.println(v);
+			return super.touchUp(v);}
+		else
+			return false;
+	}
+
+
+	@Override
+	void handleA() {
+		// TODO Auto-generated method stub
+		setSkipped(true);
+	}
+
+
+
+	@Override
+	void handleB() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	void handleLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	void handleRight() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	void handleUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	void handleDown() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	void handleSelect() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	void handleStart() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

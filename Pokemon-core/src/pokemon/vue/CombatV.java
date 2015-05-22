@@ -179,6 +179,7 @@ public class CombatV extends GameScreen{
 		if(weather!=null)
 		weather.draw(stage.getBatch(), arg0);
 		stage.getBatch().end();		
+		super.drawUI(arg0);
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 		
 	}
