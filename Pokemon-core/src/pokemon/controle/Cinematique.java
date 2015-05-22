@@ -3,6 +3,7 @@ package pokemon.controle;
 import java.util.Vector;
 
 import pokemon.launcher.MapScreen;
+import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Dialog;
 import pokemon.modele.Dresseur;
 import pokemon.modele.Instruction;
@@ -26,11 +27,11 @@ public class Cinematique {
 	private Vector<DeplacementNPC> isMoving;
 	private Instruction currentInstruction;
 	
-	public Cinematique(MapScreen screen, NPC npc)
+	public Cinematique(MapScreen screen, NPC npc, MyGdxGame game)
 	{
 		this.screen = screen;
 		this.dialog = npc.getCurrentDialog();
-		controller = new CinematiqueController();
+		controller = new CinematiqueController(game);
 		isMoving = new Vector<DeplacementNPC>();
 		changingStatus = new Vector<NPC>();
 		try {

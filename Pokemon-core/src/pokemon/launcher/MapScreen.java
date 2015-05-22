@@ -193,7 +193,7 @@ public class MapScreen extends GameScreen{
 				default:
 					break;			
 				}
-				cinematique = new Cinematique(this, talkingNPC);
+				cinematique = new Cinematique(this, talkingNPC, game);
 				Gdx.input.setInputProcessor(cinematique.getController());
 			}
 		}
@@ -276,7 +276,7 @@ public class MapScreen extends GameScreen{
 			if(movingNPC.isDoneMoving()) {
 				//On arrete l'animation du personnage, et on force l'interaction.
 				movingNPC.npc.move(movingNPC.moveDirection, 0, 0);
-				cinematique = new Cinematique(this, movingNPC.getNPC().getNPC());
+				cinematique = new Cinematique(this, movingNPC.getNPC().getNPC(), game);
 				if(game.getScreen() == this) {					
 					Gdx.input.setInputProcessor(cinematique.getController());
 				}

@@ -1,14 +1,18 @@
 package pokemon.controle;
 
+import pokemon.launcher.MyGdxGame;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 
 public class CinematiqueController extends GameInput {
 	private boolean isSkipped;
+	private MyGdxGame game;
 	
-	public CinematiqueController() {
+	public CinematiqueController(MyGdxGame game) {
 		setSkipped(false);
+		this.game = game;
 	}
 	
 	
