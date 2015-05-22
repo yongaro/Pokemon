@@ -234,4 +234,7 @@ public class NPC {
 	public boolean isDoneMoving() {
 		return moveDistance > 0;
 	}
+	public boolean isAggressive() {
+		return false;
+	}
 }

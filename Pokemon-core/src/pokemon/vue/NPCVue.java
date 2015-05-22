@@ -148,4 +148,7 @@ public class NPCVue {
 	public NPC getNPC() {
 		return npc;
 	}
+	public boolean isAggressive() {
+		return npc.isAggressive();
+	}
 }

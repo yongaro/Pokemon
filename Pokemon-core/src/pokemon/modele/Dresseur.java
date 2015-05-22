@@ -108,7 +108,7 @@ public class Dresseur extends NPC implements CombatInfos {
 	public Pkm[] Team(){ return (Pkm[])team.toArray(); }
 	
 	public boolean isAggressive() {
-		return aggressive;
+		return aggressive && status == 0;
 	}
 	public void setAggressive(boolean aggressive) {
 		this.aggressive = aggressive;

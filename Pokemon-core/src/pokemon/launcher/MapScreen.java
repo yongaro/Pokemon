@@ -287,45 +287,47 @@ public class MapScreen extends GameScreen{
 	private void detectBattle() {
 		//Pour chaque NPC de la map, on cherche si le joueur est dans la portee
 		for(NPCVue npc : npcs) {
-			Direction dir = npc.getOrientation();
-			Vector2 pos = npc.getPos();
-			Vector2 dim = npc.getDimensions();
-			
-			//On construit la zone d'interaction du personnage
-			Rectangle interactRegion = getInteractRegion(pos, dim, dir);	
-			
-			//On verifie si le joueur est dans cette zone
-			Rectangle playerHitbox = new Rectangle(j.getPos().x, j.getPos().y-16, j.getDimensions().x, j.getDimensions().y - 5);
-			if(interactRegion.overlaps(playerHitbox))
-			{
-				//On fait se déplacer le NPC vers le joueur
-				float moveDistance = 0;
-				switch(npc.getOrientation()) {
-				case East:
-					moveDistance = j.getPos().x - npc.getPos().x - npc.getDimensions().x;
-					j.setOrientation(Direction.West);
-					break;
-				case North:
-					moveDistance = j.getPos().y-16 - npc.getPos().y - npc.getDimensions().y;
-					j.setOrientation(Direction.South);
-					break;
-				case South:
-					moveDistance = npc.getPos().y - j.getPos().y;
-					j.setOrientation(Direction.North);
-					break;
-				case West:
-					moveDistance = npc.getPos().x - j.getPos().x - npc.getDimensions().x;
-					j.setOrientation(Direction.East);
-					break;
-				default:
-					break;
+			if(npc.isAggressive()) {
+				Direction dir = npc.getOrientation();
+				Vector2 pos = npc.getPos();
+				Vector2 dim = npc.getDimensions();
+				
+				//On construit la zone d'interaction du personnage
+				Rectangle interactRegion = getInteractRegion(pos, dim, dir);	
+				
+				//On verifie si le joueur est dans cette zone
+				Rectangle playerHitbox = new Rectangle(j.getPos().x, j.getPos().y-16, j.getDimensions().x, j.getDimensions().y - 5);
+				if(interactRegion.overlaps(playerHitbox))
+				{
+					//On fait se déplacer le NPC vers le joueur
+					float moveDistance = 0;
+					switch(npc.getOrientation()) {
+					case East:
+						moveDistance = j.getPos().x - npc.getPos().x - npc.getDimensions().x;
+						j.setOrientation(Direction.West);
+						break;
+					case North:
+						moveDistance = j.getPos().y-16 - npc.getPos().y - npc.getDimensions().y;
+						j.setOrientation(Direction.South);
+						break;
+					case South:
+						moveDistance = npc.getPos().y - j.getPos().y;
+						j.setOrientation(Direction.North);
+						break;
+					case West:
+						moveDistance = npc.getPos().x - j.getPos().x - npc.getDimensions().x;
+						j.setOrientation(Direction.East);
+						break;
+					default:
+						break;
+					}
+					System.out.println(moveDistance);
+					//On commence le deplacement du personnage
+					movingNPC = new DeplacementNPC(npc, dir, moveDistance);
+					//On arrete le joueur (BRUTAL)
+					j.stop();
+//				Gdx.input.setInputProcessor(null);
 				}
-				System.out.println(moveDistance);
-				//On commence le deplacement du personnage
-				movingNPC = new DeplacementNPC(npc, dir, moveDistance);
-				//On arrete le joueur (BRUTAL)
-				j.stop();
-				Gdx.input.setInputProcessor(null);
 			}
 		}
 	}
