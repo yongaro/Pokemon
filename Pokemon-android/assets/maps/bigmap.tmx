@@ -216,7 +216,7 @@
   </object>
   <object id="6" gid="2805" x="448" y="227">
    <properties>
-    <property name="agressive" value=""/>
+    <property name="aggressive" value=""/>
     <property name="name" value="dresseurTest2"/>
     <property name="orientation" value="West"/>
     <property name="trainer" value=""/>

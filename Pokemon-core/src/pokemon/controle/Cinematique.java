@@ -17,7 +17,7 @@ import pokemon.vue.NPCVue;
 
 public class Cinematique {
 	
-	//Attributs �trangers
+	//Attributs etrangers
 	private MapScreen screen;
 	private Dialog dialog;
 	
@@ -84,6 +84,7 @@ public class Cinematique {
 				//Si le dresseur a une equipe...
 				if(dress.asTeam()) {
 					//... on lance un combat
+					System.out.println("SWEGG");
 					screen.startBattle(dress);
 					return skip();
 				}
@@ -96,7 +97,7 @@ public class Cinematique {
 			boolean block = true;
 			//Si l'appel est bloquant, alors :
 			if(block) {
-				//On ajoute un deplacement de NPC si on ne l'a pas d�ja fait :
+				//On ajoute un deplacement de NPC si on ne l'a pas deja fait :
 				if(isMoving.isEmpty()) {					
 					NPCVue npc = screen.getNPCVueById(ins.getId());
 					if(npc == null) {
@@ -110,7 +111,6 @@ public class Cinematique {
 					//Si le NPC a fini de se deplacer, on l'enleve du tableau, et on passe a l'instruction suivante
 					if(depl.isDoneMoving()) {
 						isMoving.removeElement(depl);
-						System.out.println("TUTUT");
 						return skip();
 					}
 				}
@@ -131,6 +131,7 @@ public class Cinematique {
 		try {
 			currentInstruction = getCurrentInstruction();
 		} catch (NoMoreInstructionException e) {
+			System.out.println("FINI");
 			//Si il n'y a plus d'instructions, alors on finit la cinematique en ...
 			//... remettant le dialogue a zero, ...
 			dialog.reset();

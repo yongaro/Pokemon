@@ -3,6 +3,11 @@
 	<dialogue>
 		<text>Avant d'etre pape, Jean-Paul II etait acteur.</text>
 		<battle with="3"/>
+		<text>Oh non ! Tu m'as battu !</text>
+		<status npc="3" value="1"/>
+	</dialogue>
+	<dialogue>
+		<text>Attend un peu que je m'entraine !</text>
 	</dialogue>
 	
 	<equipe>

@@ -50,7 +50,7 @@ public class MapScreen extends GameScreen{
 
     //Attributs cinematiques
 	private Cinematique cinematique = null;
-	private Stage stage;
+	private Stage stage = null;
     private DialogBox box = null;
     private DeplacementNPC movingNPC = null;
     
@@ -106,8 +106,12 @@ public class MapScreen extends GameScreen{
 		//Affichage des NPC
 		updateNPCs();
 		
-		//Generation du Stage
+		//Generation du Stage		
 		stage = new Stage(new FitViewport(width,height,cam));
+		if(box != null) {
+			stage.addActor(box);
+		}
+		stage.draw();
 		
 		//Definition de l'input
 		if(cinematique == null) {
@@ -115,7 +119,6 @@ public class MapScreen extends GameScreen{
 		}
 		else {
 			Gdx.input.setInputProcessor(cinematique.getController());
-			System.out.println("POIL");
 		}
 		controller.unfreeze();
 	}
@@ -141,7 +144,7 @@ public class MapScreen extends GameScreen{
 			if(!cinematique.update()) {
 				//... et si elle est finie, on l'enleve.
 				cinematique = null;
-				if(game.getScreen()==this){
+				if(isCurrentScreen()){
 					Gdx.input.setInputProcessor(controller);
 				}
 			}
@@ -170,6 +173,10 @@ public class MapScreen extends GameScreen{
 	public void pause() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean isCurrentScreen() {
+		return game.getScreen() == this;
 	}
 	
 	//Autres fonctions
@@ -237,10 +244,13 @@ public class MapScreen extends GameScreen{
 	}
 	
 	public void startBattle(Dresseur dress) {
-		music.stop();
-		Combat c = new Combat(j, dress);
-		c.start();
-		game.setScreen(new CombatV(c,game,this));
+		//Si le combat n'est pas encore lance
+		if(game.getScreen() == this) {			
+			music.stop();
+			Combat c = new Combat(j, dress);
+			c.start();
+			game.setScreen(new CombatV(c,game,this));
+		}
 	}
 	
 	public NPC getNPCById(int i) {
@@ -278,6 +288,7 @@ public class MapScreen extends GameScreen{
 				//On arrete l'animation du personnage, et on force l'interaction.
 				movingNPC.npc.move(movingNPC.moveDirection, 0, 0);
 				cinematique = new Cinematique(this, movingNPC.getNPC().getNPC(), game);
+				movingNPC = null;
 				if(game.getScreen() == this) {					
 					Gdx.input.setInputProcessor(cinematique.getController());
 				}
@@ -289,47 +300,50 @@ public class MapScreen extends GameScreen{
 		//Pour chaque NPC de la map, on cherche si le joueur est dans la portee
 		for(NPCVue npc : npcs) {
 			if(npc.getNPC() instanceof Dresseur) {
-				Direction dir = npc.getOrientation();
-				Vector2 pos = npc.getPos();
-				Vector2 dim = npc.getDimensions();
-				
-				//On construit la zone d'interaction du personnage
-				Rectangle interactRegion = getInteractRegion(pos, dim, dir);	
-				
-				//On verifie si le joueur est dans cette zone
-				Rectangle playerHitbox = new Rectangle(j.getPos().x, j.getPos().y-16, j.getDimensions().x, j.getDimensions().y - 5);
-				if(interactRegion.overlaps(playerHitbox))
-				{
-					//On fait se déplacer le NPC vers le joueur
-					float moveDistance = 0;
-					switch(npc.getOrientation()) {
-					case East:
-						moveDistance = j.getPos().x - npc.getPos().x - npc.getDimensions().x;
-						j.setOrientation(Direction.West);
-						break;
-					case North:
-						moveDistance = j.getPos().y-16 - npc.getPos().y - npc.getDimensions().y;
-						j.setOrientation(Direction.South);
-						break;
-					case South:
-						moveDistance = npc.getPos().y - j.getPos().y;
-						j.setOrientation(Direction.North);
-						break;
-					case West:
-						moveDistance = npc.getPos().x - j.getPos().x - npc.getDimensions().x;
-						j.setOrientation(Direction.East);
-						break;
-					default:
-						break;
-					}
-					System.out.println(moveDistance);
-					//On commence le deplacement du personnage
-					movingNPC = new DeplacementNPC(npc, dir, moveDistance);
-					//On arrete le joueur (BRUTAL)
-					j.stop();
+				Dresseur dress = (Dresseur) npc.getNPC();
+				if(dress.isAggressive()) {					
+					Direction dir = npc.getOrientation();
+					Vector2 pos = npc.getPos();
+					Vector2 dim = npc.getDimensions();
+					
+					//On construit la zone d'interaction du personnage
+					Rectangle interactRegion = getInteractRegion(pos, dim, dir);
+					
+					//On verifie si le joueur est dans cette zone
+					Rectangle playerHitbox = new Rectangle(j.getPos().x, j.getPos().y-16, j.getDimensions().x, j.getDimensions().y - 5);
+					if(interactRegion.overlaps(playerHitbox))
+					{
+						//On fait se déplacer le NPC vers le joueur
+						float moveDistance = 0;
+						switch(npc.getOrientation()) {
+						case East:
+							moveDistance = j.getPos().x - npc.getPos().x - npc.getDimensions().x;
+							j.setOrientation(Direction.West);
+							break;
+						case North:
+							moveDistance = j.getPos().y-16 - npc.getPos().y - npc.getDimensions().y;
+							j.setOrientation(Direction.South);
+							break;
+						case South:
+							moveDistance = npc.getPos().y - j.getPos().y;
+							j.setOrientation(Direction.North);
+							break;
+						case West:
+							moveDistance = npc.getPos().x - j.getPos().x - npc.getDimensions().x;
+							j.setOrientation(Direction.East);
+							break;
+						default:
+							break;
+						}
+						System.out.println(moveDistance + "AGRESSION");
+						//On commence le deplacement du personnage
+						movingNPC = new DeplacementNPC(npc, dir, moveDistance);
+						//On arrete le joueur (BRUTAL)
+						j.stop();
 //				Gdx.input.setInputProcessor(null);
-					controller.freeze();
-
+						controller.freeze();
+						
+					}
 				}
 			}
 		}
