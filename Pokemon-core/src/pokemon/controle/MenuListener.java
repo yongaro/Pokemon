@@ -16,9 +16,9 @@ import com.badlogic.gdx.Screen;
 public class MenuListener extends InputMultiplexer{
 	MyGdxGame mygdxgame;
 	menuPokemon menupokemon;
-	public int state=0; //1- objet dans pokemon 2-Utilisation objet pokemon
-	public int slotInventaire[];
-	public int slotPokemon;
+	protected int state=0; //1- objet dans pokemon 2-Utilisation objet pokemon
+	protected int slotInventaire[];
+	protected int slotPokemon;
 	menuInventaire menuinventaire;
 	menuPokematos  menupokematos;
 	menuPokematosMap  menupokematosmap;

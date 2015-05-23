@@ -41,7 +41,7 @@ public abstract class GameInput implements InputProcessor{
 	}
 	
 	public boolean touchUp(Vector2 v){
-
+		System.out.println(v);
 		if(v.x>35 && v.x<65 && v.y>10 && v.y<40)
 			handleDown();
 		if(v.x>35 && v.x<65 && v.y>65 && v.y<90)
@@ -50,10 +50,14 @@ public abstract class GameInput implements InputProcessor{
 			handleLeft();
 		if(v.x>60 && v.x<90 && v.y>30 && v.y<70)
 			handleRight();
-		if(v.x>460 && v.x<540 && v.y>10 && v.y<80)
+		if(v.x>490 && v.x<560 && v.y>5 && v.y<75)
 			handleB();
-		if(v.x>550 && v.x<630 && v.y>10 && v.y<80)
+		if(v.x>565 && v.x<635 && v.y>40 && v.y<110)
 			handleA();
+		if(v.x>340 && v.x<400 && v.y>0 && v.y<25)
+			handleStart();
+		if(v.x>250 && v.x<310 && v.y>0 && v.y<25)
+			handleSelect();
 		return true;
 		
 	}

@@ -114,7 +114,6 @@ public class InventaireMenuListener extends GameInput{
 		// TODO Auto-generated method stub
 		if(state==1){
 
-			System.out.println("Switch a partir de l'inventaire");
 			menuListener.switchto(menuPokemon.class);}
 		if(state==2 && objselector[1]==1){
 			objselector[1]--;

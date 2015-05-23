@@ -20,7 +20,7 @@ public enum myInput {
 			this.id=Keys.valueOf(b.getAttribute("button"));
 			if(this.id==-1)
 				throw new UnknownKeyException("Wrong keycode for : "+this.name());
-			System.out.println(this.name()+" : "+this.id);
+			//System.out.println(this.name()+" : "+this.id);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -29,7 +29,7 @@ public enum myInput {
 
 	}
 	myInput(int id){
-		System.out.println(this.name());
+		//System.out.println(this.name());
 		this.id=id;
 	}
 

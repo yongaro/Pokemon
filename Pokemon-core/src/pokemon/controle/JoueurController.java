@@ -26,43 +26,32 @@ public class JoueurController extends GameInput{
 		this.j = jv.getJoueur();
 		this.screen = screen;
 	}
-	
+
 	//Pour Desktop
 	@Override
 	public boolean keyDown(int key) {
 		System.out.println(j.canMove()+" controle map");
 		if(j.canMove()) {		
 			super.keyDown(key);
-			
-			if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-				j.setSpeedX(0);
-				j.setSpeedY(0);
-				screen.popMenu();
-			}
 		}
-		if(Gdx.input.isKeyJustPressed(myInput.A.getID()))
-			handleA();
+
 
 		return false;
 	}
 	@Override
-	public boolean keyUp(int arg0) {
-		switch(arg0)
-		{
-		case Keys.RIGHT:
-			input.remove(Direction.East);
-			break;
-		case Keys.LEFT:
-			input.remove(Direction.West);
-			break;
-		case Keys.DPAD_UP:
-			input.remove(Direction.North);
-			break;
-		case Keys.DPAD_DOWN:
-			input.remove(Direction.South);
-			break;
 
-		}
+	public boolean keyUp(int arg0) {
+
+		if(arg0==myInput.LEFT.getID())
+			input.remove(Direction.West);
+		if(arg0==myInput.RIGHT.getID())
+			input.remove(Direction.East);
+		if(arg0==myInput.UP.getID())
+			input.remove(Direction.North);
+		if(arg0==myInput.DOWN.getID())
+			input.remove(Direction.South);
+
+
 		if(input.size()!=0){
 			j.move(input.firstElement());
 			jv.setAnimation(input.firstElement());
@@ -77,7 +66,7 @@ public class JoueurController extends GameInput{
 	}
 
 
-//controles
+	//controles
 	@Override
 	public boolean touchDragged(int arg0, int arg1, int arg2) {
 		return false;
@@ -95,7 +84,7 @@ public class JoueurController extends GameInput{
 			input.remove(Direction.West);
 		if(v.x>60 && v.x<90 && v.y>30 && v.y<70)
 			input.remove(Direction.East);
-	/*	if(x>460 && x<540 && y>10 && y<80)
+		/*	if(x>460 && x<540 && y>10 && y<80)
 			handleB();
 		if(x>550 && x<630 && y>10 && y<80)
 			handleA();*/
@@ -113,10 +102,10 @@ public class JoueurController extends GameInput{
 		v.set(x, y);
 		screen.getStage().screenToStageCoordinates(v);
 		if(!freeze)
-		super.touchUp(v);
+			super.touchUp(v);
 		return false;
 	}
-	
+
 	//A voir
 	@Override
 	public boolean mouseMoved(int arg0, int arg1) {
@@ -183,13 +172,14 @@ public class JoueurController extends GameInput{
 	@Override
 	void handleSelect() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	void handleStart() {
-		// TODO Auto-generated method stub
-		
+		j.setSpeedX(0);
+		j.setSpeedY(0);
+		screen.popMenu();
 	}
 
 

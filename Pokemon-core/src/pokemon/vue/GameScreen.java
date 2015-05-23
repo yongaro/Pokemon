@@ -49,8 +49,11 @@ public abstract class GameScreen implements Screen{
 			Gdx.gl.glEnable(GL20.GL_BLEND);
 			shapeRenderer.rect(35, 10, 30, 80);
 			shapeRenderer.rect(10, 35, 80, 30);
-			shapeRenderer.ellipse(550, 10, 80, 80);
-			shapeRenderer.ellipse(460,10, 80, 80);
+			shapeRenderer.ellipse(565, 40, 70, 70);
+			shapeRenderer.ellipse(490,5, 70, 70);
+			shapeRenderer.rect(340, 0,60,25);
+			shapeRenderer.rect(250, 0,60,25);
+
 			shapeRenderer.end();
 			Gdx.gl.glDisable(GL20.GL_BLEND);
 			if(touched==false)
