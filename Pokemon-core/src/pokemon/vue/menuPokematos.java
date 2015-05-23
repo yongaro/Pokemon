@@ -1,25 +1,14 @@
 package pokemon.vue;
 
 import java.util.Vector;
-
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Pokedex;
 import pokemon.modele.Type;
-
-import android.graphics.Paint.Cap;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class menuPokematos extends  GameScreen{
 

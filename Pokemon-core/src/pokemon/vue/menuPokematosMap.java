@@ -1,18 +1,11 @@
 package pokemon.vue;
-import javax.microedition.khronos.opengles.GL;
 
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Minimap;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class menuPokematosMap extends GameScreen{
 

@@ -1,6 +1,7 @@
 package pokemon.vue;
 
 import pokemon.controle.MenuListener;
+import pokemon.controle.StartScreenListener;
 import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Map;
@@ -11,14 +12,19 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 
-public class StartScreen extends GameScreen implements InputProcessor{
+public class StartScreen extends GameScreen{
 	MyGdxGame game;
 	SpriteActor s=new SpriteStartMenu();
-	SpriteActor charm=new SpriteActor(Gdx.files.internal("charmander.png"), 0, 0);
-
+	SpriteActor charm=new SpriteActor(Gdx.files.internal("charmanderf.png"));
+	StartScreenListener listener;
+	int selector;
 	
+
+
 	public StartScreen(MyGdxGame game){
 		this.game=game;
+		listener=new StartScreenListener(this,game);
+		selector=0;
 	}
 
 	public void dispose() {
@@ -40,22 +46,22 @@ public class StartScreen extends GameScreen implements InputProcessor{
 
 	@Override
 	public void render(float arg0) {
-		Gdx.gl.glClearColor(1f, 1f, 1f, 1);
+		Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
 		stage.act();
 		stage.draw();
 		stage.getBatch().begin();
-		f.setColor(Color.BLACK);
+		f.setColor(0.58f, 0.59f, 0.57f, 1);
+		if(selector==0)
+			f.setColor(1f, 1f, 1f, 1);
 		f.draw(stage.getBatch(), "Nouvelle Partie", width/2-f.getBounds("Nouvelle Partie").width/2, height/2f);
+		if(selector==1)
+			f.setColor(1f, 1f, 1f, 1);
+		else
+			f.setColor(0.58f, 0.59f, 0.57f, 1);
 		f.draw(stage.getBatch(), "Charger Partie", width/2-f.getBounds("Charger Partie").width/2, height/2.5f);
-
 		stage.getBatch().end();
-		if(Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.VOLUME_UP)){
-			MyGdxGame.Jtest.setCurrentMap(new Map("maps/bigmap.tmx", MyGdxGame.npcList));
-			MapScreen mapS=new MapScreen(game);
-		//	MenuListener menu=new MenuListener(game,mapS);
-			game.setScreen(mapS);
-		}
+
 
 	}
 
@@ -67,58 +73,21 @@ public class StartScreen extends GameScreen implements InputProcessor{
 
 	@Override
 	public void show() {
-		charm.setBounds(0, -190, charm.getWidth()/5, charm.getHeight()/5);
-	
-		stage.addActor(s);
+		Gdx.input.setInputProcessor(listener);
+		charm.setBounds(430,0, charm.getWidth()/1.2f, charm.getHeight()/1.2f);
 		stage.addActor(charm);
+		stage.addActor(s);
+
 	}
 
-	@Override
-	public boolean keyDown(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
+
+	public int getSelector() {
+		return selector;
 	}
 
-	@Override
-	public boolean keyTyped(char arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setSelector(int state) {
+		this.selector = state;
 	}
-
-	@Override
-	public boolean keyUp(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
+	
+	

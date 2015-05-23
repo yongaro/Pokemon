@@ -3,22 +3,14 @@ package pokemon.vue;
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
-import pokemon.controle.InventaireMenuListener;
 import pokemon.controle.MenuListener;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Joueur;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 @Tps(nbhours=3)
 public class menuInventaire  extends GameScreen{

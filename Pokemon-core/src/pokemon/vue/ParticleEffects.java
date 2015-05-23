@@ -2,7 +2,6 @@ package pokemon.vue;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 
 public enum ParticleEffects {
 	Eau,Feu,Plante,Poison,Vol,Electrique,Sol,Roche,Psy,Spectre,Insecte,Tenebre,Acier,Combat,Glace,Dragon,Normal,Fee;
