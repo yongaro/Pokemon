@@ -87,6 +87,9 @@ public class Combat extends Thread {
 		pkmListe[0].listeIndice=0; pkmListe[1].listeIndice=1;
 	}
 	
+
+	
+	
 	public void initSolo(Joueur j,Dresseur d){
 		equipe1=new PokemonCombat[j.teamsize];
 		equipe2=new PokemonCombat[d.getTeam().size()];
@@ -94,15 +97,23 @@ public class Combat extends Thread {
 		
 		for(int i=0;i<j.teamsize;i++){
 			equipe1[i]=new PokemonCombat(j.team[i],false,j); equipe1[i].equipe=equipe1;
+			if(equipe1[i].pkm.statut!=Statut.KO && pkmListe[0]==null){
+				pkmListe[0]=equipe1[i];
+				pkmListe[0].listeIndice=i;
+			}
 		}
 		for(int i=0;i<d.getTeam().size();i++){
 			equipe2[i]=new PokemonCombat(d.getTeam().elementAt(i),true,d); equipe2[i].equipe=equipe2;
+			if(equipe2[i].pkm.statut!=Statut.KO && pkmListe[1]==null){
+				pkmListe[1]=equipe2[i];
+				pkmListe[1].listeIndice=i;
+			}
 		}
-		pkmListe[0]=equipe1[0];
-		pkmListe[1]=equipe2[0];
+		//pkmListe[0]=equipe1[0];
+		//pkmListe[1]=equipe2[0];
 		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
 		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
-		pkmListe[0].listeIndice=0; pkmListe[1].listeIndice=1;
+		 
 	}
 	
 	
