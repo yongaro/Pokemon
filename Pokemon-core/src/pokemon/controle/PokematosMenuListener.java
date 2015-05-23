@@ -22,7 +22,7 @@ public class PokematosMenuListener extends GameInput{
 	menuPokematos menu;
 	MyGdxGame myGdxGame;
 	MenuListener menuListener;
-	int state; //2-Pokemon slider 1 debloque /3-Pokemon valid� slider 2 debloque /4-Affichage location
+	int state; //2-Pokemon slider 1 debloque /3-Pokemon valide slider 2 debloque /4-Affichage location
 	Sound s;
 	int pkselector=1,optselector=1;
 	int page=0;
@@ -161,6 +161,9 @@ public class PokematosMenuListener extends GameInput{
 	@Override
 	void handleB() {
 		// TODO Auto-generated method stub
+		if(state==1){
+			myGdxGame.setScreen(menuListener.getScreen());
+		}
 		if(state<=3 && state>1)
 			state--;
 		if(state==4){

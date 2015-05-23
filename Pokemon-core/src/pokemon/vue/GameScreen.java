@@ -17,6 +17,7 @@ public abstract class GameScreen implements Screen{
 	protected ShapeRenderer shapeRenderer;
 	float elapsedTime;
 	boolean touched;
+	protected int state;
 
 	public GameScreen(){
 		stage=new Stage(new FitViewport(GameScreen.width,GameScreen.height));
@@ -34,6 +35,10 @@ public abstract class GameScreen implements Screen{
 
 	public Stage getStage() {
 		return stage;
+	}
+	
+	public int getState(){
+		return state;
 	}
 	
 	public void drawUI(float delta){

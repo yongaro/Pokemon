@@ -91,7 +91,7 @@ public class Joueur implements CombatInfos, Serializable {
 		System.out.println("Sauvegarde terminee");
 	}
 	
-	public void Charger(){
+	public void Charger() throws IOException{
 		System.out.println("Chargement de sauvegarde");
 		Joueur temp = null;
 		try{
@@ -115,10 +115,10 @@ public class Joueur implements CombatInfos, Serializable {
 		this.teamsize=temp.teamsize;
 		System.out.println("DONE");
 		}
-		catch(IOException ex){
+	/*	catch(IOException ex){
 			System.out.println(ex.toString());
 			JOptionPane.showMessageDialog(null, "Echec du chargement", "Chargement de Partie",JOptionPane.ERROR_MESSAGE);
-		} catch (ClassNotFoundException e) {
+		}*/ catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 

@@ -55,32 +55,6 @@ public class InventaireMenuListener extends GameInput{
 	}
 
 	@Override
-	public boolean keyTyped(char arg0) {
-
-		return true;
-	}
-
-	
-
-	@Override
-	public boolean keyUp(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
 		if(inventaire==mygdxgame.getScreen()){
 			inventaire.setTouched(true);
@@ -90,11 +64,6 @@ public class InventaireMenuListener extends GameInput{
 			return false;
 	}
 
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
@@ -129,6 +98,9 @@ public class InventaireMenuListener extends GameInput{
 
 	@Override
 	void handleB() {
+		if(state==1){
+			mygdxgame.setScreen(menuListener.getScreen());
+		}
 		if(state!=1)
 		{
 			state--;

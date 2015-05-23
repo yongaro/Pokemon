@@ -226,23 +226,7 @@ public class menuPokemon  extends GameScreen {
 	public void dispose() {
 
 	}
-	/*  private void init() {
-			camera = new OrthographicCamera(Gdx.graphics.getWidth(),
-					Gdx.graphics.getHeight());
-			camera.update();
-			//batch = new SpriteBatch();
 
-			// create stage
-			stage = new Stage();
-			// set the stage to handle input
-	        Gdx.input.setInputProcessor(stage);
-
-	        // create actor
-	       myActor = new MyActor(stage.getBatch());
-
-	        // add myActor to stage
-	        stage.addActor(myActor);
-		}*/
 	public void healthbarswap(int i,int j){
 		int temp=healthbars[i];
 		healthbars[i]=healthbars[j];

@@ -10,7 +10,6 @@ public class Pokeball extends SpriteActor{
 
 	//TextureRegion g=new T
 	boolean alive;
-	RotateByAction b=new RotateByAction();
 	int i;
 	
 	Pokeball(boolean alive,int i){

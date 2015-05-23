@@ -1,5 +1,7 @@
 package pokemon.controle;
 
+import java.io.IOException;
+
 import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Map;
@@ -22,13 +24,19 @@ public class StartScreenListener extends GameInput{
 			MapScreen mapS=new MapScreen(game);
 		//	MenuListener menu=new MenuListener(game,mapS);
 			game.setScreen(mapS);
+			screen.dispose();
+
 		}
 		if(screen.getSelector()==1){
+			try{
 			MyGdxGame.Jtest.Charger();
 			MyGdxGame.Jtest.setCurrentMap(new Map("maps/bigmap.tmx", MyGdxGame.npcList));
 			MapScreen mapS=new MapScreen(game);
 		//	MenuListener menu=new MenuListener(game,mapS);
 			game.setScreen(mapS);
+			}
+			catch(IOException e){
+			}
 		}
 	}
 
@@ -41,26 +49,26 @@ public class StartScreenListener extends GameInput{
 	@Override
 	void handleLeft() {
 		// TODO Auto-generated method stub
-		
+		if(screen.getSelector()==1)
+			screen.setSelector(0);
 	}
 
 	@Override
 	void handleRight() {
 		// TODO Auto-generated method stub
-		
+		if(screen.getSelector()==0)
+			screen.setSelector(1);
 	}
 
 	@Override
 	void handleUp() {
-		if(screen.getSelector()==1)
-			screen.setSelector(0);
+		
 		
 	}
 
 	@Override
 	void handleDown() {
-		if(screen.getSelector()==0)
-			screen.setSelector(1);
+
 		
 		
 	}

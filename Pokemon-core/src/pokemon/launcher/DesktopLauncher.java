@@ -14,7 +14,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) throws Exception {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new MyGdxGame(), config);
-		config.width=900;
-		config.height=600;
+		config.width=(int) (640*1.2f);
+		config.height=(int) (360*1.2f);
 	}
 }

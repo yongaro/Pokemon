@@ -1,21 +1,12 @@
 package pokemon.controle;
 
 import pokemon.annotations.Tps;
-import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Joueur;
 import pokemon.modele.Pkm;
-import pokemon.modele.Stockage;
 import pokemon.vue.menuInventaire;
 import pokemon.vue.menuPokemon;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 @Tps(nbhours=2)
 public class PokemonMenuListenner extends GameInput{
@@ -87,7 +78,7 @@ public class PokemonMenuListenner extends GameInput{
 	public void handleRight(){
 		if(state==1){		
 			menuListener.switchto(menuInventaire.class);
-			//menuListener.switchtoInventory();
+			stateRAZ();
 		}
 
 	}
@@ -138,6 +129,10 @@ public class PokemonMenuListenner extends GameInput{
 	}
 
 	public void handleB(){
+		System.out.println("B pressed");
+		if(state==1){
+			myGdxGame.setScreen(menuListener.getScreen());
+		}
 		if(state==2){
 			this.state--;
 			atkselector=1;
@@ -189,7 +184,12 @@ public class PokemonMenuListenner extends GameInput{
 		}
 	}
 
-
+	public void stateRAZ(){
+		state=1;
+		pkselector=0;
+		atkselector=1;
+		menu.update(state, pkselector, atkselector);
+	}
 
 }
 

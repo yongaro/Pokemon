@@ -1,8 +1,6 @@
 package pokemon.controle;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
 import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
@@ -35,7 +33,7 @@ public class MenuListener extends InputMultiplexer{
 		menupokematos=new menuPokematos(mygdxgame);
 		menupokematosmap=new menuPokematosMap(mygdxgame);
 		mygdxgame.setScreen(menupokemon);
-		this.addProcessor(new ReturnToMapListener(mygdxgame, screen));
+	//	this.addProcessor(new ReturnToMapListener(mygdxgame, screen));
 		this.addProcessor(new PokemonMenuListenner(menupokemon,mygdxgame,this));
 		this.addProcessor(new InventaireMenuListener(mygdxgame, menupokemon, menuinventaire,this));
 		this.addProcessor(new PokematosMenuListener(menupokematos,mygdxgame,this));
@@ -51,6 +49,7 @@ public class MenuListener extends InputMultiplexer{
 			this.addProcessor(new InventaireMenuListener(mygdxgame, menupokemon, menuinventaire,this));}
 		mygdxgame.setScreen(menuinventaire);
 	}
+	
 	
 	public void switchto(Class c)
 	{
