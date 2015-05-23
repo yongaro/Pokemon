@@ -52,6 +52,13 @@ public class CombatV extends GameScreen{
 		this.mygdxgame=mygdxgame;
 		dbox=new DialogBox(new Vector2(640,100),true);
 		dbox.setMessage("Un pokemon sauvage apparait");
+		for(int i=0;i<MyGdxGame.Jtest.getTeam().length;i++){
+			if(MyGdxGame.Jtest.getTeam()[i].get(2)!=0){
+				pkm=MyGdxGame.Jtest.getTeam()[i];
+				System.out.println("Envoi "+pkm.getNom());
+				break;
+			}
+		}
 		this.c=c;
 		for( int i=0;i<c.getPkmListe().length;i++){
 			System.out.println(c.getPkmListe()[i].isIA());
@@ -61,6 +68,7 @@ public class CombatV extends GameScreen{
 			}
 			else{
 				friends.add(new BattleGroup(PokemonSprite.a1,c,this,c.getPkmListe()[i]));
+				System.out.println("FRIENDS "+c.getPkmListe()[i].getPkm().getNom());
 			}
 		}
 		stage.addActor(a);

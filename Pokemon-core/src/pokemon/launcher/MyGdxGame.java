@@ -1,26 +1,14 @@
 package pokemon.launcher;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
-import javax.swing.JOptionPane;
-
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.utils.XmlReader;
-import com.badlogic.gdx.utils.XmlReader.Element;
 
 import pokemon.annotations.Tps;
 import pokemon.controle.MenuListener;
 import pokemon.modele.*;
-import pokemon.vue.CombatV;
 import pokemon.vue.StartScreen;
 
 
@@ -46,9 +34,9 @@ public class MyGdxGame extends Game {
 		//Jtest.Sauvegarder();
 		//Jtest.Charger();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
-		//MapScreen mapS=new MapScreen(this);
-		//MenuListener menu=new MenuListener(this,mapS);
-		this.setScreen(new StartScreen(this));
+		MapScreen mapS=new MapScreen(this);
+		MenuListener menu=new MenuListener(this,mapS);
+		//this.setScreen(new StartScreen(this));
 		//TestMap2 test = new TestMap2();
 		//this.setScreen(mapS);
 		//Combat test=new Combat(Jtest, Jtest2);
@@ -72,7 +60,7 @@ public class MyGdxGame extends Game {
 	    	System.out.println(Ptest[0].getNom()+" peut il apprendre Charge ? " +  bddCapacite.Charge.get().peutApprendre(Ptest[0]));
 	    	//Ptest[0].infliger(56);
 	    	//Ptest[1].infliger(38);
-	    	Ptest2[2].infliger(58);
+	    	Ptest[0].infliger(70);
 	    	for(int i=0;i<6;i++){
 	    		//Ptest[i].give(Medicament.baieTest); Ptest2[i].give(Medicament.baieTest);
 	    		if(i==0){

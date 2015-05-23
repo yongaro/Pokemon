@@ -10,8 +10,7 @@ import pokemon.vue.BattleSoundManager;
 import pokemon.vue.CombatV;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
+
 
 public class CombatListener extends GameInput{
 
