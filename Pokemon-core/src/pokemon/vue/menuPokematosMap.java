@@ -77,15 +77,15 @@ public menuPokematosMap(MyGdxGame myGdxGame) {
 
 		f.drawMultiLine(stage.getBatch(),"C\nA\nR\nT\nE", 5, 140);
 		f.setColor(1, 1, 1, 1);
-		f.draw(stage.getBatch(),"Pokemons",18, height-5);
-
-		f.draw(stage.getBatch(),"Inventaire",160+13, height-5);
+		f.draw(stage.getBatch(),"Pokemons",18, height-3);
+		f.draw(stage.getBatch(),"Options",488+30, height-3);
+		f.draw(stage.getBatch(),"Inventaire",160+13, height-3);
 		//f.setScale(1.5f);
 		//f.draw(stage.getBatch(),"Pokedex",75, 315);			
 		//f.draw(stage.getBatch(),"Pokedex",80, 315);
 		
 		f.setColor(0.58f, 0.59f, 0.57f, 1);	
-		f.draw(stage.getBatch(),"PokeMatos",324+13, height-5);
+		f.draw(stage.getBatch(),"PokeMatos",324+13, height-3);
 		stage.getBatch().draw(map,340-map.getWidth()/2,165-map.getHeight()/2,map.getWidth(),map.getHeight());
 		stage.getBatch().end();
 		stage.act(delta);

@@ -5,16 +5,11 @@ import java.util.Vector;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Pokedex;
 import pokemon.vue.menuInventaire;
+import pokemon.vue.menuOptions;
 import pokemon.vue.menuPokematos;
 import pokemon.vue.menuPokematosMap;
-
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Audio;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -49,61 +44,6 @@ public class PokematosMenuListener extends GameInput{
 		return false;
 	}
 
-	@Override
-	public boolean keyTyped(char arg0) {
-		return false;
-
-		
-	}
-
-	@Override
-	public boolean keyUp(int arg0) {
-		/*	if(myGdxGame.getScreen()==menu)
-		{
-			//menu.acteur.move=Move.wait;
-			switch(arg0)
-			{
-			case Keys.DPAD_DOWN:
-				if(state==2){
-					menu.acteur.move=Move.wait;
-					//System.out.print("set");
-				}
-				break;
-			case Keys.DPAD_UP:
-				if(state==2){
-					menu.acteur.move=Move.wait;
-					//System.out.print("set");
-					}
-			break;
-			case Keys.DPAD_RIGHT:
-					if(state==2){
-					menu.acteur.move=Move.wait;
-					//System.out.print("set");
-					}
-			break;
-			case Keys.DPAD_LEFT:
-						if(state==2){
-						menu.acteur.move=Move.wait;
-						//System.out.print("set");
-						}
-			break;
-			}
-			return true;
-		}*/
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
@@ -116,11 +56,6 @@ public class PokematosMenuListener extends GameInput{
 
 	}
 
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
@@ -177,7 +112,6 @@ public class PokematosMenuListener extends GameInput{
 	void handleLeft() {
 		// TODO Auto-generated method stub
 		if(state==1){
-			System.out.println("SWITCHING");
 			menuListener.switchto(menuInventaire.class);
 
 		}
@@ -186,7 +120,10 @@ public class PokematosMenuListener extends GameInput{
 	@Override
 	void handleRight() {
 		// TODO Auto-generated method stub
+		if(state==1){
+			menuListener.switchto(menuOptions.class);
 
+		}
 	}
 
 	@Override

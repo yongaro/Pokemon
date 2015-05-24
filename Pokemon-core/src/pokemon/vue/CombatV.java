@@ -32,7 +32,6 @@ public class CombatV extends GameScreen{
 	int atknumber=0;
 	DialogBox dbox;
 	float timer;
-	int state=0;
 	int offset;
 	int selector=0;
 	int flag;
@@ -48,6 +47,7 @@ public class CombatV extends GameScreen{
 	
 	public float cout=-1;
 	public CombatV(Combat c,MyGdxGame mygdxgame,MapScreen ms){
+		state=0;
 		this.getStage().clear();
 		this.mygdxgame=mygdxgame;
 		dbox=new DialogBox(new Vector2(640,100),true);
@@ -267,18 +267,6 @@ public class CombatV extends GameScreen{
 		for(int i=0;i<friends.size();i++)
 			friends.get(i).getHud().animate();
 	}
-
-
-
-	public int getState() {
-		return state;
-	}
-
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
 
 	public int getSelector() {
 		return selector;

@@ -40,6 +40,9 @@ public abstract class GameScreen implements Screen{
 	public int getState(){
 		return state;
 	}
+	public void setState(int i){
+		state=i;
+	}
 	
 	public void drawUI(float delta){
 		if(elapsedTime!=-1 && elapsedTime<300){

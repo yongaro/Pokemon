@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.vue.menuInventaire;
+import pokemon.vue.menuOptions;
 import pokemon.vue.menuPokematos;
 import pokemon.vue.menuPokematosMap;
 import pokemon.vue.menuPokemon;
@@ -22,6 +23,7 @@ public class MenuListener extends InputMultiplexer{
 	menuInventaire menuinventaire;
 	menuPokematos  menupokematos;
 	menuPokematosMap  menupokematosmap;
+	menuOptions options;
 	MapScreen screen;
 	
 	public MenuListener(MyGdxGame mygdxgame, MapScreen screen)
@@ -29,26 +31,22 @@ public class MenuListener extends InputMultiplexer{
 		this.mygdxgame=mygdxgame;
 		this.screen = screen;
 		menupokemon=new menuPokemon(mygdxgame);
-		menuinventaire=new menuInventaire(mygdxgame,this);
+		menuinventaire=new menuInventaire(mygdxgame);
 		menupokematos=new menuPokematos(mygdxgame);
 		menupokematosmap=new menuPokematosMap(mygdxgame);
+		options=new menuOptions();
 		mygdxgame.setScreen(menupokemon);
 	//	this.addProcessor(new ReturnToMapListener(mygdxgame, screen));
 		this.addProcessor(new PokemonMenuListenner(menupokemon,mygdxgame,this));
 		this.addProcessor(new InventaireMenuListener(mygdxgame, menupokemon, menuinventaire,this));
 		this.addProcessor(new PokematosMenuListener(menupokematos,mygdxgame,this));
 		this.addProcessor(new PokematosMapMenuListener(menupokematosmap,mygdxgame,this));
+		this.addProcessor(new OptionsMenuListener(this, options, mygdxgame));
 		Gdx.input.setInputProcessor(this);
 		slotInventaire=new int[2];
 	}
 
-	public void switchtoInventory()
-	{
-		if(menuinventaire==null){
-			menuinventaire=new menuInventaire(mygdxgame,this);
-			this.addProcessor(new InventaireMenuListener(mygdxgame, menupokemon, menuinventaire,this));}
-		mygdxgame.setScreen(menuinventaire);
-	}
+
 	
 	
 	public void switchto(Class c)
