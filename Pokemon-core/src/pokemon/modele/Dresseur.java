@@ -26,6 +26,7 @@ public class Dresseur extends NPC implements CombatInfos {
 	public Dresseur(String path) {
 		super(path);
 		setAggressive(false);
+		setName("Dresseur");
 	}
 	public Dresseur(Vector2 pos) {
 		super(pos);
@@ -35,10 +36,12 @@ public class Dresseur extends NPC implements CombatInfos {
 	public Dresseur(String path, Vector2 pos, boolean isAggressive) {
 		super(path, pos);
 		setAggressive(isAggressive);
+		setName("Dresseur");
 	}
 	public Dresseur(String path, Vector2 pos, int status, boolean isAggressive) {
 		super(path, pos, status);
 		setAggressive(isAggressive);
+		setName("Dresseur");
 	}
 	
 	//Fonctionnalitees principales
