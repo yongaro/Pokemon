@@ -39,7 +39,7 @@ public enum Statut {
 			this.dummy=new Atk(Type.Tenebre);
 		}
 		else if(this.name().compareTo("Vampigraine")==0){
-			this.dummy=new Atk(Type.Plante); this.dummy.type=5;
+			this.dummy=new Atk(Type.Plante); this.dummy.type=3;
 		}
 		else{
 			this.dummy=new Atk(Type.Normal);
@@ -48,15 +48,20 @@ public enum Statut {
 	}
 	
 	public void applique(Pkm cible,Combat context){
-		if(this==Brule || this==Empoisonne || this==Endormi || this==Gele || this==Paralyse){
+		if(this==Brule || this==Empoisonne || this==Endormi || this==Gele || this==Paralyse || this==Toxic){
 			if(cible.statut==Normal){
+				if(this!=Toxic){
 				context.ajoutBuffer(cible.nom+" est "+this.name());
+				}
+				else{
+					context.ajoutBuffer(cible.nom+" est gravement empoisonne");
+				}
 				cible.statut=this;
+
 				if(this==Endormi){
 					Random rand=new Random();
 					nbtours=rand.nextInt(5)+1;
 				}
-				System.out.println(cible.nom+" ");
 				if(cible.objTenu instanceof Medicament){
 					Medicament m=(Medicament)cible.objTenu;
 					if(m.baie && (m.flagSoin==2 || m.flagSoin==4)){
@@ -68,7 +73,7 @@ public enum Statut {
 			}
 		}
 		if(this==KO){cible.statut=this; cible.supTemp.clear();}
-		if(this==Attraction || this==Confus || this==Peur || this==Piege){
+		if(this==Attraction || this==Confus || this==Peur || this==Piege || this==Vampigraine){
 			if(this==Confus || this==Piege){
 				context.ajoutBuffer(cible.nom+" est "+this.name());
 				Random rand=new Random();
@@ -78,6 +83,7 @@ public enum Statut {
 				context.ajoutBuffer(cible.nom+" est sous le charme");
 			}
 			if(this==Peur){context.ajoutBuffer(cible.nom+" a peur");}
+			if(this==Vampigraine){context.ajoutBuffer(cible.nom+" est infecte");}
 			if(this==Requiem){nbtours=3;}
 			if(!cible.supTemp.contains(this)){
 				if(cible.objTenu instanceof Medicament){
@@ -167,7 +173,6 @@ public enum Statut {
 	    		Random rand=new Random();
 		    	if(rand.nextInt(100)<=50){
 		    		dmg=Atk.confDmg.atkdamage(user, cible, context,true);
-		    		System.out.println("confusion dmg "+dmg);
 			    	context.ajoutBuffer(cible.nom+" est Confus");
 			    	context.ajoutBuffer(cible.nom+" se blesse dans sa follie");
 			    	cible.infliger(dmg);

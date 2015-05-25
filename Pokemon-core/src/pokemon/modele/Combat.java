@@ -153,7 +153,7 @@ public class Combat extends Thread {
 			endOfTurn=true;
 			for(PokemonCombat p:pkmListe){
 				System.out.println("Traitement des statuts de "+p.pkm.nom);
-				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){
+				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule || p.pkm.statut==Statut.Toxic ){
 					System.out.println(p.pkm.statut);
 					this.pCourant=p;
 					this.capCur=p.pkm.statut.dummy;
