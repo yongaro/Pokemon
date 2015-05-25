@@ -36,6 +36,7 @@ public class StartScreenListener extends GameInput{
 			game.setScreen(mapS);
 			}
 			catch(IOException e){
+				e.printStackTrace();
 			}
 		}
 	}

@@ -19,7 +19,6 @@ public class Pokeball extends SpriteActor{
 		this.setBounds(650+20*i,150,15,15);
 		this.i=i;
 		this.addAction(Actions.sequence(Actions.delay((float) (0.2+i*0.2f)),Actions.parallel(Actions.moveBy(-160, 0,0.5f))));
-		System.out.println("Pokeball "+alive);
 	}
 	
 	

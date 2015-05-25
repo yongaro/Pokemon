@@ -35,7 +35,7 @@ public class CombatListener extends GameInput{
 
 	public void getBuffer(String s){
 		retval=s.split("\n");
-		System.out.println("RETVAL"+Arrays.toString(retval));
+		//System.out.println("RETVAL"+Arrays.toString(retval));
 		combatV.getDbox().setWidth(width);
 		combatV.getDbox().setMessage(retval[0]);
 		textinc=1;
@@ -98,7 +98,12 @@ public class CombatListener extends GameInput{
 
 	@Override
 	void handleA() {
+		//System.out.println("A PRESSED textinc: "+textinc+" STATE: "+combatV.getState());
 		// TODO Auto-generated method stub
+		if(combatV.getState()==-1){
+			combatV.ennemiLaunch();//set state to 1
+			return;
+		}
 		if(combatV.getState()==0){
 			combatV.battleBegin();//set state to 1
 			return;
@@ -136,7 +141,7 @@ public class CombatListener extends GameInput{
 
 		}
 		if(combatV.getState()==3){ //selection atq
-		//	attackanimation=true;
+			System.out.println("ACTIONS SELECTED");
 			c.setAct(flag, combatV.getSelector());
 			//
 			//selector=0;
@@ -149,8 +154,10 @@ public class CombatListener extends GameInput{
 				if(c.getCapCur() instanceof AtkMeteo){
 					combatV.weather();
 					}
-				else
-				combatV.playAttackAnimations();
+				else{
+					System.out.println("ATTACK ANIMATIONS");
+					combatV.playAttackAnimations();
+				}
 
 			}
 			//state++;
@@ -171,9 +178,7 @@ public class CombatListener extends GameInput{
 				}
 			}
 			else{
-				
 				//textinc=1;
-
 				if(combatV.hideDeadIA())
 				{
 					return;
@@ -191,6 +196,7 @@ public class CombatListener extends GameInput{
 				combatV.getDbox().setMessage("Que faire ?");
 				}
 				//
+				System.out.println("UNFREEZE");
 
 				c.setfreeze(false);
 			}

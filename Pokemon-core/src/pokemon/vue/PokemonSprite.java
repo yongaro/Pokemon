@@ -69,6 +69,8 @@ public class PokemonSprite extends Actor{
     public void addSlideAction(){
     	if(myGroup.getpCombat()!=null && myGroup.getpCombat().isIA())
     		this.addAction(Actions.moveBy(400, 0, 1.6f));
+    	if(pos.x<320 && myGroup.getpCombat()==null)
+    		this.addAction(Actions.moveBy(400, 0, 1.6f));
     	if(pos.x>320)
     		this.addAction(Actions.moveTo(pos.x-420, pos.y, 1.6f));
     	this.addAction(Actions.scaleTo(1.5f, 1.5f,1.6f));
@@ -78,6 +80,8 @@ public class PokemonSprite extends Actor{
     public void hideTrainer(){
     	if(pos.x>320)
    			this.addAction(Actions.sequence(Actions.moveTo(this.getX(), -70,0.5f),Actions.visible(false)));
+    	else
+    		this.addAction(Actions.sequence(Actions.moveTo(this.getX()+140,this.getY(),0.5f),Actions.visible(false)));
     	
    	}
     
@@ -91,8 +95,6 @@ public class PokemonSprite extends Actor{
     }
     public void attack(){
     	if(myGroup.getpCombat().getPkm()==myGroup.getCombat().getPCourant().getPkm()){
-
-    		System.out.println("CALLING ATTACK "+myGroup.getpCombat().getNom());
     		if (myGroup.getpCombat().isIA()){
     			this.addAction(Actions.sequence(Actions.moveBy(-50, -40,0.2f
     					),Actions.moveBy(50, 40,0.2f)));
@@ -174,6 +176,8 @@ public class PokemonSprite extends Actor{
     public void popPokemon(){
     	this.setScale(1, 1);
     	this.setVisible(false);
+    	if(myGroup.getpCombat().isIA())
+    		this.setPosition(460,220);
     	this.addAction(Actions.delay(0.5f,Actions.parallel(Actions.visible(true),Actions.scaleTo(1.5f, 1.5f,0.5f))));
     	}
     
@@ -181,7 +185,7 @@ public class PokemonSprite extends Actor{
     public void draw (Batch batch, float parentAlpha) {
 
     	b.begin();
-    	if(myGroup.getpCombat()!=null)
+    	//if(myGroup.getpCombat()!=null)
     	//System.out.println(p.getPkm().getNom()+"  "+getX());
     	if( (this.getX()<=461 && this.getX()>=459) || this.getX()==pos.x-420)
     		b.setColor(Color.WHITE);

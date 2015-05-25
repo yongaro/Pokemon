@@ -26,6 +26,7 @@ public class CombatV extends GameScreen{
 	Vector<BattleGroup> friends=new Vector<BattleGroup>();
 	PokeballGroup ballGroup=new PokeballGroup();
 	BattleGroup a=new BattleGroup(new PokemonSprite(PokemonSprite.a1,"trainerS.png"));
+	BattleGroup ed=new BattleGroup(new PokemonSprite(PokemonSprite.e1,"bugcatcher.png"));
 	Texture fond=new Texture(Gdx.files.internal("battlebackground.png"));
 	Pkm pkm=MyGdxGame.Jtest.getTeam()[0];
 	boolean attackanimation;
@@ -47,15 +48,15 @@ public class CombatV extends GameScreen{
 	
 	public float cout=-1;
 	public CombatV(Combat c,MyGdxGame mygdxgame,MapScreen ms){
-		state=0;
+		state=-1;
 		this.getStage().clear();
 		this.mygdxgame=mygdxgame;
 		dbox=new DialogBox(new Vector2(640,100),true);
-		dbox.setMessage("Un pokemon sauvage apparait");
+		dbox.setMessage("Dresseur veut se battre");
 		for(int i=0;i<MyGdxGame.Jtest.getTeam().length;i++){
 			if(MyGdxGame.Jtest.getTeam()[i].get(2)!=0){
 				pkm=MyGdxGame.Jtest.getTeam()[i];
-				System.out.println("Envoi "+pkm.getNom());
+				//System.out.println("Envoi "+pkm.getNom());
 				break;
 			}
 		}
@@ -72,13 +73,16 @@ public class CombatV extends GameScreen{
 			}
 		}
 		stage.addActor(a);
+		stage.addActor(ed);
+
 		stage.addActor(ballGroup);
-		for(BattleGroup g:ennemies)
+		/*for(BattleGroup g:ennemies)
 		{
 			stage.addActor(g);
 			g.getpSprite().addSlideAction();
-		}
+		}*/
 		a.getpSprite().addSlideAction();
+		ed.getpSprite().addSlideAction();
 		stage.addActor(dbox);
 
 
@@ -212,7 +216,6 @@ public class CombatV extends GameScreen{
 	public void show() {
 
 		Gdx.input.setInputProcessor(listener);
-		System.out.println(Gdx.input.getInputProcessor());
 
 	}
 
@@ -322,6 +325,16 @@ public class CombatV extends GameScreen{
 			state++;
 		}
 	}
+	
+	public void ennemiLaunch(){
+		ed.getpSprite().hideTrainer();
+		
+		ennemies.get(0).getpSprite().popPokemon();
+		dbox.setMessage("L'ennemi envoie "+ennemies.get(0).getpCombat().getNom()+".");
+		stage.addActor(ennemies.get(0));
+		state=0;		
+	}
+	
 	
 	public boolean hideDeadIA(){ //retourne vrai si ia dead
 		boolean ret=false;
