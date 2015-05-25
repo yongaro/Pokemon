@@ -36,7 +36,7 @@ public class MyGdxGame extends Game {
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
 		MapScreen mapS=new MapScreen(this);
 		MenuListener menu=new MenuListener(this,mapS);
-		//this.setScreen(new StartScreen(this));
+		this.setScreen(new StartScreen(this));
 		//TestMap2 test = new TestMap2();
 		//this.setScreen(mapS);
 		//Combat test=new Combat(Jtest, Jtest2);
@@ -74,7 +74,7 @@ public class MyGdxGame extends Game {
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.Seisme.get()); Ptest2[i].add(bddCapacite.Seisme.get());
 	    			Ptest[i].add(bddCapacite.MegaSangsue.get()); Ptest2[i].add(bddCapacite.MegaSangsue.get());
-	    			Ptest[i].setStatut(Statut.Empoisonne); Ptest2[i].setStatut(Statut.Empoisonne);
+	    			Ptest[i].setStatut(Statut.Gele); Ptest2[i].setStatut(Statut.Empoisonne);
 	    		}
 	    		if(i==2){
 	    			Ptest[i].add(bddCapacite.Surf.get()); Ptest2[i].add(bddCapacite.Surf.get());

@@ -76,15 +76,20 @@ public class Combat extends Thread {
 		
 		for(int i=0;i<j1.teamsize;i++){
 			equipe1[i]=new PokemonCombat(j1.team[i],false,j1); equipe1[i].equipe=equipe1;
+			if(equipe1[i].pkm.statut!=Statut.KO && pkmListe[0]==null){
+				pkmListe[0]=equipe1[i];
+				pkmListe[0].listeIndice=i;
+			}
 		}
 		for(int i=0;i<j2.teamsize;i++){
 			equipe2[i]=new PokemonCombat(j2.team[i],true,j2); equipe2[i].equipe=equipe2;
+			if(equipe2[i].pkm.statut!=Statut.KO && pkmListe[1]==null){
+				pkmListe[1]=equipe2[i];
+				pkmListe[1].listeIndice=i;
+			}
 		}
-		pkmListe[0]=equipe1[0];
-		pkmListe[1]=equipe2[0];
 		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
 		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
-		pkmListe[0].listeIndice=0; pkmListe[1].listeIndice=1;
 	}
 	
 
@@ -109,8 +114,6 @@ public class Combat extends Thread {
 				pkmListe[1].listeIndice=i;
 			}
 		}
-		//pkmListe[0]=equipe1[0];
-		//pkmListe[1]=equipe2[0];
 		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
 		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
 		 
@@ -186,14 +189,23 @@ public class Combat extends Thread {
 			switch(actflag){
 			case 0:
 				System.out.println("Execution d'une Capacite");
-				//while((act=sc.nextInt())<user.cap.max){System.out.println(act); }
-				//act=sc.nextInt();
+	
 				//Application des statuts pouvant empecher l'action
 				ch1=user.pkm.statut.StatEffect(user.pkm,0,this);
-				for(Statut s: user.pkm.supTemp){
-					if(s.StatEffect(user.pkm,0,this)==0){
-						ch2=0;
+				if(ch1==1){
+					for(Statut s: user.pkm.supTemp){
+						if(s.StatEffect(user.pkm,0,this)==0){
+							ch2=0;
+							this.pCourant=user;
+							this.capCur=s.dummy;
+							this.cibleCourante=user;
+						}
 					}
+				}
+				else{
+					this.pCourant=user;
+					this.capCur=user.pkm.statut.dummy;
+					this.cibleCourante=user;
 				}
 				if(ch1==1 && ch2==1){
 					this.capCur=user.pkm.cap.elementAt(act).cible;
