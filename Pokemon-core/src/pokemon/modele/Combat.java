@@ -30,6 +30,7 @@ public class Combat extends Thread {
 	protected int ind;
 	protected boolean freeze;
 	protected int fini;
+	protected boolean dresseur;
 	
 	
 	//0 niveau 1 XP 2 PV 3 ATT 4 DEF 5 ATTSP 6 DEFSP 7 VIT 8 Precision (100) 9 Esquive (5% de base)
@@ -42,6 +43,7 @@ public class Combat extends Thread {
 		meteo=false;
 		endOfTurn=false;
 		fini=0;
+		dresseur=false;
 	}
 
 
@@ -96,6 +98,7 @@ public class Combat extends Thread {
 	
 	
 	public void initSolo(Joueur j,Dresseur d){
+		dresseur=true;
 		equipe1=new PokemonCombat[j.teamsize];
 		equipe2=new PokemonCombat[d.getTeam().size()];
 		pkmListe=new PokemonCombat[2];
@@ -191,7 +194,7 @@ public class Combat extends Thread {
 			switch(actflag){
 			case 0:
 				
-	
+				
 				//Application des statuts pouvant empecher l'action
 				ch1=user.pkm.statut.StatEffect(user.pkm,user.adv[0].pkm,0,this);
 				if(ch1==1){
