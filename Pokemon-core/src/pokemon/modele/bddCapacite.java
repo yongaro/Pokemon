@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.XmlReader.*;
 
 @Tps(nbhours=5)
 public enum bddCapacite {
-	Abime,Acidarmure,Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,DansePluie,Eclair,Grele,Griffe,JetPierres,MegaSangsue,CageEclair,
+	Abime,Acidarmure,Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,DansePluie,Eclair,Grele,Griffe,JetPierres,MegaSangsue,CageEclair,Morsure,
 	PoingDeFeu,PoingEclair,PoingGlace,RafalePsy,Repos,Seisme,Surf,TempeteDeSable,Tonnerre,JetDeSable,Zenith;
 
 	
