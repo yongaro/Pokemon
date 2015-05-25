@@ -380,6 +380,7 @@ public class Combat extends Thread {
 	public synchronized void setCible(PokemonCombat cible){ this.cibleCourante=cible; }
 	public synchronized boolean getendOfTurn(){ return endOfTurn;}
 	public synchronized int getFini(){ return fini; }
+	public synchronized boolean getDresseur(){ return dresseur; }
 	
 	
 }
