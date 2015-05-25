@@ -84,7 +84,7 @@ public class Cinematique {
 				//Si le dresseur a une equipe...
 				if(dress.asTeam()) {
 					//... on lance un combat
-					System.out.println("SWEGG");
+					
 					screen.startBattle(dress);
 					return skip();
 				}
@@ -131,7 +131,7 @@ public class Cinematique {
 		try {
 			currentInstruction = getCurrentInstruction();
 		} catch (NoMoreInstructionException e) {
-			System.out.println("FINI");
+			
 			//Si il n'y a plus d'instructions, alors on finit la cinematique en ...
 			//... remettant le dialogue a zero, ...
 			dialog.reset();

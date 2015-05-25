@@ -33,6 +33,7 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos,Serializa
 		//creation d'un nouveau Pokemon par copie de la base bl
 		this.ID=base.ID;
 		this.nom=base.nom;
+		this.IAbh=base.IAbh;
 		int i=0;
 		this.stats=new int[10][2];
 		for(i=0;i<8;i++){this.stats[i][0]=base.stats[i][0]; this.stats[i][1]=base.stats[i][1];}
@@ -67,11 +68,12 @@ public class Pkm implements Qmax,Comparator<Pkm>,Comparable<Pkm>,Infos,Serializa
 	}
 	
 	//constructeur pour creer les pokemon de base du pokedex
-	public Pkm(int ID,String nom,int[] stats,Type t1,Type t2){
+	public Pkm(int ID,String nom,int[] stats,Type t1,Type t2,int IABH){
 		//copie des stats
 		this.ID=ID;
 		this.statut=Statut.Normal;
 		this.nom=nom;
+		this.IAbh=IABH;
 		int i=0;
 		this.stats=new int[10][2];
 		this.stats[0][0]=0; this.stats[1][0]=0;

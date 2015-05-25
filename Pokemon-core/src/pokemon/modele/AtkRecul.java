@@ -26,13 +26,13 @@ public class AtkRecul extends Atk implements Serializable {
 		if(touche==0 || esquive==1){
 			context.ajoutBuffer(user.nom+" rate son attaque...");
 		}
-		if(touche==1 && esquive==0 && power>0){
+		if(touche==1 && esquive==0){
 			int reculdmg=0;
 			if(power>0){
 				reculdmg=this.atkdamage(user,cible,context,true);
 				cible.infliger(reculdmg);
 			}
-			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible,context);}
 		
 			//Traitement des dégats du Recul
 			if(user.capP!=CapacitePassive.TeteDeRoc){

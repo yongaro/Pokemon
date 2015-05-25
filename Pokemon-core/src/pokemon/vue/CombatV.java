@@ -330,7 +330,7 @@ public class CombatV extends GameScreen{
 			//System.out.println("COMBAT-"+c.getPkmListe()[i].getNom()+ "=/SWAP/=" + c.getPkmListe()[i].getSwap());
 		//	System.out.println("COMBAT-"+c.getPkmListe()[i+1].getNom()+ "=/SWAP/=" + c.getPkmListe()[i+1].getSwap());
 			if(ennemies.get(i).getpCombat().getSwap()!=-1){
-				System.out.println("DEAD IA FOUND");
+				
 				ret=true;
 				state=8; //swapping ennemies
 				dbox.setMessage("Le pokemon ennemi est KO");
@@ -393,7 +393,7 @@ public class CombatV extends GameScreen{
 		}
 		else{
 			int j=0;
-			System.out.println("DEAD SWAP");
+			
 			for(j=0;j<c.getPkmListe().length;j++) //recherche du pokemon a changer dans la liste des pokemons
 			{
 				if(pkm==c.getPkmListe()[j].getPkm()){ //quand j'ai trouve

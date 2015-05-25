@@ -121,18 +121,18 @@ public class Combat extends Thread {
 	
 	
 	public int combatsolo(){
-		System.out.println("FREEZE DE DEBUT DE COMBAT"); this.setfreeze(true); 
+		 this.setfreeze(true); 
 		while(this.gagnant()==0){
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
-				System.out.println("Tour de "+pkmListe[i].pkm.nom);
+				
 				if(endOfTurn){endOfTurn=false;}
 				this.resetAct();
 				this.setBufferState(false);
 				pCourant=pkmListe[i];
 				this.capCur=null; this.cibleCourante=null;
 				pkmListe[i].action(pkmListe[i].adv[0],this);
-				//System.out.println("FIN DE TOUR \n"+pCourant.pkm.nom+" "+cibleCourante.pkm.nom+" "+capCur.nom);
+				//
 			}
 			if(this.climat != Climat.Normal){
 				//Application des effets de meteo
@@ -149,19 +149,19 @@ public class Combat extends Thread {
 			//Application des degats sur la duree
 			endOfTurn=true;
 			for(PokemonCombat p:pkmListe){
-				System.out.println("Application des statuts sur "+p.pkm.nom);
+				
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){
-					System.out.println(p.pkm.statut);
+					
 					this.pCourant=p;
 					this.capCur=p.pkm.statut.dummy;
 					this.cibleCourante=p;
-					p.pkm.statut.StatEffect(p.pkm,1,this);
+					p.pkm.statut.StatEffect(p.pkm,p.adv[0].pkm,1,this);
 					this.setfreeze(true);
 					for(Statut s: p.pkm.supTemp){
 						this.pCourant=p;
 						this.capCur=s.dummy;
 						this.cibleCourante=p;
-						s.StatEffect(p.pkm,1,this);
+						s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
 						this.setfreeze(true);
 					}
 					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
@@ -188,13 +188,13 @@ public class Combat extends Thread {
 			
 			switch(actflag){
 			case 0:
-				System.out.println("Execution d'une Capacite");
+				
 	
 				//Application des statuts pouvant empecher l'action
-				ch1=user.pkm.statut.StatEffect(user.pkm,0,this);
+				ch1=user.pkm.statut.StatEffect(user.pkm,user.adv[0].pkm,0,this);
 				if(ch1==1){
 					for(Statut s: user.pkm.supTemp){
-						if(s.StatEffect(user.pkm,0,this)==0){
+						if(s.StatEffect(user.pkm,user.adv[0].pkm,0,this)==0){
 							this.endOfTurn=true;
 							ch2=0;
 							this.pCourant=user;
@@ -255,7 +255,7 @@ public class Combat extends Thread {
 				break;
 			}
 		}
-		System.out.println("FIN D'ACTION DU JOUEUR");
+		
 	}
 	
 	public void ajoutXpStack(PokemonCombat pkmc){
@@ -289,14 +289,14 @@ public class Combat extends Thread {
 					done=1;
 				}
 				else{
-					System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
+					//System.out.println("Vous ne pouvez pas envoyer un Pokemon K.O au combat !");
 				}
 			}
 		}
 		else{
 			for(int i=0;i<user.equipe.length;i++){
 				if(user.equipe[i].pkm.statut!=Statut.KO){
-					System.out.println(user.prop+" envoie "+user.equipe[i].pkm.nom+" au combat");
+					this.ajoutBuffer(user.prop+" envoie "+user.equipe[i].pkm.nom+" au combat");
 					user.setSwap(i);
 					user.waitIAswap();
 					//pkmRef=user.pkm; stackRef=user.XpStack;
@@ -359,7 +359,7 @@ public class Combat extends Thread {
 
 	public synchronized void setfreeze(boolean f){ 
 		freeze=f;
-		if(!freeze){ System.out.println("SETFREEZE "+f); notify();}
+		if(!freeze){  notify();}
 		else{
 			while(freeze){
 				try { System.out.println("SETFREEZE "+f);  this.wait(); } 

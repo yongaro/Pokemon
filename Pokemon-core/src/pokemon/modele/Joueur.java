@@ -88,11 +88,10 @@ public class Joueur implements CombatInfos, Serializable {
 			System.out.println(ex.toString());
 			JOptionPane.showMessageDialog(null, "Echec de la sauvegarde", "Sauvegarde",JOptionPane.ERROR_MESSAGE);
 		}
-		System.out.println("Sauvegarde terminee");
+		
 	}
 	
 	public void Charger() throws IOException{
-		System.out.println("Chargement de sauvegarde");
 		Joueur temp = null;
 		try{
 		FileInputStream fin = new FileInputStream("PkmSauvegarde");
@@ -111,9 +110,7 @@ public class Joueur implements CombatInfos, Serializable {
 			}
 		}
 		this.team=temp.team;
-		System.out.println("loading teamsize: "+temp.teamsize);
 		this.teamsize=temp.teamsize;
-		System.out.println("DONE");
 		}
 	/*	catch(IOException ex){
 			System.out.println(ex.toString());
@@ -249,9 +246,9 @@ public class Joueur implements CombatInfos, Serializable {
 		/*Verif si non debordement de map*/
 
 		if(nextPos.x>800-spriteWidth || nextPos.x<0 ) 
-		{setSpeedX(0);System.out.println("REACH BORDER");nextPos = getPos();}
+		{setSpeedX(0);nextPos = getPos();}
 		if( nextPos.y>800-spriteHeight || nextPos.y<0)
-		{setSpeedY(0);System.out.println("REACH BORDER");nextPos = getPos();}
+		{setSpeedY(0);nextPos = getPos();}
 		/*verif si collision avec decors*/
 		if(currentMap.collide(nextPos, spriteWidth, spriteHeight))
 		{

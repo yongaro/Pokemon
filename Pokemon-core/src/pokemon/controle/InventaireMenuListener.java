@@ -71,7 +71,7 @@ public class InventaireMenuListener extends GameInput{
 			inventaire.setTouched(false);
 			v.set(screenX,screenY);
 			inventaire.getStage().screenToStageCoordinates(v);
-			System.out.println(v);
+			
 			return super.touchUp(v);}
 		else
 			return false;
@@ -134,7 +134,7 @@ public class InventaireMenuListener extends GameInput{
 
 		}
 		if(state==1){
-			System.out.println("Switch a partir de l'inventaire");
+			
 			menuListener.switchto(menuPokematos.class);}
 	}
 
@@ -155,7 +155,7 @@ public class InventaireMenuListener extends GameInput{
 			}
 			if(objselector[0]!=0)
 				objselector[0]--;
-			System.out.println(objselector[0]);
+			
 		}
 		if(state==3)
 			if(actionselector!=1)
@@ -175,7 +175,7 @@ public class InventaireMenuListener extends GameInput{
 		{
 			if(objselector[0]<6 && objselector[1]==0){
 				if(objselector[0]+displayedAtk+1<joueur.getPoche(pktselector-1).size()){
-					//System.out.println(objselector+displayedAtk);
+					//
 					this.objselector[0]++;}
 			}
 			else{

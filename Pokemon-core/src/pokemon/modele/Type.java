@@ -1,7 +1,7 @@
 package pokemon.modele;
 
 public enum Type {
-	Eau,Feu,Plante,Poison,Vol,Electrique,Sol,Roche,Psy,Spectre,Insecte,Tenebre,Acier,Combat,Glace,Dragon,Normal,Fee;
+	Eau,Feu,Plante,Poison,Vol,Electrique,Sol,Roche,Psy,Spectre,Insecte,Tenebre,Acier,Combat,Glace,Dragon,Normal,Fee,Neutre;
 	
 	public double isweak(Type test){
 		
@@ -106,6 +106,7 @@ public enum Type {
 			if(test==Type.Combat || test==Type.Insecte || test==Type.Tenebre){return 1/2.0;}
 			else{return 1.0;}
 		}
+		if(this==Type.Neutre){ return 1.0; }
 		
 		return 0;
 	}

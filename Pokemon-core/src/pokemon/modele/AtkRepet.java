@@ -28,7 +28,7 @@ public class AtkRepet extends Atk implements Serializable {
 			int  nbcoups=random.nextInt();
 			for(int i=0;i<=nbcoups;i++){
 				context.ajoutBuffer("Touche "+i+" fois"+this.atkdamage(user,cible,context,false));
-				if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
+				if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible,context);}
 			}
 			context.ajoutBuffer("Touche "+nbcoups+" fois");
 			

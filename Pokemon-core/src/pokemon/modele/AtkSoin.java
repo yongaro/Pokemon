@@ -31,14 +31,14 @@ public class AtkSoin extends Atk implements Serializable{
 		if(touche==0 || esquive==1){
 			context.ajoutBuffer(user.nom+" rate son attaque...");
 		}
-		if(touche==1 && esquive==0 && power>0){
+		if(touche==1 && esquive==0){
 			int soin=0;
 			if(power>0){
 				soin=this.atkdamage(user,cible,context,false);
 				cible.infliger(soin);
 				soin=(int)(soin/2);
 			}
-			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible,context);}
 			
 			//Test de capacite Passive Suintement
 			if(cible.capP==CapacitePassive.Suintement){

@@ -65,7 +65,7 @@ public class PokemonMenuListenner extends GameInput{
 			menu.setTouched(false);
 			v.set(screenX, screenY);
 			menu.getStage().screenToStageCoordinates(v);
-			System.out.println(v);
+			
 			return super.touchUp(v);}
 		else
 			return false;
@@ -129,7 +129,7 @@ public class PokemonMenuListenner extends GameInput{
 	}
 
 	public void handleB(){
-		System.out.println("B pressed");
+		
 		if(state==1){
 			myGdxGame.setScreen(menuListener.getScreen());
 		}
@@ -145,12 +145,12 @@ public class PokemonMenuListenner extends GameInput{
 		case 1:
 			state=3;
 			change=pkselector;
-			System.out.println("State to 3");
+			
 			break;
 		case 2:
 			state=4;
 			change=atkselector-1;
-			System.out.println("State to 4 Selectec atk "+change);
+			
 
 			break;
 		case 3://switch des pokemons

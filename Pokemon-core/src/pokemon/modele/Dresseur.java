@@ -73,7 +73,7 @@ public class Dresseur extends NPC implements CombatInfos {
 	//Fonctions privees
 	@Override
 	protected void lireXML(String path) {
-		System.out.println("Dresseur");
+		
 		try {
 			//On recupere les dialogues
 			Element root = getDialogs(path);
@@ -88,7 +88,7 @@ public class Dresseur extends NPC implements CombatInfos {
 					int lvl = pokemonElt.getInt("niveau");
 					
 					Pkm pokemon = new Pkm(Pokedex.values()[id-1].get(), lvl);
-					System.out.println(pokemon.nom);
+					
 					for(int k = 0;k<pokemonElt.getChildCount();k++) {
 						Element cap = pokemonElt.getChild(k);
 						pokemon.add(bddCapacite.valueOf(cap.getAttribute("nom")).get());

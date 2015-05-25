@@ -8,6 +8,10 @@ public class Atk extends Capacite implements Serializable {
 	/**
 	 * 
 	 */
+	
+	protected static Atk confDmg=new Atk(Type.Neutre);
+	
+	
 	private static final long serialVersionUID = 5046958113917347481L;
 	protected Statut effet;
 	protected int effetProc;
@@ -15,7 +19,7 @@ public class Atk extends Capacite implements Serializable {
 	public Atk(){
 		super(); this.effet=Statut.Normal;
 	}
-	public Atk(Type elt){super(elt); this.type=3;} 
+	public Atk(Type elt){super(elt); this.type=3; this.power=40; this.pre=100; this.CC=0;} 
 	public Atk(int pw,int pre,int cc,String nom,String d,Type el,int type,int pp,Statut effet, int efprc){
 		super(pw,pre,cc,nom,d,el,type,pp); this.effet=effet; effetProc=efprc;
 	}
@@ -32,9 +36,10 @@ public class Atk extends Capacite implements Serializable {
 		if(touche==0 || esquive==1){
 			context.ajoutBuffer(user.nom+" rate son attaque...");
 		}
-		if(touche==1 && esquive==0 && power>0){
+		if(touche==1 && esquive==0){
 			if(power>0){cible.infliger(this.atkdamage(user,cible,context,false));}
-			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){
+				effet.applique(cible,context);}
 		
 			//Traitement capacite passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){

@@ -44,7 +44,7 @@ public class CombatListener extends GameInput{
 			myGdxGame.setScreen(ms);
 		}
 		if(c.isMeteo()){
-			System.out.println("CAY LA METEO");
+			
 			combatV.setState(10);
 		}
 		else
@@ -54,7 +54,7 @@ public class CombatListener extends GameInput{
 	@Override
 	public boolean keyDown(int arg0) {
 		//if(c.getPCourant()!=null)
-		System.out.println("Called");
+		
 		
 		if(!combatV.healthbarLocked()){
 			if(this.myGdxGame.getScreen()==combatV){
@@ -82,7 +82,7 @@ public class CombatListener extends GameInput{
 			combatV.setTouched(false);
 			v.set(screenX, screenY);
 			combatV.getStage().screenToStageCoordinates(v);
-			System.out.println(v);
+			
 			return super.touchUp(v);}
 		else
 			return false;
@@ -104,7 +104,7 @@ public class CombatListener extends GameInput{
 			return;
 		}
 		if(combatV.getState()==1){
-			System.out.println("UNLOCKING THREAD STATE 1");
+			
 			c.setfreeze(false);
 			combatV.getDbox().setWidth(width/2);
 			combatV.getDbox().setMessage("Que faire ?");
@@ -138,14 +138,14 @@ public class CombatListener extends GameInput{
 		if(combatV.getState()==3){ //selection atq
 		//	attackanimation=true;
 			c.setAct(flag, combatV.getSelector());
-			//System.out.println(" SETACT "+flag+","+selector);
+			//
 			//selector=0;
 			combatV.setSelector(0);
 		}
 		if(combatV.getState()==5)//lecture du buffer
 		{//si qqchose a lire
 			if(textinc==1){
-				System.out.println("LAUNCHING ANIMATIONS");
+				
 				if(c.getCapCur() instanceof AtkMeteo){
 					combatV.weather();
 					}
@@ -165,13 +165,13 @@ public class CombatListener extends GameInput{
 			{
 				//if(!combatV.healthbarLocked())
 					combatV.getDbox().setMessage(retval[textinc++]);
-					System.out.println(retval[textinc-1]);
+					
 				if(textinc==2){
 					combatV.animateHealthBars();
 				}
 			}
 			else{
-				System.out.println("ICI");
+				
 				//textinc=1;
 
 				if(combatV.hideDeadIA())
@@ -190,7 +190,7 @@ public class CombatListener extends GameInput{
 				
 				combatV.getDbox().setMessage("Que faire ?");
 				}
-				//System.out.println("UNLOCKING THREAD STATE6");
+				//
 
 				c.setfreeze(false);
 			}

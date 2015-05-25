@@ -40,12 +40,12 @@ public enum Pokedex {
 			if(pk.get("type2").compareTo("")==0){
 				pkm=new Pkm(pk.getInt("ID"),pk.get("nom"),
 						new int[]{pk.getInt("PV"),pk.getInt("ATT"),pk.getInt("DEF"),pk.getInt("ATTSP"),pk.getInt("DEFSP"),pk.getInt("VIT")},
-						Type.valueOf(pk.get("type1")),null);
+						Type.valueOf(pk.get("type1")),null,pk.getInt("IAbh"));
 			}
 			else{
 				pkm=new Pkm(pk.getInt("ID"),pk.get("nom"),
 						new int[]{pk.getInt("PV"),pk.getInt("ATT"),pk.getInt("DEF"),pk.getInt("ATTSP"),pk.getInt("DEFSP"),pk.getInt("VIT")},
-						Type.valueOf(pk.get("type1")),Type.valueOf(pk.get("type2")));
+						Type.valueOf(pk.get("type1")),Type.valueOf(pk.get("type2")),pk.getInt("IAbh"));
 			}
 			//initialisation du tableau events
 			subtemp=pk.getChildByName("CapacitePassive");

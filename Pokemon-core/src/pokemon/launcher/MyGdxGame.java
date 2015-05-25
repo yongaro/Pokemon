@@ -60,7 +60,7 @@ public class MyGdxGame extends Game {
 	    	System.out.println(Ptest[0].getNom()+" peut il apprendre Charge ? " +  bddCapacite.Charge.get().peutApprendre(Ptest[0]));
 	    	//Ptest[0].infliger(56);
 	    	//Ptest[1].infliger(38);
-	    	Ptest[0].infliger(70);
+	    	//Ptest[0].infliger(70);
 	    	for(int i=0;i<6;i++){
 	    		//Ptest[i].give(Medicament.baieTest); Ptest2[i].give(Medicament.baieTest);
 	    		if(i==0){
@@ -74,7 +74,7 @@ public class MyGdxGame extends Game {
 	    			Ptest[i].add(bddCapacite.JetDeSable.get()); Ptest2[i].add(bddCapacite.JetDeSable.get());
 	    			Ptest[i].add(bddCapacite.Seisme.get()); Ptest2[i].add(bddCapacite.Seisme.get());
 	    			Ptest[i].add(bddCapacite.MegaSangsue.get()); Ptest2[i].add(bddCapacite.MegaSangsue.get());
-	    			Ptest[i].setStatut(Statut.Gele); Ptest2[i].setStatut(Statut.Empoisonne);
+	    			//Ptest[i].setStatut(Statut.Gele); Ptest2[i].setStatut(Statut.Empoisonne);
 	    		}
 	    		if(i==2){
 	    			Ptest[i].add(bddCapacite.Surf.get()); Ptest2[i].add(bddCapacite.Surf.get());

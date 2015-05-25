@@ -39,7 +39,7 @@ public class AtkChangeStats extends Atk implements Serializable {
 				if(fof==1){user.buff(Tstats,context);}
 				if(fof==0){cible.debuff(Tstats,context);}
 			}
-			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible);}
+			if(random.nextInt(100)<=effetProc && this.effet!=Statut.Normal){effet.applique(cible,context);}
 		
 			//Traitement capacit� passive
 			if(user.capP.flag==3 || (user.capP.flag==1 && type==3) || (user.capP.flag==2 && type==5) ){

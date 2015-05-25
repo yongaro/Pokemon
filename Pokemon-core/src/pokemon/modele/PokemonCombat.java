@@ -62,12 +62,15 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 				
 				switch(pkm.IAbh){
 				case 1:
+					System.out.println("IA BESTDMG");
 					ind=bestdmg(cible,context);
 					break;
 				case 2:
+					System.out.println("IA BESTDOT");
 					ind=this.bestdot(cible, context);
 					break;
 				case 3:
+					System.out.println("IA BESTCTRL");
 					ind=this.bestControl(cible, context);
 					break;
 				default:
@@ -132,29 +135,35 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		return ind;
 	}
 	
-	//Scores : Requiem 100 | Picots,Stuck 75 | Poison,Brule = 70 | Confus,Maudit =60 | Paralysie,Sommeil,Gel = 40
+	//Scores : Requiem 100 | Picots,Stuck 70 | Poison,Brule = 70 | Confus,Maudit =60 | Paralysie,Sommeil,Gel = 40
 	public int dotScore(Capacite c,Pkm user,Pkm cible){
 		int score=0;
 		if(c instanceof Heal){ return 0; }
 		if(c instanceof Atk){
-			if(cible.statut==Statut.Normal){
-				if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
-					score+=70;
-				}
-				if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
-					score+=40;
+			if(((Atk)c).effet.principal){
+				if(cible.statut==Statut.Normal){
+					if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
+						score+=70;
+					}
+					if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
+						score+=40;
+					}
+					//Ajout d'une base au score
+					score+=c.pre;
+					score+=((Atk)c).effetProc;
 				}
 			}
 			else if(!cible.supTemp.contains(((Atk) c).effet)){
-				if(((Atk) c).effet==Statut.Requiem){ score+=100; }
-				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Stuck){ score+=75; }
+				//if(((Atk) c).effet==Statut.Requiem){ score+=100; }
+				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Piege){ score+=70; }
 				if(((Atk) c).effet==Statut.Confus || (((Atk) c).effet==Statut.Maudit && user.type.contains(Type.Spectre))){
 					score+=60;
 				}
+				//Ajout d'une base au score
+				score+=c.pre;
+				score+=((Atk)c).effetProc;
 			}
-			//Ajout d'une base au score
-			score+=c.pre;
-			score+=(int)(c.maxPP/5);
+			
 			if(c instanceof AtkRecul && (user.stats[2][0]<(int)(user.stats[2][1]/2))){
 				score-=15;
 			}
@@ -162,7 +171,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 				if(user.stats[2][0]<(int)(user.stats[2][1]/2)){
 					score+=20;
 				}
-				else if(cible.capP==CapacitePassive.Suintement){
+				if(cible.capP==CapacitePassive.Suintement){
 					score-=20;
 				}
 			}
@@ -173,17 +182,16 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	
 	
 	public int bestdot(PokemonCombat cible,Combat context){
-		int ind=0; int maxScore=0; int scoreTemp=0;
+		int ind=0; int maxScore=0; int scoreTemp=0; int egalite=0;
 		for(int i=0;i<pkm.cap.contenu.size();i++){
 			//Dans le cas ou l'adversaire n'pas statut on cherche d'abord a lui en infliger un
 			//Strat�gie qui vise a infliger Poison ou Brulure + Maudit + Requiem + Stuck
 			//On cherche d'abord a infliger Requiem
 			scoreTemp=dotScore(this.pkm.cap.elementAt(i).get(),pkm,cible.pkm);
-			if(maxScore<scoreTemp){ maxScore=scoreTemp; ind=i; }
-			if(maxScore==scoreTemp){
-				ind=bestdmg(cible,context);
-			}
+			if(maxScore<scoreTemp){ maxScore=scoreTemp; scoreTemp=0; ind=i; }
+			if(maxScore==scoreTemp){ egalite=maxScore;}
 		}
+		if(egalite==maxScore){ return bestdmg(cible,context); }
 		return ind;
 	}
 	
@@ -193,23 +201,26 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		int score=0;
 		//On cherche a infliger Sommeil ou Paralysie ou Gel + confusion + Attraction + Peur
 		if(c instanceof Atk){
-			if(cible.statut==Statut.Normal){
-				if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
-					score+=20;
-				}
-				if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
-					score+=70;
+			if(((Atk)c).effet.principal){
+				if(cible.statut==Statut.Normal){
+					if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
+						score+=20;
+					}
+					if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
+						score+=70;
+					}
+					score+=c.pre;
+					score+=((Atk)c).effetProc;
 				}
 			}
-			else if(cible.supTemp.contains(((Atk) c).effet)){
+			else if(!cible.supTemp.contains(((Atk) c).effet)){
 				if(((Atk) c).effet==Statut.Requiem){ score+=10; }
-				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Stuck){ score+=30; }
+				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Piege){ score+=30; }
 				if(((Atk) c).effet==Statut.Confus || ((Atk) c).effet==Statut.Attraction || ((Atk) c).effet==Statut.Peur ){
-					score+=50;
+					score+=70;
 				}
 				//Ajout d'une base au score
-				score+=c.pre;
-				score+=(int)(c.maxPP/5);
+				
 				if(c instanceof AtkRecul && (user.stats[2][0]<(int)(user.stats[2][1]/2))){
 					score-=15;
 				}
@@ -217,24 +228,26 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 					if(user.stats[2][0]<(int)(user.stats[2][1]/2)){
 						score+=20;
 					}
-					else if(cible.capP==CapacitePassive.Suintement){
+					 if(cible.capP==CapacitePassive.Suintement){
 						score-=20;
 					}
 				}
+				score+=c.pre;
+				score+=((Atk)c).effetProc;
 			}
 		}
 		return score;
 	}
 	
 	public int bestControl(PokemonCombat cible,Combat context){
-		int ind=0; int maxScore=0; int scoreTemp=0;
+		int ind=0; int maxScore=0; int scoreTemp=0; int egalite=0;
 		for(int i=0;i<pkm.cap.contenu.size();i++){
 			scoreTemp=controlScore(this.pkm.cap.elementAt(i).get(),pkm,cible.pkm);
-			if(maxScore<scoreTemp){ maxScore=scoreTemp; ind=i; }
-			if(maxScore==scoreTemp){
-				ind=bestdmg(cible,context);
-			}
+			System.out.println(pkm.cap.at(i).nom+" "+scoreTemp);
+			if(maxScore<scoreTemp){ maxScore=scoreTemp; scoreTemp=0; ind=i; }
+			if(maxScore==scoreTemp){ egalite=maxScore; }
 		}
+		if(egalite==maxScore){ return bestdmg(cible,context); }
 		return ind;
 	}
 	

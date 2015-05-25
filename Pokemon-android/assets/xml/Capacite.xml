@@ -50,6 +50,12 @@
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="48" effet="Normal"
 			Tstats="14" ChangeProc="100" fof="1">
 		</Armure>
+		<Attraction
+			ID="679" effetProc="50" class="Atk"
+			nom="Attraction"
+			description="L'adversaire trouve la cible trop mignone pour l'attaquer"
+			power="0" type="5" pre="100" CC="0" element="Fee" maxPP="15" effet="Attraction">
+		</Attraction>
 		<Balayage
 			ID="17" effetProc="10" class="Atk"
 			nom="Balayage"
@@ -129,7 +135,7 @@
 			Tstats="07" ChangeProc="10" fof="0">			
 		</BullesDo>
 		<CageEclair
-			ID="67" effetProc="10" class="Atk"
+			ID="67" effetProc="100" class="Atk"
 			nom="Cage Eclair"
 			description="Un faible choc electrique frappe l'ennemi. Si l'attaque le touche, celui-ci est paralyse."
 			power="0" type="3" pre="100" CC="0" element="Electrique" maxPP="24" effet="Paralyse">			
@@ -156,7 +162,7 @@
 			ID="83" effetProc="10" class="Atk"
 			nom="Claquoir"
 			description="Piege l'ennemi et l'ecrase pendant 2 à 5 tours. "
-			power="35" type="3" pre="75" CC="7" element="Eau" maxPP="16" effet="Stuck">
+			power="35" type="3" pre="75" CC="7" element="Eau" maxPP="16" effet="Piege">
 		</Claquoir>
 		<!--Clonage
 			ID="89" effetProc="10" class="Atk"
@@ -392,7 +398,7 @@
 			ID="263" effetProc="10" class="Atk"
 			nom="Etreinte"
 			description="Ligote l'ennemi avec les tentacules ou le corps pour l'ecraser durant 2 à 5 tours. "
-			power="15" type="3" pre="85" CC="7" element="Normal" maxPP="32" effet="Stuck">
+			power="15" type="3" pre="85" CC="7" element="Normal" maxPP="32" effet="Piege">
 		</Etreinte>
 		<Souplesse	
 			ID="269" effetProc="10" class="Atk"
@@ -459,13 +465,13 @@
 			ID="331" effetProc="30" class="Atk"
 			nom="Ligotage"
 			description="Le lanceur ligote l'ennemi avec des lianes ou son corps pour l'ecraser durant 2 à 5 tours. "
-			power="15" type="3" pre="90" CC="7" element="Normal" maxPP="24" effet="Stuck">
+			power="15" type="3" pre="90" CC="7" element="Normal" maxPP="24" effet="Piege">
 		</Ligotage>
 		<!--<Mania	
 			ID="337" effetProc="30" class="Atk"
 			nom="Ligotage"
 			description="Le lanceur ligote l'ennemi avec des lianes ou son corps pour l'ecraser durant 2 à 5 tours. "
-			power="15" type="3" pre="90" CC="7" element="Normal" maxPP="24" effet="Stuck">
+			power="15" type="3" pre="90" CC="7" element="Normal" maxPP="24" effet="Piege">
 		</Mania>-->
 		<Damocles	
 			ID="347" effetProc="30" class="AtkRecul"
@@ -523,7 +529,7 @@
 			ID="389" effetProc="100" class="Atk"
 			nom="Ultrason"
 			description="Le lanceur produit d'étranges ondes sonores pouvant rendre confus."
-			power="0" type="3" pre="55" CC="7" element="Normal" maxPP="32" effet="Confus">
+			power="0" type="3" pre="55" CC="0" element="Psy" maxPP="32" effet="Confus">
 		</Ultrason>
 		<Flammeche	
 			ID="401" effetProc="30" class="Atk"
@@ -551,7 +557,7 @@
 		
 		<RafalePsy 
 			ID="421" effetProc="10" class="Atk"
-			nom="Rafale Psu"
+			nom="Rafale Psy"
 			description="Un etrange rayon frappe l'ennemi. Peut aussi le rendre confus."
 			power="65" type="5" pre="100" CC="7" element="Psy" maxPP="32" effet="Confus" >
 		</RafalePsy>
@@ -586,22 +592,22 @@
 			description="Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser."
 			power="100" type="5" pre="100" CC="7" element="Electrique" maxPP="35" effet="Paralyse" >
 		</Tonnerre>
+		<Toxic
+			ID="461" effetProc="100" class="Atk"
+			nom="Toxic" 
+			description="Empoisonne gravement l'ennemi. Les degats dus au poison augmentent a chaque tour."
+			power="0" type="5" pre="90" CC="0" element="Poison" maxPP="16" effet="Toxic">
+		</Toxic>
+		<Vampigraine
+			ID="467" effetProc="100" class="Atk"
+			nom="Vampigraine"
+			description="Une graine est semee sur l'ennemi. À chaque tour, elle lui dérobe des PV que le lanceur recupere."
+			power="0" type="5" pre="90" CC="0" element="Plante" maxPP="10" effet="Vampigraine">
+		</Vampigraine>
 		<Zenith
 		    ID="457" class="AtkMeteo"
 			nom="Zenith" Climat="Zenith"
 			description="Fait briller le soleil et ameliore les capacites de type Feu."
 			type="5" pre="100" element="Feu" maxPP="5">
 		</Zenith>
-		<Toxic
-			ID="461" class="Atk"
-			nom="Toxic"
-			description="Empoisonne gravement l'ennemi. Les dégâts dus au poison augmentent à chaque tour."
-			power="0" type="5" pre="90" CC="0" element="Poison" maxiPP="16" effet="Toxic">
-		</Toxic>
-		<Ligotage
-			ID="463" class="Atk"
-			nom="Ligotage"
-			description="Le lanceur ligote l'ennemi avec des lianes ou son corps pour l'écraser durant 2 à 5 tours."
-			power="15" type="5" pre="90" CC="7" element="Normal" effet="Piege">
-		</Ligotage>
 </Capacite>

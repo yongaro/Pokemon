@@ -59,7 +59,7 @@ public class BattleHud extends Actor{
 				locked=true; //verouillage
 		}*/
 		if(locked && myGroup.getpCombat().getPkm().get(2)!=oldpv){
-				//System.out.println("LOCKED");
+				//
 				if(myGroup.getpCombat().getPkm().get(2)>oldpv){ //Monter ou descendre les pdvs ?
 					increase=true;
 				}
@@ -69,7 +69,7 @@ public class BattleHud extends Actor{
 				//calcul du nouveau pourcentage
 				pvperc[1]=(160*myGroup.getpCombat().getPkm().get(2))/myGroup.getpCombat().getPkm().getmax(2); 
 				oldpv=myGroup.getpCombat().getPkm().get(2);	
-				//System.out.println(pvperc[0]+"/"+pvperc[1]);
+				//
 
 		}
 			if(pvperc[1]!=pvperc[0]){
@@ -80,7 +80,7 @@ public class BattleHud extends Actor{
 					{
 						pvperc[0]=pvperc[1]; //pour les erreur d'approx
 						locked=false; //deverouillage
-						//System.out.println("UNLOCKED");
+						//
 					}
 				}
 				else{
@@ -89,7 +89,7 @@ public class BattleHud extends Actor{
 					else
 					{pvperc[0]=pvperc[1];//pour les erreur d'approx
 					locked=false;//deverouillage
-					//System.out.println("UNLOCKED");
+					//
 					}
 				}
 				oldpv=(int) Math.round(((pvperc[0]*myGroup.getpCombat().getPkm().getmax(2))/160.0));
