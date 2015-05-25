@@ -36,7 +36,16 @@ active: false
 - X Offset - 
 active: false
 - Y Offset - 
-active: false
+active: true
+lowMin: -30.0
+lowMax: -30.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -132,4 +141,4 @@ additive: false
 behind: false
 premultipliedAlpha: false
 - Image Path -
-/C:/Users/User/git/Pokemon/Pokemon-core/particle.png
+particle.png

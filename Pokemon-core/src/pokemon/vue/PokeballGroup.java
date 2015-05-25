@@ -10,7 +10,7 @@ public class PokeballGroup extends Group{
 		int i=0;
 		while(i<6 && MyGdxGame.Jtest.getTeam()[i]!=null)
 		{
-				this.addActor(new Pokeball(MyGdxGame.Jtest.getTeam()[i].get(2)!=0,i));
+				this.addActor(new Pokeball( MyGdxGame.Jtest.getTeam()[i].get(2)!=0,i));
 				i++;
 		}
 		this.setTransform(true);
