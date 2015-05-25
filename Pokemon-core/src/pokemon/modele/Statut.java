@@ -11,6 +11,9 @@ public enum Statut {
 	protected boolean principal;
 	
 	private Statut(){
+		if(this.name().compareTo("Attraction")==0){
+			this.dummy=new Atk(Type.Fee); principal=false;
+		}
 		if(this.name().compareTo("Brule")==0){
 			this.dummy=new Atk(Type.Feu); principal=true;
 		}

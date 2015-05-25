@@ -149,23 +149,25 @@ public class Combat extends Thread {
 			//Application des degats sur la duree
 			endOfTurn=true;
 			for(PokemonCombat p:pkmListe){
-				
+				System.out.println("Traitement des statuts de "+p.pkm.nom);
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule ){
-					
+					System.out.println(p.pkm.statut);
 					this.pCourant=p;
 					this.capCur=p.pkm.statut.dummy;
 					this.cibleCourante=p;
 					p.pkm.statut.StatEffect(p.pkm,p.adv[0].pkm,1,this);
 					this.setfreeze(true);
+				}
 					for(Statut s: p.pkm.supTemp){
+						System.out.println(s);
 						this.pCourant=p;
 						this.capCur=s.dummy;
 						this.cibleCourante=p;
 						s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
-						this.setfreeze(true);
+						//this.setfreeze(true);
 					}
+				
 					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
-				}
 			}
 			endOfTurn=false;
 		}
