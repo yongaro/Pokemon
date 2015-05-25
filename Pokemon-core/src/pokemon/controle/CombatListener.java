@@ -165,13 +165,14 @@ public class CombatListener extends GameInput{
 			{
 				//if(!combatV.healthbarLocked())
 					combatV.getDbox().setMessage(retval[textinc++]);
+					System.out.println(retval[textinc-1]);
 				if(textinc==2){
 					combatV.animateHealthBars();
 				}
 			}
 			else{
 				System.out.println("ICI");
-				textinc=1;
+				//textinc=1;
 
 				if(combatV.hideDeadIA())
 				{
@@ -199,7 +200,8 @@ public class CombatListener extends GameInput{
 
 		if(combatV.getState()==7){ //pokemon change par le joueur
 			c.setfreeze(false);
-			
+			combatV.getDbox().setWidth(width/2);
+
 			combatV.setState(2);
 			return;
 

@@ -19,7 +19,7 @@ public class Pokeball extends SpriteActor{
 		this.setBounds(650+20*i,150,15,15);
 		this.i=i;
 		this.addAction(Actions.sequence(Actions.delay((float) (0.2+i*0.2f)),Actions.parallel(Actions.moveBy(-160, 0,0.5f))));
-		
+		System.out.println("Pokeball "+alive);
 	}
 	
 	
@@ -34,7 +34,7 @@ public class Pokeball extends SpriteActor{
 		if(alive)
 			batch.setColor(Color.WHITE);
 		else{
-			getStage().getBatch().setColor(Color.DARK_GRAY);
+			getStage().getBatch().setColor(Color.BLACK);
 		}
 		//batch.draw(t,this.getX(),this.getY(),0,0,15,15,1,1,this.getRotation());
 		s.setPosition(this.getX(), this.getY());
