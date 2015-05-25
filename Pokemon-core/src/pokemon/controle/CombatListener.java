@@ -200,7 +200,8 @@ public class CombatListener extends GameInput{
 
 		if(combatV.getState()==7){ //pokemon change par le joueur
 			c.setfreeze(false);
-			
+			combatV.getDbox().setWidth(width/2);
+
 			combatV.setState(2);
 			return;
 
