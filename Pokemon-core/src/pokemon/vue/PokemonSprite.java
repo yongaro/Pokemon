@@ -98,7 +98,7 @@ public class PokemonSprite extends Actor{
     					),Actions.moveBy(50, 40,0.2f)));
     			if(myGroup.getCombat().getCapCur()!=null){
     				System.out.println(myGroup.getCombat().getCapCur().getElement().name());
-    				if(myGroup.getCombat().getendOfTurn()){System.out.println("ENDOFTURN");
+    				if(myGroup.getCombat().getendOfTurn()){
     					ParticleEffects.valueOf(myGroup.getCombat().getCapCur().getElement().name()).AdvSelf(myGroup.getCombatV());}
     				else
     					ParticleEffects.valueOf(myGroup.getCombat().getCapCur().getElement().name()).AdvEffect(myGroup.getCombatV());
@@ -108,7 +108,7 @@ public class PokemonSprite extends Actor{
     			this.addAction(Actions.sequence(Actions.moveBy(50, 40,0.2f),Actions.moveBy(-50, -40,0.2f)));
     			if(myGroup.getCombat().getCapCur()!=null ){
     				System.out.println(myGroup.getCombat().getCapCur().getElement().name());
-    				if(myGroup.getCombat().getendOfTurn()){System.out.println("ENDOFTURN");
+    				if(myGroup.getCombat().getendOfTurn()){
     					ParticleEffects.valueOf(myGroup.getCombat().getCapCur().getElement().name()).JoueurSelf(myGroup.getCombatV());}
     				else
     					ParticleEffects.valueOf(myGroup.getCombat().getCapCur().getElement().name()).JoueurEffect(myGroup.getCombatV());
