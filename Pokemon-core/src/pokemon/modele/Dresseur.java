@@ -82,8 +82,8 @@ public class Dresseur extends NPC implements CombatInfos {
 			Element root = getDialogs(path);
 			
 			//On récupere le nom
-			String str = root.get("name");
-			if(str == null) {
+			String str = root.getAttribute("name");
+			if(str != null) {
 				setName(str);
 			}
 			else {

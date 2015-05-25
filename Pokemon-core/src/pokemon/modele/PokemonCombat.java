@@ -146,7 +146,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 						score+=70;
 					}
 					if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
-						score+=40;
+						score+=30;
 					}
 					//Ajout d'une base au score
 					score+=c.pre;
@@ -156,9 +156,9 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			else if(!cible.supTemp.contains(((Atk) c).effet)){
 				//if(((Atk) c).effet==Statut.Requiem){ score+=100; }
 				if(((Atk) c).effet==Statut.Vampigraine){ score+=80; }
-				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Piege){ score+=70; }
+				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Piege){ score+=60; }
 				if(((Atk) c).effet==Statut.Confus || (((Atk) c).effet==Statut.Maudit && user.type.contains(Type.Spectre))){
-					score+=60;
+					score+=50;
 				}
 				//Ajout d'une base au score
 				score+=c.pre;
