@@ -592,4 +592,16 @@
 			description="Fait briller le soleil et ameliore les capacites de type Feu."
 			type="5" pre="100" element="Feu" maxPP="5">
 		</Zenith>
+		<Toxic
+			ID="461" class="Atk"
+			nom="Toxic"
+			description="Empoisonne gravement l'ennemi. Les dégâts dus au poison augmentent à chaque tour."
+			power="0" type="5" pre="90" CC="0" element="Poison" maxiPP="16" effet="Toxic">
+		</Toxic>
+		<Ligotage
+			ID="463" class="AtkRep"
+			nom="Ligotage"
+			description="Le lanceur ligote l'ennemi avec des lianes ou son corps pour l'écraser durant 2 à 5 tours."
+			power="15" type="5" pre="90" CC="7" element="Normal" effet="Normal">
+		</Ligotage>
 </Capacite>
