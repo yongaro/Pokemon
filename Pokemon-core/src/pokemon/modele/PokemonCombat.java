@@ -145,7 +145,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 					score+=40;
 				}
 			}
-			else if(cible.supTemp.contains(((Atk) c).effet)){
+			else if(!cible.supTemp.contains(((Atk) c).effet)){
 				if(((Atk) c).effet==Statut.Requiem){ score+=100; }
 				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Stuck){ score+=75; }
 				if(((Atk) c).effet==Statut.Confus || (((Atk) c).effet==Statut.Maudit && user.type.contains(Type.Spectre))){
