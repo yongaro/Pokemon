@@ -12,5 +12,11 @@
 			<capacite nom="PoingGlace"/>
 			<capacite nom="Repos"/>
 		</pokemon>
+		<pokemon id="25" niveau="42">
+			<capacite nom="Tonnerre"/>
+			<capacite nom="Repos"/>
+			<capacite nom="CageEclair"/>
+			<capacite nom="JetDeSable"/>
+		</pokemon>
 	</equipe>
 </PNJ>

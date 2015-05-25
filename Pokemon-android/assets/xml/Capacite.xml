@@ -145,7 +145,7 @@
 			nom="Charge"
 			description="Le lanceur charge l'ennemi et le percute de tout son corps."
 			power="50" type="3" pre="100" CC="7" element="Normal" maxPP="56" effet="Normal">
-		</Chargerge>
+		</Charge>
 		<ChocMental
 			ID="79" effetProc="10" class="Atk"
 			nom="Choc Mental"
@@ -213,7 +213,7 @@
 			description="Le lanceur se developpe. Augmente l'Atq. Spe "
 			power="0" type="3" pre="100" CC="0" element="Normal" maxPP="64" effet="Normal"
 			Tstats="15" ChangeProc="100" fof="1">
-		</CrocDeMort>
+		</Croissance>
 		<CruAile	
 			ID="131" effetProc="10" class="Atk"
 			nom="Cru-Aile"
@@ -262,7 +262,7 @@
 			nom="Ecrasement"
 			description="ecrase l'ennemi avec un enorme pied. Peut aussi l'apeurer. "
 			power="65" type="3" pre="100" CC="7" element="Normal" maxPP="32" effet="Peur">
-		</Erasement>
+		</Ecrasement>
 		<EcrasFace
 			ID="167" effetProc="30" class="Atk"
 			nom="Ecras'Face"
@@ -509,7 +509,7 @@
 			ID="379" effetProc="30" class="Atk"
 			nom="Morsure"
 			description="L'ennemi est mordu par de tranchantes canines. Peut l'apeurer."
-			power="60" type="3" pre="100" CC="7" element="Tenebres" maxPP="40" effet="Peur">
+			power="60" type="3" pre="100" CC="7" element="Tenebre" maxPP="40" effet="Peur">
 		</Morsure>
 		<Rugissement	
 			ID="383" effetProc="30" class="Atk"
@@ -517,6 +517,7 @@
 			description="Le lanceur pousse un cri tout mimi pour tromper la vigilance de l'ennemi et baisser son Attaque."
 			power="0" type="3" pre="100" CC="7" element="Normal" maxPP="64" effet="Normal"
 			Tstats="03" ChangeProc="100" fof="0">
+			
 		</Rugissement>
 		<Ultrason	
 			ID="389" effetProc="100" class="Atk"
@@ -536,57 +537,57 @@
 
 
 		<JetPierres 
-			ID="47" effetProc="10" class="Atk"
+			ID="409" effetProc="10" class="Atk"
 			nom="Jet-Pierres"
 			description="Le lanceur lache une pierre sur l'ennemi."
 			power="50" type="5" pre="90" CC="7" element="Roche" maxPP="24" effet="Normal" >
 		</JetPierres>
 		<MegaSangsue 
-			ID="999" effetProc="10" class="AtkSoin"
+			ID="419" effetProc="10" class="AtkSoin"
 			nom="Mega-Sangsue"
 			description="Une attaque qui convertit la moitie des degats infliges en PV. "
 			power="40" type="5" pre="100" CC="7" element="Plante" maxPP="15" effet="Normal" >
 		</MegaSangsue>		
 		
 		<RafalePsy 
-			ID="41" effetProc="10" class="Atk"
+			ID="421" effetProc="10" class="Atk"
 			nom="Rafale Psu"
 			description="Un etrange rayon frappe l'ennemi. Peut aussi le rendre confus."
 			power="65" type="5" pre="100" CC="7" element="Psy" maxPP="32" effet="Confus" >
 		</RafalePsy>
 		<Repos
-			ID="5" effetProc="10" class="Heal"
+			ID="431" effetProc="10" class="Heal"
 			nom="Repos"
 			description="Le lanceur dort pendant deux tours. Il regagne tous ses PVs et n'a plus de problemes de statut."
 			power="100" type="5" pre="100" CC="0" element="Psy" maxPP="10" effet="Endormi"
 			code="3" >
 		</Repos>
 		<Seisme 
-			ID="43" effetProc="10" class="Atk"
+			ID="433" effetProc="10" class="Atk"
 			nom="Seisme"
 			description="Le lanceur provoque un tremblement de terre touchant tous les Pokemon autour de lui."
 			power="100" type="5" pre="100" CC="7" element="Sol" maxPP="16" effet="Normal" >
 		</Seisme>
 		<Surf	
-			ID="37" effetProc="10" class="Atk"
+			ID="439" effetProc="10" class="Atk"
 			nom="Surf"
 			description="Une enorme vague s'abat sur le champ de bataille. Permet aussi de voyager sur l'eau. "
 			power="90" type="5" pre="100" CC="7" element="Eau" maxPP="24" effet="Normal">
 		</Surf>
 		<TempeteDeSable
-		    ID="669" class="AtkMeteo"
+		    ID="443" class="AtkMeteo"
 			nom="Tempete de Sable" Climat="TempeteSable"
 			description="Une tempete de sable qui blesse tous les Pokemons sauf les types Roche, Sol et Acier."
 			type="5" pre="100" element="Sol" maxPP="5">
 		</TempeteDeSable>
 		<Tonnerre 
-			ID="2" effetProc="10" class="Atk"
+			ID="449" effetProc="10" class="Atk"
 			nom="Tonnerre"
 			description="Une grosse decharge electrique tombe sur l'ennemi. Peut aussi le paralyser."
 			power="100" type="5" pre="100" CC="7" element="Electrique" maxPP="35" effet="Paralyse" >
 		</Tonnerre>
 		<Zenith
-		    ID="668" class="AtkMeteo"
+		    ID="457" class="AtkMeteo"
 			nom="Zenith" Climat="Zenith"
 			description="Fait briller le soleil et ameliore les capacites de type Feu."
 			type="5" pre="100" element="Feu" maxPP="5">
