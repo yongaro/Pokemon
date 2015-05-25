@@ -155,14 +155,13 @@ public enum Statut {
 	    	return 1;
 	    }
 	    if(this==Statut.Confus && flag==0){
-	    	Random rand=new Random();
 	    	if(nbtours==0){
 	    		cible.supTemp.remove(this);
 	    		context.ajoutBuffer(cible.nom+" sort de sa confusion");
-	    		cible.supTemp.remove(this);
 	    		return 1;
 	    	}
 	    	else{
+	    		Random rand=new Random();
 		    	if(rand.nextInt(100)<=50){
 		    		dmg=Atk.confDmg.atkdamage(user, cible, context,true);
 		    		System.out.println("confusion dmg "+dmg);
