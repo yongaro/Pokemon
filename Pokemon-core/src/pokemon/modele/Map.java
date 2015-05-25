@@ -1,5 +1,6 @@
 package pokemon.modele;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
@@ -18,7 +19,11 @@ import com.badlogic.gdx.math.Vector2;
  * objets present sur la map */
 
 @Tps(nbhours=10)
-public class Map {
+public class Map implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5865738960359926159L;
 	//Proprietes de la Map
 	private TiledMap tiledMap;
 	private Music music;
