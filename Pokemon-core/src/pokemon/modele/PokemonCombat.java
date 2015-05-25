@@ -142,7 +142,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		if(c instanceof Atk){
 			if(((Atk)c).effet.principal){
 				if(cible.statut==Statut.Normal){
-					if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
+					if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule || ((Atk)c).effet==Statut.Toxic ){
 						score+=70;
 					}
 					if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
@@ -155,6 +155,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			}
 			else if(!cible.supTemp.contains(((Atk) c).effet)){
 				//if(((Atk) c).effet==Statut.Requiem){ score+=100; }
+				if(((Atk) c).effet==Statut.Vampigraine){ score+=80; }
 				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Piege){ score+=70; }
 				if(((Atk) c).effet==Statut.Confus || (((Atk) c).effet==Statut.Maudit && user.type.contains(Type.Spectre))){
 					score+=60;
@@ -204,7 +205,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		if(c instanceof Atk){
 			if(((Atk)c).effet.principal){
 				if(cible.statut==Statut.Normal){
-					if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule){
+					if(((Atk)c).effet==Statut.Empoisonne || ((Atk)c).effet==Statut.Brule || ((Atk)c).effet==Statut.Toxic){
 						score+=20;
 					}
 					if(((Atk)c).effet==Statut.Paralyse || ((Atk)c).effet==Statut.Endormi || ((Atk)c).effet==Statut.Gele){
@@ -216,6 +217,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			}
 			else if(!cible.supTemp.contains(((Atk) c).effet)){
 				if(((Atk) c).effet==Statut.Requiem){ score+=10; }
+				if(((Atk) c).effet==Statut.Vampigraine){ score+=40; }
 				if(((Atk) c).effet==Statut.Picots || ((Atk) c).effet==Statut.Piege){ score+=30; }
 				if(((Atk) c).effet==Statut.Confus || ((Atk) c).effet==Statut.Attraction || ((Atk) c).effet==Statut.Peur ){
 					score+=70;
