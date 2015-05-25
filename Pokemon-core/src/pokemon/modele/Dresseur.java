@@ -14,12 +14,14 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 @Tps(nbhours=3)
 public class Dresseur extends NPC implements CombatInfos {
 	private boolean aggressive;
+	private String name;
 	private Vector<Pkm> team;
 	
 	//Constructeurs
 	public Dresseur() {
 		super();
 		setAggressive(false);
+		setName("Dresseur");
 	}
 	public Dresseur(String path) {
 		super(path);
@@ -28,6 +30,7 @@ public class Dresseur extends NPC implements CombatInfos {
 	public Dresseur(Vector2 pos) {
 		super(pos);
 		setAggressive(false);
+		setName("Dresseur");
 	}
 	public Dresseur(String path, Vector2 pos, boolean isAggressive) {
 		super(path, pos);
@@ -78,6 +81,12 @@ public class Dresseur extends NPC implements CombatInfos {
 			//On recupere les dialogues
 			Element root = getDialogs(path);
 			
+			//On récupere le nom
+			String str = root.get("name");
+			if(str == null) {
+				setName(str);
+			}
+			
 			//On recupere l'equipe
 			Element equipe = root.getChildByName("equipe");
 			if(equipe != null) {
@@ -113,5 +122,15 @@ public class Dresseur extends NPC implements CombatInfos {
 	}
 	public void setAggressive(boolean aggressive) {
 		this.aggressive = aggressive;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String toString() {
+		return this.name;
 	}
 }

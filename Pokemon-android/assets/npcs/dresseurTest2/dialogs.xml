@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<PNJ id="3">
+<PNJ id="3" name="Dresseur Roger">
 	<dialogue>
 		<text>Avant d'etre pape, Jean-Paul II etait acteur.</text>
 		<battle with="3"/>
