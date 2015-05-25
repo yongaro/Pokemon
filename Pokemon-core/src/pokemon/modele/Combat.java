@@ -126,6 +126,7 @@ public class Combat extends Thread {
 			Arrays.sort(pkmListe);
 			for(int i=0;i<pkmListe.length;i++){
 				System.out.println("Tour de "+pkmListe[i].pkm.nom);
+				if(endOfTurn){endOfTurn=false;}
 				this.resetAct();
 				this.setBufferState(false);
 				pCourant=pkmListe[i];
@@ -170,9 +171,8 @@ public class Combat extends Thread {
 		}
 		
 		fini=this.gagnant();
-		System.out.println("CAY FINI FAUT SWAP DECRAN KILL IT DAMNIT "+fini);
-		this.ajoutBuffer("PUTE");
-		return this.gagnant();
+		this.ajoutBuffer("   ");
+		return fini;
 	}
 	
 	
@@ -195,17 +195,22 @@ public class Combat extends Thread {
 				if(ch1==1){
 					for(Statut s: user.pkm.supTemp){
 						if(s.StatEffect(user.pkm,0,this)==0){
+							this.endOfTurn=true;
 							ch2=0;
 							this.pCourant=user;
 							this.capCur=s.dummy;
 							this.cibleCourante=user;
+							//this.setBufferState(true);
 						}
 					}
 				}
 				else{
+					this.endOfTurn=true;
 					this.pCourant=user;
 					this.capCur=user.pkm.statut.dummy;
 					this.cibleCourante=user;
+					//this.ajoutBuffer(" ");
+					//this.setBufferState(true);
 				}
 				if(ch1==1 && ch2==1){
 					this.capCur=user.pkm.cap.elementAt(act).cible;

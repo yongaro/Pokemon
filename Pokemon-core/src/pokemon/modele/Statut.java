@@ -3,7 +3,7 @@ package pokemon.modele;
 import java.util.Random;
 
 public enum Statut {
-	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur,Picots,Requiem,Stuck;
+	Attraction,Brule,Confus,Empoisonne,Endormi,Gele,KO,Maudit,Normal,Paralyse,Peur,Picots,Requiem,Stuck,Vampigraine;
 	
 	protected int nbtours;
 	protected Capacite dummy;
@@ -33,6 +33,9 @@ public enum Statut {
 		}
 		else if(this.name().compareTo("Peur")==0){
 			this.dummy=new Atk(Type.Tenebre);
+		}
+		else if(this.name().compareTo("Vampigraine")==0){
+			this.dummy=new Atk(Type.Plante); this.dummy.type=5;
 		}
 		else{
 			this.dummy=new Atk(Type.Normal);
@@ -107,7 +110,7 @@ public enum Statut {
 	    }
 	    if(this==Statut.Gele && flag==0){
 	    	Random rand=new Random();
-	    	if(rand.nextInt()<=10){
+	    	if(rand.nextInt(100)<=10){
 	    		System.out.println(cible.nom+" n'est plus gele");
 	    		context.ajoutBuffer(cible.nom+" n'est plus gele");
 	    		cible.statut=Statut.Normal;
@@ -160,10 +163,16 @@ public enum Statut {
 	    	return 0;
 	    }
 	    if(this==Statut.Maudit && flag==1){
+	    	dmg=(int)(cible.stats[2][1]/4);
 	    	context.ajoutBuffer(cible.nom+" est maudit");
 	    	context.ajoutBuffer(dmg+" pv");
-	    	cible.infliger((int)(cible.stats[2][1]/4));
+	    	cible.infliger(dmg);
 	    	return 1;
+	    }
+	    if(this==Statut.Vampigraine && flag==1){
+	    	dmg=(int)cible.stats[2][1]/8;
+	    	context.ajoutBuffer("La santée de "+cible.nom+" est drainee");
+	    	cible.infliger(dmg);
 	    }
 	    return 1;
 	}
