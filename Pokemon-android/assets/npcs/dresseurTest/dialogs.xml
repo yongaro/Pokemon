@@ -6,17 +6,17 @@
 	</dialogue>
 	
 	<equipe>
+		<pokemon id="2" niveau="25">
+			<capacite nom="MegaSangsue"/>
+			<capacite nom="Toxic"/>
+			<capacite nom="Ligotage"/>
+			<capacite nom="Vampigraine"/>
+		</pokemon>
 		<pokemon id="12" niveau="25">
 			<capacite nom="RafalePsy"/>
 			<capacite nom="Ultrason"/>
 			<capacite nom="CageEclair"/>
 			<capacite nom="Attraction"/>
-		</pokemon>
-		<pokemon id="24" niveau="25">
-			<capacite nom="MegaSangsue"/>
-			<capacite nom="Toxic"/>
-			<capacite nom="Ligotage"/>
-			<capacite nom="Vampigraine"/>
 		</pokemon>
 		<pokemon id="5" niveau="25">
 			<capacite nom="PoingDeFeu"/>

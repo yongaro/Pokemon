@@ -167,7 +167,7 @@ public class Combat extends Thread {
 						this.capCur=s.dummy;
 						this.cibleCourante=p;
 						s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
-						//this.setfreeze(true);
+						this.setfreeze(true);
 					}
 				
 					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
@@ -301,7 +301,7 @@ public class Combat extends Thread {
 		else{
 			for(int i=0;i<user.equipe.length;i++){
 				if(user.equipe[i].pkm.statut!=Statut.KO){
-					this.ajoutBuffer(user.prop+" envoie "+user.equipe[i].pkm.nom+" au combat");
+					this.ajoutBuffer(user.prop.getName()+" envoie "+user.equipe[i].pkm.nom+" au combat");
 					user.setSwap(i);
 					user.waitIAswap();
 					//pkmRef=user.pkm; stackRef=user.XpStack;

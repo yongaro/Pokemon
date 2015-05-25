@@ -395,7 +395,7 @@
 			power="90" type="3" pre="95" CC="7" element="Vol" maxPP="24" effet="Normal">
 		</Vol> <!-- CLASSE ATKRET A CREER-->
 		<Etreinte	
-			ID="263" effetProc="10" class="Atk"
+			ID="263" effetProc="100" class="Atk"
 			nom="Etreinte"
 			description="Ligote l'ennemi avec les tentacules ou le corps pour l'ecraser durant 2 à 5 tours. "
 			power="15" type="3" pre="85" CC="7" element="Normal" maxPP="32" effet="Piege">
@@ -462,7 +462,7 @@
 			power="85" type="3" pre="100" CC="7" element="Normal" maxPP="24" effet="Paralyse">
 		</Plaquage>
 		<Ligotage	
-			ID="331" effetProc="30" class="Atk"
+			ID="331" effetProc="100" class="Atk"
 			nom="Ligotage"
 			description="Le lanceur ligote l'ennemi avec des lianes ou son corps pour l'ecraser durant 2 à 5 tours. "
 			power="15" type="3" pre="90" CC="7" element="Normal" maxPP="24" effet="Piege">
@@ -602,7 +602,7 @@
 			ID="467" effetProc="100" class="Atk"
 			nom="Vampigraine"
 			description="Une graine est semee sur l'ennemi. À chaque tour, elle lui dérobe des PV que le lanceur recupere."
-			power="0" type="5" pre="90" CC="0" element="Plante" maxPP="10" effet="Vampigraine">
+			power="0" type="3" pre="90" CC="0" element="Plante" maxPP="10" effet="Vampigraine">
 		</Vampigraine>
 		<Zenith
 		    ID="457" class="AtkMeteo"

@@ -188,6 +188,7 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 			//Strat�gie qui vise a infliger Poison ou Brulure + Maudit + Requiem + Stuck
 			//On cherche d'abord a infliger Requiem
 			scoreTemp=dotScore(this.pkm.cap.elementAt(i).get(),pkm,cible.pkm);
+			System.out.println(pkm.cap.at(i)+" "+scoreTemp);
 			if(maxScore<scoreTemp){ maxScore=scoreTemp; scoreTemp=0; ind=i; }
 			if(maxScore==scoreTemp){ egalite=maxScore;}
 		}

@@ -339,6 +339,7 @@ public class Joueur implements CombatInfos, Serializable {
 	
 	public Pkm teamAt(int ind){ return team[ind]; }
 	public Pkm[] Team(){ return team; }
+	public String getName(){ return this.nom;}
 	public void stop() {
 		speed = new Vector2();
 	}

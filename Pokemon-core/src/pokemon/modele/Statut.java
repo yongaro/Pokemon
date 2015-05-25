@@ -192,13 +192,17 @@ public enum Statut {
 	    if(this==Statut.Vampigraine && flag==1){
 	    	dmg=(int)cible.stats[2][1]/8;
 	    	context.ajoutBuffer("La santée de "+cible.nom+" est drainee");
+	    	context.ajoutBuffer(dmg+" pv");
 	    	cible.infliger(dmg);
 	    	user.heal(dmg);
+	    	return 1;
 	    }
 	    if(this==Statut.Piege){
 	    	dmg=(int)cible.stats[2][1]/16;
 	    	context.ajoutBuffer("Le piege inflige des degats");
+	    	context.ajoutBuffer(dmg+" pv");
 	    	cible.infliger(dmg);
+	    	return 1;
 	    }
 	    return 1;
 	}
