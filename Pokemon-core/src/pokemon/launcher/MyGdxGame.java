@@ -36,7 +36,7 @@ public class MyGdxGame extends Game {
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
 		MapScreen mapS=new MapScreen(this);
 		MenuListener menu=new MenuListener(this,mapS);
-		this.setScreen(new StartScreen(this));
+		//this.setScreen(new StartScreen(this));
 		//TestMap2 test = new TestMap2();
 		//this.setScreen(mapS);
 		//Combat test=new Combat(Jtest, Jtest2);

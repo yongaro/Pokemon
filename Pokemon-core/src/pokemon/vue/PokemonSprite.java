@@ -21,11 +21,11 @@ public class PokemonSprite extends Actor{
 	public static Vector2 e1=new Vector2(60,220);
 	public static Vector2 e2=new Vector2(-100,220);
 	public static Vector2 a1=new Vector2(440,60);
-    public Texture s=new Texture(Gdx.files.internal("Sprites/6.png"));
+    public Texture s;
     SpriteBatch b=new SpriteBatch();
     boolean finished,attackplayer=false;
     ShapeRenderer shapeRenderer=new ShapeRenderer();
-	Sound son = Gdx.audio.newSound(Gdx.files.internal("Sound/4.ogg"));
+	Sound son;
 	Music sonatq = Gdx.audio.newMusic(Gdx.files.internal("Sound/normaldamage.WAV"));
 	Music soneatq;
 	BattleGroup myGroup;
@@ -60,7 +60,7 @@ public class PokemonSprite extends Actor{
        	   	this.setBounds(10, 60, s.getWidth()*1.2f, s.getHeight()*1.2f);
 
     	}
-
+    	son = Gdx.audio.newSound(Gdx.files.internal("Sound/"+myGroup.getpCombat().getPkm().getID()+".ogg"));
 	
     	pos=v;
     	b.getProjectionMatrix().setToOrtho2D(0, 0,640,360);
@@ -201,6 +201,7 @@ public class PokemonSprite extends Actor{
     	{
     		finished=true;
     		b.setColor(Color.WHITE);
+    		if(son!=null)
     		son.play(0.5f);	
     	}
     }
@@ -213,6 +214,7 @@ public class PokemonSprite extends Actor{
 			s=new Texture(Gdx.files.internal("Sprites/"+myGroup.getpCombat().getPkm().getID()+".png"));
 		else
 			s=new Texture(Gdx.files.internal("Sprites/back/"+myGroup.getpCombat().getPkm().getID()+".png"));
+		son=Gdx.audio.newSound(Gdx.files.internal("Sound/"+myGroup.getpCombat().getPkm().getID()+".ogg"));
 	}
 
 
