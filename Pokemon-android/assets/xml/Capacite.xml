@@ -599,9 +599,9 @@
 			power="0" type="5" pre="90" CC="0" element="Poison" maxiPP="16" effet="Toxic">
 		</Toxic>
 		<Ligotage
-			ID="463" class="AtkRep"
+			ID="463" class="Atk"
 			nom="Ligotage"
 			description="Le lanceur ligote l'ennemi avec des lianes ou son corps pour l'écraser durant 2 à 5 tours."
-			power="15" type="5" pre="90" CC="7" element="Normal" effet="Normal">
+			power="15" type="5" pre="90" CC="7" element="Normal" effet="Piege">
 		</Ligotage>
 </Capacite>
