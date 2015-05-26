@@ -4,10 +4,8 @@ import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Joueur;
 import pokemon.vue.CombatV;
 import pokemon.vue.menuPokemon;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
+
 
 public class CombatMenuPokemon extends GameInput{ //CONTROLLEUR DE L ECRAN POKEMON PENDANT LE COMBAT
 
@@ -37,7 +35,9 @@ public class CombatMenuPokemon extends GameInput{ //CONTROLLEUR DE L ECRAN POKEM
 	public boolean touchDown(int x, int y, int pointer, int button) {			
 		
 			menu.setTouched(true);
-			return true;
+			v.set(x, y);
+			menu.getStage().screenToStageCoordinates(v);
+			return super.touchUp(v);
 	}
 
 
@@ -45,10 +45,7 @@ public class CombatMenuPokemon extends GameInput{ //CONTROLLEUR DE L ECRAN POKEM
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 			menu.setTouched(false);
-			v.set(screenX, screenY);
-			menu.getStage().screenToStageCoordinates(v);
-			
-			return super.touchUp(v);
+			return true;
 	}
 
 
