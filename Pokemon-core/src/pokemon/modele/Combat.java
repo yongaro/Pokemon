@@ -165,6 +165,7 @@ public class Combat extends Thread {
 					this.cibleCourante=p;
 					s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
 					this.setfreeze(true);
+					if(p.pkm.stats[2][0]<=0){ break; }
 				}
 				if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
 			}

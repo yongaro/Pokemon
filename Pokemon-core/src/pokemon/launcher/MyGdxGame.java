@@ -58,7 +58,7 @@ public class MyGdxGame extends Game {
 	    	System.out.println("Attribut Attacks de Reptincel : "+Ptest[0].getAttacks());
 	    	System.out.println("ID de l'attaque Charge : "+bddCapacite.Charge.get().getID());
 	    	System.out.println(Ptest[0].getNom()+" peut il apprendre Charge ? " +  bddCapacite.Charge.get().peutApprendre(Ptest[0]));
-	    	//Ptest[0].infliger(56);
+	    	Ptest[0].infliger(56);
 	    	//Ptest[1].infliger(38);
 	    	//Ptest[0].infliger(70);
 	    	for(int i=0;i<6;i++){
