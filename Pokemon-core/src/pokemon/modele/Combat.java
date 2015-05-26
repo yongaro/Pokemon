@@ -79,14 +79,14 @@ public class Combat extends Thread {
 		for(int i=0;i<j1.teamsize;i++){
 			equipe1[i]=new PokemonCombat(j1.team[i],false,j1); equipe1[i].equipe=equipe1;
 			if(equipe1[i].pkm.statut!=Statut.KO && pkmListe[0]==null){
-				pkmListe[0]=equipe1[i];
+				pkmListe[0]=new PokemonCombat(equipe1[i]);
 				pkmListe[0].listeIndice=i;
 			}
 		}
 		for(int i=0;i<j2.teamsize;i++){
 			equipe2[i]=new PokemonCombat(j2.team[i],true,j2); equipe2[i].equipe=equipe2;
 			if(equipe2[i].pkm.statut!=Statut.KO && pkmListe[1]==null){
-				pkmListe[1]=equipe2[i];
+				pkmListe[1]=new PokemonCombat(equipe2[i]);
 				pkmListe[1].listeIndice=i;
 			}
 		}
@@ -106,20 +106,19 @@ public class Combat extends Thread {
 		for(int i=0;i<j.teamsize;i++){
 			equipe1[i]=new PokemonCombat(j.team[i],false,j); equipe1[i].equipe=equipe1;
 			if(equipe1[i].pkm.statut!=Statut.KO && pkmListe[0]==null){
-				pkmListe[0]=equipe1[i];
+				pkmListe[0]=new PokemonCombat(equipe1[i]);
 				pkmListe[0].listeIndice=i;
 			}
 		}
 		for(int i=0;i<d.getTeam().size();i++){
 			equipe2[i]=new PokemonCombat(d.getTeam().elementAt(i),true,d); equipe2[i].equipe=equipe2;
 			if(equipe2[i].pkm.statut!=Statut.KO && pkmListe[1]==null){
-				pkmListe[1]=equipe2[i];
+				pkmListe[1]=new PokemonCombat(equipe2[i]);
 				pkmListe[1].listeIndice=i;
 			}
 		}
 		pkmListe[0].adv[0]=pkmListe[1]; pkmListe[0].XpStack.add(pkmListe[0].adv[0].pkm);
 		pkmListe[1].adv[0]=pkmListe[0]; pkmListe[1].XpStack.add(pkmListe[1].adv[0].pkm);
-		 
 	}
 	
 	
@@ -154,23 +153,20 @@ public class Combat extends Thread {
 			for(PokemonCombat p:pkmListe){
 				System.out.println("Traitement des statuts de "+p.pkm.nom);
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule || p.pkm.statut==Statut.Toxic ){
-					System.out.println(p.pkm.statut);
 					this.pCourant=p;
 					this.capCur=p.pkm.statut.dummy;
 					this.cibleCourante=p;
 					p.pkm.statut.StatEffect(p.pkm,p.adv[0].pkm,1,this);
 					this.setfreeze(true);
 				}
-					for(Statut s: p.pkm.supTemp){
-						System.out.println(s);
-						this.pCourant=p;
-						this.capCur=s.dummy;
-						this.cibleCourante=p;
-						s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
-						this.setfreeze(true);
-					}
-				
-					if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
+				for(Statut s: p.pkm.supTemp){
+					this.pCourant=p;
+					this.capCur=s.dummy;
+					this.cibleCourante=p;
+					s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
+					this.setfreeze(true);
+				}
+				if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
 			}
 			endOfTurn=false;
 		}
@@ -287,8 +283,9 @@ public class Combat extends Thread {
 				
 				if(user.equipe[select].pkm.statut!=Statut.KO){
 					System.out.println(user.equipe[select].pkm.nom+" remplace "+user.pkm.nom);
+					user.swapImport(user.equipe[select]);
 					//pkmRef=user.pkm; stackRef=user.XpStack;
-					user.pkm=user.equipe[select].pkm; user.XpStack=user.equipe[select].XpStack;
+					//user.pkm=user.equipe[select].pkm; user.XpStack=user.equipe[select].XpStack;
 					//user.equipe[act].pkm=pkmRef; user.equipe[act].XpStack=stackRef;
 					ajoutXpStack(user);
 					done=1;
@@ -305,7 +302,8 @@ public class Combat extends Thread {
 					user.setSwap(i);
 					user.waitIAswap();
 					//pkmRef=user.pkm; stackRef=user.XpStack;
-					user.pkm=user.equipe[i].pkm; user.XpStack=user.equipe[i].XpStack;
+					//user.pkm=user.equipe[i].pkm; user.XpStack=user.equipe[i].XpStack;
+					user.swapImport(user.equipe[i]);
 					//p.pkm=pkmRef; p.XpStack=stackRef;
 					ajoutXpStack(user);
 					break;
@@ -381,6 +379,7 @@ public class Combat extends Thread {
 	public synchronized boolean getendOfTurn(){ return endOfTurn;}
 	public synchronized int getFini(){ return fini; }
 	public synchronized boolean getDresseur(){ return dresseur; }
+	
 	
 	
 }

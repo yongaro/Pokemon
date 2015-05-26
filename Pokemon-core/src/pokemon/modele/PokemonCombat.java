@@ -29,6 +29,29 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 		swap=-1;
 	}
 	
+	public PokemonCombat(PokemonCombat cp){
+		pkm=cp.pkm;
+		isIA=cp.isIA;
+		listeIndice=cp.listeIndice;
+		equipe=cp.equipe;
+		prop=cp.prop;
+		XpStack=cp.XpStack;
+		adv=cp.adv;
+		voisins=cp.voisins;
+		swap=cp.swap;
+	}
+	
+	public void swapImport(PokemonCombat cp){
+		pkm=cp.pkm;
+		isIA=cp.isIA;
+		listeIndice=cp.listeIndice;
+		equipe=cp.equipe;
+		prop=cp.prop;
+		XpStack=cp.XpStack;
+		swap=cp.swap;
+	}
+	
+	
 	public Pkm getPkm() { return pkm; }
 	public boolean isIA() { return isIA; }
 	public String getNom(){ return pkm.nom;}
