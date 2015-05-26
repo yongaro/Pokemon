@@ -179,6 +179,11 @@ public class Combat extends Thread {
 			
 		}
 		
+		//on enleve tous les statuts temporaires
+		for(PokemonCombat p:equipe1){
+			p.pkm.supTemp.clear();
+		}
+		
 		fini=this.gagnant();
 		this.ajoutBuffer("   ");
 		return fini;
