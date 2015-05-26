@@ -117,12 +117,12 @@ public class PokemonSprite extends Actor{
     			}
     			
     		}
-    		if(myGroup.getCombat().getCapCur().getType()!=3)
+    		if(myGroup.getCombat().getCapCur()!=null && myGroup.getCombat().getCapCur().getType()!=3)
     			myGroup.getCombatV().playEffect();
     		else{
     			myGroup.getCombatV().playBoom();
     		}
-    		
+    		if(myGroup.getCombat().getCapCur()!=null){
     		switch(myGroup.getCombat().getCapCur().getElement()){
     		case Eau:
     			soneatq=Gdx.audio.newMusic(Gdx.files.internal("Sound/127-Water02.ogg"));
@@ -141,11 +141,13 @@ public class PokemonSprite extends Actor{
     		soneatq.play();
     		
     	}    
+    	}
     		
     	}
 
     public void hurt(){
-    	if(myGroup.getpCombat().getPkm()==myGroup.getCombat().getCibleCourante().getPkm()){
+    	System.out.println("Cible: "+myGroup.getCombat().getCibleCourante());
+    	if(myGroup.getCombat().getCibleCourante()!=null && myGroup.getpCombat().getPkm()==myGroup.getCombat().getCibleCourante().getPkm()){
     		//System.out.println("CALLING HURT "+p.getNom());
 
     		if (myGroup.getpCombat().isIA()){

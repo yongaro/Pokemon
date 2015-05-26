@@ -35,7 +35,7 @@ public class CombatListener extends GameInput{
 
 	public void getBuffer(String s){
 		retval=s.split("\n");
-		//System.out.println("RETVAL"+Arrays.toString(retval));
+		System.out.println("RETVAL"+Arrays.toString(retval));
 		combatV.getDbox().setWidth(width);
 		combatV.getDbox().setMessage(retval[0]);
 		textinc=1;
@@ -98,7 +98,7 @@ public class CombatListener extends GameInput{
 
 	@Override
 	void handleA() {
-		//System.out.println("A PRESSED textinc: "+textinc+" STATE: "+combatV.getState());
+		System.out.println("A PRESSED textinc: "+textinc+" STATE: "+combatV.getState());
 		// TODO Auto-generated method stub
 		if(combatV.getState()==-1){
 			combatV.ennemiLaunch();//set state to 1
@@ -155,7 +155,7 @@ public class CombatListener extends GameInput{
 					combatV.weather();
 					}
 				else{
-					System.out.println("ATTACK ANIMATIONS");
+					if(c.getCapCur()!=null && c.getCapCur()!=null)
 					combatV.playAttackAnimations();
 				}
 
@@ -196,8 +196,6 @@ public class CombatListener extends GameInput{
 				combatV.getDbox().setMessage("Que faire ?");
 				}
 				//
-				System.out.println("UNFREEZE");
-
 				c.setfreeze(false);
 			}
 			return;
@@ -207,6 +205,7 @@ public class CombatListener extends GameInput{
 		if(combatV.getState()==7){ //pokemon change par le joueur
 			c.setfreeze(false);
 			combatV.getDbox().setWidth(width/2);
+			combatV.getDbox().setMessage("Que faire ?");
 
 			combatV.setState(2);
 			return;

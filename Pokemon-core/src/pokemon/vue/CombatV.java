@@ -69,7 +69,6 @@ public class CombatV extends GameScreen{
 			}
 			else{
 				friends.add(new BattleGroup(PokemonSprite.a1,c,this,c.getPkmListe()[i]));
-				System.out.println("FRIENDS "+c.getPkmListe()[i].getPkm().getNom());
 			}
 		}
 		stage.addActor(a);
@@ -385,8 +384,9 @@ public class CombatV extends GameScreen{
 		int i=0;
 		state=7;
 		dbox.setWidth(width);
-		System.out.println(p.getNom()+"va remplacer"+pkm.getNom());
+		System.out.println(p.getNom()+" va remplacer "+pkm.getNom());
 		dbox.setMessage("En avant "+p.getNom()+" !");
+		System.out.println(dbox.getMessage());
 		for(i=0;i<c.getEquipe1().length;i++) //recherche du pokemon dnas l'equipe
 		{
 			if(p==c.getEquipe1()[i].getPkm())
