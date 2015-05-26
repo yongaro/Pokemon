@@ -153,27 +153,30 @@ public class Combat extends Thread {
 			for(PokemonCombat p:pkmListe){
 				System.out.println("Traitement des statuts de "+p.pkm.nom);
 				if(p.pkm.statut==Statut.Empoisonne || p.pkm.statut==Statut.Brule || p.pkm.statut==Statut.Toxic ){
+					System.out.println(p.pkm.statut);
 					this.pCourant=p;
 					this.capCur=p.pkm.statut.dummy;
 					this.cibleCourante=p;
 					p.pkm.statut.StatEffect(p.pkm,p.adv[0].pkm,1,this);
 					this.setfreeze(true);
 				}
-				for(Statut s: p.pkm.supTemp){
-					if(p.pkm.stats[2][0]<=0){ break; }
-					this.pCourant=p;
-					this.capCur=s.dummy;
-					this.cibleCourante=p;
-					s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
-					this.setfreeze(true);
-					if(p.pkm.stats[2][0]<=0){ break; }
+				if(p.pkm.stats[2][0]>0){
+					for(Statut s: p.pkm.supTemp){
+						if(s.infligedegats){
+							this.pCourant=p;
+							this.capCur=s.dummy;
+							this.cibleCourante=p;
+							s.StatEffect(p.pkm,p.adv[0].pkm,1,this);
+							this.setfreeze(true);
+							if(p.pkm.stats[2][0]<=0){ break; }
+						}
+					}
 				}
 				//if(p.pkm.stats[2][0]<=0){ break; }
-				
-				//if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
 				this.chercherKO();
 			}
 			endOfTurn=false;
+			
 		}
 		
 		fini=this.gagnant();
@@ -190,6 +193,11 @@ public class Combat extends Thread {
 		int isdone=0; int i=0; int ch1=0; int ch2=1;
 		while(isdone==0){
 			System.out.println("Debut du tour du joueur");
+			
+			//this.pCourant=user;
+			//this.capCur=Statut.Peur.dummy;
+			//this.cibleCourante=cible;
+			
 			this.getAct();
 			
 			switch(actflag){

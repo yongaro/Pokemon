@@ -9,40 +9,47 @@ public enum Statut {
 	protected Capacite dummy;
 	protected int dmg;
 	protected boolean principal;
+	protected boolean infligedegats;
 	
 	private Statut(){
 		if(this.name().compareTo("Attraction")==0){
-			this.dummy=new Atk(Type.Fee); principal=false;
+			this.dummy=new Atk(Type.Fee); principal=false; infligedegats=false;
 		}
 		if(this.name().compareTo("Brule")==0){
-			this.dummy=new Atk(Type.Feu); principal=true;
+			this.dummy=new Atk(Type.Feu); principal=true; infligedegats=true;
 		}
 		else if(this.name().compareTo("Confus")==0){
-			this.dummy=new Atk(Type.Psy);
+			this.dummy=new Atk(Type.Psy); infligedegats=true;
 		}
 		else if(this.name().compareTo("Empoisonne")==0 || this.name().compareTo("Toxic")==0){
-			this.dummy=new Atk(Type.Poison); principal=true;
+			this.dummy=new Atk(Type.Poison); principal=true; infligedegats=true;
 		}
 		else if(this.name().compareTo("Endormi")==0){
-			this.dummy=new Atk(Type.Vol); principal=true;
+			this.dummy=new Atk(Type.Vol); principal=true; infligedegats=false;
 		}
 		else if(this.name().compareTo("Gele")==0){
-			this.dummy=new Atk(Type.Glace); principal=true;
+			this.dummy=new Atk(Type.Glace); principal=true; infligedegats=false;
 		}
 		else if(this.name().compareTo("Maudit")==0 || this.name().compareTo("Requiem")==0){
-			this.dummy=new Atk(Type.Spectre);
+			this.dummy=new Atk(Type.Spectre); infligedegats=true;
 		}
 		else if(this.name().compareTo("Paralyse")==0 || this.name().compareTo("Stuck")==0){
-			this.dummy=new Atk(Type.Electrique); principal=true;
+			this.dummy=new Atk(Type.Electrique); principal=true; infligedegats=false;
 		}
 		else if(this.name().compareTo("Peur")==0){
-			this.dummy=new Atk(Type.Tenebre);
+			this.dummy=new Atk(Type.Tenebre); infligedegats=false;
 		}
 		else if(this.name().compareTo("Vampigraine")==0){
-			this.dummy=new Atk(Type.Plante); this.dummy.type=3;
+			this.dummy=new Atk(Type.Plante); this.dummy.type=3; infligedegats=true;
+		}
+		else if(this.name().compareTo("Piege")==0){
+			this.dummy=new Atk(Type.Plante); this.dummy.type=3; infligedegats=true;
+		}
+		else if(this.name().compareTo("Picots")==0){
+			this.dummy=new Atk(Type.Normal); this.dummy.type=3; infligedegats=true;
 		}
 		else{
-			this.dummy=new Atk(Type.Normal);
+			this.dummy=new Atk(Type.Normal); infligedegats=false;
 		}
 		nbtours=0; dmg=0;
 	}

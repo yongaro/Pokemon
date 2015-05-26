@@ -281,15 +281,16 @@ public class PokemonCombat implements Comparable<PokemonCombat> {
 	
 	//A modifier pour prendre en compte les differents bonus
 	public void XPreward(Combat context){
-		Pkm temp;
-		int XP=(int)( (Pokedex.values()[pkm.ID-1].baseXP*pkm.stats[0][0]*1.5)/7 );
-		
-		while(!XpStack.empty()){
-			temp=XpStack.pop();
-			temp.addXP(XP);
-			context.ajoutBuffer(temp.nom+" gagne "+XP+" pts d'experience: "+temp.stats[1][0]+"/"+temp.stats[1][1]);
-		}
-		
+			Pkm temp;
+			int XP=(int)( (Pokedex.values()[pkm.ID-1].baseXP*pkm.stats[0][0]*1.5)/7 );
+			
+			while(!XpStack.empty()){
+				temp=XpStack.pop();
+				temp.addXP(XP);
+				if(this.isIA){
+					context.ajoutBuffer(temp.nom+" gagne "+XP+" pts d'experience: "+temp.stats[1][0]+"/"+temp.stats[1][1]);
+				}
+			}
 	}
 	
 	public synchronized void setSwap(int sw){ swap=sw; notify();	 }
