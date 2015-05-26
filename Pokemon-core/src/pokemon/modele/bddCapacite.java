@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.XmlReader.*;
 @Tps(nbhours=5)
 public enum bddCapacite {
 	Abime,Acidarmure,Attraction,Balayage,Blizzard,Charge,CrochetVenin,CrocDeMort,CruAile,DansePluie,Eclair,Etreinte,Grele,Griffe,JetDeSable,JetPierres,Ligotage,MegaSangsue,
-	CageEclair,Morsure,PoingDeFeu,PoingEclair,PoingGlace,PoingKarate,RafalePsy,Repos,Seisme,Surf,TempeteDeSable,Tonnerre,Toxic,Ultrason,Vampigraine,Zenith;
+	CageEclair,Morsure,PoingDeFeu,PoingEclair,PoingGlace,PoingKarate,RafalePsy,Repos,Seisme,Surf,TempeteDeSable,Tonnerre,Tornade,Toxic,Ultrason,Vampigraine,Zenith;
 
 	//
 	protected  XmlReader reader = new XmlReader();

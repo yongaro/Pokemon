@@ -529,7 +529,7 @@
 			ID="389" effetProc="100" class="Atk"
 			nom="Ultrason"
 			description="Le lanceur produit d'étranges ondes sonores pouvant rendre confus."
-			power="0" type="3" pre="55" CC="0" element="Psy" maxPP="32" effet="Confus">
+			power="0" type="3" pre="65" CC="0" element="Psy" maxPP="32" effet="Confus">
 		</Ultrason>
 		<Flammeche	
 			ID="401" effetProc="30" class="Atk"

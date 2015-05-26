@@ -19,7 +19,7 @@ public enum Statut {
 			this.dummy=new Atk(Type.Feu); principal=true; infligedegats=true;
 		}
 		else if(this.name().compareTo("Confus")==0){
-			this.dummy=new Atk(Type.Psy); infligedegats=true;
+			this.dummy=new Atk(Type.Psy); infligedegats=false;
 		}
 		else if(this.name().compareTo("Empoisonne")==0 || this.name().compareTo("Toxic")==0){
 			this.dummy=new Atk(Type.Poison); principal=true; infligedegats=true;
@@ -82,9 +82,9 @@ public enum Statut {
 		if(this==KO){cible.statut=this; cible.supTemp.clear();}
 		if(this==Attraction || this==Confus || this==Peur || this==Piege || this==Vampigraine){
 			if(this==Confus || this==Piege){
-				context.ajoutBuffer(cible.nom+" est "+this.name());
 				Random rand=new Random();
 				nbtours=rand.nextInt(5)+1;
+				context.ajoutBuffer(cible.nom+" est "+this.name()+" pour "+nbtours+" tours");
 			}
 			if(this==Attraction){
 				context.ajoutBuffer(cible.nom+" est sous le charme");
@@ -180,13 +180,15 @@ public enum Statut {
 	    		Random rand=new Random();
 		    	if(rand.nextInt(100)<=50){
 		    		dmg=Atk.confDmg.atkdamage(user, cible, context,true);
+		    		//dmg=(int)cible.stats[2][1]/16;
 			    	context.ajoutBuffer(cible.nom+" est Confus");
 			    	context.ajoutBuffer(cible.nom+" se blesse dans sa follie");
 			    	cible.infliger(dmg);
 			    	//infliger les degats d'une attaque a 40 de dégats sans type
+			    	nbtours--;
+			    	return 0;
 		    	}
-		    	nbtours--;
-		    	return 0;
+		    	return 1;
 	    	}
 	    }
 	    if(this==Statut.Peur && flag==0){
