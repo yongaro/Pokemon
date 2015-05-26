@@ -22,6 +22,7 @@ public class AtkChangeStats extends Atk implements Serializable {
 		Tstats=code; ChangeProc=proc; this.fof=fof;
 	}
 	public void script(Pkm user,Pkm cible,Combat context){
+		System.out.println("atkcs");
 		context.ajoutBuffer(user.nom+" utilise "+nom);
 		 Random random=new Random();
 		//test de precision

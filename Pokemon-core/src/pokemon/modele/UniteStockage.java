@@ -56,10 +56,10 @@ public class UniteStockage<A extends Qmax & Infos> implements Serializable/*impl
 			 if(cible instanceof Pokeball){ ((Pokeball)cible).script(pcible); quantite--;}
 			 if(cible instanceof CT){ ((CT)cible).script(pcible);}
 			 if(cible instanceof Capacite){
-				 if(cible instanceof Atk){ ((Atk)cible).script(user,pcible,context);}
 				 if(cible instanceof AtkChangeStats){ ((AtkChangeStats)cible).script(user,pcible,context);}
-				 if(cible instanceof AtkRecul){ ((AtkRecul)cible).script(user,pcible,context);}
-				 if(cible instanceof AtkRepet){ ((AtkRepet)cible).script(user,pcible,context);}
+				 else if(cible instanceof AtkRecul){ ((AtkRecul)cible).script(user,pcible,context);}
+				 else if(cible instanceof AtkRepet){ ((AtkRepet)cible).script(user,pcible,context);}
+				 else  if(cible instanceof Atk){ ((Atk)cible).script(user,pcible,context);}
 				 if(cible instanceof Heal){ ((Heal)cible).script(user,pcible,context);}
 				 if(cible instanceof AtkMeteo){ ((AtkMeteo)cible).script(user,pcible,context); }
 				 quantite--;
