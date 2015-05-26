@@ -159,6 +159,7 @@ public class Combat extends Thread {
 					p.pkm.statut.StatEffect(p.pkm,p.adv[0].pkm,1,this);
 					this.setfreeze(true);
 				}
+				if(p.pkm.stats[2][0]<=0){ break; }
 				for(Statut s: p.pkm.supTemp){
 					this.pCourant=p;
 					this.capCur=s.dummy;
@@ -167,7 +168,10 @@ public class Combat extends Thread {
 					this.setfreeze(true);
 					if(p.pkm.stats[2][0]<=0){ break; }
 				}
-				if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
+				if(p.pkm.stats[2][0]<=0){ break; }
+				
+				//if(p.pkm.stats[2][0]<=0){ p.XPreward(this); pokeswap(p,true); }
+				this.chercherKO();
 			}
 			endOfTurn=false;
 		}
