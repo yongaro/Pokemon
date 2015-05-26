@@ -85,6 +85,7 @@ public enum Statut {
 				Random rand=new Random();
 				nbtours=rand.nextInt(5)+1;
 				context.ajoutBuffer(cible.nom+" est "+this.name()+" pour "+nbtours+" tours");
+				//git problem
 			}
 			if(this==Attraction){
 				context.ajoutBuffer(cible.nom+" est sous le charme");
