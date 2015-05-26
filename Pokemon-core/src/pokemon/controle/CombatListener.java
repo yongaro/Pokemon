@@ -68,10 +68,13 @@ public class CombatListener extends GameInput{
 	public boolean touchDown(int x, int y, int pointer, int button) {			
 		if(combatV==myGdxGame.getScreen()){
 			combatV.setTouched(true);
-			return true;
+			v.set(x, y);
+			combatV.getStage().screenToStageCoordinates(v);
+			return super.touchUp(v);
 			}
 		else
 			return false;
+		
 	}
 
 
@@ -80,10 +83,7 @@ public class CombatListener extends GameInput{
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if(combatV==myGdxGame.getScreen()){
 			combatV.setTouched(false);
-			v.set(screenX, screenY);
-			combatV.getStage().screenToStageCoordinates(v);
-			
-			return super.touchUp(v);}
+			return true;}
 		else
 			return false;
 	}
