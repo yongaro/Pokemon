@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
-public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECRAN POKEMON PENDANT LE COMBAT
+public class CombatMenuPokemon extends GameInput{ //CONTROLLEUR DE L ECRAN POKEMON PENDANT LE COMBAT
 
 	menuPokemon menu;
 	MyGdxGame myGdxGame;
@@ -32,94 +32,97 @@ public class CombatMenuPokemon implements InputProcessor{ //CONTROLLEUR DE L ECR
 		combatv=combatV;
 		Gdx.input.setInputProcessor(this);
 	}
+	
+	@Override
+	public boolean touchDown(int x, int y, int pointer, int button) {			
+		
+			menu.setTouched(true);
+			return true;
+	}
 
-	public boolean keyDown(int arg0) {
-		switch(arg0)
-		{
-		case Keys.DOWN:
-			if(state==1 || state==3){
-				if(pkselector+1<joueur.teamSize()){
-					this.pkselector++;
-					menu.update(state,pkselector,atkselector);
-				}
-			}
-			if(state==2 || state==4){
-				if(atkselector<4){
-					this.atkselector++;
-					menu.update(state,pkselector,atkselector);
-				}
-			}
-			break;
 
-		case Keys.UP:
-			if(state==1 || state==3){
-				if(pkselector!=0){
-					this.pkselector--;
-					menu.update(state,pkselector,atkselector);
-				}
-			}
-			if(state==2 || state==4){
-				if(atkselector!=1){
-					this.atkselector--;
-					menu.update(state,pkselector,atkselector);
-				}
-			}
-			break;
-		case Keys.BACKSPACE:
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+			menu.setTouched(false);
+			v.set(screenX, screenY);
+			menu.getStage().screenToStageCoordinates(v);
+			
+			return super.touchUp(v);
+	}
+
+
+	@Override
+	void handleA() {
+		// TODO Auto-generated method stub
+		if(joueur.getTeam()[pkselector].get(2)>0){
+			combatv.swapPokemon(joueur.getTeam()[pkselector],pkselector);
 			myGdxGame.setScreen(combatv);
-			break;
-		case 
-		Keys.ENTER:
-			if(joueur.getTeam()[pkselector].get(2)>0){
-				combatv.swapPokemon(joueur.getTeam()[pkselector],pkselector);
-				myGdxGame.setScreen(combatv);
-			}
-			break;
-
 		}
-		return false;
 	}
 
 	@Override
-	public boolean keyTyped(char arg0) {
+	void handleB() {
 		// TODO Auto-generated method stub
-		return false;
+		myGdxGame.setScreen(combatv);
 	}
 
 	@Override
-	public boolean keyUp(int arg0) {
+	void handleLeft() {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
+	void handleRight() {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean scrolled(int arg0) {
+	void handleUp() {
 		// TODO Auto-generated method stub
-		return false;
+		if(state==1 || state==3){
+			if(pkselector!=0){
+				this.pkselector--;
+				menu.update(state,pkselector,atkselector);
+			}
+		}
+		if(state==2 || state==4){
+			if(atkselector!=1){
+				this.atkselector--;
+				menu.update(state,pkselector,atkselector);
+			}
+		}
 	}
 
 	@Override
-	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
+	void handleDown() {
 		// TODO Auto-generated method stub
-		return false;
+		if(state==1 || state==3){
+			if(pkselector+1<joueur.teamSize()){
+				this.pkselector++;
+				menu.update(state,pkselector,atkselector);
+			}
+		}
+		if(state==2 || state==4){
+			if(atkselector<4){
+				this.atkselector++;
+				menu.update(state,pkselector,atkselector);
+			}
+		}
 	}
 
 	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
+	void handleSelect() {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
+	void handleStart() {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 
