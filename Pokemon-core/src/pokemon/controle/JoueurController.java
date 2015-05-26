@@ -30,7 +30,6 @@ public class JoueurController extends GameInput{
 	//Pour Desktop
 	@Override
 	public boolean keyDown(int key) {
-		System.out.println(j.canMove()+" controle map");
 		if(j.canMove()) {		
 			super.keyDown(key);
 		}
