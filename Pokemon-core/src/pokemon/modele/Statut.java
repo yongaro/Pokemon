@@ -202,7 +202,7 @@ public enum Statut {
 	    	user.heal(dmg);
 	    	return 1;
 	    }
-	    if(this==Statut.Piege){
+	    if(this==Statut.Piege && flag==1){
 	    	dmg=(int)cible.stats[2][1]/16;
 	    	context.ajoutBuffer("Le piege inflige des degats");
 	    	context.ajoutBuffer(dmg+" pv");
