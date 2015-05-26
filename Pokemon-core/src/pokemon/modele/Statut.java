@@ -173,8 +173,8 @@ public enum Statut {
 	    }
 	    if(this==Statut.Confus && flag==0){
 	    	if(nbtours==0){
-	    		cible.supTemp.remove(this);
-	    		context.ajoutBuffer(cible.nom+" sort de sa confusion");
+	    		//cible.supTemp.remove(this);
+	    		//context.ajoutBuffer(cible.nom+" sort de sa confusion");
 	    		return 1;
 	    	}
 	    	else{
