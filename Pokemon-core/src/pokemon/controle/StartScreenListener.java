@@ -2,6 +2,8 @@ package pokemon.controle;
 
 import java.io.IOException;
 
+import com.badlogic.gdx.math.Vector2;
+
 import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.Map;
@@ -22,7 +24,7 @@ public class StartScreenListener extends GameInput{
 		if(screen.getSelector()==0){
 			MyGdxGame.Jtest.setCurrentMap(new Map("maps/bigmap.tmx", MyGdxGame.npcList));
 			MapScreen mapS=new MapScreen(game);
-		//	MenuListener menu=new MenuListener(game,mapS);
+		//	screenListener screen=new screenListener(game,mapS);
 			game.setScreen(mapS);
 			screen.dispose();
 
@@ -32,7 +34,7 @@ public class StartScreenListener extends GameInput{
 			MyGdxGame.Jtest.Charger();
 			MyGdxGame.Jtest.setCurrentMap(new Map("maps/bigmap.tmx", MyGdxGame.npcList));
 			MapScreen mapS=new MapScreen(game);
-		//	MenuListener menu=new MenuListener(game,mapS);
+		//	screenListener screen=new screenListener(game,mapS);
 			game.setScreen(mapS);
 			}
 			catch(IOException e){
@@ -85,5 +87,24 @@ public class StartScreenListener extends GameInput{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
+	@Override
+	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
+		
+			screen.setTouched(true);
+			return true;
+
+	}
+
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+			screen.setTouched(false);
+			Vector2 v=new Vector2(screenX,screenY);
+			screen.getStage().screenToStageCoordinates(v);
+			return super.touchUp(v);
+
+
+	}
 }

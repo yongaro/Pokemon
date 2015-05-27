@@ -89,6 +89,7 @@ public class MapScreen extends GameScreen{
 		stage.draw();
 		super.drawUI(delta);
 	}
+    
 	@Override
 	public void resize(int arg0, int arg1) {
 		//cam.viewportWidth=arg0/2f;

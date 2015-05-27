@@ -46,7 +46,7 @@ public class StartScreen extends GameScreen{
 	}
 
 	@Override
-	public void render(float arg0) {
+	public void render(float delta) {
 		Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT| GL20.GL_DEPTH_BUFFER_BIT);
 		stage.act();
@@ -66,7 +66,7 @@ public class StartScreen extends GameScreen{
 			f.setColor(0.58f, 0.59f, 0.57f, 1);
 		f.draw(stage.getBatch(), "Charger Partie", 470,50);
 		stage.getBatch().end();
-
+		super.drawUI(delta);
 
 	}
 

@@ -73,7 +73,7 @@ public enum Statut {
 					Medicament m=(Medicament)cible.objTenu;
 					if(m.baie && (m.flagSoin==2 || m.flagSoin==4)){
 						context.ajoutBuffer(cible.nom+" utilise sa baie");
-						m.script(cible);
+						m.script(cible, context);
 						cible.objTenu=null;
 					}
 				}
