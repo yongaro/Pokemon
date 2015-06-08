@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="17" height="21" tilewidth="16" tileheight="16" nextobjectid="2">
+ <tileset firstgid="1" name="pokecenter-1013729" tilewidth="16" tileheight="16">
+  <image source="pokecenter-1013729.png" width="272" height="336"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="17" height="21">
+  <data encoding="base64" compression="zlib">
+   eJzN0DdMVlEYBmD+xIajiZXoohQBxZYYRaODFGkCIrbJLswqltnObMVFB7EuamJ3tht7xYKiWLGXycfkJP4hP3oHB0/y5Pvue8/5bklK+r9WKmmkkxGyTLLIZkjIchjGcEYw8h89P498CihkMkUUU0IpZUyhnAoqmUoV06hmOjOYySxmd/C8OcxlHvNZwEIWsZgaaiO++xKWsow6lrOClayKOGM1a1jLOtazgY3UR5yxic1sYSvb2E4DOxLs38mudtluGtnDXvaxnwMcTDDjEIc5Epcd5RjHOcFJTnGaMxG/5SznOM8FLnKJy1wJe65yjevc4Ca3uM0d7nKP+zygiYc84jFPaOYpz2jhOS9o5SWveM0b3vKONt7zgY984jNf+Mo3vvPjD98Xi/3uO+k704WudCOZ7rGOz/9aPeLu99T3ojd96Es/UsKe/uqABPMGygaRShrpZDCYTLLIDueGqjkJZoyKy0aHfow6llzGMT7kE9SJ7WZMcp0XlxWGvkgtpoRSykJerlZQGa6r/vKfoq6f7nhc4w==
+  </data>
+ </layer>
+ <layer name="Calque 2" width="17" height="21">
+  <data encoding="base64" compression="zlib">
+   eJzNzMtTjmEYB+Dvq+h8TqTowMaCKSmldDRMK4sGRSelFSlskUP7ErYOM7GlFtlSTlt/D+FqehfvVJ/vNWPhnrnmuZ/7fp5fPBaLpZBKGjvYSToZZJJFNjnkkkc+BRRSRDEl7KKU3eyhjL2UU8E+9lNJFdXUcICDsa11aJvZkW1m63WMBho5ThPNnKCFVk7SRjsddNJFN6cS5P6rGmCQIYYZ+Yu/V7nGBNeZZIob3ORWhIzb3OEu09zjPg94yEyEjCc8ZZY5HjHP49AuWT3jOS94GZov8IrXETLe8JZFljbtlnkXIeM9H1hhlY984jNf+Boh41uEN/9DfecHa/zk1/owvrFLcabG//w/2z6HXPLIp4DC4F+xsyRJRkVoX6mvopqaJP/CdTj0tlZfx1Hqg3mDszHomxLktoXmnfouukOz0/ozwb0nQcbZTfPe4H7OeZ4L9NHPRS4xwCBDDDPCZUYZ4wrj/AZdhjcy
+  </data>
+ </layer>
+ <layer name="Calque 3" width="17" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAuEMUiJoVFTJ7K9qIDcyxiNljEHGnsjlEweMEBKphxkQpmjIJRgAwAt9AClA==
+  </data>
+ </layer>
+ <objectgroup name="Regions">
+  <object id="1" x="119" y="303" width="33" height="21"/>
+ </objectgroup>
+</map>
