@@ -1,9 +1,12 @@
 package pokemon.modele;
 
 import java.io.Serializable;
+import java.util.Random;
 import java.util.Vector;
 
 import pokemon.annotations.Tps;
+import pokemon.launcher.MyGdxGame;
+import pokemon.vue.CombatV;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -156,6 +159,20 @@ public class Map implements Serializable {
 		}
 		return false;
 	}
+	
+	public void herb(Vector2 nextPos, int spriteWidth, int spriteHeight) throws WildBattleException{
+		//Collision avec les tiles
+		Random r=new Random();
+		TiledMapTileLayer layerCollision = (TiledMapTileLayer) tiledMap.getLayers().get(2);
+		if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)(nextPos.y/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null ||
+				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null) {
+			if(r.nextInt(200)<3){
+				throw new WildBattleException();
+			}
+		}
+		}
 	/* Interagit avec le NPC de la position donnee
 	 * Renvoie null si aucun NPC n'est present sur place.*/
 //	public String interact(Joueur j, Vector2 target, NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {

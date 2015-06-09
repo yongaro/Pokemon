@@ -13,6 +13,7 @@ import pokemon.modele.Direction;
 import pokemon.modele.Dresseur;
 import pokemon.modele.Joueur;
 import pokemon.modele.NPC;
+import pokemon.modele.WildBattleException;
 import pokemon.vue.CombatV;
 import pokemon.vue.DialogBox;
 import pokemon.vue.GameScreen;
@@ -132,6 +133,12 @@ public class MapScreen extends GameScreen{
 			npcs.clear();
 			updateNPCs();
 			updateMusic();
+		} catch (WildBattleException e) {
+			Combat test=new Combat(game.Jtest, game.Jtest2);
+			test.start();
+			game.setScreen(new CombatV(test,game,this));
+			music.pause();
+			
 		}
 		
 		//On met a jour la position des NPC

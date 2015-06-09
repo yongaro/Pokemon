@@ -236,7 +236,7 @@ public class Joueur implements CombatInfos, Serializable {
 			speed.x=0;
 		}
 	}
-	public void updatePosition() throws ChangeMapException {
+	public void updatePosition() throws ChangeMapException,WildBattleException {
 		Vector2 nextPos = new Vector2(getPos());
 
 		nextPos.y+=Gdx.graphics.getDeltaTime()*getSpeed().y;
@@ -260,6 +260,9 @@ public class Joueur implements CombatInfos, Serializable {
 			//System.out.println("Speed:" +getSpeed());
 			nextPos = getPos();
 		}
+		if(!getPos().epsilonEquals(nextPos,0.2f)){
+			currentMap.herb(nextPos, spriteWidth, spriteHeight);
+		}
 		//System.out.println("GOING TO NEXT POS");
 		//speed.x+=10*delta;
 		setPos(nextPos);//);=nextPos.x;
@@ -270,6 +273,7 @@ public class Joueur implements CombatInfos, Serializable {
 		{
 			throw new ChangeMapException();
 		}
+		
 	}
 	
 //	public String interact(NPCList npcList) throws NoMoreInstructionException, NoNPCException, MovementException {

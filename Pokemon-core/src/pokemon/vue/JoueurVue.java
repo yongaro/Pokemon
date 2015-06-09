@@ -11,6 +11,7 @@ import pokemon.annotations.Tps;
 import pokemon.modele.ChangeMapException;
 import pokemon.modele.Direction;
 import pokemon.modele.Joueur;
+import pokemon.modele.WildBattleException;
 
 @Tps(nbhours=2)
 public class JoueurVue {
@@ -62,7 +63,7 @@ public class JoueurVue {
 		}
 		batch.draw(a.getKeyFrame(animationtime,true), j.getPos().x, j.getPos().y);
 	}
-	public void updatePosition(OrthogonalTiledMapRenderer renderer) throws ChangeMapException{
+	public void updatePosition(OrthogonalTiledMapRenderer renderer) throws ChangeMapException,WildBattleException{
 		try {
 			j.updatePosition();
 		} catch (ChangeMapException e) {
