@@ -1,6 +1,8 @@
 package pokemon.modele;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Vector;
 
@@ -8,6 +10,7 @@ import pokemon.annotations.Tps;
 import pokemon.launcher.MyGdxGame;
 import pokemon.vue.CombatV;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -16,6 +19,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
 
 /* La classe Map permet de regrouper toutes les informations
  * concernant une map, notemment sa TiledMap, ainsi que tout les
@@ -29,14 +35,16 @@ public class Map implements Serializable {
 	private static final long serialVersionUID = -5865738960359926159L;
 	//Proprietes de la Map
 	private TiledMap tiledMap;
-	private Music music;
-	
+	private Music music;	
 	//Attributs des NPC
 	private Vector<NPC> npcs;
 	
 	//Attributs des changements de Map
 	private Vector<MapChange> mapChanges;
-	
+	//pool des pokemons qui peuvent spawn
+	private int[] spawn;
+	//level range
+	private int[] lvlRange;
 	//Constructeurs
 	public Map() {
 		tiledMap = new TmxMapLoader().load("map.tmx");
@@ -59,12 +67,34 @@ public class Map implements Serializable {
 		tiledMap = loader.load(path);
 		npcs = new Vector<NPC>();
 		mapChanges = new Vector<MapChange>();
-		
 		getTransitions();
 		getNPCs(npcList);
+		getPokemons();
 		setMusique(new Music(tiledMap));
 	}
 	
+	private void getPokemons(){
+		lvlRange=new int[2];
+		XmlReader reader = new XmlReader();
+		try {
+			Element root = reader.parse(Gdx.files.internal("xml/spawnPool.xml"));
+			lvlRange[0]=root.getChildByName("levelRange").getIntAttribute("min");
+			lvlRange[1]=root.getChildByName("levelRange").getIntAttribute("max");
+			Element b=root.getChildByName("pokemons");
+			Array<Element> elm=b.getChildrenByName("p");
+			spawn=new int[elm.size];
+			int i=0;
+			for(Element e:elm){
+				spawn[i]=e.getIntAttribute("id");
+				i++;
+			}
+			System.out.println(Arrays.toString(spawn));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	//Fonction privees
 	private void getNPCs(NPCList npcList) {
 		MapLayer objectLayer = tiledMap.getLayers().get("NPCs");
@@ -162,14 +192,17 @@ public class Map implements Serializable {
 	
 	public void herb(Vector2 nextPos, int spriteWidth, int spriteHeight) throws WildBattleException{
 		//Collision avec les tiles
+		//System.out.println(((TiledMapTileLayer) tiledMap.getLayers().get(0)).getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f)).getTile().getId());
+
 		Random r=new Random();
 		TiledMapTileLayer layerCollision = (TiledMapTileLayer) tiledMap.getLayers().get(2);
 		if(layerCollision.getCell((int)(nextPos.x/16f),(int)(nextPos.y/16f))!=null ||
 				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)(nextPos.y/16f))!=null ||
 				layerCollision.getCell((int)((nextPos.x+spriteWidth-5)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null ||
 				layerCollision.getCell((int)((nextPos.x)/16f),(int)((nextPos.y+spriteHeight-5)/16f))!=null) {
-			if(r.nextInt(200)<3){
-				throw new WildBattleException();
+			if(r.nextInt(200)<2){
+				//throw new WildBattleException();
+				System.out.println("Lancer combat avec "+Pokedex.values()[spawn[r.nextInt(spawn.length)]+1].get().getNom()+" niveau "+(r.nextInt(lvlRange[1]-lvlRange[0])+lvlRange[0]));
 			}
 		}
 		}

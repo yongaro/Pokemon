@@ -260,7 +260,7 @@ public class Joueur implements CombatInfos, Serializable {
 			//System.out.println("Speed:" +getSpeed());
 			nextPos = getPos();
 		}
-		if(!getPos().epsilonEquals(nextPos,0.2f)){
+		if(!getPos().epsilonEquals(nextPos,0.5f)){
 			currentMap.herb(nextPos, spriteWidth, spriteHeight);
 		}
 		//System.out.println("GOING TO NEXT POS");
