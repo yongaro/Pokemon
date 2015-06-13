@@ -33,7 +33,7 @@ public class MyGdxGame extends Game {
 		MyGdxGame.initStatic();
 		//Jtest.Sauvegarder();
 		//Jtest.Charger();
-		Jtest.setCurrentMap(new Map("maps/pokecenter.tmx", npcList));
+		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));
 		MapScreen mapS=new MapScreen(this);
 		//MenuListener menu=new MenuListener(this,mapS);
 		//this.setScreen(new StartScreen(this));
