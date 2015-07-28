@@ -97,6 +97,14 @@ public class BattleHud extends Actor{
 			if(locked && pvperc[1]==pvperc[0])
 				locked=false;
 			
+			if(myGroup.getpCombat().getEquipe()==myGroup.combat.getEquipe1() && pvperc[0]<=54){
+				if(Musics.current_music!=Musics.Default_LowHP.content )
+					Musics.playDefaultLowHP();
+			}
+			else if(myGroup.getpCombat().getEquipe()==myGroup.combat.getEquipe1() && pvperc[0]>=54){
+				if(Musics.current_music==Musics.Default_LowHP.content)
+					Musics.resumeAfterLowHP();
+			}
 		}
 	
 
@@ -109,13 +117,13 @@ public class BattleHud extends Actor{
 		locked=false;
 		if(myGroup.pCombat.isIA())
 			addAction(Actions.parallel(Actions.moveBy(210, 0,0.2f),Actions.visible(true)));
+		
 		//else
 			//addAction(Actions.parallel(Actions.moveBy(-210, 0,0.2f),Actions.visible(true)));
 		//System.out.println("HUD NOW VISIBLE"+this.isVisible());
 	}
 
 	public void draw (Batch batch, float parentAlpha) {
-
 		shapeRenderer.setProjectionMatrix(myGroup.getStage().getCamera().combined);
 		shapeRenderer.begin(ShapeType.Filled);
 		Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -126,7 +134,13 @@ public class BattleHud extends Actor{
 		shapeRenderer.triangle(getX()+this.getWidth()-20,this.getY(), getX()+this.getWidth()-20, getY()+20, getX()+this.getWidth(), getY()+20);
 		shapeRenderer.setColor(1f, 1f, 1f, 0.6f);
 		shapeRenderer.rect(getX()+35,getY()+getHeight()-27,160,8);
-		shapeRenderer.setColor(0f, 0.95f, 0f, 1f);
+		if(pvperc[0]>80)
+			shapeRenderer.setColor(0f, 0.95f, 0f, 1f);
+		if(pvperc[0]<=80)
+			shapeRenderer.setColor(1f, 0.55f, 0f, 1f);
+		if(pvperc[0]<=54)
+			shapeRenderer.setColor(0.95f, 0.15f, 0f, 1f);
+		
 		shapeRenderer.rect(getX()+35,getY()+getHeight()-27,pvperc[0],8);
 		shapeRenderer.end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -147,7 +161,7 @@ public class BattleHud extends Actor{
 	public void animate(){
 		if(myGroup.getpCombat().getPkm().get(2)!=oldpv){		
 			locked=true; //verouillage
-}
+		}
 	}
 
 

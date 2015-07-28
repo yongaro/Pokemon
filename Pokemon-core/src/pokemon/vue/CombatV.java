@@ -86,7 +86,8 @@ public class CombatV extends GameScreen{
 
 
 		//Demarrage de la musique
-		BattleSoundManager.begin();
+		//BattleSoundManager.begin();
+		//Musics.playDefaultBattle(true);
 		attackanimation=true;
 		e=new ParticleEffect();
 		boom=new ParticleEffect();
@@ -313,7 +314,8 @@ public class CombatV extends GameScreen{
 	}
 
 	public void battleBegin(){
-		if(a.getpSprite().getActions().size==0 && BattleSoundManager.next()){
+		//if(a.getpSprite().getActions().size==0 && BattleSoundManager.next()){
+		if(a.getpSprite().getActions().size==0){
 			ballGroup.remove();
 			a.getpSprite().hideTrainer();
 			dbox.setMessage("En avant "+pkm.getNom());

@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import pokemon.annotations.Tps;
 import pokemon.controle.MenuListener;
 import pokemon.modele.*;
+import pokemon.vue.Musics;
 import pokemon.vue.StartScreen;
 
 
@@ -31,6 +32,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 		MyGdxGame.initStatic();
+		Musics.loadContent();
 		//Jtest.Sauvegarder();
 		//Jtest.Charger();
 		Jtest.setCurrentMap(new Map("maps/bigmap.tmx", npcList));

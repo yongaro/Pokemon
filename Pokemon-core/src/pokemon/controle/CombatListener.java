@@ -6,8 +6,9 @@ import pokemon.launcher.MapScreen;
 import pokemon.launcher.MyGdxGame;
 import pokemon.modele.AtkMeteo;
 import pokemon.modele.Combat;
-import pokemon.vue.BattleSoundManager;
+//import pokemon.vue.BattleSoundManager;
 import pokemon.vue.CombatV;
+import pokemon.vue.Musics;
 
 import com.badlogic.gdx.Gdx;
 
@@ -40,7 +41,8 @@ public class CombatListener extends GameInput{
 		combatV.getDbox().setMessage(retval[0]);
 		textinc=1;
 		if(c.getFini()!=0){
-			BattleSoundManager.end();
+			//BattleSoundManager.end();
+			Musics.stop();
 			myGdxGame.setScreen(ms);
 		}
 		if(c.isMeteo()){

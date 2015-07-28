@@ -19,6 +19,7 @@ import pokemon.vue.DialogBox;
 import pokemon.vue.GameScreen;
 import pokemon.vue.JoueurVue;
 import pokemon.vue.NPCVue;
+import pokemon.vue.Musics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -55,9 +56,6 @@ public class MapScreen extends GameScreen{
     private DialogBox box = null;
     private DeplacementNPC movingNPC = null;
     
-    //Attribut sonore
-    private Music music;
-
 
     //Constructeurs
     public MapScreen(MyGdxGame game) {
@@ -123,6 +121,7 @@ public class MapScreen extends GameScreen{
 			Gdx.input.setInputProcessor(cinematique.getController());
 		}
 		controller.unfreeze();
+		Musics.play(MyGdxGame.Jtest.getCurrentMap().getMusique().getPath());
 	}
 	public void update(float delta)
 	{
@@ -136,9 +135,9 @@ public class MapScreen extends GameScreen{
 		} catch (WildBattleException e) {
 			Combat test=new Combat(game.Jtest, game.Jtest2);
 			test.start();
+			Musics.playDefaultBattle(true);
 			game.setScreen(new CombatV(test,game,this));
-			music.pause();
-			
+			//music.pause();
 		}
 		
 		//On met a jour la position des NPC
@@ -169,8 +168,7 @@ public class MapScreen extends GameScreen{
 		
 	}
 	public void dispose() {
-		music.dispose();
-		
+		//music.dispose();
 	}
 	@Override
 	public void hide() {
@@ -220,13 +218,11 @@ public class MapScreen extends GameScreen{
 	}
 	
 	public void updateMusic() {
-		if(music != null) {			
-			music.stop();
-		}
-		music = Gdx.audio.newMusic(Gdx.files.internal(j.getCurrentMap().getMusique().getPath()));
-		music.setVolume(0.3f);
-		music.setLooping(true);
-		music.play();
+		Musics.stop();
+		Musics.play(j.getCurrentMap().getMusique().getPath());
+		//music.setVolume(0.3f);
+		//music.setLooping(true);
+		//music.play();
 	}
 	
 	public void addBox(String text) {
@@ -254,7 +250,8 @@ public class MapScreen extends GameScreen{
 	public void startBattle(Dresseur dress) {
 		//Si le combat n'est pas encore lance
 		if(game.getScreen() == this) {			
-			music.stop();
+			//music.stop();
+			Musics.playDefaultBattle(false);
 			Combat c = new Combat(j, dress);
 			c.start();
 			game.setScreen(new CombatV(c,game,this));
