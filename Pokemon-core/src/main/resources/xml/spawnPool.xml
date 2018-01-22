@@ -1,0 +1,13 @@
+<mapSpawn>
+	<levelRange min="5" max="15"/>
+	<pokemons>
+		<p id="8"/>
+		<p id="1"/>
+		<p id="21"/>
+		<p id="10"/>
+		<p id="11"/>
+		<p id="12"/>
+		<p id="16"/>
+		<p id="20"/>
+	</pokemons>
+</mapSpawn>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="10" height="10" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="tileset_johto" tilewidth="16" tileheight="16">
+  <image source="tileset.png" trans="ffffff" width="128" height="7504"/>
+ </tileset>
+ <layer name="Terrain" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxtj0EKADEIA02b/795W7AwGzwEi2l0VFXpaB+5pdZ9r/aeFnpCz0NGqMaOHb6Rc+xhVjFD+EOWyeMdyUh+Mit81/+O5JmYHbMyS+arD8Q8APc=
+  </data>
+ </layer>
+ <layer name="Collide" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYKANUECikfFgUTdYAQBbrgKB
+  </data>
+ </layer>
+</map>

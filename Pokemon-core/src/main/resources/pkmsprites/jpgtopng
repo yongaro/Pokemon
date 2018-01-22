@@ -1,0 +1,4 @@
+convert  your.jpg  -transparent white  your.png
+
+
+convert image1.png -fuzz 20% -transparent white result.png

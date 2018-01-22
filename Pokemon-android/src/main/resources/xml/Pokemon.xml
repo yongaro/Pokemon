@@ -1,0 +1,235 @@
+<Pokemon>
+	<Bulbizarre
+		ID="1" nom="Bulbizarre" IAbh="2"
+		description="Il a une étrange graine plantée sur son dos. Elle grandit avec lui depuis sa naissance."
+		PV="45" ATT="49" DEF="49" ATTSP="65" DEFSP="65" VIT="45" type1="Plante" type2="Poison" XP="64" attacks="42">
+		<CapacitePassive>
+			<Engrais nom="Engrais"></Engrais>
+			<Chlorophylle nom="Chlorophylle"></Chlorophylle>
+		</CapacitePassive>
+		<Events>
+			<E niveau="1" Capacite="Charge" Evolution=""></E>
+			<E niveau="3" Capacite="Rugissement" Evolution=""></E>
+			<E niveau="9" Capacite="FouetLianes" Evolution=""></E>
+			<E niveau="12" Capacite="PoudreDodo" Evolution=""></E>
+			<E niveau="13" Capacite="PoudreToxic" Evolution=""></E>
+			<E niveau="14" Capacite="ParaSpore" Evolution=""></E>
+			<E niveau="15" Capacite="Belier" Evolution=""></E>
+			<E niveau="19" Capacite="TrancheHerbe" Evolution=""></E>
+			<E niveau="21" Capacite="DouxParfum" Evolution=""></E>
+			<E niveau="25" Capacite="Croissance" Evolution=""></E>
+			<E niveau="27" Capacite="Damocles" Evolution=""></E>
+			<E niveau="33" Capacite="Synthese" Evolution=""></E>
+			<E niveau="37" Capacite="CanonGraine" Evolution=""></E>
+		</Events>
+	</Bulbizarre>
+	<Herbizarre
+		ID="2" nom="Herbizarre" IAbh="2"
+		description="Il y a un bulbe sur son dos. On dit que s’il absorbe assez de nutriments, ce bulbe se transforme en une jolie fleur."
+		PV="60" ATT="62" DEF="63" ATTSP="80" DEFSP="80" VIT="60" type1="Plante" type2="Poison" XP="142">
+		<CapacitePassive>
+			<Engrais nom="Engrais"></Engrais>
+			<Chlorophylle nom="Chlorophylle"></Chlorophylle>
+		</CapacitePassive>
+	</Herbizarre>
+	<Florizarre
+		ID="3" nom="Florizarre" IAbh="2"
+		description="Ses pétales lui servent à capter la lumière du soleil. Il peut ainsi en canaliser l’énergie."
+		PV="80" ATT="82" DEF="83" ATTSP="100" DEFSP="100" VIT="80" type1="Plante" type2="Poison" XP="236">
+		<CapacitePassive>
+			<Engrais nom="Engrais"></Engrais>
+			<Chlorophylle nom="Chlorophylle"></Chlorophylle>
+		</CapacitePassive>
+	</Florizarre>
+	<Salameche
+		ID="4" nom="Salameche" IAbh="1"
+		description="Une petite flamme brûle au bout de sa queue. Si cette flamme s’éteint, la vie de ce Pokémon s’éteint elle aussi."
+		PV="39" ATT="52" DEF="43" ATTSP="60" DEFSP="50" VIT="65" type1="Feu" type2="" XP="62">
+		<CapacitePassive>
+			<Brasier nom="Brasier"></Brasier>
+		</CapacitePassive>
+	</Salameche>
+	<Reptincel
+		ID="5" nom="Reptincel"  IAbh="1"
+		description="Il se sert de sa queue pour faire tomber ses adversaires. Une fois qu’ils sont au sol, il les lacère de ses griffes acérées."
+		PV="58" ATT="64" DEF="58" ATTSP="80" DEFSP="65" VIT="80" type1="Feu" type2="" XP="142" attacks="31">
+		<CapacitePassive>
+			<Brasier nom="Brasier"></Brasier>
+		</CapacitePassive>
+	</Reptincel>
+	<Dracaufeu
+		ID="6" nom="Dracaufeu"  IAbh="1"
+		description="Ses ailes peuvent le faire voler à plus de 1?400 m d’altitude. Ce Pokémon crache du feu à des températures très élevées."
+		PV="78" ATT="84" DEF="78" ATTSP="109" DEFSP="85" VIT="100" type1="Feu" type2="Vol" XP="240">
+		<CapacitePassive>
+			<Brasier nom="Brasier"></Brasier>
+		</CapacitePassive>
+	</Dracaufeu>
+	<Carapuce
+		ID="7" nom="Carapuce" IAbh="1"
+		description="Caché sous l’eau, il crache un jet d’eau sur sa proie et se cache à l’intérieur de sa carapace."
+		PV="44" ATT="48" DEF="65" ATTSP="50" DEFSP="64" VIT="43" type1="Eau" type2="" XP="63">
+		<CapacitePassive>
+			<Torrent nom="Torrent"></Torrent>
+			<Cuvette nom="Cuvette"></Cuvette>
+		</CapacitePassive>
+	</Carapuce>
+	<Carabaffe
+		ID="8" nom="Carabaffe" IAbh="1"
+		description="On prétend qu’il vit 10 000 ans. Attaqué, il cache sa tête dans sa carapace, mais son corps trop gros ne peut y tenir en entier."
+		PV="59" ATT="63" DEF="80" ATTSP="65" DEFSP="80" VIT="58" type1="Eau" type2="" XP="142">
+		<CapacitePassive>
+			<Torrent nom="Torrent"></Torrent>
+			<Cuvette nom="Cuvette"></Cuvette>
+		</CapacitePassive>
+	</Carabaffe>
+	<Tortank
+		ID="9" nom="Tortank" IAbh="1"
+		description="Les trombes d’eau projetées par les canons de sa carapace peuvent percer le métal le plus résistant."
+		PV="79" ATT="83" DEF="100" ATTSP="85" DEFSP="105" VIT="78" type1="Eau" type2="" XP="239">
+		<CapacitePassive>
+			<Torrent nom="Torrent"></Torrent>
+			<Cuvette nom="Cuvette"></Cuvette>
+		</CapacitePassive>
+	</Tortank>
+	<Chenipan
+		ID="10" nom="Chenipan"  IAbh="1"
+		description="Ses antennes rouges libèrent une puanteur qui repousse l’ennemi. Il grandit par mues régulières."
+		PV="45" ATT="30" DEF="35" ATTSP="20" DEFSP="20" VIT="45" type1="Insecte" type2="" XP="39">
+		<CapacitePassive>
+			<EcranPoudre nom="EcranPoudre"></EcranPoudre>
+			<Fuite nom="Fuite"></Fuite>
+		</CapacitePassive>
+	</Chenipan>
+	<Chrysacier
+		ID="11" nom="Chrysacier"  IAbh="1"
+		description="Son corps frêle est protégé par sa carapace d’acier. Il encaisse les coups durs en attendant d’évoluer."
+		PV="50" ATT="20" DEF="55" ATTSP="25" DEFSP="25" VIT="30" type1="Insecte" type2="" XP="72">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+		</CapacitePassive>
+	</Chrysacier>
+	<Papilusion
+		ID="12" nom="Papilusion"  IAbh="3"
+		description="Il raffole du nectar des fleurs. Il est capable de repérer la plus petite quantité de pollen."
+		PV="60" ATT="45" DEF="50" ATTSP="90" DEFSP="80" VIT="70" type1="Insecte" type2="Vol" XP="173">
+		<CapacitePassive>
+			<OeilCompose nom="OeilCompose"></OeilCompose>
+		</CapacitePassive>
+	</Papilusion>
+	<Aspicot
+		ID="13" nom="Aspicot"  IAbh="1"
+		description="Son aiguillon empoisonné est très dangereux. Son corps est coloré afin de repousser ses ennemis."
+		PV="40" ATT="35" DEF="30" ATTSP="20" DEFSP="20" VIT="50" type1="Insecte" type2="Poison" XP="39">
+		<CapacitePassive>
+			<EcranPoudre nom="EcranPoudre"></EcranPoudre>
+			<Fuite nom="Fuite"></Fuite>
+		</CapacitePassive>
+	</Aspicot>
+	<Coconfort
+		ID="14" nom="Coconfort"  IAbh="1"
+		description="Il se cache sous les feuilles et les branches pour fuir les prédateurs en attendant d’évoluer."
+		PV="45" ATT="25" DEF="50" ATTSP="25" DEFSP="25" VIT="35" type1="Insecte" type2="Poison" XP="72">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+		</CapacitePassive>
+	</Coconfort>
+	<Dardargnan
+		ID="15" nom="Dardargnan"  IAbh="1"
+		description="Il se sert de ses trois aiguillons empoisonnés pour attaquer sans relâche ses adversaires."
+		PV="65" ATT="90" DEF="40" ATTSP="45" DEFSP="80" VIT="75" type1="Insecte" type2="Poison" XP="173">
+		<CapacitePassive>
+			<Essaim nom="Essaim"></Essaim>
+		</CapacitePassive>
+	</Dardargnan>
+	<Roucool
+		ID="16" nom="Roucool"  IAbh="1"
+		description="Ce Pokémon docile préfère éviter le combat. Toutefois, il se montre très féroce quand on l’agresse."
+		PV="40" ATT="45" DEF="40" ATTSP="35" DEFSP="35" VIT="56" type1="Normal" type2="Vol" XP="50">
+		<CapacitePassive>
+			<Cran nom="Cran"></Cran>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Roucool>
+	<Roucoups
+		ID="17" nom="Roucoups"  IAbh="1"
+		description="Grâce à ses griffes très puissantes, il est capable de transporter des Noeunoeuf vers un nid éloigné de plus de 100 km."
+		PV="63" ATT="60" DEF="55" ATTSP="50" DEFSP="50" VIT="71" type1="Normal" type2="Vol" XP="122">
+		<CapacitePassive>
+			<Cran nom="Cran"></Cran>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Roucoups>
+	<Roucarnage
+		ID="18" nom="Roucarnage"  IAbh="1"
+		description="Roucarnage déploie ses ailes majestueuses pour effrayer ses ennemis. Il peut voler à Mach 2."
+		PV="83" ATT="80" DEF="75" ATTSP="70" DEFSP="70" VIT="101" type1="Normal" type2="Vol" XP="211">
+		<CapacitePassive>
+			<Cran nom="Cran"></Cran>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Roucarnage>
+	<Rattata
+		ID="19" nom="Rattata"  IAbh="1"
+		description="Les dents de Rattata sont longues et tranchantes. Comme elles poussent sans arrêt, il doit ronger tout ce qu’il trouve pour pouvoir les tailler."
+		PV="30" ATT="56" DEF="35" ATTSP="25" DEFSP="35" VIT="72" type1="Normal" type2="" XP="51">
+		<CapacitePassive>
+			<Fuite nom="Fuite"></Fuite>
+			<Cran nom="Cran"></Cran>
+			<Agitation nom="Agitation"></Agitation>
+		</CapacitePassive>
+	</Rattata>
+	<Rattatac
+		ID="20" nom="Rattatac"  IAbh="1"
+		description="Il grignote sans cesse pour apaiser la poussée de ses crocs. Il peut transpercer un mur de parpaings."
+		PV="55" ATT="81" DEF="60" ATTSP="50" DEFSP="70" VIT="97" type1="Normal" type2="" XP="145">
+		<CapacitePassive>
+			<Fuite nom="Fuite"></Fuite>
+			<Cran nom="Cran"></Cran>
+			<Agitation nom="Agitation"></Agitation>
+		</CapacitePassive>
+	</Rattatac>
+	<Piafabec
+		ID="21" nom="Piafabec"  IAbh="1"
+		description="Très protecteur de son territoire, il chasse les insectes dans les hautes herbes. Ses petites ailes lui permettent de voler très vite."
+		PV="40" ATT="60" DEF="30" ATTSP="31" DEFSP="31" VIT="70" type1="Normal" type2="Vol" XP="52">
+		<CapacitePassive>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Piafabec>
+	<Rapasdepic
+		ID="22" nom="Rapasdepic"  IAbh="1"
+		description="Ses ailes géantes lui permettent de voler sur de longues distances sans qu’il ait besoin de se reposer."
+		PV="65" ATT="90" DEF="65" ATTSP="61" DEFSP="61" VIT="100" type1="Normal" type2="Vol" XP="152">
+		<CapacitePassive>
+			<RegardVif nom="RegardVif"></RegardVif>
+		</CapacitePassive>
+	</Rapasdepic>
+	<Abo
+		ID="23" nom="Abo"  IAbh="1"
+		description="Il se faufile dans l’herbe sans un bruit et frappe dans le dos quand sa proie s’y attend le moins."
+		PV="35" ATT="60" DEF="44" ATTSP="40" DEFSP="54" VIT="55" type1="Poison" type2="" XP="58">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+			<Intimidation nom="Intimidation"></Intimidation>
+		</CapacitePassive>
+	</Abo>
+	<Arbok
+		ID="24" nom="Arbok"  IAbh="2"
+		description="Il utilise la marque sur son ventre pour intimider l’ennemi. Il étouffe l’ennemi pétrifié par la peur."
+		PV="60" ATT="85" DEF="69" ATTSP="65" DEFSP="79" VIT="80" type1="Poison" type2="" XP="153">
+		<CapacitePassive>
+			<Mue nom="Mue"></Mue>
+			<Intimidation nom="Intimidation"></Intimidation>
+		</CapacitePassive>
+	</Arbok>
+	<Pikachu
+		ID="25" nom="Pikachu"  IAbh="1"
+		description="Pikachu a de petites poches pleines d’électricité sur ses joues. S’il se sent menacé, il laisse s’échapper des décharges électriques."
+		PV="35" ATT="55" DEF="40" ATTSP="50" DEFSP="50" VIT="90" type1="Electrique" type2="" XP="105">
+		<CapacitePassive>
+			<Statik nom="Statik"></Statik>
+			<Paratonnerre nom="Paratonnerre"></Paratonnerre>
+		</CapacitePassive>
+	</Pikachu>
+</Pokemon>

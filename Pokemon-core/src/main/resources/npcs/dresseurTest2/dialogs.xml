@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<PNJ id="3" name="Dresseur Roger">
+	<dialogue>
+		<text>Avant d'etre pape, Jean-Paul II etait acteur.</text>
+		<battle with="3"/>
+		<text>Oh non ! Tu m'as battu !</text>
+		<status npc="3" value="1"/>
+	</dialogue>
+	<dialogue>
+		<text>Attend un peu que je m'entraine !</text>
+	</dialogue>
+	
+	<equipe>
+		<pokemon id="8" niveau="10">
+			<capacite nom="Tonnerre"/>
+			<capacite nom="JetDeSable"/>
+			<capacite nom="PoingGlace"/>
+			<capacite nom="Repos"/>
+		</pokemon>
+	</equipe>
+</PNJ>

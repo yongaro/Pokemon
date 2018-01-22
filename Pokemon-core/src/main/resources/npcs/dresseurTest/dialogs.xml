@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<PNJ id="2" name="Dresseur Gerard">
+	<dialogue>
+		<text>Le Brocoli a ete introduit en France par Catherine de Medicis.</text>
+		<battle with="2"/>
+	</dialogue>
+	
+	<equipe>
+	    <pokemon id="12" niveau="25">
+			<capacite nom="RafalePsy"/>
+			<capacite nom="Tornade"/>
+			<capacite nom="CageEclair"/>
+			<capacite nom="Ultrason"/>
+		</pokemon>
+		<pokemon id="2" niveau="25">
+			<capacite nom="MegaSangsue"/>
+			<capacite nom="Toxic"/>
+			<capacite nom="Ligotage"/>
+			<capacite nom="Vampigraine"/>
+		</pokemon>
+		
+		<pokemon id="5" niveau="25">
+			<capacite nom="PoingDeFeu"/>
+			<capacite nom="PoingGlace"/>
+			<capacite nom="PoingEclair"/>
+			<capacite nom="PoingKarate"/>
+		</pokemon>
+	</equipe>
+</PNJ>

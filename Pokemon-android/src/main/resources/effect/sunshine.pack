@@ -1,0 +1,75 @@
+
+sunshine.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sun0
+  rotate: false
+  xy: 1, 305
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun1
+  rotate: false
+  xy: 1, 153
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun2
+  rotate: false
+  xy: 123, 305
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun3
+  rotate: false
+  xy: 1, 1
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun4
+  rotate: false
+  xy: 123, 153
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun5
+  rotate: false
+  xy: 123, 153
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun6
+  rotate: false
+  xy: 1, 1
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun7
+  rotate: false
+  xy: 123, 305
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun8
+  rotate: false
+  xy: 1, 153
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1
+sun9
+  rotate: false
+  xy: 1, 305
+  size: 120, 150
+  orig: 120, 150
+  offset: 0, 0
+  index: -1

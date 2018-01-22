@@ -1,0 +1,6 @@
+<Musics>
+    <Default_Trainer_Battle default="1" title="Default_Trainer_Battle.ogg" intro="52"></Default_Trainer_Battle>
+    <Default_Wild_Battle default="1" title="Default_Wild_Battle.ogg" intro="44"></Default_Wild_Battle>
+    <Default_LowHP default="1" title="Default_LowHP.ogg" intro="11"></Default_LowHP>
+    <Sootopolis default="0" title="Sootopolis.ogg" intro="16"></Sootopolis>    
+</Musics>

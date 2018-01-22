@@ -1,11 +1,18 @@
-apply plugin: "java"
-
-sourceCompatibility = 1.6
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-sourceSets.main.java.srcDirs = [ "src/" ]
+apply plugin: 'java'
+apply plugin: 'application'
 
 
-eclipse.project {
-    name = appName + "-core"
+
+mainClassName = 'pokemon.launcher.DesktopLauncher'
+
+jar{
+    manifest{
+        attributes 'Main-Class': 'pokemon.launcher.DesktopLauncher'
+    }
+}
+
+
+dependencies{
+//     compile files('libs/deps-01.jar', 'libs/deps-02.jar')
+     compile fileTree(dir: 'libs/libGDX', include: '*.jar')
 }
